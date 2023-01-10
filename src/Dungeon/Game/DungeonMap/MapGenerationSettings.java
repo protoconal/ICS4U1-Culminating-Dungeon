@@ -10,6 +10,14 @@ public class MapGenerationSettings {
             0.50, // RegularTile
     };
 
+    private static final double[][] scalingTables = {
+            // depth will always be half of width of table
+            {1, 0.00, 1.00}, // depth 1
+            {2, 0.50, 1.00}, // depth 2
+            //{3, 1.00, 1.00}, // depth 3
+            {4, 3.00, 1.00}, // depth 4
+    };
+
     private static double[] wallChance = {
             0.10, // DeadEnd
             0.70, // Wall Twice
@@ -25,6 +33,10 @@ public class MapGenerationSettings {
 
     public static double[] getProbabilities() {
         return chanceTables;
+    }
+
+    public static double[][] getScalingFactors() {
+        return scalingTables;
     }
 
     public static double[] getWallChance() {

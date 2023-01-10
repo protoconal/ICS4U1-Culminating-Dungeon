@@ -16,7 +16,7 @@ public class WeightedRandom {
         this.BaseProbabilities = probabilities;
         this.CDF = new double[probabilities.length];
         this.ScaleFactors = new double[probabilities.length];
-        for (int x = 0; x <= probabilities.length; x++) {
+        for (int x = 0; x < probabilities.length; x++) {
             this.ScaleFactors[x] = 1;
         }
         updateCDF();
@@ -36,7 +36,7 @@ public class WeightedRandom {
             this.CDF[x] = runningTotal;
 
             // multiply by scaling
-            this.CDF[x] *= this.ScaleFactors[x];
+            this.CDF[x] += this.ScaleFactors[x];
         }
         this.SUM = this.CDF[this.CDF.length - 1];
 
@@ -62,6 +62,7 @@ public class WeightedRandom {
 
     public void setScaleFactors(double[] ScaleFactors) {
         this.ScaleFactors = ScaleFactors;
+        updateCDF();
     }
 
 
