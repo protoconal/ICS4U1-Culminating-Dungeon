@@ -46,14 +46,14 @@ public class Dungeon {
     }
 
     public void generateMap() {
-        traverse(this.center);
+        traverse(this.center, 0);
 
         System.out.println(this);
     }
 
-    public void traverse(int[] initialCoordinates) {
+    public void traverse(int[] initialCoordinates, int radius) {
         //Util.clearTerminal();
-        //System.out.println(this);
+        System.out.println(this + "\n");
 
         // randomly get tile
         ArrayList<String> traversableDirections = new ArrayList<>();
@@ -64,7 +64,7 @@ public class Dungeon {
             String direction = validDirections[x];
             final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
             if (checkBounds(newCoordinates) && getMapTile(newCoordinates) == null) {
-                randomTile = generateRandomTile(0);
+                randomTile = generateRandomTile(radius);
                 // if the tile is not a WallTile
                 if (!(randomTile instanceof WallTile)) {
                     traversableDirections.add(direction);
@@ -75,7 +75,7 @@ public class Dungeon {
 
         while (!traversableDirections.isEmpty()) {
             String direction = traversableDirections.remove(0);
-            traverse(calculateCoordinates(initialCoordinates, direction));
+            traverse(calculateCoordinates(initialCoordinates, direction), radius + 1);
         }
     }
 
@@ -83,7 +83,23 @@ public class Dungeon {
         // TODO: implement radius based randomization
 
         // TODO: implement this better, make one tile class that can handle this automatically
+        weightedRandom.setScaleFactors(lookupScaleFactors(radius));
         return MapGenerationSettings.getTile(weightedRandom.generateChoice());
+    }
+
+    private double[] lookupScaleFactors(int radius) {
+        double[][] factors = MapGenerationSettings.getScalingFactors();
+
+        double[] scalingFactor = factors[0];
+        int x = 0;
+        while (radius > scalingFactor[0]) {
+            x++;
+            scalingFactor = factors[x];
+        }
+
+        double[] truncScalingFactor = Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);;
+
+        return truncScalingFactor;
     }
 
     private void setMapTile(GameTile gameTile, int[] coordinates) {

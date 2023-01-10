@@ -4,20 +4,41 @@ import Dungeon.Game.Util;
 import java.util.Random;
 
 public class WeightedRandom {
-    // https://stackoverflow.com/a/4463613
 
+
+    // https://stackoverflow.com/a/4463613
     final Random rand = new Random();
     private final double[] CDF;
-    private final double SUM;
+    private double[] ScaleFactors;
+    private final double[] BaseProbabilities;
+    private double SUM;
     public WeightedRandom(double[] probabilities) {
+        this.BaseProbabilities = probabilities;
         this.CDF = new double[probabilities.length];
-
-        double runningTotal = 0;
+        this.ScaleFactors = new double[probabilities.length];
         for (int x = 0; x < probabilities.length; x++) {
-            runningTotal += probabilities[x];
-            this.CDF[x] = runningTotal;
+            this.ScaleFactors[x] = 1;
         }
-        this.SUM = this.CDF[probabilities.length - 1];
+        updateCDF();
+    }
+
+    public WeightedRandom(double[] probabilities, double[] scalarFactors) {
+        this.BaseProbabilities = probabilities;
+        this.CDF = new double[probabilities.length];
+        this.ScaleFactors = scalarFactors;
+        updateCDF();
+    }
+
+    private void updateCDF() {
+        double runningTotal = 0;
+        for (int x = 0; x < this.CDF.length; x++) {
+            runningTotal += this.BaseProbabilities[x];
+            this.CDF[x] = runningTotal;
+
+            // multiply by scaling
+            this.CDF[x] += this.ScaleFactors[x];
+        }
+        this.SUM = this.CDF[this.CDF.length - 1];
 
         Util.insertionSort(this.CDF);
     }
@@ -38,6 +59,12 @@ public class WeightedRandom {
         }
         return min;
     }
+
+    public void setScaleFactors(double[] ScaleFactors) {
+        this.ScaleFactors = ScaleFactors;
+        updateCDF();
+    }
+
 
     /** double[] chanceTables = {
                 0.05, // RegularTile

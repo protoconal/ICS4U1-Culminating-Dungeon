@@ -17,6 +17,17 @@ public class Util {
         return -1;
     }
 
+    public static double[] copyArrayFromIndexes(double[] originalArr, int fromIndex, int toIndex) {
+        double[] copyArr = new double[toIndex - fromIndex];
+        int y = 0;
+        for (int x = fromIndex; x < toIndex; x++) {
+            copyArr[y] = originalArr[x];
+            y++;
+        }
+
+        return copyArr;
+    }
+
     public static void insertionSort(double[] data) {
         // insertion sort
         int index;
