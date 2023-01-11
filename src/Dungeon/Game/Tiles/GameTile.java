@@ -1,4 +1,4 @@
-package Dungeon.Game;
+package Dungeon.Game.Tiles;
 
 public class GameTile {
     private final int tileID = 1;

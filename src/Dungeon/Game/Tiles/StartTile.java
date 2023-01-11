@@ -1,4 +1,4 @@
-package Dungeon.Game;
+package Dungeon.Game.Tiles;
 
 public class StartTile extends GameTile {
     @Override

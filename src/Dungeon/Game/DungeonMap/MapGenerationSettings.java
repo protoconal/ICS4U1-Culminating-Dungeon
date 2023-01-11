@@ -1,7 +1,7 @@
 package Dungeon.Game.DungeonMap;
 
-import Dungeon.Game.GameTile;
-import Dungeon.Game.WallTile;
+import Dungeon.Game.Tiles.GameTile;
+import Dungeon.Game.Tiles.WallTile;
 
 public class MapGenerationSettings {
     // TODO: implement scaling generation

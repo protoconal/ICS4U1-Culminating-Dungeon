@@ -1,9 +1,9 @@
 package Dungeon.Game.DungeonMap;
 
-import Dungeon.Game.GameTile;
-import Dungeon.Game.StartTile;
+import Dungeon.Game.Tiles.GameTile;
+import Dungeon.Game.Tiles.StartTile;
 import Dungeon.Game.Util;
-import Dungeon.Game.WallTile;
+import Dungeon.Game.Tiles.WallTile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
