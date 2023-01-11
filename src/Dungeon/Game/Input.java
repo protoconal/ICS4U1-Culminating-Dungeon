@@ -2,7 +2,11 @@ package Dungeon.Game;
 
 import java.util.Scanner;
 
-class Input {
+public class Input {
+    public Input() {
+      // do nothing
+    }
+  
     final String[] validMovementKeys = {
             "W", // up
             "A", // left
@@ -35,11 +39,32 @@ class Input {
     }
 
     private String getInput(String consoleText) {
-        System.out.println(consoleText);
+        System.out.print(consoleText);
         String key = scan.nextLine();
         // skip newline
         scan.next();
         return key;
+    }
+
+    final String[] validMenuKeys = {
+            "B", // begin
+            ";", // menu
+    };
+
+    public String getMenuKeys() {
+        return getValidKeystroke(validMenuKeys,"Input: ");
+    }
+
+  
+    final String[] validInteractionKeys = {
+            "O", // loot
+            "K", // monster
+            "L", // inventory
+            ";", // menu
+    };
+
+    public String getInteraction() {
+        return getValidKeystroke(validInteractionKeys,"Interact: ");
     }
 
 }
@@ -59,9 +84,8 @@ class Input {
 // Press O to collect loot
 // Press K to fight monster
 // Press L to open inventory
-// Press ; to...
 
-// Finally, if you're a coward, press M to go to the menu.
+// Finally, if you're a coward, press ; to go to the menu.
 
 // Are you ready? Press B to begin!
 
