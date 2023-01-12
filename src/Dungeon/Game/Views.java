@@ -7,8 +7,21 @@ public class Views {
   public static String gameHeader() {
     return "----------  " + Game.getName() + "  ----------\n";
   }
+
+  public static String getToolTip(String type) {
+    if (type.equals("MOVEMENT")) {
+      return "W: Up, A: Left, S: Down, D: Right";
+    }
+    if (type.equals("INVENTORY")) {
+      return "E: Use, ";
+    }
+    if (type.equals("MAINMENU")) {
+      return "B: Begin, ;, Exit";
+    }
+    return null;
+  }
   
-  public static void showMainMenu() {
+  public static void printMainMenu() {
     String[] consoleText = new String[]{
       "Hello, wandering traveller!",
       "You’ve been selected to explore the newly-discovered dungeon of Vaquera.", 
@@ -28,15 +41,7 @@ public class Views {
     printLines(consoleText);
   }
 
-  public static String showToolTip(String type) {
-    if (type.equals("MOVEMENT")) {
-      return "W: Up, A: Left, S: Down, D: Right";
-    }
-    if (type.equals("INVENTORY")) {
-      return "E: Use, ";
-    }
-    return null;
-  }
+  
 
   public static void showTutorial() {
     String[] consoleText = new String[]{
@@ -51,19 +56,21 @@ public class Views {
     printLines(consoleText);
   }
 
-  public static void showDungeon(Dungeon map) {
+  public static void printDungeon(Dungeon map) {
     
   }
 
-  public static void showDeathMenu(Dungeon map) {
+  public static void printDeathMenu() {
     
   }
 
-  public static void showShop() {
+  public static void printShop() {
     
   }
 
   public static void printLines(String[] consoleText) {
+    // cls terminal
+    Util.clearTerminal();
     StringBuilder outString = new StringBuilder(gameHeader());
     for (int x = 0; x < consoleText.length; x++) {
       outString.append(consoleText[x] + "\n");

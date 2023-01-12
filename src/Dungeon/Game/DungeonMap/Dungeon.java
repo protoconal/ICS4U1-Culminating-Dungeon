@@ -53,7 +53,7 @@ public class Dungeon {
 
     public void traverse(int[] initialCoordinates, int radius) {
         //Util.clearTerminal();
-        System.out.println(this + "\n");
+        //System.out.println(this + "\n");
 
         // randomly get tile
         ArrayList<String> traversableDirections = new ArrayList<>();

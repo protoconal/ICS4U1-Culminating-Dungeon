@@ -42,7 +42,7 @@ public class Input {
         System.out.print(consoleText);
         String key = scan.nextLine();
         // skip newline
-        scan.next();
+        // scan.next();
         return key;
     }
 
@@ -94,3 +94,19 @@ public class Input {
 // You have met [insert monster here]. Prepare for battle! Which attack would you like to use?
 
 // Shopkeeper: Hi, [player name]! What would you like to buy?
+
+// Armo: Protects you from four attacks.
+// Frezo (freeze): Freezes the monster for 14 seconds 
+// Hepo (health potion): Protects you for 40 seconds.
+// Wepo (weapon): Reduces a flojo's HP by 400, a jotai's HP by 40, and a sterk's HP by 4.
+
+//***
+
+// Potential Gems
+
+// Silver: 1 Vac
+// Ruby: 5 Vacs
+// Gold: 10 Vacs
+// Diamond: 25 Vacs
+// Sapphire: 50 Vacs
+// Platinum: 100 Vacs
