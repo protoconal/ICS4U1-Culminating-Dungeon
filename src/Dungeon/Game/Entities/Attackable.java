@@ -1,4 +1,4 @@
-package Dungeon.Game;
+package Dungeon.Game.Entities;
 
 public interface Attackable {
 }
