@@ -1,10 +1,10 @@
 package Dungeon.Game.Rooms;
 
 public class WalledRoom extends Room {
-    private static final int TITLE_ID = 1;
+    private static final int TILE_ID = 1;
 
     public WalledRoom() {
-        super(TITLE_ID);
+        super(TILE_ID);
     }
 
     @Override
@@ -12,5 +12,4 @@ public class WalledRoom extends Room {
         return "####";
     }
 
-    // --Commented out by Inspection (1/12/2023 11:22 PM):private final boolean UNTRAVERSABLE = true;
 }
