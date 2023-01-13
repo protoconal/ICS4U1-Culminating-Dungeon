@@ -6,7 +6,7 @@ public class Game {
   static final String GAME_NAME = "PLACEHOLDER_NAME";
   static String phase;
   
-  final Input IN = new Input();
+  private final Input IN = new Input();
   private Dungeon currentMap = new Dungeon();
 
   public Game() {

@@ -23,7 +23,7 @@ public class Dungeon {
     private final int[] CENTER;
 
     public Dungeon() {
-        final int defaultSize = 9;
+        int defaultSize = 9;
         // remember, convention = row, column
         MAP = new GameTile[defaultSize][defaultSize];
         CENTER = new int[]{defaultSize / 2, defaultSize / 2};
@@ -58,7 +58,7 @@ public class Dungeon {
         // check each direction, generate new tile if no tile exists
         for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
             String direction = VALID_DIRECTIONS[x];
-            final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
+            int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
             if (newCoordinates != null && // check coordinates are there
                     checkBounds(newCoordinates) && // check they are in bounds
                     getMapTile(newCoordinates) == null) { // check if it is empty
@@ -116,7 +116,7 @@ public class Dungeon {
 
     private int[] calculateCoordinates(int[] initialCoordinates, String direction) {
         // calculate new coordinates based on input
-        final int[][] directionFactors = {
+        int[][] directionFactors = {
                 // row, column
                 { 0,-1},
                 { 0, 1},
@@ -139,8 +139,8 @@ public class Dungeon {
     }
 
     private boolean checkBounds(int[] coordinates) {
-        final int minBound = 0;
-        final int maxBound = this.MAP.length - 1;
+        int minBound = 0;
+        int maxBound = this.MAP.length - 1;
 
         boolean rowBounds = (coordinates[0] >= minBound) && (coordinates[0] <= maxBound);
         boolean columnBounds = (coordinates[1] >= minBound) && (coordinates[1] <= maxBound);
