@@ -1,4 +1,7 @@
 package Dungeon.Game.Entities;
 
-public class Monster {
+public abstract class Monster extends Entity {
+    public Monster(int maxHP) {
+        super(maxHP);
+    }
 }
