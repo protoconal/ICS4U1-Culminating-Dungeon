@@ -1,7 +1,5 @@
 package Dungeon.Game;
 
-import java.util.Random;
-
 /**
  * Utility Class
  */
@@ -47,24 +45,6 @@ public class Util {
             // if it stops, its at -1
             // we know that this index would be the right spot for it
             data[index + 1] = key;
-        }
-    }
-    public static void selectionSort(String[] words) {
-        //Selection Sort
-        int smallestIndex;
-
-        for (int i = 0; i < words.length; i++) { //this is reducing the unsorted portion of the array
-            smallestIndex = i; //setting smallestIndex to the first element of the UNSORTED portion of the array
-            for (int j = i + 1; j < words.length; j++) {//these are the elements we compared TO
-                // smallestIndex to the current element of the array
-                if (words[j].compareTo(words[smallestIndex]) < 0) {
-                    smallestIndex = j;
-                }
-            }
-            // Swap the smallestIndex to the beginning of the unsorted portion of the array
-            String tempVar = words[smallestIndex];
-            words[smallestIndex] = words[i];
-            words[i] = tempVar;
         }
     }
 

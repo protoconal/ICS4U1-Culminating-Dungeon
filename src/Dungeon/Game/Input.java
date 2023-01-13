@@ -7,23 +7,25 @@ public class Input {
       // do nothing
     }
   
-    final String[] validMovementKeys = {
+    final String[] VALID_MOVEMENT_KEYS = {
             "W", // up
             "A", // left
             "S", // down
             "D", // right
     };
-    final Scanner scan = new Scanner(System.in);
+    final Scanner SCAN = new Scanner(System.in);
 
     public String getMove() {
-        return getValidKeystroke(validMovementKeys,"Move: ");
+        return getValidKeystroke(VALID_MOVEMENT_KEYS,"Move: ");
     }
 
     public String getValidKeystroke(String[] validKeys, String consoleText) {
-        String key = getInput(consoleText);
+        System.out.print(consoleText);
+        String key = SCAN.nextLine();
         while (!checkKey(key, validKeys)) {
             System.out.println("Sorry, Invalid option.");
-            key = getInput(consoleText);
+            System.out.print(consoleText);
+            key = SCAN.nextLine();
         }
         return key;
     }
@@ -38,25 +40,17 @@ public class Input {
         return false;
     }
 
-    private String getInput(String consoleText) {
-        System.out.print(consoleText);
-        String key = scan.nextLine();
-        // skip newline
-        scan.next();
-        return key;
-    }
-
-    final String[] validMenuKeys = {
+    final String[] VALID_MENU_KEYS = {
             "B", // begin
             ";", // menu
     };
 
     public String getMenuKeys() {
-        return getValidKeystroke(validMenuKeys,"Input: ");
+        return getValidKeystroke(VALID_MENU_KEYS,"Input: ");
     }
 
   
-    final String[] validInteractionKeys = {
+    final String[] VALID_INTERACTION_KEYS = {
             "O", // loot
             "K", // monster
             "L", // inventory
@@ -64,7 +58,7 @@ public class Input {
     };
 
     public String getInteraction() {
-        return getValidKeystroke(validInteractionKeys,"Interact: ");
+        return getValidKeystroke(VALID_INTERACTION_KEYS,"Interact: ");
     }
 
 }

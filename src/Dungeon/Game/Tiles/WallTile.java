@@ -1,10 +1,10 @@
 package Dungeon.Game.Tiles;
 
 public class WallTile extends GameTile {
-    private final int tileID = 0;
-    @Override
-    public int getTileID() {
-        return tileID;
+    private static final int TITLE_ID = 1;
+
+    public WallTile() {
+        super(TITLE_ID);
     }
 
     @Override
@@ -12,5 +12,5 @@ public class WallTile extends GameTile {
         return "####";
     }
 
-    private boolean UNTRAVERSABLE = true;
+    // --Commented out by Inspection (1/12/2023 11:22 PM):private final boolean UNTRAVERSABLE = true;
 }

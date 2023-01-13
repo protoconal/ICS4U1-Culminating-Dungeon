@@ -7,14 +7,14 @@ public class Inventory {
     private final HashMap<String, Item> ITEM_INVENTORY = new HashMap<>();
 
     // use a map
-    private final HashMap<String, Integer> playerInventory = new HashMap<>();
+    private final HashMap<String, Integer> PLAYER_INVENTORY = new HashMap<>();
 
     private String[] itemPriceIds;
     private double[] itemPrices;
 
     public HashMap<String, Integer> getPlayerInventory() {
         // probably redundant
-        return playerInventory;
+        return PLAYER_INVENTORY;
     }
 
     public void initializeItemInventory() {
@@ -29,20 +29,20 @@ public class Inventory {
 
     public void addItemCount(String itemName) {
         // get current count
-        this.playerInventory.put(itemName, getItemCount(itemName) + 1);
+        this.PLAYER_INVENTORY.put(itemName, getItemCount(itemName) + 1);
     }
 
     public int getItemCount(String itemName) {
-        // get the count or return 0 if it doesnt exist.
-        return playerInventory.getOrDefault(itemName, 0);
+        // get the count or return 0 if it doesn't exist.
+        return PLAYER_INVENTORY.getOrDefault(itemName, 0);
     }
 
     public String[] getItemIds() {
-      return (String[]) this.ITEM_INVENTORY.keySet().toArray();
+      return this.ITEM_INVENTORY.keySet().toArray(new String[0]);
     }
 
     // For sorting items based on price
-    // selecton sort implemented under Util class
+    // selection sort implemented under Util class
     // access using Util.selectionSort(Array[]);
     public void calculateSortedPrices() {
       // get all the items
@@ -54,7 +54,7 @@ public class Inventory {
         itemPrices[x] = item.getPrice();
       }
       // implement some sort that keeps the ordering of the items
-      // two arrays, one containing the itemStrings and the other the prices, while sorting, update both arrays according to indexi
+      // two arrays, one containing the itemStrings and the other the prices, while sorting, update both arrays according to indexes
 
       //Selection Sort
       int smallestIndex;

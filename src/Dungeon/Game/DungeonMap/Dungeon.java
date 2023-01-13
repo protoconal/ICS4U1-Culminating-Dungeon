@@ -1,9 +1,9 @@
 package Dungeon.Game.DungeonMap;
 
 import Dungeon.Game.Tiles.GameTile;
+import Dungeon.Game.Tiles.WallTile;
 import Dungeon.Game.Tiles.StartTile;
 import Dungeon.Game.Util;
-import Dungeon.Game.Tiles.WallTile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,25 +11,23 @@ import java.util.Arrays;
 public class Dungeon {
 
     // TODO: implement randomized scaling generation
-    // i.e, map must have x Tiles of each Type, therefore randomly spit them around.
-    final String[] validDirections = {
+    // i.e, MAP must have x Tiles of each Type, therefore randomly spit them around.
+    private final String[] VALID_DIRECTIONS = {
             "LEFT",
             "RIGHT",
             "UP",
             "DOWN"
     };
-
-    final WeightedRandom weightedRandom = new WeightedRandom(MapGenerationSettings.getProbabilities());
-
-    GameTile[][] map;
-    int[] center;
+    private final WeightedRandom WEIGHTED_RANDOM = new WeightedRandom(MapGenerationSettings.getProbabilities());
+    private final GameTile[][] MAP;
+    private final int[] CENTER;
 
     public Dungeon() {
         final int defaultSize = 9;
-        // rememeber, convention = row, column
-        map = new GameTile[defaultSize][defaultSize];
-        center = new int[]{defaultSize / 2, defaultSize / 2};
-        setMapTile(new StartTile(), center);
+        // remember, convention = row, column
+        MAP = new GameTile[defaultSize][defaultSize];
+        CENTER = new int[]{defaultSize / 2, defaultSize / 2};
+        setMapTile(new StartTile(), CENTER);
 
         generateMap();
     }
@@ -38,34 +36,35 @@ public class Dungeon {
     public String toString() {
         StringBuilder out = new StringBuilder();
 
-        for (int row = 0; row < this.map.length; row++) {
-            out.append(Arrays.toString(this.map[row]) + "\n");
+        for (int row = 0; row < this.MAP.length; row++) {
+            out.append(Arrays.toString(this.MAP[row])).append("\n");
         }
 
         return out.toString();
     }
 
     public void generateMap() {
-        traverse(this.center, 0);
+        traverse(this.CENTER, 0);
 
         System.out.println(this);
     }
 
     public void traverse(int[] initialCoordinates, int radius) {
-        //Util.clearTerminal();
-        //System.out.println(this + "\n");
 
         // randomly get tile
         ArrayList<String> traversableDirections = new ArrayList<>();
         GameTile randomTile;
 
         // check each direction, generate new tile if no tile exists
-        for (int x = 0; x < validDirections.length; x++) {
-            String direction = validDirections[x];
+        for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
+            String direction = VALID_DIRECTIONS[x];
             final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
-            if (checkBounds(newCoordinates) && getMapTile(newCoordinates) == null) {
+            if (newCoordinates != null && // check coordinates are there
+                    checkBounds(newCoordinates) && // check they are in bounds
+                    getMapTile(newCoordinates) == null) { // check if it is empty
                 randomTile = generateRandomTile(radius);
-                // if the tile is not a WallTile
+                // if the tile is not a wall tile
+
                 if (!(randomTile instanceof WallTile)) {
                     traversableDirections.add(direction);
                 }
@@ -81,10 +80,11 @@ public class Dungeon {
 
     private GameTile generateRandomTile(int radius) {
         // TODO: implement radius based randomization
-
-        // TODO: implement this better, make one tile class that can handle this automatically
-        weightedRandom.setScaleFactors(lookupScaleFactors(radius));
-        return MapGenerationSettings.getTile(weightedRandom.generateChoice());
+        if (WEIGHTED_RANDOM.getRadius() != radius) {
+            WEIGHTED_RANDOM.setScaleFactors(radius, lookupScaleFactors(radius));
+        }
+        int choice = WEIGHTED_RANDOM.generateChoice();
+        return GameTile.getTile(choice);
     }
 
     private double[] lookupScaleFactors(int radius) {
@@ -92,25 +92,26 @@ public class Dungeon {
 
         double[] scalingFactor = factors[0];
         int x = 0;
-        while (radius > scalingFactor[0]) {
-            x++;
+        while ((double) radius > scalingFactor[0] && x < (factors.length - 1)) {
+            x += 1;
             scalingFactor = factors[x];
         }
 
-        double[] truncScalingFactor = Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);;
-
-        return truncScalingFactor;
+        return Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);
     }
 
     private void setMapTile(GameTile gameTile, int[] coordinates) {
-        this.map[coordinates[0]][coordinates[1]] = gameTile;
+        this.MAP[coordinates[0]][coordinates[1]] = gameTile;
 
-        //Util.clearTerminal();
-        //System.out.println(this);
+        boolean DEBUG = false;
+        if (DEBUG) {
+            Util.clearTerminal();
+            System.out.println(this);
+        }
     }
 
     public GameTile getMapTile(int[] coordinates) {
-        return this.map[coordinates[0]][coordinates[1]];
+        return this.MAP[coordinates[0]][coordinates[1]];
     }
 
     private int[] calculateCoordinates(int[] initialCoordinates, String direction) {
@@ -123,7 +124,7 @@ public class Dungeon {
                 { 1, 0}
         };
 
-        int directionIndex = Util.index(this.validDirections, direction);
+        int directionIndex = Util.index(this.VALID_DIRECTIONS, direction);
         if (directionIndex == -1) {
             System.out.println("ERROR: Invalid Direction. Raised by calculateCoordinates().");
             return null;
@@ -139,7 +140,7 @@ public class Dungeon {
 
     private boolean checkBounds(int[] coordinates) {
         final int minBound = 0;
-        final int maxBound = this.map.length - 1;
+        final int maxBound = this.MAP.length - 1;
 
         boolean rowBounds = (coordinates[0] >= minBound) && (coordinates[0] <= maxBound);
         boolean columnBounds = (coordinates[1] >= minBound) && (coordinates[1] <= maxBound);

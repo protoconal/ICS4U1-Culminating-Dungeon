@@ -1,45 +1,36 @@
 package Dungeon.Game.DungeonMap;
 
-import Dungeon.Game.Tiles.GameTile;
-import Dungeon.Game.Tiles.WallTile;
-
 public class MapGenerationSettings {
     // TODO: implement scaling generation
-    private static double[] chanceTables = {
-            0.50, // Wall
-            0.50, // RegularTile
+    private static final double[] CHANCE_TABLES = {
+            0.50, // EmptyTile
+            0.50, // WallTile
     };
 
-    private static final double[][] scalingTables = {
+    private static final double[][] SCALING_TABLES = {
             // depth will always be half of width of table
-            {1, 0.00, 1.00}, // depth 1
-            {2, 0.50, 1.00}, // depth 2
-            //{3, 1.00, 1.00}, // depth 3
-            {4, 3.00, 1.00}, // depth 4
+            {1, 1.00, 0.00}, // depth 1, EmptyTile Chance, WallTile Chance,
+            {2, 1.00, 1.50}, // depth 2
+            {4, 1.00, 0.50}, // depth 5
+            {5, 1.00, 5.00}, // depth 5
+            {8, 1.00, 2.00}, // depth 6
     };
 
-    private static double[] wallChance = {
+    private static final double[] WALL_CHANCE = {
             0.10, // DeadEnd
             0.70, // Wall Twice
             0.20, // Wall Thrice
     };
 
-    public static GameTile getTile(int tileID) {
-        // these definitions correspond to chance table
-        if (tileID == 0) { return new WallTile(); };
-        if (tileID == 1) { return new GameTile(); };
-        return null;
-    }
-
     public static double[] getProbabilities() {
-        return chanceTables;
+        return CHANCE_TABLES;
     }
 
     public static double[][] getScalingFactors() {
-        return scalingTables;
+        return SCALING_TABLES;
     }
 
     public static double[] getWallChance() {
-        return wallChance;
+        return WALL_CHANCE;
     }
 }

@@ -69,8 +69,8 @@ public class Views {
     Util.clearTerminal();
     StringBuilder outString = new StringBuilder(gameHeader());
     for (int x = 0; x < consoleText.length; x++) {
-      outString.append(consoleText[x] + "\n");
+      outString.append(consoleText[x]).append("\n");
     }
-    System.out.println(outString.toString());
+    System.out.println(outString);
   }
 }

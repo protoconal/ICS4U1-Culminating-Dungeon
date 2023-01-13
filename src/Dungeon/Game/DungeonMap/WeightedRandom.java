@@ -7,11 +7,12 @@ public class WeightedRandom {
 
 
     // https://stackoverflow.com/a/4463613
-    private final Random rand = new Random();
+    private final Random RAND = new Random();
     private final double[] CDF;
     private final double[] BASE_PROBABILITIES;
     private double[] scaleFactors;
     private double sum;
+    private int radius = -1;
   
     public WeightedRandom(double[] probabilities) {
         this.BASE_PROBABILITIES = probabilities;
@@ -23,29 +24,29 @@ public class WeightedRandom {
         updateCDF();
     }
 
-    public WeightedRandom(double[] probabilities, double[] scalarFactors) {
-        this.BASE_PROBABILITIES = probabilities;
-        this.CDF = new double[probabilities.length];
-        this.scaleFactors = scalarFactors;
-        updateCDF();
-    }
+// --Commented out by Inspection START (1/12/2023 11:21 PM):
+//    public WeightedRandom(double[] probabilities, double[] scalarFactors) {
+//        this.BASE_PROBABILITIES = probabilities;
+//        this.CDF = new double[probabilities.length];
+//        this.scaleFactors = scalarFactors;
+//        updateCDF();
+//    }
+// --Commented out by Inspection STOP (1/12/2023 11:21 PM)
 
     private void updateCDF() {
         double runningTotal = 0;
         for (int x = 0; x < this.CDF.length; x++) {
-            runningTotal += this.BASE_PROBABILITIES[x];
-            this.CDF[x] = runningTotal;
-
             // multiply by scaling
-            this.CDF[x] += this.scaleFactors[x];
+            runningTotal += this.BASE_PROBABILITIES[x] * this.scaleFactors[x];
+            this.CDF[x] = runningTotal;
         }
-        this.sum = this.CDF[this.CDF.length - 1];
+        this.sum = runningTotal;
 
         Util.insertionSort(this.CDF);
     }
 
     public int generateChoice() {
-        double randomChoice = rand.nextDouble(this.sum);
+        double randomChoice = RAND.nextDouble(this.sum);
         // binary search
         int min = 0;
         int max = this.CDF.length - 1;
@@ -61,13 +62,18 @@ public class WeightedRandom {
         return min;
     }
 
-    public void setScaleFactors(double[] scaleFactors) {
+    public void setScaleFactors(int radius, double[] scaleFactors) {
         this.scaleFactors = scaleFactors;
+        this.radius = radius;
         updateCDF();
     }
 
+    public int getRadius() {
+        return this.radius;
+    }
 
-    /** double[] chanceTables = {
+
+    /* double[] chanceTables = {
                 0.05, // RegularTile
                 0.05, // RegularTile
                 0.15,  // WallTile

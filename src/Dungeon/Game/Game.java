@@ -1,14 +1,13 @@
 package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
-import Dungeon.Game.Views;
 
 public class Game {
-  static String gameName = "PLACEHOLDER_NAME";
+  static final String GAME_NAME = "PLACEHOLDER_NAME";
   static String phase;
   
-  Input in = new Input();
-  Dungeon currentMap = new Dungeon();
+  final Input IN = new Input();
+  private Dungeon currentMap = new Dungeon();
 
   public Game() {
     // do nothing
@@ -17,25 +16,25 @@ public class Game {
 
     // getMenuInputs
     System.out.println(Views.getToolTip("MAINMENU"));
-    String optionSelected = in.getMenuKeys();
+    String optionSelected = IN.getMenuKeys();
     if (optionSelected.equals(";")) {
       exit();
     }
    // continue onto main method
     showDungeon();
-  };
+  }
 
-  public void showDungeon() {
+    public void showDungeon() {
     Views.printDungeon(this.currentMap);
     // getMenuInputs
     System.out.println(Views.getToolTip("MAINMENU"));
-    String optionSelected = in.getMenuKeys();
+    String optionSelected = IN.getMenuKeys();
     // TODO: handle input
   }
 
   
 
-  public static String getName() { return gameName; }
+  public static String getName() { return GAME_NAME; }
 
   
   public void exit() {
