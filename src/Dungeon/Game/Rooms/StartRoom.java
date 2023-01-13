@@ -1,9 +1,9 @@
-package Dungeon.Game.Tiles;
+package Dungeon.Game.Rooms;
 
-public class StartTile extends GameTile {
+public class StartRoom extends Room {
     private static final int TITLE_ID = -1;
 
-    public StartTile() {
+    public StartRoom() {
         super(TITLE_ID);
     }
 

@@ -1,9 +1,9 @@
-package Dungeon.Game.Tiles;
+package Dungeon.Game.Rooms;
 
-public class WallTile extends GameTile {
+public class WalledRoom extends Room {
     private static final int TITLE_ID = 1;
 
-    public WallTile() {
+    public WalledRoom() {
         super(TITLE_ID);
     }
 
