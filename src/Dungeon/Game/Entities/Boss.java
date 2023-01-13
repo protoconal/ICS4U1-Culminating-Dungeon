@@ -1,42 +1,62 @@
 package Dungeon.Game.Entities;
 
 public abstract class Boss extends Monster {
-    public Boss(int maxHP, int minDamage, int maxDamage, String attackText) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public Boss(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+        super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
 }
 
 class SpiderBroodMother extends Boss {
-    private static final String attackText = "";
-    public SpiderBroodMother(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public SpiderBroodMother() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class DarkKnightofTheForgotten extends Boss {
-    private static final String attackText = "";
-    public DarkKnightofTheForgotten(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public DarkKnightofTheForgotten() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class CorruptedExecutioner extends Boss {
-    private static final String attackText = "";
-    public CorruptedExecutioner(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public CorruptedExecutioner() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class LichKing extends Boss {
-    private static final String attackText = "";
-    public LichKing(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public LichKing() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class AldwynTheFallen extends Boss {
-    private static final String attackText = "";
-    public AldwynTheFallen(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public AldwynTheFallen() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }

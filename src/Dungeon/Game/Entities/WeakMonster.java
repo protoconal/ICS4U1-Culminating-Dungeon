@@ -1,29 +1,41 @@
 package Dungeon.Game.Entities;
 
 public abstract class WeakMonster extends Monster {
-    public WeakMonster(int maxHP, int minDamage, int maxDamage, String attackText) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public WeakMonster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+        super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
 }
 
 class Slime extends WeakMonster {
-    private static final String attackText = "";
-    public Slime(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public Slime() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class Spider extends WeakMonster {
-    private static final String attackText = "";
-    public Spider(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public Spider() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class Skeleton extends WeakMonster {
-    private static final String attackText = "";
-    public Skeleton(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public Skeleton() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 

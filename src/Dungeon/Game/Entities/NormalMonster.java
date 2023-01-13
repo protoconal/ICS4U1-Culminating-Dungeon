@@ -1,27 +1,39 @@
 package Dungeon.Game.Entities;
 
 public abstract class NormalMonster extends Monster {
-    public NormalMonster(int maxHP, int minDamage, int maxDamage, String attackText) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public NormalMonster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+        super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
 }
 class HauntedArmour extends NormalMonster {
-    private static final String attackText = "";
-    public HauntedArmour(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public HauntedArmour() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "Armour clanks.", // onAttackText
+                "A ghostly set of armor appears!" // onAppearText
+        );
     }
 }
 
 class Ghoul extends NormalMonster {
-    private static final String attackText = "";
-    public Ghoul(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public Ghoul() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                " verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
 
 class Cultist extends NormalMonster {
-    private static final String attackText = "";
-    public Cultist(int maxHP, int minDamage, int maxDamage) {
-        super(maxHP, minDamage, maxDamage, attackText);
+    public Cultist() {
+        super(0, //maxHP
+                0, // minDamage
+                0, // maxDamage
+                "verbs.", // onAttackText
+                "x appears!" // onAppearText
+        );
     }
 }
