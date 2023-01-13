@@ -1,21 +1,21 @@
-package Dungeon.Game.Tiles;
+package Dungeon.Game.Rooms;
 
-public abstract class GameTile {
+public abstract class Room {
     private final int TILE_ID;
 
-    public GameTile() {
+    public Room() {
         this.TILE_ID = 0;
     }
 
-    public GameTile(int tileID) {
+    public Room(int tileID) {
         this.TILE_ID = tileID;
     }
 
-    public static GameTile getTile(int tileID) {
+    public static Room getTile(int tileID) {
         // these definitions correspond to chance table
-        if (tileID == 0) { return new EmptyTile(); }
-        if (tileID == 1) { return new WallTile(); }
-        if (tileID == -1) { return new StartTile(); }
+        if (tileID == 0) { return new NormalRoom(); }
+        if (tileID == 1) { return new WalledRoom(); }
+        if (tileID == -1) { return new StartRoom(); }
         return null;
     }
 
