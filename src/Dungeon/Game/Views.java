@@ -45,10 +45,6 @@ public class Views {
 
   public static void showTutorial() {
     String[] consoleText = new String[]{
-      "Hello, wandering traveller!",
-      "You’ve been selected to explore the newly-discovered dungeon of Vaquera.", 
-      "Your bravery will help you fight monsters, find treasure, and help Vaquera learn more about the treasures that lie beneath the surface.",
-      "Oh, I didn't tell you how to move!",
       "",
       "",
       "",

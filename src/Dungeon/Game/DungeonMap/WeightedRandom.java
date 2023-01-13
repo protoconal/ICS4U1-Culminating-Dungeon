@@ -7,44 +7,45 @@ public class WeightedRandom {
 
 
     // https://stackoverflow.com/a/4463613
-    final Random rand = new Random();
+    private final Random rand = new Random();
     private final double[] CDF;
-    private double[] ScaleFactors;
-    private final double[] BaseProbabilities;
-    private double SUM;
+    private final double[] BASE_PROBABILITIES;
+    private double[] scaleFactors;
+    private double sum;
+  
     public WeightedRandom(double[] probabilities) {
-        this.BaseProbabilities = probabilities;
+        this.BASE_PROBABILITIES = probabilities;
         this.CDF = new double[probabilities.length];
-        this.ScaleFactors = new double[probabilities.length];
+        this.scaleFactors = new double[probabilities.length];
         for (int x = 0; x < probabilities.length; x++) {
-            this.ScaleFactors[x] = 1;
+            this.scaleFactors[x] = 1;
         }
         updateCDF();
     }
 
     public WeightedRandom(double[] probabilities, double[] scalarFactors) {
-        this.BaseProbabilities = probabilities;
+        this.BASE_PROBABILITIES = probabilities;
         this.CDF = new double[probabilities.length];
-        this.ScaleFactors = scalarFactors;
+        this.scaleFactors = scalarFactors;
         updateCDF();
     }
 
     private void updateCDF() {
         double runningTotal = 0;
         for (int x = 0; x < this.CDF.length; x++) {
-            runningTotal += this.BaseProbabilities[x];
+            runningTotal += this.BASE_PROBABILITIES[x];
             this.CDF[x] = runningTotal;
 
             // multiply by scaling
-            this.CDF[x] += this.ScaleFactors[x];
+            this.CDF[x] += this.scaleFactors[x];
         }
-        this.SUM = this.CDF[this.CDF.length - 1];
+        this.sum = this.CDF[this.CDF.length - 1];
 
         Util.insertionSort(this.CDF);
     }
 
     public int generateChoice() {
-        double randomChoice = rand.nextDouble(this.SUM);
+        double randomChoice = rand.nextDouble(this.sum);
         // binary search
         int min = 0;
         int max = this.CDF.length - 1;
@@ -60,8 +61,8 @@ public class WeightedRandom {
         return min;
     }
 
-    public void setScaleFactors(double[] ScaleFactors) {
-        this.ScaleFactors = ScaleFactors;
+    public void setScaleFactors(double[] scaleFactors) {
+        this.scaleFactors = scaleFactors;
         updateCDF();
     }
 
