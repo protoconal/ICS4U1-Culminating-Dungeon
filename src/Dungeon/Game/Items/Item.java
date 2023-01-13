@@ -3,7 +3,6 @@ package Dungeon.Game.Items;
 import java.util.ArrayList;
 
 public class Item {
-
   private String name;
   private String description;
   private double price;
@@ -36,7 +35,4 @@ public class Item {
   public double getPrice() { return this.price; }
 
   public int getStackSize() { return this.maximumStackSize; }
-  
-  
-  
 }

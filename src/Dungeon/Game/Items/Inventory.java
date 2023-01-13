@@ -12,8 +12,6 @@ public class Inventory {
     private String[] itemPriceIds;
     private double[] itemPrices;
 
-  
-
     public HashMap<String, Integer> getPlayerInventory() {
         // probably redundant
         return playerInventory;
@@ -30,6 +28,7 @@ public class Inventory {
     }
 
     public void addItemCount(String itemName) {
+        // get current count
         this.playerInventory.put(itemName, getItemCount(itemName) + 1);
     }
 
@@ -80,12 +79,13 @@ public class Inventory {
       this.itemPrices = itemPrices;
     }
 
-  
-    
-  
+    public String[] getItemPriceIds() {
+        return itemPriceIds;
+    }
 
-  
-
+    public double[] getItemPrices() {
+        return itemPrices;
+    }
 }
 
 // inventoryArray = new Item[20];
