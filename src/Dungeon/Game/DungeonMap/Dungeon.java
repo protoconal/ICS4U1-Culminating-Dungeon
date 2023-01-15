@@ -1,8 +1,8 @@
 package Dungeon.Game.DungeonMap;
 
-import Dungeon.Game.Rooms.Room;
-import Dungeon.Game.Rooms.WalledRoom;
-import Dungeon.Game.Rooms.StartRoom;
+import Dungeon.Game.Tiles.GameTile;
+import Dungeon.Game.Tiles.WallTile;
+import Dungeon.Game.Tiles.StartTile;
 import Dungeon.Game.Util;
 
 import java.util.ArrayList;
@@ -19,15 +19,15 @@ public class Dungeon {
             "DOWN"
     };
     private final WeightedRandom WEIGHTED_RANDOM = new WeightedRandom(MapGenerationSettings.getProbabilities());
-    private final Room[][] MAP;
+    private final GameTile[][] MAP;
     private final int[] CENTER;
 
     public Dungeon() {
         int defaultSize = 9;
         // remember, convention = row, column
-        MAP = new Room[defaultSize][defaultSize];
+        MAP = new GameTile[defaultSize][defaultSize];
         CENTER = new int[]{defaultSize / 2, defaultSize / 2};
-        setMapTile(new StartRoom(), CENTER);
+        setMapTile(new StartTile(), CENTER);
 
         generateMap();
     }
@@ -53,7 +53,7 @@ public class Dungeon {
 
         // randomly get tile
         ArrayList<String> traversableDirections = new ArrayList<>();
-        Room randomTile;
+        GameTile randomTile;
 
         // check each direction, generate new tile if no tile exists
         for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
@@ -65,7 +65,7 @@ public class Dungeon {
                 randomTile = generateRandomTile(radius);
                 // if the tile is not a wall tile
 
-                if (!(randomTile instanceof WalledRoom)) {
+                if (!(randomTile instanceof WallTile)) {
                     traversableDirections.add(direction);
                 }
                 setMapTile(randomTile, newCoordinates);
@@ -78,13 +78,13 @@ public class Dungeon {
         }
     }
 
-    private Room generateRandomTile(int radius) {
+    private GameTile generateRandomTile(int radius) {
         // TODO: implement radius based randomization
         if (WEIGHTED_RANDOM.getRadius() != radius) {
             WEIGHTED_RANDOM.setScaleFactors(radius, lookupScaleFactors(radius));
         }
         int choice = WEIGHTED_RANDOM.generateChoice();
-        return Room.getTile(choice);
+        return GameTile.getTile(choice);
     }
 
     private double[] lookupScaleFactors(int radius) {
@@ -100,8 +100,8 @@ public class Dungeon {
         return Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);
     }
 
-    private void setMapTile(Room room, int[] coordinates) {
-        this.MAP[coordinates[0]][coordinates[1]] = room;
+    private void setMapTile(GameTile gameTile, int[] coordinates) {
+        this.MAP[coordinates[0]][coordinates[1]] = gameTile;
 
         boolean DEBUG = false;
         if (DEBUG) {
@@ -110,7 +110,7 @@ public class Dungeon {
         }
     }
 
-    public Room getMapTile(int[] coordinates) {
+    public GameTile getMapTile(int[] coordinates) {
         return this.MAP[coordinates[0]][coordinates[1]];
     }
 

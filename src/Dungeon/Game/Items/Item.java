@@ -16,14 +16,8 @@ public class Item {
     this.NAME = name;
     this.DESCRIPTION = description;
     this.PRICE = price;
+    // should the item store the size allowed in inventory or should that be seperately tracked???
     this.STACK_SIZE = maximumStackSize;
-  }
-
-  public Item(String name, String description) {
-    this.NAME = name;
-    this.DESCRIPTION = description;
-    this.PRICE = -1;
-    this.STACK_SIZE = -1;
   }
 
   public Item(String name, String description, double price, int maximumStackSize, ArrayList<String> properties) {

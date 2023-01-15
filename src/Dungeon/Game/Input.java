@@ -88,4 +88,3 @@ public class Input {
 // You have met [insert monster here]. Prepare for battle! Which attack would you like to use?
 
 // Shopkeeper: Hi, [player name]! What would you like to buy?
-
