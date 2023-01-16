@@ -7,20 +7,20 @@ public abstract class NormalMonster extends Monster {
 }
 class HauntedArmour extends NormalMonster {
     public HauntedArmour() {
-        super(256, //maxHP
-                15, // minDamage
-                25, // maxDamage
+        super(170, //maxHP
+                20, // minDamage
+                30, // maxDamage
                 "Armour clanks.", // onAttackText
                 "A ghostly set of armor appears!" // onAppearText
         );
     }
 }
-
+  
 class Ghoul extends NormalMonster {
     public Ghoul() {
-        super(1024, //maxHP
-                30, // minDamage
-                35, // maxDamage
+        super(125, //maxHP
+                15, // minDamage
+                25, // maxDamage
                 " verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -29,9 +29,9 @@ class Ghoul extends NormalMonster {
 
 class Cultist extends NormalMonster {
     public Cultist() {
-        super(4096, //maxHP
-                40, // minDamage
-                45, // maxDamage
+        super(150, //maxHP
+                25, // minDamage
+                30, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );

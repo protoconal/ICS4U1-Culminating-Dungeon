@@ -24,8 +24,8 @@ class IronSword extends WeaponItem {
         "TEMPORARY DESCRIPTION", // description
         10.00, // price
         1, // maxNumber
-        1, // minDamage
-        2); // maxDamage
+        5, // minDamage
+        15); // maxDamage
   }
 }
 
@@ -36,8 +36,8 @@ class Katana extends WeaponItem {
         "TEMPORARY DESCRIPTION", // description
         10.00, // price
         1, // maxNumber
-        1, // minDamage
-        6); // maxDamage
+        20, // minDamage
+        30); // maxDamage
   }
 }
 
@@ -73,7 +73,7 @@ class HolyBlade extends WeaponItem {
         10.00, // price
         1, // maxNumber
         1, // minDamage
-        720); // maxDamage
+        0); // maxDamage
   }
 }
 
@@ -85,7 +85,7 @@ class Muramasa extends WeaponItem {
         10.00, // price
         1, // maxNumber
         1, // minDamage
-        5040); // maxDamage
+        0); // maxDamage
   }
 }
 
@@ -97,7 +97,7 @@ class CorruptedGreatSword extends WeaponItem {
         10.00, // price
         1, // maxNumber
         1, // minDamage
-        40320); // maxDamage
+        0); // maxDamage
   }
 }
 
@@ -109,6 +109,18 @@ class AbyssalBlade extends WeaponItem {
         10.00, // price
         1, // maxNumber
         1, // minDamage
-        3628800); // maxDamage
+        0); // maxDamage
+  }
+}
+
+class GodSlayer extends WeaponItem {
+  public GodSlayer() {
+    super(
+        "God Slayer", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        1, // maxNumber
+        1, // minDamage
+        0); // maxDamage
   }
 }

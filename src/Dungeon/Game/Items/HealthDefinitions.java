@@ -8,43 +8,43 @@ public class HealthDefinitions {
 class Bandage extends HealthItem {
   public Bandage() {
     super("Bandage", // name
-            "TEMPORARY DESCRIPTION", // description
-            10.00, // price
-            1, // maximumStackSize
-            50 // restoreHP
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        10, // maximumStackSize
+        100 // restoreHP
     );
   }
 }
 
 class Potion extends HealthItem {
   public Potion() {
-    super("Bandage", // name
-            "TEMPORARY DESCRIPTION", // description
-            10.00, // price
-            1, // maximumStackSize
-            100 // restoreHP
+    super("Potion", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        3, // maximumStackSize
+        200 // restoreHP
     );
   }
 }
 
 class Pill extends HealthItem {
   public Pill() {
-    super("Bandage", // name
-            "TEMPORARY DESCRIPTION", // description
-            10.00, // price
-            1, // maximumStackSize
-            250 // restoreHP
+    super("Pill", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        5, // maximumStackSize
+        150 // restoreHP
     );
   }
 }
 
 class ChickenSoup extends HealthItem {
   public ChickenSoup() {
-    super("Bandage", // name
-            "TEMPORARY DESCRIPTION", // description
-            10.00, // price
-            1, // maximumStackSize
-            500 // restoreHP
+    super("Chicken Soup", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        2, // maximumStackSize
+        120 // restoreHP
     );
   }
 }

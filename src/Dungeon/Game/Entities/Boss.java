@@ -9,8 +9,8 @@ public abstract class Boss extends Monster {
 class SpiderBroodMother extends Boss {
     public SpiderBroodMother() {
         super(500, //maxHP
-                10, // minDamage
-                20, // maxDamage
+                30, // minDamage
+                70, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -20,8 +20,8 @@ class SpiderBroodMother extends Boss {
 class DarkKnightofTheForgotten extends Boss {
     public DarkKnightofTheForgotten() {
         super(650, //maxHP
-                15, // minDamage
-                25, // maxDamage
+                60, // minDamage
+                80, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -31,8 +31,8 @@ class DarkKnightofTheForgotten extends Boss {
 class CorruptedExecutioner extends Boss {
     public CorruptedExecutioner() {
         super(750, //maxHP
-                30, // minDamage
-                40, // maxDamage
+                70, // minDamage
+                90, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -42,8 +42,8 @@ class CorruptedExecutioner extends Boss {
 class LichKing extends Boss {
     public LichKing() {
         super(900, //maxHP
-                35, // minDamage
-                45, // maxDamage
+                75, // minDamage
+                90, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -53,8 +53,8 @@ class LichKing extends Boss {
 class AldwynTheFallen extends Boss {
     public AldwynTheFallen() {
         super(1000, //maxHP
-                50, // minDamage
-                60, // maxDamage
+                80, // minDamage
+                100, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
