@@ -9,9 +9,6 @@ public class Views {
   }
 
   public static String getToolTip(String type) {
-    if (type.equals("MOVEMENT")) {
-      return "W: Up, A: Left, S: Down, D: Right";
-    }
     if (type.equals("INVENTORY")) {
       return "E: Use, ";
     }

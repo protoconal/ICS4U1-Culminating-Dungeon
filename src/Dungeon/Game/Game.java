@@ -8,6 +8,7 @@ public class Game {
   
   private final Input IN = new Input();
   private Dungeon currentMap = new Dungeon();
+  private int[] playerCoordinates = currentMap.getCenter();
 
   public Game() {
     // do nothing
@@ -27,9 +28,11 @@ public class Game {
   public void showDungeon() {
     Views.printDungeon(this.currentMap);
     // getMenuInputs
-    System.out.println(Views.getToolTip("MOVEMENT"));
-    String optionSelected = IN.getMenuKeys();
+    String optionSelected = IN.getMove(currentMap.getMovableDirections(playerCoordinates));
     // TODO: handle input
+
+    // activate Room input
+
   }
 
   public void handleRoom() {

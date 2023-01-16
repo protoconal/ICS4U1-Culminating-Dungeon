@@ -1,21 +1,70 @@
 package Dungeon.Game;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input {  
     final String[] VALID_MOVEMENT_KEYS = {
-            "W", // up
+            // keeping same from dungeon
             "A", // left
-            "S", // down
             "D", // right
+            "W", // up
+            "S" // down
     };
+
+    final String[] VALID_DIRECTIONS = {
+            // keeping same from dungeon
+            "LEFT", // left
+            "RIGHT", // right
+            "UP", // up
+            "DOWN" // down
+    };
+
+    final String[] TOOLTIP_DIRECTION = {
+            // keeping same from dungeon
+            "A: Left", // left
+            "D: Right", // right
+            "W: Up", // up
+            "S: Down" // down
+    };
+
     final Scanner SCAN = new Scanner(System.in);
 
-    public String getMove() {
-        return getValidKeystroke(VALID_MOVEMENT_KEYS,"Move: ");
+    public String getMove(String[] movableDirections) {
+        // i know this is inefficient. - oh well.
+
+        // efficiency - convert representation of directions and movement into a int[]
+        ArrayList<String> possibleMovementKeys = new ArrayList<>();
+        StringBuilder toolTip = new StringBuilder();
+        for (int x = 0; x < movableDirections.length; x++) {
+            // calculate the possible key combinations that are allowed given the directions
+            int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
+            possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
+            toolTip.append(TOOLTIP_DIRECTION[index]);
+
+            // I KNOW ALRIGHT
+            if (x != movableDirections.length - 1) {
+                toolTip.append(" ");
+            }
+        }
+
+        System.out.println(toolTip);
+        return getValidKeystroke(possibleMovementKeys,"Move: ");
     }
 
     public String getValidKeystroke(String[] validKeys, String consoleText) {
+        System.out.print(consoleText);
+        String key = SCAN.nextLine();
+        while (!checkKey(key, validKeys)) {
+            System.out.println("Sorry, Invalid option.");
+            System.out.print(consoleText);
+            key = SCAN.nextLine();
+        }
+        return key;
+    }
+
+    public String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
         System.out.print(consoleText);
         String key = SCAN.nextLine();
         while (!checkKey(key, validKeys)) {
@@ -30,6 +79,16 @@ public class Input {
         // case ignorant
         for (int x = 0; x < validKeys.length; x++) {
             if (key.equalsIgnoreCase(validKeys[x])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean checkKey(String key, ArrayList<String> validKeys) {
+        // case ignorant
+        for (int x = 0; x < validKeys.size(); x++) {
+            if (key.equalsIgnoreCase(validKeys.get(x))) {
                 return true;
             }
         }

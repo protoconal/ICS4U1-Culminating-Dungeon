@@ -5,6 +5,7 @@ import Dungeon.Game.Rooms.WalledRoom;
 import Dungeon.Game.Rooms.StartRoom;
 import Dungeon.Game.Util;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,7 +15,7 @@ public class Dungeon {
 
     // TODO: implement randomized scaling generation
     // i.e, MAP must have x Tiles of each Type, therefore randomly spit them around.
-    private final String[] VALID_DIRECTIONS = {
+    private static final String[] VALID_DIRECTIONS = {
             "LEFT",
             "RIGHT",
             "UP",
@@ -24,6 +25,10 @@ public class Dungeon {
     private final Room[][] MAP;
     private final boolean[][] VISIBLE_SPACES;
     private final int[] CENTER;
+
+    public int[] getCenter() {
+        return CENTER;
+    }
 
     public Dungeon() {
         int defaultSize = 9;
@@ -45,6 +50,17 @@ public class Dungeon {
       // update visited space with the correct tiling
       this.VISIBLE_SPACES[row][column] = true;
     }
+
+    public String[] getMovableDirections(int[] playerCoordinates) {
+        ArrayList<String> movableDirections = new ArrayList<>();
+        for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
+            if (checkBounds(Dungeon.calculateCoordinates(playerCoordinates, VALID_DIRECTIONS[x]))) {
+                movableDirections.add(VALID_DIRECTIONS[x]);
+            }
+        }
+        return movableDirections.toArray(new String[0]);
+    }
+
 
     @Override
     public String toString() {
@@ -78,12 +94,13 @@ public class Dungeon {
     }
 
     public void generateMap() {
-        traverse(this.CENTER, 0);
+        this.traverse(this.CENTER, 0);
 
         System.out.println(this);
     }
 
-    public void traverse(int[] initialCoordinates, int radius) {
+
+    private void traverse(int[] initialCoordinates, int radius) {
 
         // randomly get tile
         ArrayList<String> traversableDirections = new ArrayList<>();
@@ -148,7 +165,7 @@ public class Dungeon {
         return this.MAP[coordinates[0]][coordinates[1]];
     }
 
-    private int[] calculateCoordinates(int[] initialCoordinates, String direction) {
+    public static int[] calculateCoordinates(int[] initialCoordinates, String direction) {
         // calculate new coordinates based on input
         int[][] directionFactors = {
                 // row, column
@@ -158,7 +175,7 @@ public class Dungeon {
                 { 1, 0}
         };
 
-        int directionIndex = Util.index(this.VALID_DIRECTIONS, direction);
+        int directionIndex = Util.index(VALID_DIRECTIONS, direction);
         if (directionIndex == -1) {
             System.out.println("ERROR: Invalid Direction. Raised by calculateCoordinates().");
             return null;
