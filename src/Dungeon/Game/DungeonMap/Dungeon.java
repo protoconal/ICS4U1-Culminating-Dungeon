@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Dungeon {
+    
+  
 
     // TODO: implement randomized scaling generation
     // i.e, MAP must have x Tiles of each Type, therefore randomly spit them around.
@@ -20,16 +22,28 @@ public class Dungeon {
     };
     private final WeightedRandom WEIGHTED_RANDOM = new WeightedRandom(MapGenerationSettings.getProbabilities());
     private final Room[][] MAP;
+    private final boolean[][] VISIBLE_SPACES;
     private final int[] CENTER;
 
     public Dungeon() {
         int defaultSize = 9;
         // remember, convention = row, column
         MAP = new Room[defaultSize][defaultSize];
+        VISIBLE_SPACES = new boolean[defaultSize][defaultSize];
         CENTER = new int[]{defaultSize / 2, defaultSize / 2};
         setMapTile(new StartRoom(), CENTER);
-
+        VISIBLE_SPACES[CENTER[0]][CENTER[1]] = true;
+      
         generateMap();
+    }
+
+    public boolean[][] getVisibleSpaces() {
+      return this.VISIBLE_SPACES;
+    }
+
+    public void setVisibleSpaces(int row, int column) {
+      // update visited space with the correct tiling
+      this.VISIBLE_SPACES[row][column] = true;
     }
 
     @Override
@@ -38,6 +52,26 @@ public class Dungeon {
 
         for (int row = 0; row < this.MAP.length; row++) {
             out.append(Arrays.toString(this.MAP[row])).append("\n");
+        }
+
+        return out.toString();
+    }
+
+    public String visibleSpacesToString() {
+        StringBuilder out = new StringBuilder();
+
+        for (int row = 0; row < this.MAP.length; row++) {
+            Room[] columns = this.MAP[row];
+            for (int col = 0; col < columns.length; col++) {
+                if (this.VISIBLE_SPACES[row][col]) {
+                  out.append(this.MAP[row][col]);
+                }
+                else {
+                  out.append("#####");
+                }
+                out.append(", ");
+            }
+          out.append("\n");
         }
 
         return out.toString();

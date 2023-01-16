@@ -2,11 +2,7 @@ package Dungeon.Game;
 
 import java.util.Scanner;
 
-public class Input {
-    public Input() {
-      // do nothing
-    }
-  
+public class Input {  
     final String[] VALID_MOVEMENT_KEYS = {
             "W", // up
             "A", // left

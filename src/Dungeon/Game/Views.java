@@ -53,7 +53,12 @@ public class Views {
   }
 
   public static void printDungeon(Dungeon map) {
-    
+    String[] consoleText = new String[]{
+      map.visibleSpacesToString(),
+      "",
+      "",
+    };
+    printLines(consoleText);
   }
 
   public static void printDeathMenu() {

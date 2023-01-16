@@ -15,3 +15,36 @@ class Bandage extends HealthItem {
     );
   }
 }
+
+class Potion extends HealthItem {
+  public Potion() {
+    super("Bandage", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        1, // maximumStackSize
+            1 // restoreHP
+    );
+  }
+}
+
+class Pill extends HealthItem {
+  public Bandage() {
+    super("Bandage", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        1, // maximumStackSize
+            1 // restoreHP
+    );
+  }
+}
+
+class ChickenSoup extends HealthItem {
+  public Bandage() {
+    super("Bandage", // name
+        "TEMPORARY DESCRIPTION", // description
+        10.00, // price
+        1, // maximumStackSize
+            1 // restoreHP
+    );
+  }
+}

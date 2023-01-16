@@ -8,9 +8,9 @@ public abstract class StrongMonster extends Monster {
 
 class Troll extends StrongMonster {
     public Troll() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(2097152, //maxHP
+                50, // minDamage
+                60, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -19,7 +19,7 @@ class Troll extends StrongMonster {
 
 class Centaur extends StrongMonster {
     public Centaur() {
-        super(0, //maxHP
+        super(16777216, //maxHP
                 0, // minDamage
                 0, // maxDamage
                 "verbs.", // onAttackText
@@ -30,7 +30,7 @@ class Centaur extends StrongMonster {
 
 class Minotaur extends StrongMonster {
     public Minotaur() {
-        super(0, //maxHP
+        super(134217728, //maxHP
                 0, // minDamage
                 0, // maxDamage
                 "verbs.", // onAttackText

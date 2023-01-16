@@ -8,9 +8,9 @@ public abstract class Boss extends Monster {
 
 class SpiderBroodMother extends Boss {
     public SpiderBroodMother() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(500, //maxHP
+                10, // minDamage
+                20, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -19,9 +19,9 @@ class SpiderBroodMother extends Boss {
 
 class DarkKnightofTheForgotten extends Boss {
     public DarkKnightofTheForgotten() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(650, //maxHP
+                15, // minDamage
+                25, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -30,9 +30,9 @@ class DarkKnightofTheForgotten extends Boss {
 
 class CorruptedExecutioner extends Boss {
     public CorruptedExecutioner() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(750, //maxHP
+                30, // minDamage
+                40, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -41,9 +41,9 @@ class CorruptedExecutioner extends Boss {
 
 class LichKing extends Boss {
     public LichKing() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(900, //maxHP
+                35, // minDamage
+                45, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -52,9 +52,9 @@ class LichKing extends Boss {
 
 class AldwynTheFallen extends Boss {
     public AldwynTheFallen() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(1000, //maxHP
+                50, // minDamage
+                60, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );

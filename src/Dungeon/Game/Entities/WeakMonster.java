@@ -8,9 +8,9 @@ public abstract class WeakMonster extends Monster {
 
 class Slime extends WeakMonster {
     public Slime() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(2, //maxHP
+                1, // minDamage
+                10, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -19,9 +19,9 @@ class Slime extends WeakMonster {
 
 class Spider extends WeakMonster {
     public Spider() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(4, //maxHP
+                5, // minDamage
+                15, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );
@@ -30,9 +30,9 @@ class Spider extends WeakMonster {
 
 class Skeleton extends WeakMonster {
     public Skeleton() {
-        super(0, //maxHP
-                0, // minDamage
-                0, // maxDamage
+        super(8, //maxHP
+                10, // minDamage
+                20, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText
         );

@@ -24,14 +24,17 @@ public class Game {
     showDungeon();
   }
 
-    public void showDungeon() {
+  public void showDungeon() {
     Views.printDungeon(this.currentMap);
     // getMenuInputs
-    System.out.println(Views.getToolTip("MAINMENU"));
+    System.out.println(Views.getToolTip("MOVEMENT"));
     String optionSelected = IN.getMenuKeys();
     // TODO: handle input
   }
 
+  public void handleRoom() {
+    
+  }
   
 
   public static String getName() { return GAME_NAME; }
