@@ -7,26 +7,26 @@ import java.util.Scanner;
 public class Input {  
     final String[] VALID_MOVEMENT_KEYS = {
             // keeping same from dungeon
-            "A", // left
-            "D", // right
             "W", // up
-            "S" // down
+            "A", // left
+            "S", // down
+            "D", // right
     };
 
     final String[] VALID_DIRECTIONS = {
             // keeping same from dungeon
-            "LEFT", // left
-            "RIGHT", // right
             "UP", // up
-            "DOWN" // down
+            "LEFT", // left
+            "DOWN", // down
+            "RIGHT", // right
     };
 
     final String[] TOOLTIP_DIRECTION = {
             // keeping same from dungeon
-            "A: Left", // left
-            "D: Right", // right
             "W: Up", // up
-            "S: Down" // down
+            "A: Left", // left
+            "S: Down", // down
+            "D: Right", // right
     };
 
     final Scanner SCAN = new Scanner(System.in);

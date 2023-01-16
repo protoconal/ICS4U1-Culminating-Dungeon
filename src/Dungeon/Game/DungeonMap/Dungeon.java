@@ -16,10 +16,17 @@ public class Dungeon {
     // TODO: implement randomized scaling generation
     // i.e, MAP must have x Tiles of each Type, therefore randomly spit them around.
     private static final String[] VALID_DIRECTIONS = {
-            "LEFT",
-            "RIGHT",
             "UP",
-            "DOWN"
+            "LEFT",
+            "DOWN",
+            "RIGHT"
+    };
+    private static final int[][] DIRECTION_FACTORS = {
+            // row, column
+            {-1, 0}, // UP
+            { 0,-1}, // LEFT
+            { 1, 0}, // DOWN
+            { 0, 1}, // RIGHT
     };
     private final WeightedRandom WEIGHTED_RANDOM = new WeightedRandom(MapGenerationSettings.getProbabilities());
     private final Room[][] MAP;
@@ -167,13 +174,7 @@ public class Dungeon {
 
     public static int[] calculateCoordinates(int[] initialCoordinates, String direction) {
         // calculate new coordinates based on input
-        int[][] directionFactors = {
-                // row, column
-                { 0,-1},
-                { 0, 1},
-                {-1, 0},
-                { 1, 0}
-        };
+
 
         int directionIndex = Util.index(VALID_DIRECTIONS, direction);
         if (directionIndex == -1) {
@@ -181,7 +182,7 @@ public class Dungeon {
             return null;
         }
 
-        int[] directionFactor = directionFactors[directionIndex].clone();
+        int[] directionFactor = DIRECTION_FACTORS[directionIndex].clone();
         for (int x = 0; x < 2; x++) {
             directionFactor[x] += initialCoordinates[x];
         }
