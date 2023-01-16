@@ -12,8 +12,8 @@ class DullSword extends WeaponItem {
         "TEMPORARY DESCRIPTION", // description
         10.00, // price
         1, // maxNumber
-        1, // minDamage
-        1); // maxDamage
+        5, // minDamage
+        15); // maxDamage
   }
 }
 
@@ -22,10 +22,10 @@ class IronSword extends WeaponItem {
     super(
         "Iron Sword", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        150.00, // price
         1, // maxNumber
-        5, // minDamage
-        15); // maxDamage
+        20, // minDamage
+        30); // maxDamage
   }
 }
 
@@ -34,10 +34,10 @@ class Katana extends WeaponItem {
     super(
         "Katana", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        300.00, // price
         1, // maxNumber
-        20, // minDamage
-        30); // maxDamage
+        25, // minDamage
+        40); // maxDamage
   }
 }
 
@@ -46,10 +46,10 @@ class RoyalSword extends WeaponItem {
     super(
         "Royal Sword", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        550.00, // price
         1, // maxNumber
-        1, // minDamage
-        24); // maxDamage
+        30, // minDamage
+        45); // maxDamage
   }
 }
 
@@ -58,10 +58,10 @@ class CrystalGreatSword extends WeaponItem {
     super(
         "Crystal Great Sword", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        700.00, // price
         1, // maxNumber
-        1, // minDamage
-        120); // maxDamage
+        40, // minDamage
+        60); // maxDamage
   }
 }
 
@@ -70,10 +70,10 @@ class HolyBlade extends WeaponItem {
     super(
         "Holy Blade", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        800.00, // price
         1, // maxNumber
-        1, // minDamage
-        0); // maxDamage
+        55, // minDamage
+        70); // maxDamage
   }
 }
 
@@ -82,10 +82,10 @@ class Muramasa extends WeaponItem {
     super(
         "Muramasa", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        1000.00, // price
         1, // maxNumber
-        1, // minDamage
-        0); // maxDamage
+        60, // minDamage
+        75); // maxDamage
   }
 }
 
@@ -94,10 +94,10 @@ class CorruptedGreatSword extends WeaponItem {
     super(
         "Corrupted Great Sword", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        1250.00, // price
         1, // maxNumber
-        1, // minDamage
-        0); // maxDamage
+        55, // minDamage
+        80); // maxDamage
   }
 }
 
@@ -106,10 +106,10 @@ class AbyssalBlade extends WeaponItem {
     super(
         "Abyssal Blade", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        1500.00, // price
         1, // maxNumber
-        1, // minDamage
-        0); // maxDamage
+        70, // minDamage
+        85); // maxDamage
   }
 }
 
@@ -118,9 +118,9 @@ class GodSlayer extends WeaponItem {
     super(
         "God Slayer", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        2000.00, // price
         1, // maxNumber
-        1, // minDamage
-        0); // maxDamage
+        90, // minDamage
+        100); // maxDamage
   }
 }
