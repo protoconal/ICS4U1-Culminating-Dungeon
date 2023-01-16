@@ -9,7 +9,7 @@ class Silver extends LootItem {
   public Silver() {
     super("Silver", // name
         "TEMPORARY DESCRIPTION", // description
-        5 // value
+        10 // value
     );
   }
 }
@@ -18,7 +18,7 @@ class Gold extends LootItem {
   public Gold() {
     super("Gold", // name
         "TEMPORARY DESCRIPTION", // description
-        5 // value
+        50 // value
     );
   }
 }
@@ -27,7 +27,7 @@ class Platinum extends LootItem {
   public Platinum() {
     super("Platinum", // name
         "TEMPORARY DESCRIPTION", // description
-        5 // value
+        75 // value
     );
   }
 }
@@ -36,7 +36,7 @@ class Sapphire extends LootItem {
   public Sapphire() {
     super("Sapphire", // name
         "TEMPORARY DESCRIPTION", // description
-        5 // value
+        120 // value
     );
   }
 }
@@ -45,7 +45,7 @@ class Diamond extends LootItem {
   public Diamond() {
     super("Diamond", // name
         "TEMPORARY DESCRIPTION", // description
-        5 // value
+        200 // value
     );
   }
 }
@@ -54,7 +54,7 @@ class Ruby extends LootItem {
   public Ruby() {
     super("Ruby", // name
         "TEMPORARY DESCRIPTION", // description
-        5 // value
+        300 // value
     );
   }
 }
