@@ -1,10 +1,12 @@
 package Dungeon.Game.Rooms;
 
+import Dungeon.Game.Player;
+
 public class TrapRoom extends Room {
     private static final int TILE_ID = 4;
 
     public TrapRoom() {
-        super();
+        super(TILE_ID, false);
     }
 
     @Override
@@ -16,4 +18,6 @@ public class TrapRoom extends Room {
     public boolean interactRoom(Player player) {
         return false;
     }
+
+
 }

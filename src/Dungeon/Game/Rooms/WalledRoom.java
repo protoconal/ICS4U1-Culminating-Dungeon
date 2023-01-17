@@ -1,5 +1,7 @@
 package Dungeon.Game.Rooms;
 
+import Dungeon.Game.Player;
+
 public class WalledRoom extends Room {
     private static final int TILE_ID = 1;
 

@@ -1,7 +1,7 @@
 package Dungeon.Game.Rooms;
 
 import Dungeon.Game.Entities.*;
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.Player;
 
 public class MonsterRoom extends Room {
     private static final int TILE_ID = 3;
@@ -10,7 +10,7 @@ public class MonsterRoom extends Room {
     private Spawner spawner = null;
 
     public MonsterRoom() {
-        super(TILE_ID);
+        super(TILE_ID, false);
     }
 
     public MonsterRoom(Monster monster) {

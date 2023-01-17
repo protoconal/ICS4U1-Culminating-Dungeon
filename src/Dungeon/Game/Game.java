@@ -1,7 +1,6 @@
 package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
-import Dungeon.Game.Rooms.Player;
 import Dungeon.Game.Rooms.Room;
 
 public class Game {
@@ -50,6 +49,11 @@ public class Game {
   }
 
   public void handleRoom(Room currentRoom) {
+    // if room is not interactable
+    if (!currentRoom.isInteractable()) {
+      return;
+    }
+
     boolean hasDied = currentRoom.interactRoom(this.player);
     IN.waitForKeyPress();
     if (hasDied) {

@@ -1,4 +1,4 @@
-package Dungeon.Game.Rooms;
+package Dungeon.Game;
 
 import Dungeon.Game.Items.PlayerInventory;
 
