@@ -34,6 +34,7 @@ public class Item {
     this.properties = properties;
   }
 
+
   public String getName() { return this.NAME; }
 
   public String getDescription() { return this.DESCRIPTION; }
