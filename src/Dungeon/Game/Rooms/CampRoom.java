@@ -3,6 +3,10 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 public class CampRoom extends Room {
+    // allow shopping
+
+    // allow for healing
+
     private static final int TILE_ID = 5;
 
     public CampRoom() {
@@ -16,6 +20,7 @@ public class CampRoom extends Room {
 
     @Override
     public boolean interactRoom(Player player) {
+        // check healplayer
         return false;
     }
 }

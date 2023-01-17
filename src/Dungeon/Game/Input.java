@@ -4,8 +4,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Input {  
-    final String[] VALID_MOVEMENT_KEYS = {
+public class Input {
+    final static String[] VALID_MOVEMENT_KEYS = {
             // keeping same from dungeon
             "W", // up
             "A", // left
@@ -13,7 +13,7 @@ public class Input {
             "D", // right
     };
 
-    final String[] VALID_DIRECTIONS = {
+    final static String[] VALID_DIRECTIONS = {
             // keeping same from dungeon
             "UP", // up
             "LEFT", // left
@@ -21,7 +21,7 @@ public class Input {
             "RIGHT", // right
     };
 
-    final String[] TOOLTIP_DIRECTION = {
+    final static String[] TOOLTIP_DIRECTION = {
             // keeping same from dungeon
             "W: Up", // up
             "A: Left", // left
@@ -29,9 +29,9 @@ public class Input {
             "D: Right", // right
     };
 
-    final Scanner SCAN = new Scanner(System.in);
+    final static Scanner SCAN = new Scanner(System.in);
 
-    public String getMove(String[] movableDirections) {
+    public static String getMove(String[] movableDirections) {
         // i know this is inefficient. - oh well.
 
         // efficiency - convert representation of directions and movement into a int[]
@@ -54,7 +54,7 @@ public class Input {
         return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, getValidKeystroke(possibleMovementKeys,"Move: "))];
     }
 
-    public String getValidKeystroke(String[] validKeys, String consoleText) {
+    public static String getValidKeystroke(String[] validKeys, String consoleText) {
         System.out.print(consoleText);
         String key = SCAN.nextLine();
         while (!checkKey(key, validKeys)) {
@@ -65,7 +65,7 @@ public class Input {
         return key.toUpperCase();
     }
 
-    public String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
+    public static String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
         System.out.print(consoleText);
         String key = SCAN.nextLine();
         while (!checkKey(key, validKeys)) {
@@ -76,7 +76,7 @@ public class Input {
         return key.toUpperCase();
     }
 
-    private boolean checkKey(String key, String[] validKeys) {
+    private static boolean checkKey(String key, String[] validKeys) {
         // case ignorant
         for (int x = 0; x < validKeys.length; x++) {
             if (key.equalsIgnoreCase(validKeys[x])) {
@@ -86,7 +86,7 @@ public class Input {
         return false;
     }
 
-    private boolean checkKey(String key, ArrayList<String> validKeys) {
+    private static boolean checkKey(String key, ArrayList<String> validKeys) {
         // case ignorant
         for (int x = 0; x < validKeys.size(); x++) {
             if (key.equalsIgnoreCase(validKeys.get(x))) {
@@ -96,29 +96,29 @@ public class Input {
         return false;
     }
 
-    public void waitForKeyPress() {
+    public static void waitForKeyPress() {
         System.out.print("Press enter key to continue...");
         SCAN.nextLine();
     }
 
-    final String[] VALID_MENU_KEYS = {
+    final static String[] VALID_MENU_KEYS = {
             "B", // begin
             ";", // menu
     };
 
-    public String getMenuKeys() {
+    public static String getMenuKeys() {
         return getValidKeystroke(VALID_MENU_KEYS,"Input: ");
     }
 
   
-    final String[] VALID_INTERACTION_KEYS = {
+    final static String[] VALID_INTERACTION_KEYS = {
             "O", // loot
             "K", // monster
             "L", // inventory
             ";", // menu
     };
 
-    public String getInteraction() {
+    public static String getInteraction() {
         return getValidKeystroke(VALID_INTERACTION_KEYS,"Interact: ");
     }
 

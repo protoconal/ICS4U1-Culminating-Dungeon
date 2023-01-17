@@ -6,8 +6,6 @@ import Dungeon.Game.Rooms.Room;
 public class Game {
   static final String GAME_NAME = "PLACEHOLDER_NAME";
   static String phase;
-  
-  private final Input IN = new Input();
   private Dungeon currentMap = new Dungeon();
   private int[] playerCoordinates = currentMap.getCenter();
 
@@ -20,7 +18,7 @@ public class Game {
 
     // getMenuInputs
     System.out.println(Views.getToolTip("MAINMENU"));
-    String optionSelected = IN.getMenuKeys();
+    String optionSelected = Input.getMenuKeys();
     if (optionSelected.equals(";")) {
       exit();
     }
@@ -33,7 +31,7 @@ public class Game {
     this.currentMap.updateVisibility(playerCoordinates);
     Views.printDungeon(this.currentMap, playerCoordinates);
     // getMenuInputs
-    String optionSelected = IN.getMove(currentMap.getMovableDirections(playerCoordinates));
+    String optionSelected = Input.getMove(currentMap.getMovableDirections(playerCoordinates));
 
     // update coordinates
     this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
@@ -55,7 +53,7 @@ public class Game {
     }
 
     boolean hasDied = currentRoom.interactRoom(this.player);
-    IN.waitForKeyPress();
+    Input.waitForKeyPress();
     if (hasDied) {
       // send to death code
     }
