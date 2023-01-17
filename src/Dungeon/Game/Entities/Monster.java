@@ -5,7 +5,16 @@ public abstract class Monster extends Entity {
     private final int MAX_DAMAGE;
     private final String onAttackText; // x verbs you.
     private final String onAppearText; // a blobby creature appears.
-    public int randomDamage() {
+
+    public Monster() {
+        super(0);
+        this.MIN_DAMAGE = 0;
+        this.MAX_DAMAGE = 0;
+        this.onAttackText = "";
+        this.onAppearText = "";
+    }
+
+    public int generateDamage() {
         int damageRange = MAX_DAMAGE - MIN_DAMAGE;
         return (int) (MIN_DAMAGE + Math.random() * damageRange);
     }
