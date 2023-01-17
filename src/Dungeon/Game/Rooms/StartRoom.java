@@ -11,4 +11,8 @@ public class StartRoom extends Room {
     public String toString() {
         return "START";
     }
+
+    public boolean interactRoom(Player player) {
+        return false;
+    }
 }

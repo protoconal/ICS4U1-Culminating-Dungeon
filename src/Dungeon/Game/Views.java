@@ -77,4 +77,14 @@ public class Views {
     }
     System.out.println(outString);
   }
+
+  public static void delayedPrintLines(String[] consoleText) {
+    // cls terminal
+    Util.clearTerminal();
+    StringBuilder outString = new StringBuilder(gameHeader());
+    for (int x = 0; x < consoleText.length; x++) {
+      outString.append(consoleText[x]).append("\n");
+    }
+    System.out.println(outString);
+  }
 }

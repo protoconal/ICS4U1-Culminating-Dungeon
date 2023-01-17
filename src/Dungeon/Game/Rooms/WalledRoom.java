@@ -12,4 +12,8 @@ public class WalledRoom extends Room {
         return "#####";
     }
 
+    public boolean interactRoom(Player player) {
+        return false;
+    }
+
 }

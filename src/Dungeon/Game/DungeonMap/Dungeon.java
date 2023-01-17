@@ -1,15 +1,15 @@
 package Dungeon.Game.DungeonMap;
 
-import Dungeon.Game.Rooms.Room;
-import Dungeon.Game.Rooms.WalledRoom;
-import Dungeon.Game.Rooms.StartRoom;
+import Dungeon.Game.Items.LootDefinitions;
+import Dungeon.Game.Rooms.*;
 import Dungeon.Game.Util;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Dungeon {
+
+    LootDefinitions lootGenerator = new LootDefinitions();
     
   
 
@@ -160,7 +160,18 @@ public class Dungeon {
             WEIGHTED_RANDOM.setScaleFactors(radius, lookupScaleFactors(radius));
         }
         int choice = WEIGHTED_RANDOM.generateChoice();
-        return Room.getTile(choice);
+        return getTile(choice);
+    }
+
+    public Room getTile(int tileID) {
+        // these definitions correspond to chance table
+        if (tileID == 0) { return new NormalRoom(); }
+        if (tileID == 1) { return new WalledRoom(); }
+        if (tileID == 2) { return new TreasureRoom(lootGenerator.generateLoot()); }
+        if (tileID == 3) { return new MonsterRoom(); }
+        if (tileID == 4) { return new TrapRoom(); }
+        if (tileID == -1) { return new StartRoom(); }
+        return null;
     }
 
     private double[] lookupScaleFactors(int radius) {

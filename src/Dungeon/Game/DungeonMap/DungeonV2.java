@@ -1,4 +1,5 @@
-package Dungeon.Game.DungeonMap;
+/*
+* package Dungeon.Game.DungeonMap;
 
 import Dungeon.Game.Rooms.NormalRoom;
 import Dungeon.Game.Rooms.Room;
@@ -97,8 +98,9 @@ public class DungeonV2 {
         // TODO: implement radius based randomization
 
         // TODO: implement this better, make one tile class that can handle this automatically
-        return Room.getTile(weightedRandom.generateChoice());
+        return getTile(weightedRandom.generateChoice());
     }
+
 
     private void setMapTile(Room room, int[] coordinates) {
         this.numberOfTiles[0] += 1;
@@ -149,3 +151,4 @@ public class DungeonV2 {
 
 
 }
+*/

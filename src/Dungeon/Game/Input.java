@@ -96,6 +96,11 @@ public class Input {
         return false;
     }
 
+    public void waitForKeyPress() {
+        System.out.print("Press any key to continue...");
+        SCAN.nextLine();
+    }
+
     final String[] VALID_MENU_KEYS = {
             "B", // begin
             ";", // menu

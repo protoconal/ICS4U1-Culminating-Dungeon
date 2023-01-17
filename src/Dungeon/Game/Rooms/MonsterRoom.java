@@ -34,4 +34,8 @@ public class MonsterRoom extends Room {
     public String toString() {
         return "MONST";
     }
+
+    public boolean interactRoom(Player player) {
+        return false;
+    }
 }
