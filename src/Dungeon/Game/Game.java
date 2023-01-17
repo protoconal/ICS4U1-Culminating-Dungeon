@@ -4,7 +4,7 @@ import Dungeon.Game.DungeonMap.Dungeon;
 import Dungeon.Game.Rooms.Room;
 
 public class Game {
-  static final String GAME_NAME = "PLACEHOLDER_NAME";
+  static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
   static String phase;
   private Dungeon currentMap = new Dungeon();
   private int[] playerCoordinates = currentMap.getCenter();

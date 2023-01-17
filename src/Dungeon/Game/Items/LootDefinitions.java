@@ -53,7 +53,7 @@ class Platinum extends LootItem {
   public Platinum() {
     super("Platinum", // name
         "TEMPORARY DESCRIPTION", // description
-        75 // value
+        70 // value
     );
   }
 }
@@ -71,7 +71,7 @@ class Diamond extends LootItem {
   public Diamond() {
     super("Diamond", // name
         "TEMPORARY DESCRIPTION", // description
-        200 // value
+        150 // value
     );
   }
 }
@@ -80,7 +80,7 @@ class Ruby extends LootItem {
   public Ruby() {
     super("Ruby", // name
         "TEMPORARY DESCRIPTION", // description
-        300 // value
+        200 // value
     );
   }
 }
