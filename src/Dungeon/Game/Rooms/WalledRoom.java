@@ -9,7 +9,7 @@ public class WalledRoom extends Room {
 
     @Override
     public String toString() {
-        return "####";
+        return "#####";
     }
 
 }
