@@ -50,7 +50,8 @@ public class Input {
         }
 
         System.out.println(toolTip);
-        return getValidKeystroke(possibleMovementKeys,"Move: ");
+        // return the direction, rather than the key
+        return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, getValidKeystroke(possibleMovementKeys,"Move: "))];
     }
 
     public String getValidKeystroke(String[] validKeys, String consoleText) {
@@ -61,7 +62,7 @@ public class Input {
             System.out.print(consoleText);
             key = SCAN.nextLine();
         }
-        return key;
+        return key.toUpperCase();
     }
 
     public String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
@@ -72,7 +73,7 @@ public class Input {
             System.out.print(consoleText);
             key = SCAN.nextLine();
         }
-        return key;
+        return key.toUpperCase();
     }
 
     private boolean checkKey(String key, String[] validKeys) {

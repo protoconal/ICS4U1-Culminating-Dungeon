@@ -24,7 +24,7 @@ public abstract class Room {
 
     @Override
     public String toString() {
-        return "    ";
+        return "     ";
     }
 
     public int getTileID() {
