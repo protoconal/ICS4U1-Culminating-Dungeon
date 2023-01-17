@@ -12,6 +12,7 @@ public class StartRoom extends Room {
         return "START";
     }
 
+    @Override
     public boolean interactRoom(Player player) {
         return false;
     }

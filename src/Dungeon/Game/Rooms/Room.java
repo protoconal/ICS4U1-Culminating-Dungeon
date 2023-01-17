@@ -20,4 +20,7 @@ public abstract class Room {
     public int getTileID() {
         return this.TILE_ID;
     }
+
+    public abstract boolean interactRoom(Player player);
+
 }

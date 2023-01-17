@@ -12,4 +12,8 @@ public class TrapRoom extends Room {
         return "TRAP!";
     }
 
+    @Override
+    public boolean interactRoom(Player player) {
+        return false;
+    }
 }
