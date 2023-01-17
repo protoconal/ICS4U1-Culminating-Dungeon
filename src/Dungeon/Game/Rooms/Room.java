@@ -11,7 +11,6 @@ public abstract class Room {
         this.TILE_ID = tileID;
     }
 
-    public abstract boolean interactRoom(Player player);
 
     @Override
     public String toString() {

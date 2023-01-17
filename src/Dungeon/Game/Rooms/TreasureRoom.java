@@ -5,6 +5,7 @@ import Dungeon.Game.Items.LootItem;
 import Dungeon.Game.Views;
 
 public class TreasureRoom extends Room {
+    private static final int TILE_ID = 2;
 
     private final LootItem LOOT;
 
@@ -33,4 +34,10 @@ public class TreasureRoom extends Room {
     public LootItem getLoot() {
         return LOOT;
     }
+
+    @Override
+    public String toString() {
+        return "!!!!!";
+    }
+
 }

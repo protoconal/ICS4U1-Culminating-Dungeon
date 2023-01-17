@@ -1,11 +1,15 @@
 package Dungeon.Game.Rooms;
 
 public class TrapRoom extends Room {
+    private static final int TILE_ID = 4;
+
     public TrapRoom() {
         super();
     }
 
-    public boolean interactRoom(Player player) {
-        return false;
+    @Override
+    public String toString() {
+        return "TRAP!";
     }
+
 }
