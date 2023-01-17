@@ -10,7 +10,7 @@ class Bandage extends HealthItem {
     super("Bandage", // name
         "TEMPORARY DESCRIPTION", // description
         50.00, // price
-        15, // maximumStackSize
+        10, // maximumStackSize
         50 // restoreHP
     );
   }
@@ -22,7 +22,7 @@ class Potion extends HealthItem {
         "TEMPORARY DESCRIPTION", // description
         250.00, // price
         3, // maximumStackSize
-        200 // restoreHP
+        180 // restoreHP
     );
   }
 }
@@ -33,7 +33,7 @@ class Pill extends HealthItem {
         "TEMPORARY DESCRIPTION", // description
         200.00, // price
         5, // maximumStackSize
-        150 // restoreHP
+        140 // restoreHP
     );
   }
 }

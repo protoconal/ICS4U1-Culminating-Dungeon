@@ -6,6 +6,7 @@ public class CampRoom extends Room {
     public CampRoom() {
         super();
     }
+  
     @Override
     public String toString() {
         return "CAMP!";

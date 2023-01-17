@@ -10,14 +10,14 @@ public class LootDefinitions {
           new Silver(),
           new Gold(),
           new Platinum(),
-          new Sapphire(),
+          //new Sapphire(),
           new Diamond(),
           new Ruby(),
   };
 
   public LootDefinitions() {
     double[] loot = new double[]{
-            0.40, // Silver();
+            0.35, // Silver();
             0.30, // Gold
             0.20, // Platinum
             0.10, // Diamond
@@ -58,14 +58,14 @@ class Platinum extends LootItem {
   }
 }
 
-class Sapphire extends LootItem {
+/*class Sapphire extends LootItem {
   public Sapphire() {
     super("Sapphire", // name
         "TEMPORARY DESCRIPTION", // description
         120 // value
     );
   }
-}
+}*/
 
 class Diamond extends LootItem {
   public Diamond() {
