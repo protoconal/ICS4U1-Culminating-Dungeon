@@ -26,22 +26,13 @@ public class Game {
   }
 
   public void showDungeon() {
-    // update visibility
-    this.currentMap.updateVisibility(playerCoordinates);
-    Views.printDungeon(this.currentMap, playerCoordinates);
+    Views.printDungeon(this.currentMap);
     // getMenuInputs
     String optionSelected = IN.getMove(currentMap.getMovableDirections(playerCoordinates));
-
-    // update coordinates
-    this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
-
     // TODO: handle input
 
     // activate Room input
-    handleRoom();
 
-    // begin draw routine
-    showDungeon();
   }
 
   public void handleRoom() {

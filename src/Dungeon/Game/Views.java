@@ -4,8 +4,6 @@ import Dungeon.Game.DungeonMap.Dungeon;
 import Dungeon.Game.Game;
 
 public class Views {
-  private static final String PLAYER_MODEL = " <i> ";
-
   public static String gameHeader() {
     return "----------  " + Game.getName() + "  ----------\n";
   }
@@ -51,9 +49,9 @@ public class Views {
     printLines(consoleText);
   }
 
-  public static void printDungeon(Dungeon map, int[] playerCoordinates) {
+  public static void printDungeon(Dungeon map) {
     String[] consoleText = new String[]{
-      map.visibleSpacesToString(playerCoordinates, PLAYER_MODEL),
+      map.visibleSpacesToString(),
       "",
       "",
     };

@@ -53,17 +53,15 @@ public class Dungeon {
       return this.VISIBLE_SPACES;
     }
 
-    public void setVisibleSpaces(int[] coordinates) {
+    public void setVisibleSpaces(int row, int column) {
       // update visited space with the correct tiling
-      this.VISIBLE_SPACES[coordinates[0]][coordinates[1]] = true;
+      this.VISIBLE_SPACES[row][column] = true;
     }
 
     public String[] getMovableDirections(int[] playerCoordinates) {
         ArrayList<String> movableDirections = new ArrayList<>();
         for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
-            int[] proposedCoordinates = Dungeon.calculateCoordinates(playerCoordinates, VALID_DIRECTIONS[x]);
-            if (checkBounds(proposedCoordinates) &&
-                    !(MAP[proposedCoordinates[0]][proposedCoordinates[1]] instanceof WalledRoom)) {
+            if (checkBounds(Dungeon.calculateCoordinates(playerCoordinates, VALID_DIRECTIONS[x]))) {
                 movableDirections.add(VALID_DIRECTIONS[x]);
             }
         }
@@ -82,17 +80,13 @@ public class Dungeon {
         return out.toString();
     }
 
-    public String visibleSpacesToString(int[] playerCoordinates, String playerModel) {
+    public String visibleSpacesToString() {
         StringBuilder out = new StringBuilder();
 
         for (int row = 0; row < this.MAP.length; row++) {
             Room[] columns = this.MAP[row];
             for (int col = 0; col < columns.length; col++) {
-                // place player
-                if (row == playerCoordinates[0] && col == playerCoordinates[1]) {
-                    out.append(playerModel);
-                }
-                else if (this.VISIBLE_SPACES[row][col]) {
+                if (this.VISIBLE_SPACES[row][col]) {
                   out.append(this.MAP[row][col]);
                 }
                 else {
@@ -104,18 +98,6 @@ public class Dungeon {
         }
 
         return out.toString();
-    }
-
-    public void updateVisibility(int[] playerCoordinates) {
-        setVisibleSpaces(playerCoordinates);
-
-        // double check bounds, then paint
-        for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
-            int[] proposedCoordinates = Dungeon.calculateCoordinates(playerCoordinates, VALID_DIRECTIONS[x]);
-            if (checkBounds(proposedCoordinates)) {
-                setVisibleSpaces(proposedCoordinates);
-            }
-        }
     }
 
     public void generateMap() {
