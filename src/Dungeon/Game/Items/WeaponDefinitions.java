@@ -10,7 +10,7 @@ class DullSword extends WeaponItem {
     super(
         "Dull Sword", // name
         "TEMPORARY DESCRIPTION", // description
-        10.00, // price
+        20.00, // price
         1, // maxNumber
         5, // minDamage
         15); // maxDamage

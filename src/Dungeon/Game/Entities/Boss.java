@@ -31,7 +31,7 @@ class DarkKnightofTheForgotten extends Boss {
 class CorruptedExecutioner extends Boss {
     public CorruptedExecutioner() {
         super(750, //maxHP
-                70, // minDamage
+                65, // minDamage
                 90, // maxDamage
                 "verbs.", // onAttackText
                 "x appears!" // onAppearText

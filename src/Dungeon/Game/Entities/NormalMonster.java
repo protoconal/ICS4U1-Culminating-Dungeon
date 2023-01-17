@@ -19,7 +19,7 @@ class HauntedArmour extends NormalMonster {
 class Ghoul extends NormalMonster {
     public Ghoul() {
         super(125, //maxHP
-                15, // minDamage
+                10, // minDamage
                 25, // maxDamage
                 " verbs.", // onAttackText
                 "x appears!" // onAppearText

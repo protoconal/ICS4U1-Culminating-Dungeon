@@ -90,7 +90,7 @@ public class Dungeon {
                   out.append(this.MAP[row][col]);
                 }
                 else {
-                  out.append("#####");
+                  out.append("?_?_?");
                 }
                 out.append(", ");
             }
