@@ -7,6 +7,7 @@ public class ItemInventory {
     private final HashMap<String, Item> ITEM_INVENTORY = new HashMap<>();
     private String[] itemPriceIds;
     private double[] itemPrices;
+
     public void initializeItemInventory() {
         // add items to the inventory, so later on we can use
         // getItemCount("name")

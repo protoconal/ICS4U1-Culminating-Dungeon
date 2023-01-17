@@ -97,7 +97,7 @@ public class Input {
     }
 
     public void waitForKeyPress() {
-        System.out.print("Press any key to continue...");
+        System.out.print("Press enter key to continue...");
         SCAN.nextLine();
     }
 

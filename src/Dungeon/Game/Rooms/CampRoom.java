@@ -8,6 +8,7 @@ public class CampRoom extends Room {
     public CampRoom() {
         super(TILE_ID, false);
     }
+  
     @Override
     public String toString() {
         return "CAMP!";
