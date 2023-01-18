@@ -21,12 +21,24 @@ public class Input {
             "RIGHT", // right
     };
 
-    final static String[] TOOLTIP_DIRECTION = {
+    final static String[] TOOLTIP_DIRECTIONS = {
             // keeping same from dungeon
             "W: Up", // up
             "A: Left", // left
             "S: Down", // down
             "D: Right", // right
+    };
+
+    final static String[] VALID_MENU_KEYS = {
+            "B", // begin
+            ";", // menu
+    };
+
+    final static String[] VALID_INTERACTION_KEYS = {
+            "O", // loot
+            "K", // monster
+            "L", // inventory
+            ";", // menu
     };
 
     final static Scanner SCAN = new Scanner(System.in);
@@ -41,9 +53,8 @@ public class Input {
             // calculate the possible key combinations that are allowed given the directions
             int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
             possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
-            toolTip.append(TOOLTIP_DIRECTION[index]);
+            toolTip.append(TOOLTIP_DIRECTIONS[index]);
 
-            // I KNOW ALRIGHT
             if (x != movableDirections.length - 1) {
                 toolTip.append(" ");
             }
@@ -101,22 +112,9 @@ public class Input {
         SCAN.nextLine();
     }
 
-    final static String[] VALID_MENU_KEYS = {
-            "B", // begin
-            ";", // menu
-    };
-
     public static String getMenuKeys() {
         return getValidKeystroke(VALID_MENU_KEYS,"Input: ");
     }
-
-  
-    final static String[] VALID_INTERACTION_KEYS = {
-            "O", // loot
-            "K", // monster
-            "L", // inventory
-            ";", // menu
-    };
 
     public static String getInteraction() {
         return getValidKeystroke(VALID_INTERACTION_KEYS,"Interact: ");
