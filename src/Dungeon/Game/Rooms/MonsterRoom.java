@@ -2,6 +2,7 @@ package Dungeon.Game.Rooms;
 
 import Dungeon.Game.Entities.*;
 import Dungeon.Game.Player;
+import Dungeon.Game.Views;
 
 public class MonsterRoom extends Room {
     private static final int TILE_ID = 3;
@@ -32,10 +33,23 @@ public class MonsterRoom extends Room {
 
     @Override
     public String toString() {
-        return "MONST";
+        return " <M> ";
     }
 
     public boolean interactRoom(Player player) {
+        this.setInteractableStatus(false);
+
+        String[] consoleText = new String[]{
+                this.monster.getAppearText(),
+        };
+
+        // show appearance text,
+        // show attacking text
+        // get player input
+
+        Views.printLines(consoleText);
+
+
         return false;
     }
 }

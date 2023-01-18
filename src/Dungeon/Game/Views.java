@@ -2,6 +2,7 @@ package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
 import Dungeon.Game.Game;
+import Dungeon.Game.Items.PlayerInventory;
 
 public class Views {
   private static final String PLAYER_MODEL = " <i> ";
@@ -56,6 +57,22 @@ public class Views {
       map.visibleSpacesToString(playerCoordinates, PLAYER_MODEL),
       "",
       "",
+    };
+    printLines(consoleText);
+  }
+
+  public static void printAttackModel(Dungeon map, int[] playerCoordinates) {
+    String[] consoleText = new String[]{
+            "",
+            "",
+    };
+    printLines(consoleText);
+  }
+
+  public static void printInventory(PlayerInventory inventory) {
+    String[] consoleText = new String[]{
+            inventory.toString(),
+            "",
     };
     printLines(consoleText);
   }
