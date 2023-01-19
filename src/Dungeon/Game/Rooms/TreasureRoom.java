@@ -20,6 +20,11 @@ public class TreasureRoom extends Room {
     LOOT = new LootDefinitions().generateLoot();
   }
 
+  @Override
+  public String toString() {
+    return "!!!!!";
+  }
+  
   public boolean interactRoom(Player player) {
     player.addScore(LOOT.getValue());
     this.setInteractableStatus(false);
@@ -38,9 +43,5 @@ public class TreasureRoom extends Room {
     return LOOT;
   }
 
-  @Override
-  public String toString() {
-    return "!!!!!";
-  }
 
 }
