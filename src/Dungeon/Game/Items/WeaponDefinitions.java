@@ -1,8 +1,30 @@
 package Dungeon.Game.Items;
 
+import java.util.HashMap;
+
 public class WeaponDefinitions {
-  // store all possible weapons
-  // can move some code out of inventory
+  private final HashMap<String, WeaponItem> WEAPON_DEFINITIONS = new HashMap<>();
+
+  public WeaponDefinitions() {
+    initializeItemInventory();
+  }
+
+  public WeaponItem returnItemFromName(String itemName) {
+    return WEAPON_DEFINITIONS.getOrDefault(itemName, null);
+  }
+
+  public void initializeItemInventory() {
+    this.WEAPON_DEFINITIONS.put("DullSword", new DullSword());
+    this.WEAPON_DEFINITIONS.put("IronSword", new IronSword());
+    this.WEAPON_DEFINITIONS.put("Katana", new Katana());
+    this.WEAPON_DEFINITIONS.put("RoyalSword", new RoyalSword());
+    this.WEAPON_DEFINITIONS.put("CrystalGreatSword", new CrystalGreatSword());
+    this.WEAPON_DEFINITIONS.put("HolyBlade", new HolyBlade());
+    this.WEAPON_DEFINITIONS.put("Muramasa", new Muramasa());
+    this.WEAPON_DEFINITIONS.put("CorruptedGreatSword", new CorruptedGreatSword());
+    this.WEAPON_DEFINITIONS.put("AbyssalBlade", new AbyssalBlade());
+    this.WEAPON_DEFINITIONS.put("GodSlayer", new GodSlayer());
+  }
 }
 
 class DullSword extends WeaponItem {
@@ -57,7 +79,7 @@ class CrystalGreatSword extends WeaponItem {
   public CrystalGreatSword() {
     super(
         "Crystal Great Sword", // name
-        "Crystal's definetly great, but I'm not so sure about the sword", // description
+        "Crystal's definitely great, but I'm not so sure about the sword", // description
         700.00, // price
         1, // maxNumber
         40, // minDamage

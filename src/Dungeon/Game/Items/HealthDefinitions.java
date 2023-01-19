@@ -1,8 +1,25 @@
 package Dungeon.Game.Items;
+
+import java.util.HashMap;
+
 // 7
 public class HealthDefinitions {
-  // store all possible weapons
-  // can move some code out of inventory
+  private final HashMap<String, HealthItem> HEALTH_DEFINITIONS = new HashMap<>();
+
+  public HealthDefinitions() {
+    initializeItemInventory();
+  }
+
+  public HealthItem returnItemFromName(String itemName) {
+    return HEALTH_DEFINITIONS.getOrDefault(itemName, null);
+  }
+
+  public void initializeItemInventory() {
+    this.HEALTH_DEFINITIONS.put("Bandage", new Bandage());
+    this.HEALTH_DEFINITIONS.put("Potion", new Potion());
+    this.HEALTH_DEFINITIONS.put("Pill", new Pill());
+    this.HEALTH_DEFINITIONS.put("ChickenSoup", new ChickenSoup());
+  }
 }
 
 class Bandage extends HealthItem {

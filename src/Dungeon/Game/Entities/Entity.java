@@ -4,45 +4,54 @@ import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.WeaponItem;
 
 public abstract class Entity implements Attackable {
-    private final int MAX_HP;
-    private int currentHP;
-    private boolean isDead;
+  private final int MAX_HP;
+  private int currentHP;
+  public Entity(int maximumHP) {
+    this.MAX_HP = maximumHP;
+    this.currentHP = maximumHP;
+  }
 
-    public Entity(int maximumHP) {
-        this.MAX_HP = maximumHP;
-        this.currentHP = maximumHP;
-        this.isDead = false;
-    }
+  public int getCurrentHP() {
+    return currentHP;
+  }
+  public int getMaxHP() {
+    return MAX_HP;
+  }
 
-    @Override
-    public void heal(HealthItem health) {
-        int newHealth = this.currentHP + health.getRestoreHP();
-        if (newHealth > MAX_HP) {
-            this.currentHP = MAX_HP;
-            return;
-        }
-        this.currentHP = newHealth;
+  @Override
+  public void heal(HealthItem health) {
+    int newHealth = this.currentHP + health.getRestoreHP();
+    if (newHealth > MAX_HP) {
+      this.currentHP = MAX_HP;
+      return;
     }
+    this.currentHP = newHealth;
+  }
 
-    @Override
-    public boolean revive(HealthItem health) {
-        this.isDead = true;
-        return true;
-    }
+  @Override
+  public boolean isDead() {
+    return this.currentHP <= 0;
+  }
 
-    @Override
-    public boolean damage(WeaponItem weapon) {
-        int newHealth = this.currentHP - weapon.randomDamage();
-        if (newHealth < 0) {
-            this.currentHP = 0;
-            this.isDead = true;
-            return true;
-        }
-        this.currentHP = newHealth;
-        return false;
+  @Override
+  public boolean damage(WeaponItem weapon) {
+    int newHealth = this.currentHP - weapon.randomDamage();
+    if (newHealth < 0) {
+      this.currentHP = 0;
+      return true;
     }
+    this.currentHP = newHealth;
+    return false;
+  }
 
-    public boolean isDead() {
-        return isDead;
+  @Override
+  public boolean damage(int damage) {
+    int newHealth = this.currentHP - damage;
+    if (newHealth < 0) {
+      this.currentHP = 0;
+      return true;
     }
+    this.currentHP = newHealth;
+    return false;
+  }
 }

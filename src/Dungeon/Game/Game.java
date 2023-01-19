@@ -1,15 +1,16 @@
 package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
+import Dungeon.Game.Items.HealthItem;
+import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Rooms.Room;
 
 public class Game {
-  static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
+  private static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
+  private static final Player player = new Player();
   static String phase;
-  private Dungeon currentMap = new Dungeon();
+  private final Dungeon currentMap = new Dungeon();
   private int[] playerCoordinates = currentMap.getCenter();
-
-  private Player player = new Player();
 
   public Game() {
     // do nothing
@@ -22,21 +23,43 @@ public class Game {
     if (optionSelected.equals(";")) {
       exit();
     }
-   // continue onto main method
 
-  
-    showDungeon();
+    // if player isnt dead, keep playing the dungeon
+    while (!player.isDead()) {
+      showDungeon();
+    }
+  }
+
+  public static Player getPlayer() {
+    return player;
+  }
+
+  public static String getName() {
+    return GAME_NAME;
   }
 
   public void showDungeon() {
-    
+
     // update visibility
     this.currentMap.updateVisibility(playerCoordinates);
     Views.printDungeon(this.currentMap, playerCoordinates);
     // getMenuInputs
     String optionSelected = Input.getMove(currentMap.getMovableDirections(playerCoordinates));
 
-    Views.printInventory(player.getInventory());
+    player.getInventory().initializeWeapons();
+    player.getInventory().initializeHealth();
+
+    if (optionSelected.equals("R")) {
+      player.damage(80);
+      showInventory();
+      return;
+    }
+    if (optionSelected.equals(";")) {
+      // TODO: quit menu
+      optionSelected = "UP";
+      // show menu
+      return;
+    }
 
     // update coordinates
     this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
@@ -47,8 +70,6 @@ public class Game {
     Room currentRoom = this.currentMap.getMapTile(playerCoordinates);
     handleRoom(currentRoom);
 
-    // begin draw routine
-    showDungeon();
   }
 
   public void handleRoom(Room currentRoom) {
@@ -57,18 +78,115 @@ public class Game {
       return;
     }
 
-    boolean hasDied = currentRoom.interactRoom(this.player);
+    boolean hasDied = currentRoom.interactRoom(player);
     Input.waitForKeyPress();
     if (hasDied) {
       // send to death code
     }
     // otherwise continue
   }
-  
 
-  public static String getName() { return GAME_NAME; }
+  public void showInventory() {
+    String optionSelected;
+    PlayerInventory currentInventory = player.getInventory();
 
-  
+    String mode = "Weapon";
+    String[] weaponsInInventory = currentInventory.getWeaponNames();
+    String[] healingInInventory = currentInventory.getHealthItems();
+
+    int index = 0;
+    boolean flag = true;
+    do {
+      // use regular print;
+      Views.printLn(currentInventory.toString());
+
+      // if empty, try switching to health
+      if (mode.equals("Weapon") && weaponsInInventory.length == 0) {
+        mode = "Health";
+      }
+      // if empty, try switching to weapons
+      if (mode.equals("Health") && healingInInventory.length == 0) {
+        mode = "Weapon";
+      }
+      // if empty, give up
+      if (currentInventory.size() == 0) {
+        Input.waitForKeyPress();
+        return;
+      }
+
+      System.out.println("Current Mode: " + mode);
+
+      String[] currentWorkingInventory = weaponsInInventory;
+      if (mode.equals("Health")) {
+        currentWorkingInventory = healingInInventory;
+      }
+
+      System.out.println("Selected item: " + currentWorkingInventory[index]);
+      optionSelected = Input.getInventoryKeys();
+
+      if (optionSelected.equals("W")) {
+        index = 0;
+        mode = "Weapons";
+      } else if (optionSelected.equals("S")) {
+        index = 0;
+        mode = "Health";
+      } else if (optionSelected.equals("A")) {
+        index -= 1;
+        if (index < 0) {
+          index = currentWorkingInventory.length - 1;
+        }
+      } else if (optionSelected.equals("D")) {
+        index += 1;
+        if (index > currentWorkingInventory.length - 1) {
+          index = 0;
+        }
+      }
+      // exit loop as input is not selection
+      else {
+        flag = false;
+      }
+    }
+    while (flag);
+
+    String itemId = "";
+    if (mode.equals("Weapon")) {
+      itemId = weaponsInInventory[index].replaceAll("\\s", "");
+    }
+    if (mode.equals("Health")) {
+      itemId = healingInInventory[index].replaceAll("\\s", "");
+    }
+
+    if (optionSelected.equals("R")) {
+      // Return
+      return;
+    }
+    if (optionSelected.equals("E")) {
+      // Use/Equip
+      if (mode.equals("Weapon")) {
+        currentInventory.setEquippedWeapon(itemId);
+
+      }
+      if (mode.equals("Health")) {
+        // ensure that player needs more than 50% of heal
+        HealthItem item = currentInventory.getHealthDefinitions().returnItemFromName(itemId);
+        if (player.getCurrentHP() + item.getRestoreHP() * 0.5 < player.getMaxHP()) {
+          item = currentInventory.removeHealthItem(itemId);
+          player.heal(item);
+        }
+      }
+    }
+    if (optionSelected.equals("Q")) {
+      // Drop/Delete
+      if (mode.equals("Weapon")) {
+        currentInventory.removeWeapon(itemId);
+      }
+      if (mode.equals("Health")) {
+        currentInventory.removeHealthItem(itemId);
+      }
+    }
+    showInventory();
+  }
+
   public void exit() {
     System.exit(0);
   }

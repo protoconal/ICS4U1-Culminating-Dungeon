@@ -6,12 +6,12 @@ public class Item {
   private final String NAME;
   private final String DESCRIPTION;
   private final double PRICE;
-  private ArrayList<String> properties = new ArrayList<>();
   private final int STACK_SIZE;
+  private ArrayList<String> properties = new ArrayList<>();
 
   // required details
   // DESCRIPTION, NAME
-  
+
   public Item(String name, String description, double price, int maximumStackSize) {
     this.NAME = name;
     this.DESCRIPTION = description;
@@ -35,11 +35,23 @@ public class Item {
   }
 
 
-  public String getName() { return this.NAME; }
+  public String getName() {
+    return this.NAME;
+  }
 
-  public String getDescription() { return this.DESCRIPTION; }
+  public String getDescription() {
+    return this.DESCRIPTION;
+  }
 
-  public double getPrice() { return this.PRICE; }
+  public double getPrice() {
+    return this.PRICE;
+  }
 
-  public int getStackSize() { return this.STACK_SIZE; }
+  public int getStackSize() {
+    return this.STACK_SIZE;
+  }
+
+  public String getId() {
+    return this.NAME.replaceAll("\\s", "");
+  }
 }
