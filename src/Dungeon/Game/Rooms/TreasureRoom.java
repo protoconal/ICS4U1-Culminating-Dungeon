@@ -6,41 +6,41 @@ import Dungeon.Game.Player;
 import Dungeon.Game.Views;
 
 public class TreasureRoom extends Room {
-    private static final int TILE_ID = 2;
+  private static final int TILE_ID = 2;
 
-    private final LootItem LOOT;
+  private final LootItem LOOT;
 
-    public TreasureRoom(LootItem item) {
-        super(TILE_ID, true);
-        LOOT = item;
-    }
+  public TreasureRoom(LootItem item) {
+    super(TILE_ID, true);
+    LOOT = item;
+  }
 
-    public TreasureRoom() {
-        super();
-        LOOT = new LootDefinitions().generateLoot();
-    }
+  public TreasureRoom() {
+    super();
+    LOOT = new LootDefinitions().generateLoot();
+  }
 
-    public boolean interactRoom(Player player) {
-        player.addScore(LOOT.getValue());
-        this.setInteractableStatus(false);
+  public boolean interactRoom(Player player) {
+    player.addScore(LOOT.getValue());
+    this.setInteractableStatus(false);
 
-        String[] consoleText = new String[]{
-                "You've found a " + LOOT.getName(),
-                LOOT.getValue() + " has been added to your score!",
-                "Total Gold: " + player.getScore(),
-        };
+    String[] consoleText = new String[]{
+        "You've found a " + LOOT.getName(),
+        LOOT.getValue() + " has been added to your score!",
+        "Total Gold: " + player.getScore(),
+    };
 
-        Views.printLines(consoleText);
-        return false;
-    }
+    Views.printLines(consoleText);
+    return false;
+  }
 
-    public LootItem getLoot() {
-        return LOOT;
-    }
+  public LootItem getLoot() {
+    return LOOT;
+  }
 
-    @Override
-    public String toString() {
-        return "!!!!!";
-    }
+  @Override
+  public String toString() {
+    return "!!!!!";
+  }
 
 }

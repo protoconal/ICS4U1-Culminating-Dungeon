@@ -1,28 +1,29 @@
 package Dungeon.Game.DungeonMap;
 
 import Dungeon.Game.Util;
+
 import java.util.Random;
 
 public class WeightedRandom {
 
 
-    // https://stackoverflow.com/a/4463613
-    private final Random RAND = new Random();
-    private final double[] CDF;
-    private final double[] BASE_PROBABILITIES;
-    private double[] scaleFactors;
-    private double sum;
-    private int radius = -1;
-  
-    public WeightedRandom(double[] probabilities) {
-        this.BASE_PROBABILITIES = probabilities;
-        this.CDF = new double[probabilities.length];
-        this.scaleFactors = new double[probabilities.length];
-        for (int x = 0; x < probabilities.length; x++) {
-            this.scaleFactors[x] = 1;
-        }
-        updateCDF();
+  // https://stackoverflow.com/a/4463613
+  private final Random RAND = new Random();
+  private final double[] CDF;
+  private final double[] BASE_PROBABILITIES;
+  private double[] scaleFactors;
+  private double sum;
+  private int radius = -1;
+
+  public WeightedRandom(double[] probabilities) {
+    this.BASE_PROBABILITIES = probabilities;
+    this.CDF = new double[probabilities.length];
+    this.scaleFactors = new double[probabilities.length];
+    for (int x = 0; x < probabilities.length; x++) {
+      this.scaleFactors[x] = 1;
     }
+    updateCDF();
+  }
 
 // --Commented out by Inspection START (1/12/2023 11:21 PM):
 //    public WeightedRandom(double[] probabilities, double[] scalarFactors) {
@@ -33,44 +34,43 @@ public class WeightedRandom {
 //    }
 // --Commented out by Inspection STOP (1/12/2023 11:21 PM)
 
-    private void updateCDF() {
-        double runningTotal = 0;
-        for (int x = 0; x < this.CDF.length; x++) {
-            // multiply by scaling
-            runningTotal += this.BASE_PROBABILITIES[x] * this.scaleFactors[x];
-            this.CDF[x] = runningTotal;
-        }
-        this.sum = runningTotal;
-
-        Util.insertionSort(this.CDF);
+  private void updateCDF() {
+    double runningTotal = 0;
+    for (int x = 0; x < this.CDF.length; x++) {
+      // multiply by scaling
+      runningTotal += this.BASE_PROBABILITIES[x] * this.scaleFactors[x];
+      this.CDF[x] = runningTotal;
     }
+    this.sum = runningTotal;
 
-    public int generateChoice() {
-        double randomChoice = RAND.nextDouble(this.sum);
-        // binary search
-        int min = 0;
-        int max = this.CDF.length - 1;
-        while (min < max) {
-            int middle = (min + max) / 2;
-            if (randomChoice > this.CDF[middle]) {
-                min = middle + 1;
-            }
-            else {
-                max = middle;
-            }
-        }
-        return min;
-    }
+    Util.insertionSort(this.CDF);
+  }
 
-    public void setScaleFactors(int radius, double[] scaleFactors) {
-        this.scaleFactors = scaleFactors;
-        this.radius = radius;
-        updateCDF();
+  public int generateChoice() {
+    double randomChoice = RAND.nextDouble(this.sum);
+    // binary search
+    int min = 0;
+    int max = this.CDF.length - 1;
+    while (min < max) {
+      int middle = (min + max) / 2;
+      if (randomChoice > this.CDF[middle]) {
+        min = middle + 1;
+      } else {
+        max = middle;
+      }
     }
+    return min;
+  }
 
-    public int getRadius() {
-        return this.radius;
-    }
+  public void setScaleFactors(int radius, double[] scaleFactors) {
+    this.scaleFactors = scaleFactors;
+    this.radius = radius;
+    updateCDF();
+  }
+
+  public int getRadius() {
+    return this.radius;
+  }
 
 
     /* double[] chanceTables = {
