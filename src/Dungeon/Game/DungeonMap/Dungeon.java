@@ -28,7 +28,7 @@ public class Dungeon {
   private final Room[][] MAP;
   private final boolean[][] VISIBLE_SPACES;
   private final int[] CENTER;
-  final LootDefinitions lootGenerator = new LootDefinitions();
+  final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
 
   public Dungeon() {
     int defaultSize = 9;
@@ -185,7 +185,7 @@ public class Dungeon {
       return new WalledRoom();
     }
     if (roomID == 2) {
-      return new TreasureRoom(lootGenerator.generateLoot());
+      return new TreasureRoom(LOOT_GENERATOR.generateLoot());
     }
     if (roomID == 3) {
       return new MonsterRoom();
