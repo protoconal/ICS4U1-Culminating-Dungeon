@@ -3,8 +3,8 @@ package Dungeon.Game.Entities;
 import Dungeon.Game.WeightedRandoms;
 
 public class WeakMonsterDefinitions {
-  private final WeightedRandoms rand;
-  private final Monster[] monsters = new Monster[]{
+  private final WeightedRandoms RANDOM;
+  private final Monster[] MONSTERS = new Monster[]{
       new Skeleton(),
       new Slime(),
       new Spider(),
@@ -16,11 +16,11 @@ public class WeakMonsterDefinitions {
         2, // Slime
         3, // Spider
     };
-    this.rand = new WeightedRandoms(spawnChances);
+    this.RANDOM = new WeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
-    return monsters[rand.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()];
   }
 
   public abstract static class WeakMonster extends Monster {

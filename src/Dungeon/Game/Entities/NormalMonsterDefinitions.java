@@ -4,8 +4,8 @@ import Dungeon.Game.WeightedRandoms;
 
 public class NormalMonsterDefinitions {
 
-  private final WeightedRandoms rand;
-  private final Monster[] monsters = new Monster[]{
+  private final WeightedRandoms RANDOM;
+  private final Monster[] MONSTERS = new Monster[]{
       new HauntedArmour(),
       new Ghoul(),
       new Cultist(),
@@ -19,11 +19,11 @@ public class NormalMonsterDefinitions {
         0.30, // Ghoul()
         0.20, // Cultist()
     };
-    this.rand = new WeightedRandoms(spawnChances);
+    this.RANDOM = new WeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
-    return monsters[rand.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()];
   }
 
   public abstract static class NormalMonster extends Monster {
