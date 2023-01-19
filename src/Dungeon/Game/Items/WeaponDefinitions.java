@@ -9,7 +9,7 @@ class DullSword extends WeaponItem {
   public DullSword() {
     super(
         "Dull Sword", // name
-        "TEMPORARY DESCRIPTION", // description
+        "A stupid sword for a stupid person", // description
         50.00, // price
         1, // maxNumber
         5, // minDamage
@@ -33,7 +33,7 @@ class Katana extends WeaponItem {
   public Katana() {
     super(
         "Katana", // name
-        "TEMPORARY DESCRIPTION", // description
+        "これが何を意味するのか、あなたには決してわからないでしょう！", // description
         300.00, // price
         1, // maxNumber
         25, // minDamage
@@ -45,7 +45,7 @@ class RoyalSword extends WeaponItem {
   public RoyalSword() {
     super(
         "Royal Sword", // name
-        "TEMPORARY DESCRIPTION", // description
+        " This is a sword fit for a sheikh, emir, chief, oba, lord, caesar, prince, king, or queen,", // description
         550.00, // price
         1, // maxNumber
         30, // minDamage
@@ -57,7 +57,7 @@ class CrystalGreatSword extends WeaponItem {
   public CrystalGreatSword() {
     super(
         "Crystal Great Sword", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Crystal's definetly great, but I'm not so sure about the sword", // description
         700.00, // price
         1, // maxNumber
         40, // minDamage
@@ -69,7 +69,7 @@ class HolyBlade extends WeaponItem {
   public HolyBlade() {
     super(
         "Holy Blade", // name
-        "TEMPORARY DESCRIPTION", // description
+        "For such a powerful sword, this price is sacrilegious!", // description
         800.00, // price
         1, // maxNumber
         55, // minDamage
@@ -81,7 +81,7 @@ class Muramasa extends WeaponItem {
   public Muramasa() {
     super(
         "Muramasa", // name
-        "TEMPORARY DESCRIPTION", // description
+        "待って、この剣は呪われている？", // description
         1000.00, // price
         1, // maxNumber
         60, // minDamage
@@ -93,7 +93,7 @@ class CorruptedGreatSword extends WeaponItem {
   public CorruptedGreatSword() {
     super(
         "Corrupted Great Sword", // name
-        "TEMPORARY DESCRIPTION", // description
+        "This sword will be taken off the market soon because it's too danger- Actually, our generous sponsors have ensured that this sword is the safest one of all.", // description
         1250.00, // price
         1, // maxNumber
         55, // minDamage
@@ -105,7 +105,7 @@ class AbyssalBlade extends WeaponItem {
   public AbyssalBlade() {
     super(
         "Abyssal Blade", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Yeah, we're kind of lazy with our names.", // description
         1500.00, // price
         1, // maxNumber
         70, // minDamage
@@ -117,7 +117,7 @@ class GodSlayer extends WeaponItem {
   public GodSlayer() {
     super(
         "God Slayer", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Isn't God immortal, though?", // description
         2000.00, // price
         1, // maxNumber
         90, // minDamage

@@ -9,6 +9,8 @@ public class PlayerInventory {
     private final HashMap<String, Integer> HEALTH_PLAYER_INVENTORY = new HashMap<>();
     private final HashMap<String, Integer> WEAPON_PLAYER_INVENTORY = new HashMap<>();
 
+    private WeaponItem equipedItem;
+
     public WeaponItem getEquipedItem() {
         return equipedItem;
     }
@@ -17,12 +19,12 @@ public class PlayerInventory {
         this.equipedItem = equipedItem;
     }
 
-    private WeaponItem equipedItem;
-
+    
     public void initializePlayerInventory() {
         // add items to the inventory, so later on we can use
         // getItemCount("name")
         // this.ITEM_INVENTORY.put("ItemID", new Item());
+      this.WEAPON_PLAYER_INVENTORY.put("DullSword", 1);
     }
 
     public String[] getItems() {
@@ -49,7 +51,7 @@ public class PlayerInventory {
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder();
-        out.append("Currently held weapons... \n");
+        out.append("Your weapons... \n");
 
         String[] weapons = this.getWeapons();
         for (int x = 0; x < weapons.length; x++) {
@@ -59,7 +61,7 @@ public class PlayerInventory {
             }
         }
 
-        out.append("Currently held weapons... ");
+        out.append("Your healing items... \n");
         String[] health = this.getHealthItems();
         for (int x = 0; x < health.length; x++) {
             out.append(health[x]).append(", ");
@@ -70,6 +72,8 @@ public class PlayerInventory {
 
         return out.toString();
     }
+
+    
 
 }
 

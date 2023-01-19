@@ -23,15 +23,20 @@ public class Game {
       exit();
     }
    // continue onto main method
+
+  
     showDungeon();
   }
 
   public void showDungeon() {
+    
     // update visibility
     this.currentMap.updateVisibility(playerCoordinates);
     Views.printDungeon(this.currentMap, playerCoordinates);
     // getMenuInputs
     String optionSelected = Input.getMove(currentMap.getMovableDirections(playerCoordinates));
+
+    Views.printInventory(player.getInventory());
 
     // update coordinates
     this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);

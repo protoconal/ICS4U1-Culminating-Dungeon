@@ -41,6 +41,19 @@ public class Input {
             ";", // menu
     };
 
+    final static String[] VALID_FIGHT_KEYS = {
+            "A", // fight
+            "H", // heal
+            "R", // inventory
+            ";", // quit
+    };
+
+    final static String[] VALID_INVENTORY_KEYS = {
+            "E", // use/equip
+            "R", // return
+            ";", // quit
+    };
+
     final static Scanner SCAN = new Scanner(System.in);
 
     public static String getMove(String[] movableDirections) {
@@ -113,7 +126,11 @@ public class Input {
     }
 
     public static String getMenuKeys() {
-        return getValidKeystroke(VALID_MENU_KEYS,"Input: ");
+        return getValidKeystroke(VALID_MENU_KEYS, "Input: ");
+    }
+
+    public static String getFightKeys() {
+        return getValidKeystroke(VALID_FIGHT_KEYS, "Input: ");
     }
 
     public static String getInteraction() {

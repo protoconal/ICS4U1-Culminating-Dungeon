@@ -52,8 +52,8 @@ class SteelArmour extends ArmourItem {
 class RoyalArmour extends ArmourItem {
   public RoyalArmour() {
     super(
-        "RoyalArmour", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Royal Armour", // name
+        "This is armour fit for a emperor, empress, duke, duchess, baron, baroness, prince, princess, tsar, or tsarina", // description
         700.00, // price
         1, // maxNumber
         300); // hpIncrease
@@ -63,8 +63,8 @@ class RoyalArmour extends ArmourItem {
 class DarkKnightArmour extends ArmourItem {
   public DarkKnightArmour() {
     super(
-        "DarkKnightArmour", // name
-        "TEMPORARY DESCRIPTION", // description
+        "dark Knight Armour", // name
+        "We put the dark in lowercase. Now we can't get sued!", // description
         800.00, // price
         1, // maxNumber
         350); // hpIncrease
@@ -75,7 +75,7 @@ class CrystallineSteelArmour extends ArmourItem {
   public CrystallineSteelArmour() {
     super(
         "Crystalline Steel Armour", // name
-        "TEMPORARY DESCRIPTION", // description
+        "When regular steel just isn't crystal enough.", // description
         1000.00, // price
         1, // maxNumber
         400); // hpIncrease
@@ -86,7 +86,7 @@ class ArmourOfTheCorrupted extends ArmourItem {
   public ArmourOfTheCorrupted() {
     super(
         "Armour Of The Corrupted", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Sold at your local politican's house", // description
         1500.00, // price
         1, // maxNumber
         450); // hpIncrease
@@ -97,7 +97,7 @@ class AbyssalSteelArmour extends ArmourItem {
   public AbyssalSteelArmour() {
     super(
         "Abyssal Steel Armour", // name
-        "TEMPORARY DESCRIPTION", // description
+        "People need to stop calling it abysmal. The only abysmal thing about it is the state of your wallet once you purchase it.", // description
         2000.00, // price
         1, // maxNumber
         500); // hpIncrease
@@ -108,7 +108,7 @@ class HolyTrinityArmour extends ArmourItem {
   public HolyTrinityArmour() {
     super(
         "HolyTrinityArmour", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Just one look at this armour and monsters will convert to Christianity.", // description
         2000.00, // price
         1, // maxNumber
         600); // hpIncrease
