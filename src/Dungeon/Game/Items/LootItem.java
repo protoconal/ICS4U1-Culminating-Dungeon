@@ -1,14 +1,14 @@
 package Dungeon.Game.Items;
 
-import java.util.ArrayList;
-
 public class LootItem extends Item {
+  private final int value;
 
-  public LootItem(String name, String description, int value, int addScore) {
-    super(name, description, value, addScore);
-    
+  public LootItem(String name, String description, int value) {
+    super(name, description);
+    this.value = value;
   }
 
-
-  
+  public int getValue() {
+    return value;
+  }
 }
