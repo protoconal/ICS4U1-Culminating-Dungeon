@@ -159,6 +159,10 @@ public class Input {
     return getValidKeystroke(VALID_INTERACTION_KEYS, "Interact: ");
   }
 
+  public static String getText(String consoleText) {
+    System.out.print(consoleText);
+    return SCAN.nextLine();
+  }
 }
 
 

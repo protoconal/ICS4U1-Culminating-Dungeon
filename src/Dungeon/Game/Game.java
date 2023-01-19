@@ -5,12 +5,15 @@ import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Rooms.Room;
 
+import java.io.IOException;
+
 public class Game {
   private static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
   private static final Player PLAYER = new Player();
   static String phase;
   private final Dungeon currentMap = new Dungeon();
   private int[] playerCoordinates = currentMap.getCenter();
+  private final HighScore SCORES_HANDLER = new HighScore();
 
   public Game() {
     // do nothing
@@ -187,7 +190,21 @@ public class Game {
     showInventory();
   }
 
+  public void quitMenu() {
+    // TODO: implement this
+  }
+
   public void exit() {
+    if (PLAYER.getScore() != 0) {
+      System.out.println("What is your name?");
+      String name = Input.getText("Input: ");
+      SCORES_HANDLER.updateHighScore(name, PLAYER.getScore());
+      try {
+        SCORES_HANDLER.writeHighScore();
+      } catch (IOException e) {
+        System.out.println("Unable to save score, check disk space.");
+      }
+    }
     System.exit(0);
   }
 }

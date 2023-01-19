@@ -4,11 +4,19 @@ import java.io.*;
 import java.util.ArrayList;
 // import java.util.Scanner;
 
-public class Highscore {
+public class HighScore {
 
   private final ArrayList<String> HIGHSCORES = new ArrayList<>();
 
-  public String[] returnHighScores() {
+  public HighScore() {
+    try {
+      this.loadHighScore();
+    }
+    catch (IOException err) {
+      System.out.println("Something terrible has happened. : " + err);
+    }
+  }
+  public String[] returnHighScoreText() {
     String[] highscoreStrings = { ":( Currently None" };
     // replace array with scores if they exist
     if (this.HIGHSCORES.size() != 0) {
@@ -24,7 +32,7 @@ public class Highscore {
    * NAME".
    * Sorts the scores before returning.
    */
-  public void loadHighScore() throws IOException {
+  private void loadHighScore() throws IOException {
     BufferedReader read = null;
 
     try {
@@ -108,12 +116,7 @@ public class Highscore {
       String currentScoreString = this.HIGHSCORES.remove(index);
       // first ten digits are the score
       int score = Integer.parseInt(currentScoreString.substring(0, 10));
-      if (currentScore > score) {
-        newScore = currentScore;
-      }
-      else {
-        newScore = score;
-      }
+      newScore = Math.max(currentScore, score);
     }
     // since it is now an integer, we must convert it back to a string
     // representation (SCORE - NAME)
