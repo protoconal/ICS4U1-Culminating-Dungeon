@@ -10,7 +10,7 @@ import java.util.Arrays;
 public class Dungeon {
 
   // TODO: implement randomized scaling generation
-  // i.e, MAP must have x Tiles of each Type, therefore randomly spit them around.
+  // i.e, MAP must have x Room of each Type, therefore randomly spit them around.
   private static final String[] VALID_DIRECTIONS = {
       "UP",
       "LEFT",
@@ -36,7 +36,7 @@ public class Dungeon {
     MAP = new Room[defaultSize][defaultSize];
     VISIBLE_SPACES = new boolean[defaultSize][defaultSize];
     CENTER = new int[]{defaultSize / 2, defaultSize / 2};
-    setMapTile(new StartRoom(), CENTER);
+    setMapRoom(new StartRoom(), CENTER);
     VISIBLE_SPACES[CENTER[0]][CENTER[1]] = true;
 
     generateMap();
@@ -140,24 +140,24 @@ public class Dungeon {
 
   private void traverse(int[] initialCoordinates, int radius) {
 
-    // randomly get tile
+    // randomly get room
     ArrayList<String> traversableDirections = new ArrayList<>();
-    Room randomTile;
+    Room randomRoom;
 
-    // check each direction, generate new tile if no tile exists
+    // check each direction, generate new room if no room exists
     for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
       String direction = VALID_DIRECTIONS[x];
       int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
       if (newCoordinates != null && // check coordinates are there
           checkBounds(newCoordinates) && // check they are in bounds
-          getMapTile(newCoordinates) == null) { // check if it is empty
-        randomTile = generateRandomTile(radius);
-        // if the tile is not a wall tile
+          getMapRoom(newCoordinates) == null) { // check if it is empty
+        randomRoom = generateRandomRoom(radius);
+        // if the room is not a wall
 
-        if (!(randomTile instanceof WalledRoom)) {
+        if (!(randomRoom instanceof WalledRoom)) {
           traversableDirections.add(direction);
         }
-        setMapTile(randomTile, newCoordinates);
+        setMapRoom(randomRoom, newCoordinates);
       }
     }
 
@@ -167,33 +167,33 @@ public class Dungeon {
     }
   }
 
-  private Room generateRandomTile(int radius) {
+  private Room generateRandomRoom(int radius) {
     // TODO: implement radius based randomization
     if (WEIGHTED_RANDOM.getRadius() != radius) {
       WEIGHTED_RANDOM.setScaleFactors(radius, lookupScaleFactors(radius));
     }
     int choice = WEIGHTED_RANDOM.generateChoice();
-    return getTile(choice);
+    return getRoom(choice);
   }
 
-  public Room getTile(int tileID) {
+  public Room getRoom(int roomID) {
     // these definitions correspond to chance table
-    if (tileID == 0) {
+    if (roomID == 0) {
       return new NormalRoom();
     }
-    if (tileID == 1) {
+    if (roomID == 1) {
       return new WalledRoom();
     }
-    if (tileID == 2) {
+    if (roomID == 2) {
       return new TreasureRoom(lootGenerator.generateLoot());
     }
-    if (tileID == 3) {
+    if (roomID == 3) {
       return new MonsterRoom();
     }
-    if (tileID == 4) {
+    if (roomID == 4) {
       return new TrapRoom();
     }
-    if (tileID == -1) {
+    if (roomID == -1) {
       return new StartRoom();
     }
     return null;
@@ -212,7 +212,7 @@ public class Dungeon {
     return Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);
   }
 
-  private void setMapTile(Room room, int[] coordinates) {
+  private void setMapRoom(Room room, int[] coordinates) {
     this.MAP[coordinates[0]][coordinates[1]] = room;
 
     boolean DEBUG = false;
@@ -222,7 +222,7 @@ public class Dungeon {
     }
   }
 
-  public Room getMapTile(int[] coordinates) {
+  public Room getMapRoom(int[] coordinates) {
     return this.MAP[coordinates[0]][coordinates[1]];
   }
 

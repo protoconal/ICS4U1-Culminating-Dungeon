@@ -67,7 +67,7 @@ public class Game {
     // TODO: handle input
 
     // activate Room input
-    Room currentRoom = this.currentMap.getMapTile(playerCoordinates);
+    Room currentRoom = this.currentMap.getMapRoom(playerCoordinates);
     handleRoom(currentRoom);
 
   }

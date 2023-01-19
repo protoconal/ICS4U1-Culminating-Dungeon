@@ -18,6 +18,9 @@ public class Views {
     if (type.equals("MAINMENU")) {
       return "B: Begin ;: Exit";
     }
+    if (type.equals("Inventory")) {
+      return "A: Left D: Right W: Weapons S: Healing R: Return ;: Menu";
+    }
     return null;
   }
 

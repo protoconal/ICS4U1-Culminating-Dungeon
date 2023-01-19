@@ -67,7 +67,7 @@ public class DungeonV2 {
         for (int x = 0; x < numberOfWalls; x++) {
             String direction = wallable.remove(rand.nextInt(wallable.size()));
             final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
-            if (newCoordinates != null && checkBounds(newCoordinates) && getMapTile(newCoordinates) == null) {
+            if (newCoordinates != null && checkBounds(newCoordinates) && getMapRoom(newCoordinates) == null) {
                 setMapTile(new WalledRoom(), newCoordinates);
             }
         }
@@ -75,7 +75,7 @@ public class DungeonV2 {
         while (!wallable.isEmpty()) {
             String direction = wallable.remove(0);
             final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
-            if (newCoordinates != null && checkBounds(newCoordinates) && getMapTile(newCoordinates) == null) {
+            if (newCoordinates != null && checkBounds(newCoordinates) && getMapRoom(newCoordinates) == null) {
                 traversableDirections.add(direction);
                 setMapTile(new NormalRoom(), newCoordinates);
             }
@@ -98,7 +98,7 @@ public class DungeonV2 {
         // TODO: implement radius based randomization
 
         // TODO: implement this better, make one tile class that can handle this automatically
-        return getTile(weightedRandom.generateChoice());
+        return getRoom(weightedRandom.generateChoice());
     }
 
 
@@ -111,7 +111,7 @@ public class DungeonV2 {
         System.out.println(this);
     }
 
-    public Room getMapTile(int[] coordinates) {
+    public Room getMapRoom(int[] coordinates) {
         return this.map[coordinates[0]][coordinates[1]];
     }
 
