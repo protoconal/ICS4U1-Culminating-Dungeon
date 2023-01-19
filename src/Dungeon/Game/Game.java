@@ -64,9 +64,7 @@ public class Game {
       return;
     }
     if (optionSelected.equals(";")) {
-      // TODO: quit menu
-      // show menu
-      return;
+      exit();
     }
 
     // update coordinates
