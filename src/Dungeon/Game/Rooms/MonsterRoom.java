@@ -3,7 +3,7 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Entities.Monster;
 import Dungeon.Game.Entities.Spawner;
 import Dungeon.Game.Player;
-import Dungeon.Game.Views;
+import Dungeon.Game.Game;
 
 public class MonsterRoom extends Room {
   private static final int TILE_ID = 3;
@@ -39,18 +39,7 @@ public class MonsterRoom extends Room {
 
   public boolean interactRoom(Player player) {
     this.setInteractableStatus(false);
-
-    String[] consoleText = new String[]{
-        this.monster.getAppearText(),
-    };
-
-    // show appearance text,
-    // show attacking text
-    // get player input
-
-    Views.printLines(consoleText);
-
-
+    Game.handleFight(this.monster);
     return false;
   }
 }

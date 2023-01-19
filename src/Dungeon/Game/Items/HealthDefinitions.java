@@ -19,6 +19,18 @@ public class HealthDefinitions {
     this.HEALTH_DEFINITIONS.put("Potion", new Potion());
     this.HEALTH_DEFINITIONS.put("Pill", new Pill());
     this.HEALTH_DEFINITIONS.put("ChickenSoup", new ChickenSoup());
+    this.HEALTH_DEFINITIONS.put("Wait", new Wait());
+  }
+}
+
+class Wait extends HealthItem {
+  public Wait() {
+    super("Wait", // name
+            "Catch your breath!", // description
+            0.00, // price
+            0, // maximumStackSize
+            10 // restoreHP
+    );
   }
 }
 

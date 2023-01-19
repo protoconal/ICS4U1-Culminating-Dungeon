@@ -1,6 +1,7 @@
 package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
+import Dungeon.Game.Entities.Monster;
 import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Rooms.Room;
@@ -93,7 +94,9 @@ public class Game {
     // otherwise continue
   }
 
-  public void showInventory() {
+
+
+  public static void showInventory() {
     String optionSelected;
     PlayerInventory currentInventory = PLAYER.getInventory();
 
@@ -223,5 +226,57 @@ public class Game {
         System.out.println("Unable to save score, check disk space.");
       }
     }
+  }
+
+  public static boolean handleFight(Monster monster) {
+    System.out.println(monster.getAppearText());
+    // send over to inventory
+    Game.showInventory();
+
+    do {
+      int damageTaken = monster.generateDamage();
+      PLAYER.damage(damageTaken);
+
+      PlayerInventory currentInventory = PLAYER.getInventory();
+      String currentAvailableHealthItem = currentInventory.getHealthItems()[0];
+
+      // if no item exists, allow them to wait
+      if (currentAvailableHealthItem != null) {
+        currentAvailableHealthItem = "Wait";
+      }
+
+      HealthItem currentHealthItem = currentInventory.getHealthDefinitions().returnItemFromName(currentAvailableHealthItem);
+      String useHealth = currentAvailableHealthItem + ": Restores " + currentHealthItem.getRestoreHP();
+
+      System.out.println(monster.getAttackText());
+      System.out.println("They took: " + damageTaken + " HP!");
+      System.out.println("A: Attack using " + PLAYER.getInventory().getEquippedWeapon());
+      System.out.println("H: Heal using " + useHealth);
+      System.out.println("I: Inventory");
+      String optionSelected = Input.getFightKeys();
+
+      // while not attacking
+      while (!optionSelected.equals("A")) {
+        if (optionSelected.equals("H")) {
+          HealthItem healingItem;
+          if (currentAvailableHealthItem.equals("Wait")) {
+            // just sub in the empty heal
+            healingItem = currentHealthItem;
+          }
+          else {
+            // use the proper inventory remove health item
+            healingItem = PLAYER.getInventory().removeHealthItem(currentAvailableHealthItem);
+          }
+          PLAYER.heal(healingItem);
+        }
+        if (optionSelected.equals("I")) {
+          // showInventory
+          Game.showInventory();
+        }
+      }
+    }
+    while (!PLAYER.isDead() && !monster.isDead());
+
+    return PLAYER.isDead();
   }
 }
