@@ -27,6 +27,11 @@ public class Game {
       exit();
     }
 
+    // getName
+    System.out.println("What do you want to your name to be?");
+    PLAYER.setName(Input.getText("Input: "));
+
+
     // if PLAYER isn't dead, keep playing the dungeon
     while (!PLAYER.isDead()) {
       showDungeon();
@@ -190,21 +195,33 @@ public class Game {
     showInventory();
   }
 
-  public void quitMenu() {
-    // TODO: implement this
+  public void deathMenu() {
+    Views.printDeathMenu(PLAYER);
+    System.out.println(Views.getToolTip("DEATH"));
+    String optionSelected = Input.getDeathKeys();
+    if (optionSelected.equals("R")) {
+      // reset
+      currentMap.reset();
+      PLAYER.reset();
+    }
+    else {
+      exit();
+    }
   }
 
   public void exit() {
+    saveScore();
+    System.exit(0);
+  }
+
+  public void saveScore() {
     if (PLAYER.getScore() != 0) {
-      System.out.println("What is your name?");
-      String name = Input.getText("Input: ");
-      SCORES_HANDLER.updateHighScore(name, PLAYER.getScore());
+      SCORES_HANDLER.updateHighScore(PLAYER.getName(), PLAYER.getScore());
       try {
         SCORES_HANDLER.writeHighScore();
       } catch (IOException e) {
         System.out.println("Unable to save score, check disk space.");
       }
     }
-    System.exit(0);
   }
 }

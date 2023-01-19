@@ -29,19 +29,24 @@ public class Dungeon {
   };
   private final WeightedRandom WEIGHTED_RANDOM = new WeightedRandom(MapGenerationSettings.getProbabilities());
   private final Room[][] MAP;
-  private final boolean[][] VISIBLE_SPACES;
+  private boolean[][] visibleSpaces;
   private final int[] CENTER;
   final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
+  private final int DEFAULT_SIZE;
+
 
   public Dungeon() {
-    int defaultSize = 9;
+    this.DEFAULT_SIZE = 9;
     // remember, convention = row, column
-    MAP = new Room[defaultSize][defaultSize];
-    VISIBLE_SPACES = new boolean[defaultSize][defaultSize];
-    CENTER = new int[]{defaultSize / 2, defaultSize / 2};
-    setMapRoom(new StartRoom(), CENTER);
-    VISIBLE_SPACES[CENTER[0]][CENTER[1]] = true;
+    MAP = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
+    CENTER = new int[]{DEFAULT_SIZE / 2, DEFAULT_SIZE / 2};
+    reset();
+  }
 
+  public void reset() {
+    setMapRoom(new StartRoom(), CENTER);
+    visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
+    visibleSpaces[CENTER[0]][CENTER[1]] = true;
     generateMap();
   }
 
@@ -68,12 +73,12 @@ public class Dungeon {
   }
 
   public boolean[][] getVisibleSpaces() {
-    return this.VISIBLE_SPACES;
+    return this.visibleSpaces;
   }
 
   public void setVisibleSpaces(int[] coordinates) {
     // update visited space with the correct tiling
-    this.VISIBLE_SPACES[coordinates[0]][coordinates[1]] = true;
+    this.visibleSpaces[coordinates[0]][coordinates[1]] = true;
   }
 
   public String[] getMovableDirections(int[] playerCoordinates) {
@@ -108,7 +113,7 @@ public class Dungeon {
         // place player
         if (row == playerCoordinates[0] && col == playerCoordinates[1]) {
           out.append(playerModel);
-        } else if (this.VISIBLE_SPACES[row][col]) {
+        } else if (this.visibleSpaces[row][col]) {
           out.append(this.MAP[row][col]);
         } else {
           out.append("?_?_?");

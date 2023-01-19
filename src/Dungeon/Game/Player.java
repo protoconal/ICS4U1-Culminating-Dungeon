@@ -26,6 +26,12 @@ public class Player extends Hero {
     this.score += score;
   }
 
+  public void reset() {
+    this.score = 0;
+    this.resetHP();
+    INVENTORY.reset();
+  }
+
   public PlayerInventory getInventory() {
     return INVENTORY;
   }

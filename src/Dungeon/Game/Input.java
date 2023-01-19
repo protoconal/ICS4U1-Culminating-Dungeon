@@ -44,6 +44,11 @@ public class Input {
       ";", // menu
   };
 
+  final static String[] VALID_DEATH_MENU_KEYS = {
+          "R", // Reset
+          ";", // Exit
+  };
+
   final static String[] VALID_INTERACTION_KEYS = {
       "O", // loot
       "K", // monster
@@ -157,6 +162,10 @@ public class Input {
 
   public static String getInteraction() {
     return getValidKeystroke(VALID_INTERACTION_KEYS, "Interact: ");
+  }
+
+  public static String getDeathKeys() {
+    return getValidKeystroke(VALID_DEATH_MENU_KEYS, "Input: ");
   }
 
   public static String getText(String consoleText) {

@@ -21,6 +21,9 @@ public class Views {
     if (type.equals("Inventory")) {
       return "A: Left D: Right W: Weapons S: Healing R: Return ;: Menu";
     }
+    if (type.equals("DEATH")) {
+      return "R: Reset  ;: Exit";
+    }
     return null;
   }
 
@@ -71,8 +74,12 @@ public class Views {
     printLines(consoleText);
   }
 
-  public static void printDeathMenu() {
-
+  public static void printDeathMenu(Player player) {
+    String[] consoleText = new String[]{
+            "Uh oh, you died!",
+            "Final Score: " + player.getScore(),
+    };
+    printLines(consoleText);
   }
 
   public static void printShop() {

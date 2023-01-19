@@ -23,6 +23,14 @@ public class PlayerInventory {
   private String[] healthNames;
   private String[] healthInInventory;
 
+  public void reset() {
+    HEALTH_PLAYER_INVENTORY.clear();
+    WEAPON_PLAYER_INVENTORY.clear();
+    equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
+    healthNames = null;
+    healthInInventory = null;
+  }
+
   public WeaponItem getEquippedWeapon() {
     return equippedWeapon;
   }
