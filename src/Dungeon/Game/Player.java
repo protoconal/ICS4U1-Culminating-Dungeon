@@ -4,7 +4,7 @@ import Dungeon.Game.Entities.Hero;
 import Dungeon.Game.Items.PlayerInventory;
 
 public class Player extends Hero {
-  public PlayerInventory inventory = new PlayerInventory();
+  public final PlayerInventory inventory = new PlayerInventory();
   private int score = 0;
 
   public Player() {
@@ -13,10 +13,9 @@ public class Player extends Hero {
 
   @Override
   public String toString() {
-    String out = "Player - HP: " + this.getCurrentHP() +
+    return "Player - HP: " + this.getCurrentHP() +
         " - AVG DMG: " +
         inventory.getEquippedWeapon().getAvgDamage();
-    return out;
   }
 
   public int getScore() {

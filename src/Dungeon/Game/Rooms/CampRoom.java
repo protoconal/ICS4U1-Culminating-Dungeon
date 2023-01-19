@@ -20,7 +20,7 @@ public class CampRoom extends Room {
 
   @Override
   public boolean interactRoom(Player player) {
-    // check healplayer
+    // check to heal player
     return false;
   }
 }

@@ -1,5 +1,7 @@
 package Dungeon.Game;
 
+import java.util.ArrayList;
+
 /**
  * Utility Class
  */
@@ -42,10 +44,49 @@ public class Util {
         index--;
       }
 
-      // if it stops, its at -1
+      // if it stops, it's at -1
       // we know that this index would be the right spot for it
       data[index + 1] = key;
     }
+  }
+
+  public static void insertionSort(ArrayList<String> data) {
+
+    // insertion sort
+    int searchIndex;
+    String key;
+
+    for (int x = 1; x < data.size(); x++) {
+      key = data.get(x);
+      searchIndex = x - 1;
+
+      while (searchIndex >= 0 && key.compareTo(data.get(searchIndex)) > 0) {
+        // move each element up one
+        data.set(searchIndex + 1, data.get(searchIndex));
+        searchIndex--;
+      }
+
+      data.set(searchIndex + 1, key);
+    }
+
+  }
+
+  /**
+   * Reverses a String ArrayList from the given indexes.
+   *
+   * @param arr   stores an arraylist of strings to be reversed
+   * @param start stores start index
+   * @param end   stores end index
+   */
+
+  public static void reverseArrList(ArrayList<String> arr, int start, int end) {
+    do {
+      String temp = arr.get(end);
+      arr.set(end, arr.get(start));
+      arr.set(start, temp);
+      start++;
+      end--;
+    } while (start <= end);
   }
 
   /**

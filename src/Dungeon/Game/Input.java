@@ -62,9 +62,9 @@ public class Input {
   final static Scanner SCAN = new Scanner(System.in);
 
   public static String getMove(String[] movableDirections) {
-    // i know this is inefficient. - oh well.
+    // I know this is inefficient. - oh well.
 
-    // efficiency - convert representation of directions and movement into a int[]
+    // efficiency - convert representation of directions and movement into an int[]
     ArrayList<String> possibleMovementKeys = new ArrayList<>();
     StringBuilder toolTip = new StringBuilder();
     for (int x = 0; x < movableDirections.length; x++) {
@@ -92,7 +92,7 @@ public class Input {
     if (keyStroke.equals(";")) {
       return ";";
     }
-    
+
     return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
   }
 

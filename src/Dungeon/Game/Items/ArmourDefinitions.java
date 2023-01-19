@@ -53,7 +53,7 @@ class RoyalArmour extends ArmourItem {
   public RoyalArmour() {
     super(
         "Royal Armour", // name
-        "This is armour fit for a emperor, empress, duke, duchess, baron, baroness, prince, princess, tsar, or tsarina", // description
+        "This is armour fit for an emperor, empress, duke, duchess, baron, baroness, prince, princess, tsar, or tsarina", // description
         700.00, // price
         1, // maxNumber
         300); // hpIncrease

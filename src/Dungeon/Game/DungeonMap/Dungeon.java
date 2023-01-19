@@ -28,7 +28,7 @@ public class Dungeon {
   private final Room[][] MAP;
   private final boolean[][] VISIBLE_SPACES;
   private final int[] CENTER;
-  LootDefinitions lootGenerator = new LootDefinitions();
+  final LootDefinitions lootGenerator = new LootDefinitions();
 
   public Dungeon() {
     int defaultSize = 9;

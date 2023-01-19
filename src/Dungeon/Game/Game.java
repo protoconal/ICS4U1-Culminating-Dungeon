@@ -7,7 +7,7 @@ import Dungeon.Game.Rooms.Room;
 
 public class Game {
   private static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
-  private static final Player player = new Player();
+  private static final Player PLAYER = new Player();
   static String phase;
   private final Dungeon currentMap = new Dungeon();
   private int[] playerCoordinates = currentMap.getCenter();
@@ -24,14 +24,14 @@ public class Game {
       exit();
     }
 
-    // if player isnt dead, keep playing the dungeon
-    while (!player.isDead()) {
+    // if PLAYER isn't dead, keep playing the dungeon
+    while (!PLAYER.isDead()) {
       showDungeon();
     }
   }
 
   public static Player getPlayer() {
-    return player;
+    return PLAYER;
   }
 
   public static String getName() {
@@ -46,17 +46,16 @@ public class Game {
     // getMenuInputs
     String optionSelected = Input.getMove(currentMap.getMovableDirections(playerCoordinates));
 
-    player.getInventory().initializeWeapons();
-    player.getInventory().initializeHealth();
+    PLAYER.getInventory().initializeWeapons();
+    PLAYER.getInventory().initializeHealth();
 
     if (optionSelected.equals("R")) {
-      player.damage(80);
+      PLAYER.damage(80);
       showInventory();
       return;
     }
     if (optionSelected.equals(";")) {
       // TODO: quit menu
-      optionSelected = "UP";
       // show menu
       return;
     }
@@ -78,7 +77,7 @@ public class Game {
       return;
     }
 
-    boolean hasDied = currentRoom.interactRoom(player);
+    boolean hasDied = currentRoom.interactRoom(PLAYER);
     Input.waitForKeyPress();
     if (hasDied) {
       // send to death code
@@ -88,7 +87,7 @@ public class Game {
 
   public void showInventory() {
     String optionSelected;
-    PlayerInventory currentInventory = player.getInventory();
+    PlayerInventory currentInventory = PLAYER.getInventory();
 
     String mode = "Weapon";
     String[] weaponsInInventory = currentInventory.getWeaponNames();
@@ -124,6 +123,7 @@ public class Game {
       System.out.println("Selected item: " + currentWorkingInventory[index]);
       optionSelected = Input.getInventoryKeys();
 
+      // could replace with a switch statement
       if (optionSelected.equals("W")) {
         index = 0;
         mode = "Weapons";
@@ -167,11 +167,11 @@ public class Game {
 
       }
       if (mode.equals("Health")) {
-        // ensure that player needs more than 50% of heal
+        // ensure that PLAYER needs more than 50% of heal
         HealthItem item = currentInventory.getHealthDefinitions().returnItemFromName(itemId);
-        if (player.getCurrentHP() + item.getRestoreHP() * 0.5 < player.getMaxHP()) {
+        if (PLAYER.getCurrentHP() + item.getRestoreHP() * 0.5 < PLAYER.getMaxHP()) {
           item = currentInventory.removeHealthItem(itemId);
-          player.heal(item);
+          PLAYER.heal(item);
         }
       }
     }
