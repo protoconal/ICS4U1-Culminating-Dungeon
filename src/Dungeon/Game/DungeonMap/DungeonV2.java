@@ -1,9 +1,11 @@
-package Dungeon.Game.DungeonMap;
+/*
+* package Dungeon.Game.DungeonMap;
 
-import Dungeon.Game.Tiles.GameTile;
-import Dungeon.Game.Tiles.StartTile;
+import Dungeon.Game.Rooms.NormalRoom;
+import Dungeon.Game.Rooms.Room;
+import Dungeon.Game.Rooms.StartRoom;
 import Dungeon.Game.Util;
-import Dungeon.Game.Tiles.WallTile;
+import Dungeon.Game.Rooms.WalledRoom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,20 +22,20 @@ public class DungeonV2 {
             "DOWN"
     };
 
-    WeightedRandom weightedRandom = new WeightedRandom(MapGenerationSettings.getProbabilities());
-    WeightedRandom branchRandom = new WeightedRandom(MapGenerationSettings.getWallChance());
+    final WeightedRandom weightedRandom = new WeightedRandom(MapGenerationSettings.getProbabilities());
+    final WeightedRandom branchRandom = new WeightedRandom(MapGenerationSettings.getWallChance());
 
-    GameTile[][] map;
-    int[] center;
-    int[] numberOfTiles = {0, 0, 0};
+    final Room[][] map;
+    final int[] center;
+    final int[] numberOfTiles = {0, 0, 0};
 
     public DungeonV2() {
         final int defaultSize = 9;
-        // rememeber, convention = row, column
-        map = new GameTile[defaultSize][defaultSize];
+        // remember, convention = row, column
+        map = new Room[defaultSize][defaultSize];
         center = new int[]{defaultSize / 2, defaultSize / 2};
         numberOfTiles[0] = defaultSize * defaultSize;
-        setMapTile(new StartTile(), center);
+        setMapTile(new StartRoom(), center);
 
         generateMap();
     }
@@ -43,7 +45,7 @@ public class DungeonV2 {
         StringBuilder out = new StringBuilder();
 
         for (int row = 0; row < this.map.length; row++) {
-            out.append(Arrays.toString(this.map[row]) + "\n");
+            out.append(Arrays.toString(this.map[row])).append("\n");
         }
 
         return out.toString();
@@ -61,21 +63,21 @@ public class DungeonV2 {
         Random rand = new Random();
 
         int numberOfWalls = generateNumberOfWalls(depth);
-        ArrayList<String> wallable = new ArrayList<String>(Arrays.asList(validDirections));
+        ArrayList<String> wallable = new ArrayList<>(Arrays.asList(validDirections));
         for (int x = 0; x < numberOfWalls; x++) {
             String direction = wallable.remove(rand.nextInt(wallable.size()));
             final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
-            if (checkBounds(newCoordinates) && getMapTile(newCoordinates) == null) {
-                setMapTile(new WallTile(), newCoordinates);
+            if (newCoordinates != null && checkBounds(newCoordinates) && getMapRoom(newCoordinates) == null) {
+                setMapTile(new WalledRoom(), newCoordinates);
             }
         }
 
         while (!wallable.isEmpty()) {
             String direction = wallable.remove(0);
             final int[] newCoordinates = calculateCoordinates(initialCoordinates, direction);
-            if (checkBounds(newCoordinates) && getMapTile(newCoordinates) == null) {
+            if (newCoordinates != null && checkBounds(newCoordinates) && getMapRoom(newCoordinates) == null) {
                 traversableDirections.add(direction);
-                setMapTile(new GameTile(), newCoordinates);
+                setMapTile(new NormalRoom(), newCoordinates);
             }
         }
 
@@ -92,23 +94,24 @@ public class DungeonV2 {
         return branchRandom.generateChoice();
     }
 
-    private GameTile generateRandomTile(int radius) {
+    private Room generateRandomTile(int radius) {
         // TODO: implement radius based randomization
 
         // TODO: implement this better, make one tile class that can handle this automatically
-        return MapGenerationSettings.getTile(weightedRandom.generateChoice());
+        return getRoom(weightedRandom.generateChoice());
     }
 
-    private void setMapTile(GameTile gameTile, int[] coordinates) {
+
+    private void setMapTile(Room room, int[] coordinates) {
         this.numberOfTiles[0] += 1;
-        this.numberOfTiles[gameTile.getTileID()] += 1;
-        this.map[coordinates[0]][coordinates[1]] = gameTile;
+        this.numberOfTiles[room.getTileID()] += 1;
+        this.map[coordinates[0]][coordinates[1]] = room;
 
-        //Util.clearTerminal();
-        //System.out.println(this);
+        Util.clearTerminal();
+        System.out.println(this);
     }
 
-    public GameTile getMapTile(int[] coordinates) {
+    public Room getMapRoom(int[] coordinates) {
         return this.map[coordinates[0]][coordinates[1]];
     }
 
@@ -148,3 +151,4 @@ public class DungeonV2 {
 
 
 }
+*/

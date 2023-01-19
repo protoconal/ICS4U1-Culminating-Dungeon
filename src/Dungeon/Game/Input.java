@@ -1,46 +1,163 @@
 package Dungeon.Game;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-class Input {
-    final String[] validMovementKeys = {
-            "W", // up
-            "A", // left
-            "S", // down
-            "D", // right
-    };
-    final Scanner scan = new Scanner(System.in);
+public class Input {
+  final static String[] VALID_MOVEMENT_KEYS = {
+      // keeping same from dungeon
+      "W", // up
+      "A", // left
+      "S", // down
+      "D", // right
+  };
 
-    public String getMove() {
-        return getValidKeystroke(validMovementKeys,"Move: ");
+  final static String[] VALID_INVENTORY_KEYS = {
+      "A", // Left
+      "D", // Right
+      "W", // Weapons
+      "S", // Health
+      "E", // Use/Equip
+      "R", // Return
+      "Q", // Drop/Delete
+      ";" // menu
+  };
+
+  final static String[] VALID_DIRECTIONS = {
+      // keeping same from dungeon
+      "UP", // up
+      "LEFT", // left
+      "DOWN", // down
+      "RIGHT", // right
+  };
+
+  final static String[] TOOLTIP_DIRECTIONS = {
+      // keeping same from dungeon
+      "W: Up", // up
+      "A: Left", // left
+      "S: Down", // down
+      "D: Right", // right
+  };
+
+  final static String[] VALID_MENU_KEYS = {
+      "B", // begin
+      ";", // menu
+  };
+
+  final static String[] VALID_INTERACTION_KEYS = {
+      "O", // loot
+      "K", // monster
+      "L", // inventory
+      ";", // menu
+  };
+
+  final static String[] VALID_FIGHT_KEYS = {
+      "A", // fight
+      "H", // heal
+      "R", // inventory
+      ";", // menu
+  };
+
+
+  final static Scanner SCAN = new Scanner(System.in);
+
+  public static String getMove(String[] movableDirections) {
+    // I know this is inefficient. - oh well.
+
+    // efficiency - convert representation of directions and movement into an int[]
+    ArrayList<String> possibleMovementKeys = new ArrayList<>();
+    StringBuilder toolTip = new StringBuilder();
+    for (int x = 0; x < movableDirections.length; x++) {
+      // calculate the possible key combinations that are allowed given the directions
+      int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
+      possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
+      toolTip.append(TOOLTIP_DIRECTIONS[index]);
+
+      if (x != movableDirections.length - 1) {
+        toolTip.append(" ");
+      }
+    }
+    possibleMovementKeys.add("R"); // patch in inventory;
+    toolTip.append(" R: Inventory"); // patch in inventory;
+    possibleMovementKeys.add(";"); // patch in menu;
+    toolTip.append(" ;: Menu"); // patch in menu;
+
+    System.out.println(toolTip);
+    // return the direction, rather than the key
+    String keyStroke = getValidKeystroke(possibleMovementKeys, "Move: ");
+
+    if (keyStroke.equals("R")) {
+      return "R";
+    }
+    if (keyStroke.equals(";")) {
+      return ";";
     }
 
-    public String getValidKeystroke(String[] validKeys, String consoleText) {
-        String key = getInput(consoleText);
-        while (!checkKey(key, validKeys)) {
-            System.out.println("Sorry, Invalid option.");
-            key = getInput(consoleText);
-        }
-        return key;
-    }
+    return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
+  }
 
-    private boolean checkKey(String key, String[] validKeys) {
-        // case ignorant
-        for (int x = 0; x < validKeys.length; x++) {
-            if (key.equalsIgnoreCase(validKeys[x])) {
-                return true;
-            }
-        }
-        return false;
+  public static String getValidKeystroke(String[] validKeys, String consoleText) {
+    System.out.print(consoleText);
+    String key = SCAN.nextLine();
+    while (!checkKey(key, validKeys)) {
+      System.out.println("Sorry, Invalid option.");
+      System.out.print(consoleText);
+      key = SCAN.nextLine();
     }
+    return key.toUpperCase();
+  }
 
-    private String getInput(String consoleText) {
-        System.out.println(consoleText);
-        String key = scan.nextLine();
-        // skip newline
-        scan.next();
-        return key;
+  public static String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
+    System.out.print(consoleText);
+    String key = SCAN.nextLine();
+    while (!checkKey(key, validKeys)) {
+      System.out.println("Sorry, Invalid option.");
+      System.out.print(consoleText);
+      key = SCAN.nextLine();
     }
+    return key.toUpperCase();
+  }
+
+  private static boolean checkKey(String key, String[] validKeys) {
+    // case ignorant
+    for (int x = 0; x < validKeys.length; x++) {
+      if (key.equalsIgnoreCase(validKeys[x])) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private static boolean checkKey(String key, ArrayList<String> validKeys) {
+    // case ignorant
+    for (int x = 0; x < validKeys.size(); x++) {
+      if (key.equalsIgnoreCase(validKeys.get(x))) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public static void waitForKeyPress() {
+    System.out.print("Press enter key to continue...");
+    SCAN.nextLine();
+  }
+
+  public static String getMenuKeys() {
+    return getValidKeystroke(VALID_MENU_KEYS, "Input: ");
+  }
+
+  public static String getFightKeys() {
+    return getValidKeystroke(VALID_FIGHT_KEYS, "Input: ");
+  }
+
+  public static String getInventoryKeys() {
+    return getValidKeystroke(VALID_INVENTORY_KEYS, "Input: ");
+  }
+
+  public static String getInteraction() {
+    return getValidKeystroke(VALID_INTERACTION_KEYS, "Interact: ");
+  }
 
 }
 
@@ -59,9 +176,8 @@ class Input {
 // Press O to collect loot
 // Press K to fight monster
 // Press L to open inventory
-// Press ; to...
 
-// Finally, if you're a coward, press M to go to the menu.
+// Finally, if you're a coward, press ; to go to the menu.
 
 // Are you ready? Press B to begin!
 
@@ -70,3 +186,4 @@ class Input {
 // You have met [insert monster here]. Prepare for battle! Which attack would you like to use?
 
 // Shopkeeper: Hi, [player name]! What would you like to buy?
+
