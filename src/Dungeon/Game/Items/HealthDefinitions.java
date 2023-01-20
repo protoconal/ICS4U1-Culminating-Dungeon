@@ -48,7 +48,7 @@ class Bandage extends HealthItem {
 class Potion extends HealthItem {
   public Potion() {
     super("Potion", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Hocus pocus, I'm starting to lose focus.", // description
         150.00, // price
         3, // maximumStackSize
         120 // restoreHP
@@ -59,7 +59,7 @@ class Potion extends HealthItem {
 class Pill extends HealthItem {
   public Pill() {
     super("Pill", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Warning: Not approved by the FDA", // description
         200.00, // price
         5, // maximumStackSize
         140 // restoreHP
@@ -70,7 +70,7 @@ class Pill extends HealthItem {
 class ChickenSoup extends HealthItem {
   public ChickenSoup() {
     super("Chicken Soup", // name
-        "TEMPORARY DESCRIPTION", // description
+        "All proceeds go to the charity 'Save the Chickens'.", // description
         250.00, // price
         5, // maximumStackSize
         180 // restoreHP

@@ -205,6 +205,11 @@ public class Dungeon {
     }
     if (roomID == 4) {
       return new TrapRoom();
+      
+    }
+    if (roomID == 5) {
+      return new EndRoom();
+      
     }
     if (roomID == -1) {
       return new StartRoom();

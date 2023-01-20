@@ -33,7 +33,7 @@ public class LootDefinitions {
 class Silver extends LootItem {
   public Silver() {
     super("Silver", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Cheaper than platinum", // description
         10 // value
     );
   }
@@ -42,7 +42,7 @@ class Silver extends LootItem {
 class Gold extends LootItem {
   public Gold() {
     super("Gold", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Ruby, but yellow", // description
         50 // value
     );
   }
@@ -51,7 +51,7 @@ class Gold extends LootItem {
 class Platinum extends LootItem {
   public Platinum() {
     super("Platinum", // name
-        "TEMPORARY DESCRIPTION", // description
+        "More expensive than silver", // description
         70 // value
     );
   }
@@ -69,7 +69,7 @@ class Platinum extends LootItem {
 class Diamond extends LootItem {
   public Diamond() {
     super("Diamond", // name
-        "TEMPORARY DESCRIPTION", // description
+        "A solid form of the element carbon with its atoms arranged in a crystal structure called diamond cubic.", // description
         150 // value
     );
   }
@@ -78,7 +78,7 @@ class Diamond extends LootItem {
 class Ruby extends LootItem {
   public Ruby() {
     super("Ruby", // name
-        "TEMPORARY DESCRIPTION", // description
+        "Gold, but red", // description
         200 // value
     );
   }
