@@ -3,9 +3,11 @@
 package Dungeon.Game.DungeonMap;
 
 
+import Dungeon.Game.Entities.*;
 import Dungeon.Game.Items.LootDefinitions;
 import Dungeon.Game.Rooms.*;
 import Dungeon.Game.Util;
+import Dungeon.Game.GameWeightedRandoms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,12 +29,14 @@ public class Dungeon {
       {1, 0}, // DOWN
       {0, 1}, // RIGHT
   };
-  private final WeightedRandom WEIGHTED_RANDOM = new WeightedRandom(MapGenerationSettings.getProbabilities());
+  private final GameWeightedRandoms WEIGHTED_RANDOM = new GameWeightedRandoms(MapGenerationSettings.getProbabilities());
   private final Room[][] MAP;
   private boolean[][] visibleSpaces;
   private final int[] CENTER;
   final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
+  final Spawner SPAWNER = new Spawner();
   private final int DEFAULT_SIZE;
+  private int difficultyMultiplier = 0;
 
 
   public Dungeon() {
@@ -47,6 +51,9 @@ public class Dungeon {
     setMapRoom(new StartRoom(), CENTER);
     visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
     visibleSpaces[CENTER[0]][CENTER[1]] = true;
+
+    this.difficultyMultiplier += 1;
+
     generateMap();
   }
 
@@ -70,10 +77,6 @@ public class Dungeon {
 
   public int[] getCenter() {
     return CENTER;
-  }
-
-  public boolean[][] getVisibleSpaces() {
-    return this.visibleSpaces;
   }
 
   public void setVisibleSpaces(int[] coordinates) {
@@ -146,6 +149,8 @@ public class Dungeon {
     System.out.println(this);
   }
 
+
+
   private void traverse(int[] initialCoordinates, int radius) {
 
     // randomly get room
@@ -196,7 +201,7 @@ public class Dungeon {
       return new TreasureRoom(LOOT_GENERATOR.generateLoot());
     }
     if (roomID == 3) {
-      return new MonsterRoom();
+      return new MonsterRoom(SPAWNER, difficultyMultiplier);
     }
     if (roomID == 4) {
       return new TrapRoom();
@@ -217,7 +222,8 @@ public class Dungeon {
       scalingFactor = factors[x];
     }
 
-    return Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);
+    scalingFactor = Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);
+    return scalingFactor;
   }
 
   private void setMapRoom(Room room, int[] coordinates) {
@@ -242,5 +248,9 @@ public class Dungeon {
     boolean columnBounds = (coordinates[1] >= minBound) && (coordinates[1] <= maxBound);
 
     return rowBounds && columnBounds;
+  }
+
+  public int getDifficultyMultiplier() {
+    return difficultyMultiplier;
   }
 }
