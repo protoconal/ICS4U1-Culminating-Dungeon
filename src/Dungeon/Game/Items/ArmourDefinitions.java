@@ -1,4 +1,4 @@
-/*package Dungeon.Game.Items;
+package Dungeon.Game.Items;
 
 public class ArmourDefinitions {
   // store all possible weapons
@@ -113,4 +113,4 @@ class HolyTrinityArmour extends ArmourItem {
         1, // maxNumber
         600); // hpIncrease
   }
-}*/
+}
