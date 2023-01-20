@@ -12,8 +12,8 @@ public class Game {
   private static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
   private static final Player PLAYER = new Player();
   static String phase;
-  private final Dungeon currentMap = new Dungeon();
-  private int[] playerCoordinates = currentMap.getCenter();
+  private final Dungeon CURRENT_MAP = new Dungeon();
+  private int[] playerCoordinates = CURRENT_MAP.getCenter();
   private final HighScore SCORES_HANDLER = new HighScore();
 
   public Game() {
@@ -50,10 +50,10 @@ public class Game {
   public void showDungeon() {
 
     // update visibility
-    this.currentMap.updateVisibility(playerCoordinates);
-    Views.printDungeon(this.currentMap, playerCoordinates);
+    this.CURRENT_MAP.updateVisibility(playerCoordinates);
+    Views.printDungeon(this.CURRENT_MAP, playerCoordinates);
     // getMenuInputs
-    String optionSelected = Input.getMove(currentMap.getMovableDirections(playerCoordinates));
+    String optionSelected = Input.getMove(CURRENT_MAP.getMovableDirections(playerCoordinates));
 
     PLAYER.getInventory().initializeWeapons();
     PLAYER.getInventory().initializeHealth();
@@ -73,7 +73,7 @@ public class Game {
     // TODO: handle input
 
     // activate Room input
-    Room currentRoom = this.currentMap.getMapRoom(playerCoordinates);
+    Room currentRoom = this.CURRENT_MAP.getMapRoom(playerCoordinates);
     handleRoom(currentRoom);
 
   }
@@ -202,7 +202,7 @@ public class Game {
     String optionSelected = Input.getDeathKeys();
     if (optionSelected.equals("R")) {
       // reset
-      currentMap.reset();
+      CURRENT_MAP.reset();
       PLAYER.reset();
     }
     else {

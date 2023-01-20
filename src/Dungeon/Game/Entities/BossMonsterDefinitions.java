@@ -4,8 +4,8 @@ import Dungeon.Game.WeightedRandoms;
 
 public class BossMonsterDefinitions {
 
-  private final WeightedRandoms rand;
-  private final Monster[] monsters = new Monster[]{
+  private final WeightedRandoms RANDOM;
+  private final Monster[] MONSTERS = new Monster[]{
       new SpiderBroodMother(),
       new DarkKnightofTheForgotten(),
       new CorruptedExecutioner(),
@@ -21,11 +21,11 @@ public class BossMonsterDefinitions {
         0.10, // LichKing
         0.05, // AldwynTheFallen
     };
-    this.rand = new WeightedRandoms(spawnChances);
+    this.RANDOM = new WeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
-    return monsters[rand.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()];
   }
 
   public abstract static class BossMonster extends Monster {
