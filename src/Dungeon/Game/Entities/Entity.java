@@ -17,6 +17,7 @@ public abstract class Entity implements Attackable {
   public int getMaxHP() {
     return MAX_HP;
   }
+  public void resetHP() {currentHP = getMaxHP();}
 
   @Override
   public void heal(HealthItem health) {

@@ -1,5 +1,7 @@
 package Dungeon.Game.Items;
 
+import Dungeon.Game.Game;
+
 import java.util.TreeMap;
 
 
@@ -7,7 +9,6 @@ public class PlayerInventory {
   public WeaponDefinitions getWeaponDefinitions() {
     return WEAPON_DEFINITIONS;
   }
-
   public HealthDefinitions getHealthDefinitions() {
     return HEALTH_DEFINITIONS;
   }
@@ -20,8 +21,12 @@ public class PlayerInventory {
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
 
   private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
-  private String[] healthNames;
-  private String[] healthInInventory;
+
+  public void reset() {
+    HEALTH_PLAYER_INVENTORY.clear();
+    WEAPON_PLAYER_INVENTORY.clear();
+    equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
+  }
 
   public WeaponItem getEquippedWeapon() {
     return equippedWeapon;
@@ -35,8 +40,15 @@ public class PlayerInventory {
     this.equippedWeapon = removeWeapon(itemString);
   }
 
-  private void addWeapon(WeaponItem equippedWeapon) {
-    this.WEAPON_PLAYER_INVENTORY.put(equippedWeapon.getId(), equippedWeapon);
+  private void addWeapon(WeaponItem weapon) {
+    if (getItemCount(weapon.getId()) == 0) {
+      // not found, therefore put into inventory
+      this.WEAPON_PLAYER_INVENTORY.put(weapon.getId(), weapon);
+    }
+    else {
+      // sell weapon automatically
+      Game.getPlayer().addScore((int) Math.round(Game.getShopInventory().getWeaponSellMultiplier() * weapon.getPrice()));
+    }
   }
 
   public void addWeapon(String itemName) {
@@ -45,6 +57,9 @@ public class PlayerInventory {
 
   public String[] getWeapons() {
     return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
+  }
+  public String[] getHealthItems() {
+    return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
   public void initializeWeapons() {
@@ -68,18 +83,11 @@ public class PlayerInventory {
     return weaponNames;
   }
 
-  public String[] getHealthItems() {
-    return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
-  }
-
-  public String[] updateHealthNames() {
-    this.healthInInventory = getHealthItems();
-    this.healthNames = new String[healthInInventory.length];
-
-    for (int x = 0; x < this.healthNames.length; x++) {
-      this.healthNames[x] = HEALTH_DEFINITIONS.returnItemFromName(this.healthInInventory[x]).getName();
+  public String[] getHealthNames() {
+    String[] healthNames = getHealthItems();
+    for (int x = 0; x < healthNames.length; x++) {
+      healthNames[x] = HEALTH_DEFINITIONS.returnItemFromName(healthNames[x]).getName();
     }
-
     return healthNames;
   }
 

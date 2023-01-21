@@ -13,12 +13,12 @@ public class Input {
   };
 
   final static String[] VALID_INVENTORY_KEYS = {
+      "R", // Return -- default behaviour
       "A", // Left
       "D", // Right
       "W", // Weapons
       "S", // Health
       "E", // Use/Equip
-      "R", // Return
       "Q", // Drop/Delete
       ";" // menu
   };
@@ -40,65 +40,54 @@ public class Input {
   };
 
   final static String[] VALID_MENU_KEYS = {
-      "B", // begin
+      "B", // begin -- default
+      "H", // highscores
       ";", // menu
   };
 
-  final static String[] VALID_INTERACTION_KEYS = {
-      "O", // loot
-      "K", // monster
-      "L", // inventory
-      ";", // menu
+  final static String[] VALID_DEATH_MENU_KEYS = {
+          "R", // Reset -- default
+          ";", // Exit
   };
 
   final static String[] VALID_FIGHT_KEYS = {
-      "A", // fight
+      "A", // fight -- default
       "H", // heal
       "R", // inventory
       ";", // menu
   };
 
+  final static String[] VALID_PRE_DUNGEON_KEYS = {
+      "R", // continue -- default
+      "S", // go shop
+      ";", // menu
+  };
+
+  final static String[] VALID_SHOP_KEYS = {
+      "R", // return -- default
+      "A", // Left
+      "D", // Right
+      "W", // Weapons
+      "S", // Health
+      "E", // buy
+      "Q", // sell
+      ";", // menu
+  };
 
   final static Scanner SCAN = new Scanner(System.in);
-
-  public static String getMove(String[] movableDirections) {
-    // I know this is inefficient. - oh well.
-
-    // efficiency - convert representation of directions and movement into an int[]
-    ArrayList<String> possibleMovementKeys = new ArrayList<>();
-    StringBuilder toolTip = new StringBuilder();
-    for (int x = 0; x < movableDirections.length; x++) {
-      // calculate the possible key combinations that are allowed given the directions
-      int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
-      possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
-      toolTip.append(TOOLTIP_DIRECTIONS[index]);
-
-      if (x != movableDirections.length - 1) {
-        toolTip.append(" ");
-      }
-    }
-    possibleMovementKeys.add("R"); // patch in inventory;
-    toolTip.append(" R: Inventory"); // patch in inventory;
-    possibleMovementKeys.add(";"); // patch in menu;
-    toolTip.append(" ;: Menu"); // patch in menu;
-
-    System.out.println(toolTip);
-    // return the direction, rather than the key
-    String keyStroke = getValidKeystroke(possibleMovementKeys, "Move: ");
-
-    if (keyStroke.equals("R")) {
-      return "R";
-    }
-    if (keyStroke.equals(";")) {
-      return ";";
-    }
-
-    return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
-  }
+  private static final String[] VALID_YN_KEYS = {
+      "N", // no -- default
+      "Y", // yes
+  };
 
   public static String getValidKeystroke(String[] validKeys, String consoleText) {
     System.out.print(consoleText);
     String key = SCAN.nextLine();
+
+    if (key.equals("")) {
+      return "";
+    }
+
     while (!checkKey(key, validKeys)) {
       System.out.println("Sorry, Invalid option.");
       System.out.print(consoleText);
@@ -143,22 +132,80 @@ public class Input {
     SCAN.nextLine();
   }
 
+  public static String getMove(String[] movableDirections) {
+    // I know this is inefficient. - oh well.
+
+    // efficiency - convert representation of directions and movement into an int[]
+    ArrayList<String> possibleMovementKeys = new ArrayList<>();
+    StringBuilder toolTip = new StringBuilder();
+    for (int x = 0; x < movableDirections.length; x++) {
+      // calculate the possible key combinations that are allowed given the directions
+      int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
+      possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
+      toolTip.append(TOOLTIP_DIRECTIONS[index]);
+
+      if (x != movableDirections.length - 1) {
+        toolTip.append(" ");
+      }
+    }
+    possibleMovementKeys.add("R"); // patch in inventory;
+    toolTip.append(" R: Inventory"); // patch in inventory;
+    possibleMovementKeys.add(";"); // patch in menu;
+    toolTip.append(" ;: Exit"); // patch in menu;
+
+    System.out.println(toolTip);
+    // return the direction, rather than the key
+    String keyStroke = getValidKeystroke(possibleMovementKeys, "Move: ");
+
+    if (keyStroke.equals("R")) {
+      return "R";
+    }
+    if (keyStroke.equals(";")) {
+      return ";";
+    }
+
+    return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
+  }
+
+  public static String getKeyOrDefault(String[] validKeys, String consoleText) {
+    String key = getValidKeystroke(validKeys, consoleText);
+    if (key.equals("")) {
+      return validKeys[0];
+    }
+    return key;
+  }
+
   public static String getMenuKeys() {
-    return getValidKeystroke(VALID_MENU_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_MENU_KEYS, "Input: ");
   }
 
   public static String getFightKeys() {
-    return getValidKeystroke(VALID_FIGHT_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_FIGHT_KEYS, "Input: ");
   }
 
   public static String getInventoryKeys() {
-    return getValidKeystroke(VALID_INVENTORY_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_INVENTORY_KEYS, "Input: ");
   }
 
-  public static String getInteraction() {
-    return getValidKeystroke(VALID_INTERACTION_KEYS, "Interact: ");
+  public static String getPreDungeonKeys() {
+    return getKeyOrDefault(VALID_PRE_DUNGEON_KEYS, "Input: ");
   }
 
+  public static String getDeathKeys() {
+    return getKeyOrDefault(VALID_DEATH_MENU_KEYS, "Input: ");
+  }
+  public static String getShopKeys() {
+    return getKeyOrDefault(VALID_SHOP_KEYS, "Input: ");
+  }
+
+  public static String getText(String consoleText) {
+    System.out.print(consoleText);
+    return SCAN.nextLine();
+  }
+
+  public static String getYN() {
+    return getKeyOrDefault(VALID_YN_KEYS, "Input: ");
+  }
 }
 
 
@@ -186,4 +233,3 @@ public class Input {
 // You have met [insert monster here]. Prepare for battle! Which attack would you like to use?
 
 // Shopkeeper: Hi, [player name]! What would you like to buy?
-

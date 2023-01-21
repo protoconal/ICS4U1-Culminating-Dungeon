@@ -2,7 +2,7 @@ package Dungeon.Game;
 
 import java.util.Random;
 
-public class WeightedRandoms {
+public class NormalWeightedRandoms {
 
   // https://stackoverflow.com/a/4463613
   private final Random RAND = new Random();
@@ -10,7 +10,7 @@ public class WeightedRandoms {
   private final double[] BASE_PROBABILITIES;
   private double sum;
 
-  public WeightedRandoms(double[] probabilities) {
+  public NormalWeightedRandoms(double[] probabilities) {
     this.BASE_PROBABILITIES = probabilities;
     this.CDF = new double[probabilities.length];
     updateCDF();
@@ -28,7 +28,6 @@ public class WeightedRandoms {
   private void updateCDF() {
     double runningTotal = 0;
     for (int x = 0; x < this.CDF.length; x++) {
-      // multiply by scaling
       runningTotal += this.BASE_PROBABILITIES[x];
       this.CDF[x] = runningTotal;
     }

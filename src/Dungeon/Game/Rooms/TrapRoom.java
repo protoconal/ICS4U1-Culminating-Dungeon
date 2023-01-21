@@ -3,10 +3,10 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 public class TrapRoom extends Room {
-  private static final int TILE_ID = 4;
+  private static final int ROOM_ID = 4;
 
   public TrapRoom() {
-    super(TILE_ID, false);
+    super(ROOM_ID, false);
   }
 
   @Override

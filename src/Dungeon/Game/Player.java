@@ -4,8 +4,9 @@ import Dungeon.Game.Entities.Hero;
 import Dungeon.Game.Items.PlayerInventory;
 
 public class Player extends Hero {
-  public final PlayerInventory inventory = new PlayerInventory();
+  public final PlayerInventory INVENTORY = new PlayerInventory();
   private int score = 0;
+  private String deathReason;
 
   public Player() {
     super();
@@ -15,7 +16,9 @@ public class Player extends Hero {
   public String toString() {
     return "Player - HP: " + this.getCurrentHP() +
         " - AVG DMG: " +
-        inventory.getEquippedWeapon().getAvgDamage();
+        INVENTORY.getEquippedWeapon().getAvgDamage() +
+        " - SCORE: " +
+        this.getScore();
   }
 
   public int getScore() {
@@ -26,8 +29,26 @@ public class Player extends Hero {
     this.score += score;
   }
 
-  public PlayerInventory getInventory() {
-    return inventory;
+  public void removeScore(int score) {
+    this.score -= score;
   }
 
+
+  public void reset() {
+    this.score = 0;
+    this.resetHP();
+    INVENTORY.reset();
+  }
+
+  public PlayerInventory getInventory() {
+    return INVENTORY;
+  }
+
+  public String getDeathReason() {
+    return deathReason;
+  }
+
+  public void setDeathReason(String deathReason) {
+    this.deathReason = deathReason;
+  }
 }

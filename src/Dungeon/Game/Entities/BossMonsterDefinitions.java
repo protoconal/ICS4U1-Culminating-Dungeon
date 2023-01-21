@@ -1,11 +1,11 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.NormalWeightedRandoms;
 
 public class BossMonsterDefinitions {
 
-  private final WeightedRandoms rand;
-  private final Monster[] monsters = new Monster[]{
+  private final NormalWeightedRandoms RANDOM;
+  private final Monster[] MONSTERS = new Monster[]{
       new SpiderBroodMother(),
       new DarkKnightofTheForgotten(),
       new CorruptedExecutioner(),
@@ -21,71 +21,101 @@ public class BossMonsterDefinitions {
         0.10, // LichKing
         0.05, // AldwynTheFallen
     };
-    this.rand = new WeightedRandoms(spawnChances);
+    this.RANDOM = new NormalWeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
-    return monsters[rand.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()].returnCopy();
   }
 
   public abstract static class BossMonster extends Monster {
-    public BossMonster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
-      super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
+    public BossMonster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+      super(name, maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
   }
 }
 
 class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
   public SpiderBroodMother() {
-    super(500, //maxHP
+    super("The Mother Spider",
+            500, //maxHP
         30, // minDamage
         70, // maxDamage
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new SpiderBroodMother();
+  }
 }
 
 class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
   public DarkKnightofTheForgotten() {
-    super(650, //maxHP
+    super("The Dark Knight of The Forgotten",
+            650, //maxHP
         60, // minDamage
         80, // maxDamage
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new DarkKnightofTheForgotten();
+  }
 }
 
 class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
   public CorruptedExecutioner() {
-    super(750, //maxHP
+    super("The Corrupted Executioner",
+            750, //maxHP
         70, // minDamage
         90, // maxDamage
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new CorruptedExecutioner();
+  }
 }
 
 class LichKing extends BossMonsterDefinitions.BossMonster {
   public LichKing() {
-    super(900, //maxHP
+    super("The Lich King",
+            900, //maxHP
         75, // minDamage
         90, // maxDamage
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new LichKing();
+  }
 }
 
 class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
   public AldwynTheFallen() {
-    super(1000, //maxHP
+    super("Aldwyn the Fallen",
+            1000, //maxHP
         80, // minDamage
         100, // maxDamage
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
+  }
+
+  @Override
+  public Monster returnCopy()  {
+    return new AldwynTheFallen();
   }
 }

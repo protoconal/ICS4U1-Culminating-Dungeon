@@ -7,19 +7,27 @@ public class Views {
   static final String SPACE_PADDING = "            ";
   private static final String PLAYER_MODEL = " <i> ";
 
+  private static final double TIME_DELAY = 1.5;
+
   public static String gameHeader() {
     return DASH_PADDING + "  " + Game.getName() + "  " + DASH_PADDING + "\n";
   }
 
   public static String getToolTip(String type) {
     if (type.equals("INVENTORY")) {
-      return "E: Use ";
+      return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: Menu";
+    }
+    if (type.equals("SHOP")) {
+      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, R: Return, ;: Menu";
+    }
+    if (type.equals("PREDUNGEON")) {
+      return "S: Go to the Shop, R: Enter the dungeon, ;: Menu";
     }
     if (type.equals("MAINMENU")) {
-      return "B: Begin ;: Exit";
+      return "B: Begin, H: High Scores, ;: Exit";
     }
-    if (type.equals("Inventory")) {
-      return "A: Left D: Right W: Weapons S: Healing R: Return ;: Menu";
+    if (type.equals("DEATHMENU")) {
+      return "R: Reset  ;: Exit";
     }
     return null;
   }
@@ -30,28 +38,13 @@ public class Views {
         "You’ve been selected to explore the newly-discovered dungeon of Vaquera.",
         "Your bravery will help you fight monsters, find treasure, and help Vaquera learn more about the treasures that lie beneath the surface.",
         "",
-        "Oh, I didn't tell you how to move!",
-        "Press W to move up",
-        "Press A to move left",
-        "Press S to move down",
-        "Press D to move right",
-        "I also need to help you use your equipment.",
-        "Press E to interact",
-        "Press F to open your inventory at anytime",
+        "If you ever need to find out what you can input, a tooltip will always appear!",
+        "ex: W: Up, A: Left, S: Down, D: Right",
+        "",
         "Finally, if you're a coward, press ; to exit to the main menu.",
-        "Are you ready? Press B to begin!",
+        "Are you ready? Enter B to begin! Enter H to see the high scores.",
     };
     printLinesWithoutPlayer(consoleText);
-  }
-
-
-  public static void showTutorial() {
-    String[] consoleText = new String[]{
-        "",
-        "",
-        "",
-    };
-    printLines(consoleText);
   }
 
   public static void printDungeon(Dungeon map, int[] playerCoordinates) {
@@ -63,20 +56,18 @@ public class Views {
     printLines(consoleText);
   }
 
-  public static void printAttackModel(Dungeon map, int[] playerCoordinates) {
+  public static void printDeathMenu(Player player, HighScore score) {
     String[] consoleText = new String[]{
+        "Unfortunately, the great \"" + player.getName() + "\" has met their great demise from " + player.getDeathReason(),
         "",
+        "Thanks for playing!",
+        "Your final score: " + player.getScore(),
+        "",
+        "High scores!",
+        score.returnHighScoreText(),
         "",
     };
     printLines(consoleText);
-  }
-
-  public static void printDeathMenu() {
-
-  }
-
-  public static void printShop() {
-
   }
 
   public static void printLines(String[] consoleText) {
@@ -99,19 +90,45 @@ public class Views {
     System.out.println(outString);
   }
 
-  public static void printLn(String outString) {
+  public static void printLn(String outString, boolean clsTerminal) {
     // cls terminal
-    Util.clearTerminal();
-    System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING + "\n" + outString);
+    if (clsTerminal) {
+      Util.clearTerminal();
+    }
+    System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING +"\n" + outString);
   }
 
   public static void delayedPrintLines(String[] consoleText) {
-    // cls terminal
-    Util.clearTerminal();
-    StringBuilder outString = new StringBuilder(gameHeader());
-    for (int x = 0; x < consoleText.length; x++) {
-      outString.append(consoleText[x]).append("\n");
+    printLines(consoleText);
+    delay();
+  }
+
+  public static void delayedPrintLinesWithoutPlayer(String[] consoleText) {
+    printLinesWithoutPlayer(consoleText);
+    delay();
+  }
+
+  public static void delayedPrintLn(String consoleText) {
+    printLn(consoleText, true);
+    delay();
+  }
+
+  public static void delay() {
+    try {
+      Thread.sleep((long) (TIME_DELAY * 1000));
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
     }
-    System.out.println(outString);
+  }
+
+
+
+  public static void printPreDungeon(int difficultyMultiplier) {
+    String[] consoleText = new String[]{
+        "Welcome traveller, you've reached the entrance to dungeon: " + difficultyMultiplier,
+        "",
+        "Beware of creepy monsters!"
+    };
+    printLines(consoleText);
   }
 }

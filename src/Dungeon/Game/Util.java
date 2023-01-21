@@ -97,6 +97,16 @@ public class Util {
     System.out.flush();
   }
 
+  public static String[] copyArrayFromIndexes(String[] originalArr, int fromIndex, int toIndex) {
+    String[] copyArr = new String[toIndex - fromIndex];
+    int y = 0;
+    for (int x = fromIndex; x < toIndex; x++) {
+      copyArr[y] = originalArr[x];
+      y++;
+    }
+
+    return copyArr;
+  }
 }
 
 

@@ -1,12 +1,13 @@
 package Dungeon.Game.Rooms;
 
 import Dungeon.Game.Player;
+import Dungeon.Game.Game;
 
 public class StartRoom extends Room {
-  private static final int TILE_ID = -1;
+  private static final int ROOM_ID = -1;
 
   public StartRoom() {
-    super(TILE_ID, false);
+    super(ROOM_ID, false);
   }
 
   @Override

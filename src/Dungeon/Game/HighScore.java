@@ -4,17 +4,30 @@ import java.io.*;
 import java.util.ArrayList;
 // import java.util.Scanner;
 
-public class Highscore {
+public class HighScore {
 
   private final ArrayList<String> HIGHSCORES = new ArrayList<>();
 
-  public String[] returnHighScores() {
-    String[] highscoreStrings = { ":( Currently None" };
-    // replace array with scores if they exist
-    if (this.HIGHSCORES.size() != 0) {
-      highscoreStrings = this.HIGHSCORES.toArray(new String[0]);
+  public HighScore() {
+    try {
+      this.loadHighScore();
     }
-    return highscoreStrings;
+    catch (IOException err) {
+      System.out.println("Something terrible has happened. : " + err);
+    }
+  }
+  public String returnHighScoreText() {
+    StringBuilder outString = new StringBuilder();
+    for (int x = 0; x < HIGHSCORES.size(); x++) {
+      outString.append("    ")
+          .append(HIGHSCORES.get(x))
+          .append("\n");
+    }
+
+    if (outString.length() == 0) {
+      return ":( Currently None";
+    }
+    return outString.toString();
   }
 
   /**
@@ -24,7 +37,7 @@ public class Highscore {
    * NAME".
    * Sorts the scores before returning.
    */
-  public void loadHighScore() throws IOException {
+  private void loadHighScore() throws IOException {
     BufferedReader read = null;
 
     try {
@@ -46,7 +59,7 @@ public class Highscore {
   }
 
   /**
-   * Sorts the highscore list using insertion sort.
+   * Sorts the high score list using insertion sort.
    */
   private void sortHighScore() {
 
@@ -62,7 +75,7 @@ public class Highscore {
     String currentElement = this.HIGHSCORES.get(0).substring(0, 11);
     int max = 0;
     int min = 0;
-    // length is oneless than size
+    // length is one less than size
     int arrayLength = this.HIGHSCORES.size() - 1;
 
     for (int x = 0; x < this.HIGHSCORES.size(); x++) {
@@ -84,7 +97,7 @@ public class Highscore {
   }
 
   /**
-   * Processes updates to the highscore list by grabbing the name and adding one
+   * Processes updates to the high score list by grabbing the name and adding one
    * to their score.
    *
    * @param name a string to store the name to update
@@ -95,25 +108,26 @@ public class Highscore {
     int index = -1;
     for (int x = 0; x < this.HIGHSCORES.size(); x++) {
       // "0000000001 - U1", start of name is past character 13
-      String currentName = this.HIGHSCORES.get(x).substring(13).strip();
+      String currentName = " ";
+      try {
+        currentName = this.HIGHSCORES.get(x).substring(13).strip();
+      }
+      catch (StringIndexOutOfBoundsException error){
+        // do nothing
+      }
       if (currentName.equals(name)) {
         index = x;
         x = this.HIGHSCORES.size();
       }
     }
 
-    int newScore = 1;
+    int newScore = currentScore;
     // if the score exists, check if higher
     if (index != -1) {
       String currentScoreString = this.HIGHSCORES.remove(index);
       // first ten digits are the score
       int score = Integer.parseInt(currentScoreString.substring(0, 10));
-      if (currentScore > score) {
-        newScore = currentScore;
-      }
-      else {
-        newScore = score;
-      }
+      newScore = Math.max(currentScore, score);
     }
     // since it is now an integer, we must convert it back to a string
     // representation (SCORE - NAME)

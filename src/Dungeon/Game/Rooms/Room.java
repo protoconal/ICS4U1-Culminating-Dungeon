@@ -3,19 +3,19 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 public abstract class Room {
-  private final int TILE_ID;
+  private final int ROOM_ID;
   private boolean isInteractable = true;
 
   public Room() {
-    this.TILE_ID = 0;
+    this.ROOM_ID = 0;
   }
 
-  public Room(int tileID) {
-    this.TILE_ID = tileID;
+  public Room(int roomId) {
+    this.ROOM_ID = roomId;
   }
 
   public Room(int tileID, boolean isInteractable) {
-    this.TILE_ID = tileID;
+    this.ROOM_ID = tileID;
     this.isInteractable = isInteractable;
   }
 
@@ -25,8 +25,8 @@ public abstract class Room {
     return "     ";
   }
 
-  public int getTileID() {
-    return this.TILE_ID;
+  public int getRoomId() {
+    return this.ROOM_ID;
   }
 
   public abstract boolean interactRoom(Player player);
