@@ -1,10 +1,13 @@
 package Dungeon.Game.Rooms;
 
-import Dungeon.Game.*;
+import Dungeon.Game.Game;
+import Dungeon.Game.Input;
+import Dungeon.Game.Player;
 import Dungeon.Game.Entities.Monster;
 import Dungeon.Game.Entities.Spawner;
 import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
+import Dungeon.Game.Views;
 
 public class MonsterRoom extends Room {
   private static final int TILE_ID = 3;
@@ -38,6 +41,7 @@ public class MonsterRoom extends Room {
     return " <M> ";
   }
 
+  @Override
   public boolean interactRoom(Player player) {
     this.setInteractableStatus(false);
     return handleFight();
