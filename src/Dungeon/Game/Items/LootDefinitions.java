@@ -57,15 +57,6 @@ class Platinum extends LootItem {
   }
 }
 
-/*class Sapphire extends LootItem {
-  public Sapphire() {
-    super("Sapphire", // name
-        "TEMPORARY DESCRIPTION", // description
-        120 // value
-    );
-  }
-}*/
-
 class Diamond extends LootItem {
   public Diamond() {
     super("Diamond", // name

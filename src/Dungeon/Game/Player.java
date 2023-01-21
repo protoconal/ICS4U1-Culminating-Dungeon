@@ -6,6 +6,7 @@ import Dungeon.Game.Items.PlayerInventory;
 public class Player extends Hero {
   public final PlayerInventory INVENTORY = new PlayerInventory();
   private int score = 0;
+  private String deathReason;
 
   public Player() {
     super();
@@ -36,4 +37,11 @@ public class Player extends Hero {
     return INVENTORY;
   }
 
+  public String getDeathReason() {
+    return deathReason;
+  }
+
+  public void setDeathReason(String deathReason) {
+    this.deathReason = deathReason;
+  }
 }

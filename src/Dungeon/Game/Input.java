@@ -49,13 +49,6 @@ public class Input {
           ";", // Exit
   };
 
-  final static String[] VALID_INTERACTION_KEYS = {
-      "O", // loot
-      "K", // monster
-      "L", // inventory
-      ";", // menu
-  };
-
   final static String[] VALID_FIGHT_KEYS = {
       "A", // fight
       "H", // heal
@@ -63,43 +56,20 @@ public class Input {
       ";", // menu
   };
 
+  final static String[] VALID_PRE_DUNGEON_KEYS = {
+      "S", // go shop
+      "R", // continue
+      ";", // menu
+  };
+
+  final static String[] VALID_SHOP_KEYS = {
+      "E", // buy
+      "Q", // sell
+      "R", // return
+      ";", // menu
+  };
 
   final static Scanner SCAN = new Scanner(System.in);
-
-  public static String getMove(String[] movableDirections) {
-    // I know this is inefficient. - oh well.
-
-    // efficiency - convert representation of directions and movement into an int[]
-    ArrayList<String> possibleMovementKeys = new ArrayList<>();
-    StringBuilder toolTip = new StringBuilder();
-    for (int x = 0; x < movableDirections.length; x++) {
-      // calculate the possible key combinations that are allowed given the directions
-      int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
-      possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
-      toolTip.append(TOOLTIP_DIRECTIONS[index]);
-
-      if (x != movableDirections.length - 1) {
-        toolTip.append(" ");
-      }
-    }
-    possibleMovementKeys.add("R"); // patch in inventory;
-    toolTip.append(" R: Inventory"); // patch in inventory;
-    possibleMovementKeys.add(";"); // patch in menu;
-    toolTip.append(" ;: Menu"); // patch in menu;
-
-    System.out.println(toolTip);
-    // return the direction, rather than the key
-    String keyStroke = getValidKeystroke(possibleMovementKeys, "Move: ");
-
-    if (keyStroke.equals("R")) {
-      return "R";
-    }
-    if (keyStroke.equals(";")) {
-      return ";";
-    }
-
-    return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
-  }
 
   public static String getValidKeystroke(String[] validKeys, String consoleText) {
     System.out.print(consoleText);
@@ -148,6 +118,41 @@ public class Input {
     SCAN.nextLine();
   }
 
+  public static String getMove(String[] movableDirections) {
+    // I know this is inefficient. - oh well.
+
+    // efficiency - convert representation of directions and movement into an int[]
+    ArrayList<String> possibleMovementKeys = new ArrayList<>();
+    StringBuilder toolTip = new StringBuilder();
+    for (int x = 0; x < movableDirections.length; x++) {
+      // calculate the possible key combinations that are allowed given the directions
+      int index = Util.index(VALID_DIRECTIONS, movableDirections[x]);
+      possibleMovementKeys.add(VALID_MOVEMENT_KEYS[index]);
+      toolTip.append(TOOLTIP_DIRECTIONS[index]);
+
+      if (x != movableDirections.length - 1) {
+        toolTip.append(" ");
+      }
+    }
+    possibleMovementKeys.add("R"); // patch in inventory;
+    toolTip.append(" R: Inventory"); // patch in inventory;
+    possibleMovementKeys.add(";"); // patch in menu;
+    toolTip.append(" ;: Menu"); // patch in menu;
+
+    System.out.println(toolTip);
+    // return the direction, rather than the key
+    String keyStroke = getValidKeystroke(possibleMovementKeys, "Move: ");
+
+    if (keyStroke.equals("R")) {
+      return "R";
+    }
+    if (keyStroke.equals(";")) {
+      return ";";
+    }
+
+    return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
+  }
+
   public static String getMenuKeys() {
     return getValidKeystroke(VALID_MENU_KEYS, "Input: ");
   }
@@ -160,12 +165,15 @@ public class Input {
     return getValidKeystroke(VALID_INVENTORY_KEYS, "Input: ");
   }
 
-  public static String getInteraction() {
-    return getValidKeystroke(VALID_INTERACTION_KEYS, "Interact: ");
+  public static String getPreDungeonKeys() {
+    return getValidKeystroke(VALID_PRE_DUNGEON_KEYS, "Interact: ");
   }
 
   public static String getDeathKeys() {
     return getValidKeystroke(VALID_DEATH_MENU_KEYS, "Input: ");
+  }
+  public static String getShopKeys() {
+    return getValidKeystroke(VALID_SHOP_KEYS, "Input: ");
   }
 
   public static String getText(String consoleText) {

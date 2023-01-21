@@ -1,21 +1,22 @@
 package Dungeon.Game.Rooms;
 
+import Dungeon.Game.Input;
 import Dungeon.Game.Items.LootDefinitions;
 import Dungeon.Game.Items.LootItem;
 import Dungeon.Game.Player;
 import Dungeon.Game.Views;
 
-public class TreasureRoom extends Room {
+public class LootRoom extends Room {
   private static final int TILE_ID = 2;
 
   private final LootItem LOOT;
 
-  public TreasureRoom(LootItem item) {
+  public LootRoom(LootItem item) {
     super(TILE_ID, true);
     LOOT = item;
   }
 
-  public TreasureRoom() {
+  public LootRoom() {
     super();
     LOOT = new LootDefinitions().generateLoot();
   }
@@ -36,6 +37,7 @@ public class TreasureRoom extends Room {
     };
 
     Views.printLines(consoleText);
+    Input.waitForKeyPress();
     return false;
   }
 

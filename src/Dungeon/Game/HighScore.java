@@ -16,13 +16,18 @@ public class HighScore {
       System.out.println("Something terrible has happened. : " + err);
     }
   }
-  public String[] returnHighScoreText() {
-    String[] highscoreStrings = { ":( Currently None" };
-    // replace array with scores if they exist
-    if (this.HIGHSCORES.size() != 0) {
-      highscoreStrings = this.HIGHSCORES.toArray(new String[0]);
+  public String returnHighScoreText() {
+    StringBuilder outString = new StringBuilder();
+    for (int x = 0; x < HIGHSCORES.size(); x++) {
+      outString.append("    ")
+          .append(HIGHSCORES.get(x))
+          .append("\n");
     }
-    return highscoreStrings;
+
+    if (outString.length() == 0) {
+      return ":( Currently None";
+    }
+    return outString.toString();
   }
 
   /**
@@ -54,7 +59,7 @@ public class HighScore {
   }
 
   /**
-   * Sorts the highscore list using insertion sort.
+   * Sorts the high score list using insertion sort.
    */
   private void sortHighScore() {
 
@@ -70,7 +75,7 @@ public class HighScore {
     String currentElement = this.HIGHSCORES.get(0).substring(0, 11);
     int max = 0;
     int min = 0;
-    // length is oneless than size
+    // length is one less than size
     int arrayLength = this.HIGHSCORES.size() - 1;
 
     for (int x = 0; x < this.HIGHSCORES.size(); x++) {
@@ -92,7 +97,7 @@ public class HighScore {
   }
 
   /**
-   * Processes updates to the highscore list by grabbing the name and adding one
+   * Processes updates to the high score list by grabbing the name and adding one
    * to their score.
    *
    * @param name a string to store the name to update

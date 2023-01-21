@@ -198,7 +198,7 @@ public class Dungeon {
       return new WalledRoom();
     }
     if (roomID == 2) {
-      return new TreasureRoom(LOOT_GENERATOR.generateLoot());
+      return new LootRoom(LOOT_GENERATOR.generateLoot());
     }
     if (roomID == 3) {
       return new MonsterRoom(SPAWNER, difficultyMultiplier);

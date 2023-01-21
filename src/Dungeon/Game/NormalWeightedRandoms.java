@@ -28,7 +28,6 @@ public class NormalWeightedRandoms {
   private void updateCDF() {
     double runningTotal = 0;
     for (int x = 0; x < this.CDF.length; x++) {
-      // multiply by scaling
       runningTotal += this.BASE_PROBABILITIES[x];
       this.CDF[x] = runningTotal;
     }

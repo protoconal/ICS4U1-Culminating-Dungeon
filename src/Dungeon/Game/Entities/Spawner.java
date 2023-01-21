@@ -2,9 +2,7 @@ package Dungeon.Game.Entities;
 
 import Dungeon.Game.DungeonMap.MapGenerationSettings;
 import Dungeon.Game.GameWeightedRandoms;
-import Dungeon.Game.Rooms.Room;
 import Dungeon.Game.Util;
-import Dungeon.Game.NormalWeightedRandoms;
 
 public class Spawner {
 

@@ -1,8 +1,30 @@
 package Dungeon.Game.Items;
 
+import java.util.HashMap;
+
 public class ArmourDefinitions {
-  // store all possible weapons
-  // can move some code out of inventory
+  private final HashMap<String, ArmourItem> ARMOUR_DEFINITIONS = new HashMap<>();
+
+  public ArmourDefinitions() {
+    initializeItemInventory();
+  }
+
+  public ArmourItem returnItemFromName(String itemName) {
+    return ARMOUR_DEFINITIONS.getOrDefault(itemName, null);
+  }
+
+  public void initializeItemInventory() {
+    this.ARMOUR_DEFINITIONS.put("RustyArmour", new RustyArmour());
+    this.ARMOUR_DEFINITIONS.put("ChainArmour", new ChainArmour());
+    this.ARMOUR_DEFINITIONS.put("IronArmour", new IronArmour());
+    this.ARMOUR_DEFINITIONS.put("SteelArmour", new SteelArmour());
+    this.ARMOUR_DEFINITIONS.put("RoyalArmour", new RoyalArmour());
+    this.ARMOUR_DEFINITIONS.put("DarkKnightArmour", new DarkKnightArmour());
+    this.ARMOUR_DEFINITIONS.put("CrystallineSteelArmour", new CrystallineSteelArmour());
+    this.ARMOUR_DEFINITIONS.put("ArmourOfTheCorrupted", new ArmourOfTheCorrupted());
+    this.ARMOUR_DEFINITIONS.put("AbyssalSteelArmour", new AbyssalSteelArmour());
+    this.ARMOUR_DEFINITIONS.put("HolyTrinityArmour", new HolyTrinityArmour());
+  }
 }
 
 class RustyArmour extends ArmourItem {
@@ -86,7 +108,7 @@ class ArmourOfTheCorrupted extends ArmourItem {
   public ArmourOfTheCorrupted() {
     super(
         "Armour Of The Corrupted", // name
-        "Sold at your local politican's house", // description
+        "Sold at your local politician's house", // description
         1500.00, // price
         1, // maxNumber
         450); // hpIncrease

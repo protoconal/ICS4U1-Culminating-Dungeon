@@ -73,10 +73,15 @@ public class Views {
     printLines(consoleText);
   }
 
-  public static void printDeathMenu(Player player) {
+  public static void printDeathMenu(Player player, HighScore score) {
     String[] consoleText = new String[]{
-            "Uh oh, you died!",
-            "Final Score: " + player.getScore(),
+        "Unfortunately, the great " + player.getName() + " has met their great demise from a " + player.getDeathReason(),
+        "",
+        "Thanks for playing!",
+        "Your final score: " + player.getScore(),
+        "",
+        "High scores!",
+        score.returnHighScoreText(),
     };
     printLines(consoleText);
   }

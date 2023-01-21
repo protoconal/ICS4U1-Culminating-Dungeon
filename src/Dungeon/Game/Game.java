@@ -1,7 +1,6 @@
 package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
-import Dungeon.Game.Entities.Monster;
 import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Rooms.Room;
@@ -11,6 +10,7 @@ import java.io.IOException;
 public class Game {
   private static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
   private static final Player PLAYER = new Player();
+  private static final PlayerInventory INVENTORY = PLAYER.getInventory();
   static String phase;
   private final Dungeon CURRENT_MAP = new Dungeon();
   private int[] playerCoordinates = CURRENT_MAP.getCenter();
@@ -34,6 +34,9 @@ public class Game {
     PLAYER.setName(Input.getText("Input: "));
 
 
+    INVENTORY.initializeWeapons();
+    INVENTORY.initializeHealth();
+
     // if PLAYER isn't dead, keep playing the dungeon
     while (!PLAYER.isDead()) {
       showDungeon();
@@ -49,6 +52,8 @@ public class Game {
   }
 
   public void showDungeon() {
+    // show the preDungeon screen
+    showPreDungeon();
 
     // update visibility
     this.CURRENT_MAP.updateVisibility(playerCoordinates);
@@ -56,12 +61,7 @@ public class Game {
     // getMenuInputs
     String optionSelected = Input.getMove(CURRENT_MAP.getMovableDirections(playerCoordinates));
 
-    PLAYER.getInventory().initializeWeapons();
-    PLAYER.getInventory().initializeHealth();
-
     if (optionSelected.equals("R")) {
-      PLAYER.damage(80);
-      Views.printLn("");
       showInventory();
       return;
     }
@@ -72,13 +72,47 @@ public class Game {
     // update coordinates
     this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
 
-    // TODO: handle input
-
     // activate Room input
     Room currentRoom = this.CURRENT_MAP.getMapRoom(playerCoordinates);
     handleRoom(currentRoom);
-
   }
+
+  public void showPreDungeon() {
+    // show the preDungeon screen
+    Views.printDungeon(this.CURRENT_MAP, playerCoordinates);
+    // getMenuInputs
+    String optionSelected = "";
+
+    while (!optionSelected.equals("R")) {
+      optionSelected = Input.getPreDungeonKeys();
+      if (optionSelected.equals("S")) {
+        showShop();
+      }
+      if (optionSelected.equals(";")) {
+        exit();
+      }
+    }
+  }
+
+  private void showShop() {
+    // getMenuInputs
+    String optionSelected = "";
+    while (!optionSelected.equals("R")) {
+      Views.printDungeon(this.CURRENT_MAP, playerCoordinates);
+
+      optionSelected = Input.getShopKeys();
+      if (optionSelected.equals("R")) {
+        // buy item
+        showShop();
+      }
+      if (optionSelected.equals("Q")) {
+        // sell item
+        exit();
+      }
+
+    }
+  }
+
 
   public void handleRoom(Room currentRoom) {
     // if room is not interactable
@@ -87,28 +121,40 @@ public class Game {
     }
 
     boolean hasDied = currentRoom.interactRoom(PLAYER);
-    Input.waitForKeyPress();
     if (hasDied) {
       // send to death code
+      showDeathMenu();
     }
-    // otherwise continue
   }
 
+  public void showDeathMenu() {
+    saveScore();
 
+    Views.printDeathMenu(PLAYER, SCORES_HANDLER);
+    System.out.println(Views.getToolTip("DEATH"));
+    String optionSelected = Input.getDeathKeys();
+    if (optionSelected.equals("R")) {
+      // reset
+      CURRENT_MAP.reset();
+      PLAYER.reset();
+    }
+    else {
+      exit();
+    }
+  }
 
   public static void showInventory() {
     String optionSelected;
-    PlayerInventory currentInventory = PLAYER.getInventory();
 
     String mode = "Weapon";
-    String[] weaponsInInventory = currentInventory.getWeaponNames();
-    String[] healingInInventory = currentInventory.getHealthItems();
+    String[] weaponsInInventory = INVENTORY.getWeaponNames();
+    String[] healingInInventory = INVENTORY.getHealthItems();
 
     int index = 0;
     boolean flag = true;
     do {
       // use regular print;
-      Views.printLn(currentInventory.toString());
+      Views.printLn(INVENTORY.toString());
 
       // if empty, try switching to health
       if (mode.equals("Weapon") && weaponsInInventory.length == 0) {
@@ -119,7 +165,7 @@ public class Game {
         mode = "Weapon";
       }
       // if empty, give up
-      if (currentInventory.size() == 0) {
+      if (INVENTORY.size() == 0) {
         Input.waitForKeyPress();
         return;
       }
@@ -170,20 +216,18 @@ public class Game {
     }
 
     if (optionSelected.equals("R")) {
-      // Return
       return;
     }
     if (optionSelected.equals("E")) {
       // Use/Equip
       if (mode.equals("Weapon")) {
-        currentInventory.setEquippedWeapon(itemId);
-
+        INVENTORY.setEquippedWeapon(itemId);
       }
       if (mode.equals("Health")) {
         // ensure that PLAYER needs more than 50% of heal
-        HealthItem item = currentInventory.getHealthDefinitions().returnItemFromName(itemId);
+        HealthItem item = INVENTORY.getHealthDefinitions().returnItemFromName(itemId);
         if (PLAYER.getCurrentHP() + item.getRestoreHP() * 0.5 < PLAYER.getMaxHP()) {
-          item = currentInventory.removeHealthItem(itemId);
+          item = INVENTORY.removeHealthItem(itemId);
           PLAYER.heal(item);
         }
       }
@@ -191,27 +235,13 @@ public class Game {
     if (optionSelected.equals("Q")) {
       // Drop/Delete
       if (mode.equals("Weapon")) {
-        currentInventory.removeWeapon(itemId);
+        INVENTORY.removeWeapon(itemId);
       }
       if (mode.equals("Health")) {
-        currentInventory.removeHealthItem(itemId);
+        INVENTORY.removeHealthItem(itemId);
       }
     }
     showInventory();
-  }
-
-  public void deathMenu() {
-    Views.printDeathMenu(PLAYER);
-    System.out.println(Views.getToolTip("DEATH"));
-    String optionSelected = Input.getDeathKeys();
-    if (optionSelected.equals("R")) {
-      // reset
-      CURRENT_MAP.reset();
-      PLAYER.reset();
-    }
-    else {
-      exit();
-    }
   }
 
   public void exit() {
