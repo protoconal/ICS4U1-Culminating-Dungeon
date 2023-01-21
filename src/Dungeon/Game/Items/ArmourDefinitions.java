@@ -6,14 +6,6 @@ public class ArmourDefinitions {
   private final HashMap<String, ArmourItem> ARMOUR_DEFINITIONS = new HashMap<>();
 
   public ArmourDefinitions() {
-    initializeItemInventory();
-  }
-
-  public ArmourItem returnItemFromName(String itemName) {
-    return ARMOUR_DEFINITIONS.getOrDefault(itemName, null);
-  }
-
-  public void initializeItemInventory() {
     this.ARMOUR_DEFINITIONS.put("RustyArmour", new RustyArmour());
     this.ARMOUR_DEFINITIONS.put("ChainArmour", new ChainArmour());
     this.ARMOUR_DEFINITIONS.put("IronArmour", new IronArmour());
@@ -25,6 +17,11 @@ public class ArmourDefinitions {
     this.ARMOUR_DEFINITIONS.put("AbyssalSteelArmour", new AbyssalSteelArmour());
     this.ARMOUR_DEFINITIONS.put("HolyTrinityArmour", new HolyTrinityArmour());
   }
+
+  public ArmourItem returnItemFromName(String itemName) {
+    return ARMOUR_DEFINITIONS.getOrDefault(itemName, null);
+  }
+
 }
 
 class RustyArmour extends ArmourItem {

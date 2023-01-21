@@ -9,7 +9,6 @@ public class PlayerInventory {
   public WeaponDefinitions getWeaponDefinitions() {
     return WEAPON_DEFINITIONS;
   }
-
   public HealthDefinitions getHealthDefinitions() {
     return HEALTH_DEFINITIONS;
   }
@@ -22,15 +21,11 @@ public class PlayerInventory {
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
 
   private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
-  private String[] healthNames;
-  private String[] healthInInventory;
 
   public void reset() {
     HEALTH_PLAYER_INVENTORY.clear();
     WEAPON_PLAYER_INVENTORY.clear();
     equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
-    healthNames = null;
-    healthInInventory = null;
   }
 
   public WeaponItem getEquippedWeapon() {
@@ -93,18 +88,6 @@ public class PlayerInventory {
     for (int x = 0; x < healthNames.length; x++) {
       healthNames[x] = HEALTH_DEFINITIONS.returnItemFromName(healthNames[x]).getName();
     }
-    return healthNames;
-  }
-
-
-  public String[] updateHealthNames() {
-    this.healthInInventory = getHealthItems();
-    this.healthNames = new String[healthInInventory.length];
-
-    for (int x = 0; x < this.healthNames.length; x++) {
-      this.healthNames[x] = HEALTH_DEFINITIONS.returnItemFromName(this.healthInInventory[x]).getName();
-    }
-
     return healthNames;
   }
 

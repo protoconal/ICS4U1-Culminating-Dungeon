@@ -38,41 +38,18 @@ public class Views {
         "You’ve been selected to explore the newly-discovered dungeon of Vaquera.",
         "Your bravery will help you fight monsters, find treasure, and help Vaquera learn more about the treasures that lie beneath the surface.",
         "",
-        "Oh, I didn't tell you how to move!",
-        "Press W to move up",
-        "Press A to move left",
-        "Press S to move down",
-        "Press D to move right",
-        "I also need to help you use your equipment.",
-        "Press E to interact",
-        "Press F to open your inventory at anytime",
+        "If you ever need to find out what you can input, a tooltip will always appear!",
+        "ex: W: Up, A: Left, S: Down, D: Right",
+        "",
         "Finally, if you're a coward, press ; to exit to the main menu.",
-        "Are you ready? Press B to begin!",
+        "Are you ready? Enter B to begin!",
     };
     printLinesWithoutPlayer(consoleText);
-  }
-
-
-  public static void showTutorial() {
-    String[] consoleText = new String[]{
-        "",
-        "",
-        "",
-    };
-    printLines(consoleText);
   }
 
   public static void printDungeon(Dungeon map, int[] playerCoordinates) {
     String[] consoleText = new String[]{
         map.visibleSpacesToString(playerCoordinates, PLAYER_MODEL),
-        "",
-        "",
-    };
-    printLines(consoleText);
-  }
-
-  public static void printAttackModel(Dungeon map, int[] playerCoordinates) {
-    String[] consoleText = new String[]{
         "",
         "",
     };
@@ -122,23 +99,29 @@ public class Views {
   }
 
   public static void delayedPrintLines(String[] consoleText) {
-    // cls terminal
-    Util.clearTerminal();
-    StringBuilder outString = new StringBuilder(gameHeader());
-    for (int x = 0; x < consoleText.length; x++) {
-      outString.append(consoleText[x]).append("\n");
-    }
-    System.out.println(outString);
+    printLines(consoleText);
+    delay();
   }
 
-  public static void delayedPrintLn(String outString) {
+  public static void delayedPrintLinesWithoutPlayer(String[] consoleText) {
+    printLinesWithoutPlayer(consoleText);
+    delay();
+  }
+
+  public static void delayedPrintLn(String consoleText) {
+    printLn(consoleText, true);
+    delay();
+  }
+
+  public static void delay() {
     try {
       Thread.sleep((long) (TIME_DELAY * 1000));
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
-    printLn(outString, true);
   }
+
+
 
   public static void printPreDungeon(int difficultyMultiplier) {
     String[] consoleText = new String[]{

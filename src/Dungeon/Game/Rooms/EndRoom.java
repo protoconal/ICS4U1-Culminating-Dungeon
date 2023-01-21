@@ -5,10 +5,10 @@ import Dungeon.Game.Player;
 import Dungeon.Game.Views;
 
 public class EndRoom extends Room {
-  private static final int TILE_ID = 5;
+  private static final int ROOM_ID = 5;
 
   public EndRoom() {
-    super(TILE_ID);
+    super(ROOM_ID);
   }
 
   @Override

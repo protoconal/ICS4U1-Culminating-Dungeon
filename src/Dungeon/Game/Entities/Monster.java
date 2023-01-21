@@ -7,15 +7,6 @@ public abstract class Monster extends Entity {
   private final String onAttackText; // x verbs you.
   private final String onAppearText; // a blobby creature appears.
 
-  public Monster() {
-    super(0);
-    this.NAME = "";
-    this.MIN_DAMAGE = 0;
-    this.MAX_DAMAGE = 0;
-    this.onAttackText = "";
-    this.onAppearText = "";
-  }
-
   public Monster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
     super(maxHP);
     this.NAME = name;

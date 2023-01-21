@@ -1,7 +1,5 @@
 package Dungeon.Game.Items;
 
-import java.util.ArrayList;
-
 public class HealthItem extends Item {
   private final int RESTORE_HP;
 

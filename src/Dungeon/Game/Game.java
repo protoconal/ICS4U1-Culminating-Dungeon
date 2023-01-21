@@ -8,7 +8,6 @@ import Dungeon.Game.Items.WeaponItem;
 import Dungeon.Game.Rooms.Room;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Game {
@@ -16,7 +15,7 @@ public class Game {
   private static final Player PLAYER = new Player();
   private static final PlayerInventory PLAYER_INVENTORY = PLAYER.getInventory();
   private static final ShopInventory SHOP_INVENTORY = new ShopInventory();
-  static String phase;
+  // --Commented out by Inspection (2023-01-21 12:11 a.m.):static String phase;
   private final Dungeon CURRENT_MAP = new Dungeon();
   private int[] playerCoordinates = CURRENT_MAP.getCenter();
   private final HighScore SCORES_HANDLER = new HighScore();
@@ -28,7 +27,6 @@ public class Game {
   public Game() {
     // do nothing
     Views.printMainMenu();
-    phase = "MAINMENU";
 
     // getMenuInputs
     System.out.println(Views.getToolTip("MAINMENU"));
@@ -112,11 +110,11 @@ public class Game {
     int index = 0;
     boolean flag = true;
     do {
-      WeaponItem weaponItem = null;
-      HealthItem healthItem = null;
+      WeaponItem weaponItem;
+      HealthItem healthItem;
 
-      String itemId = "";
-      String itemName = "";
+      String itemId;
+      String itemName;
       int price;
 
       String[] currentIdSet;

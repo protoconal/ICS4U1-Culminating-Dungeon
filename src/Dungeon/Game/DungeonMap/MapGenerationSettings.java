@@ -29,12 +29,6 @@ public class MapGenerationSettings {
   };
 
 
-  private static final double[] WALL_CHANCE = {
-      0.10, // DeadEnd
-      0.70, // Wall Twice
-      0.20, // Wall Thrice
-  };
-
   public static double[] getProbabilities() {
     return CHANCE_TABLES;
   }
@@ -43,9 +37,6 @@ public class MapGenerationSettings {
     return SCALING_TABLES;
   }
 
-  public static double[] getWallChance() {
-    return WALL_CHANCE;
-  }
   public static double[][] getMonsterChanceTable() {
     return MONSTER_CHANCE_TABLE;
   }

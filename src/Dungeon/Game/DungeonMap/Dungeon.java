@@ -233,12 +233,6 @@ public class Dungeon {
 
   private void setMapRoom(Room room, int[] coordinates) {
     this.MAP[coordinates[0]][coordinates[1]] = room;
-
-    boolean DEBUG = false;
-    if (DEBUG) {
-      Util.clearTerminal();
-      System.out.println(this);
-    }
   }
 
   public Room getMapRoom(int[] coordinates) {

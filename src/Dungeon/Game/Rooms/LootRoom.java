@@ -1,25 +1,20 @@
 package Dungeon.Game.Rooms;
 
 import Dungeon.Game.Input;
-import Dungeon.Game.Items.LootDefinitions;
 import Dungeon.Game.Items.LootItem;
 import Dungeon.Game.Player;
 import Dungeon.Game.Views;
 
 public class LootRoom extends Room {
-  private static final int TILE_ID = 2;
+  private static final int ROOM_ID = 2;
 
   private final LootItem LOOT;
 
   public LootRoom(LootItem item) {
-    super(TILE_ID, true);
+    super(ROOM_ID, true);
     LOOT = item;
   }
 
-  public LootRoom() {
-    super();
-    LOOT = new LootDefinitions().generateLoot();
-  }
 
   @Override
   public String toString() {
@@ -40,10 +35,5 @@ public class LootRoom extends Room {
     Input.waitForKeyPress();
     return false;
   }
-
-  public LootItem getLoot() {
-    return LOOT;
-  }
-
 
 }

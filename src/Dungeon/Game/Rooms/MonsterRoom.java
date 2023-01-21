@@ -13,27 +13,9 @@ public class MonsterRoom extends Room {
   private static final int TILE_ID = 3;
   private Monster monster = null;
 
-  private Spawner spawner = null;
-
-  public MonsterRoom() {
-    super(TILE_ID, false);
-  }
-
-  public MonsterRoom(Monster monster) {
-    super(TILE_ID);
-    this.monster = monster;
-  }
-
   public MonsterRoom(Spawner spawner, int depth) {
     super(TILE_ID);
-    this.spawner = spawner;
     this.monster = spawner.randomSpawn(depth);
-  }
-
-  public MonsterRoom(Spawner spawner, Monster monster) {
-    super(TILE_ID);
-    this.spawner = spawner;
-    this.monster = monster;
   }
 
   @Override
@@ -68,7 +50,9 @@ public class MonsterRoom extends Room {
       if (currentInventory.getHealthItems().length == 0) {
         currentAvailableHealthItem = "Wait";
       }
-      currentAvailableHealthItem = healthItems[0];
+      else {
+        currentAvailableHealthItem = healthItems[0];
+      }
 
       HealthItem currentHealthItem = currentInventory.getHealthDefinitions().returnItemFromName(currentAvailableHealthItem);
       String useHealth = currentAvailableHealthItem + ": Restores " + currentHealthItem.getRestoreHP();
@@ -114,6 +98,10 @@ public class MonsterRoom extends Room {
       Input.waitForKeyPress();
     }
     while (!player.isDead() && !monster.isDead());
+
+    if (player.isDead()) {
+      player.setDeathReason(monster.getName());
+    }
 
     return player.isDead();
   }
