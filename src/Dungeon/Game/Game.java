@@ -351,7 +351,7 @@ public class Game {
     }
 
     // update coordinates
-    this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
+    playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
 
     // activate Room input
     Room currentRoom = CURRENT_MAP.getMapRoom(playerCoordinates);
