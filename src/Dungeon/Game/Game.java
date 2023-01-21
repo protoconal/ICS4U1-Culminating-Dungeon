@@ -10,6 +10,9 @@ import Dungeon.Game.Rooms.Room;
 import java.io.IOException;
 import java.util.Arrays;
 
+/**
+ * It's a game
+ */
 public class Game {
   private static final String GAME_NAME = "Vaquera: The Emboldened Adventure";
   private static final Player PLAYER = new Player();
@@ -51,18 +54,38 @@ public class Game {
     }
   }
 
+  /**
+   * It returns the shop inventory
+   * 
+   * @return The shop inventory.
+   */
   public static ShopInventory getShopInventory() {
     return SHOP_INVENTORY;
   }
 
+  /**
+   * It returns the player
+   * 
+   * @return The player object.
+   */
   public static Player getPlayer() {
     return PLAYER;
   }
 
+  /**
+   * This function returns the name of the game
+   * 
+   * @return The name of the game.
+   */
   public static String getName() {
     return GAME_NAME;
   }
 
+  /**
+   * While the user hasn't selected the 'R' key, print the pre-dungeon view, get the user's input, and
+   * if the user selected the 'S' key, show the shop, or if the user selected the ';' key, exit the
+   * game.
+   */
   public static void showStart() {
     String optionSelected = "";
     while (!optionSelected.equals("R")) {
@@ -79,6 +102,9 @@ public class Game {
     }
   }
 
+  /**
+   * The function shows a shop menu, and allows the player to buy and sell items
+   */
   private static void showShop() {
     String optionSelected;
     String mode = "Weapon";
@@ -209,11 +235,18 @@ public class Game {
     while (flag);
   }
 
+  /**
+   * It resets the player's coordinates to the center of the map, and then resets the map
+   */
   public static void nextLevel() {
     playerCoordinates = CURRENT_MAP.getCenter();
     CURRENT_MAP.fullReset();
   }
 
+  /**
+   * It's a function that displays the inventory, allows the user to select an item, and then allows
+   * the user to either equip or drop the item
+   */
   public static void showInventory() {
     String optionSelected;
 
@@ -315,11 +348,17 @@ public class Game {
     showInventory();
   }
 
+  /**
+   * It saves the score and exits the game
+   */
   public static void exit() {
     saveScore();
     System.exit(0);
   }
 
+  /**
+   * If the player's score is not 0, update the high score and write it to the file
+   */
   public static void saveScore() {
     if (PLAYER.getScore() != 0) {
       SCORES_HANDLER.updateHighScore(PLAYER.getName(), PLAYER.getScore());
@@ -331,6 +370,10 @@ public class Game {
     }
   }
 
+  /**
+   * The function showDungeon() is called when the player is in the dungeon. It prints the dungeon,
+   * gets the player's input, and then handles the room the player is in
+   */
   public void showDungeon() {
     if (CURRENT_MAP.isReset()) {
       Game.showStart();
@@ -358,6 +401,11 @@ public class Game {
     handleRoom(currentRoom);
   }
 
+  /**
+   * If the room is interactable, interact with it and if the player has died, show the death menu
+   * 
+   * @param currentRoom The room that the player is currently in.
+   */
   public void handleRoom(Room currentRoom) {
     // if room is not interactable
     if (!currentRoom.isInteractable()) {
@@ -371,6 +419,13 @@ public class Game {
     }
   }
 
+  /**
+   * "If the player dies, show the death menu, and if the player chooses to reset, reset the game."
+   * <p>
+   * The first thing the function does is save the player's score. Then, it prints the death menu, and
+   * gets the player's input. If the player chooses to reset, the game is reset. If the player chooses
+   * to exit, the game exits
+   */
   public void showDeathMenu() {
     saveScore();
 

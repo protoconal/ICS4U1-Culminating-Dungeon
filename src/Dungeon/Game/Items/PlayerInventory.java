@@ -4,7 +4,11 @@ import Dungeon.Game.Game;
 
 import java.util.TreeMap;
 
+// please document this whole java file with javadocs
 
+/**
+ * The PlayerInventory class is a class that stores the player's inventory.
+ */
 public class PlayerInventory {
   private final WeaponDefinitions WEAPON_DEFINITIONS = new WeaponDefinitions();
   private final HealthDefinitions HEALTH_DEFINITIONS = new HealthDefinitions();
@@ -13,24 +17,43 @@ public class PlayerInventory {
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
   private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
 
+  /**
+   * The constructor for the PlayerInventory class.
+   */
   public WeaponDefinitions getWeaponDefinitions() {
     return WEAPON_DEFINITIONS;
   }
 
+  /**
+   * The getHealthDefinitions() method returns the HealthDefinitions object.
+   * 
+   * @return The HealthDefinitions object.
+   */
   public HealthDefinitions getHealthDefinitions() {
     return HEALTH_DEFINITIONS;
   }
 
+  /**
+   * The reset method resets the player's inventory.
+   */
   public void reset() {
     HEALTH_PLAYER_INVENTORY.clear();
     WEAPON_PLAYER_INVENTORY.clear();
     equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
   }
 
+  /**
+   * The getEquippedWeapon() method returns the equipped weapon.
+   * @return WeaponItem The equipped weapon.
+   */
   public WeaponItem getEquippedWeapon() {
     return equippedWeapon;
   }
 
+  /**
+   * The getEquippedWeapon() method sets the equipped weapon.
+   * @return WeaponItem The equipped weapon.
+   */
   public void setEquippedWeapon(String itemString) {
     // assumes validated data
 
@@ -39,6 +62,11 @@ public class PlayerInventory {
     this.equippedWeapon = removeWeapon(itemString);
   }
 
+  /**
+   * The addWeapon method adds a weapon to the player's inventory.
+   * 
+   * @param weapon
+   */
   private void addWeapon(WeaponItem weapon) {
     if (getItemCount(weapon.getId()) == 0) {
       // not found, therefore put into inventory
@@ -49,31 +77,56 @@ public class PlayerInventory {
     }
   }
 
+  /**
+   * The addWeapon method adds a weapon to the player's inventory.
+   * 
+   * @param weapon
+   */
   public void addWeapon(String itemName) {
     this.WEAPON_PLAYER_INVENTORY.put(itemName, WEAPON_DEFINITIONS.returnItemFromName(itemName));
   }
 
+
+  /** 
+   * The getWeapons method returns the weapons in the player's inventory.
+   * 
+   * @return String[] The weapons in the player's inventory.
+   */
   public String[] getWeapons() {
     return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
+  /** 
+   * The getHealthItems method returns the health items in the player's inventory.
+   * 
+   * @return String[] The health items in the player's inventory.
+   */
   public String[] getHealthItems() {
     return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
+  /**
+   * The initializeWeapons method initializes the player's weapons.
+   */
   public void initializeWeapons() {
     addWeapon("DullSword");
     addWeapon("IronSword");
     addWeapon("Katana");
   }
 
+  /**
+   * The initializeHealth method initializes the player's weapons.
+   */
   public void initializeHealth() {
     addHealthItem("Bandage");
     addHealthItem("Bandage");
     addHealthItem("Bandage");
   }
 
-
+/**
+   * The getWeaponNames method returns the names of the weapons in the player's inventory.
+   * @return String[] The names of the weapons in the player's inventory.
+   */
   public String[] getWeaponNames() {
     String[] weaponNames = getWeapons();
     for (int x = 0; x < weaponNames.length; x++) {
@@ -82,6 +135,10 @@ public class PlayerInventory {
     return weaponNames;
   }
 
+/**
+   * The getHealthNames method returns the names of the health items in the player's inventory.
+   * @return String[] The names of the health items in the player's inventory.
+   */
   public String[] getHealthNames() {
     String[] healthNames = getHealthItems();
     for (int x = 0; x < healthNames.length; x++) {
@@ -90,11 +147,20 @@ public class PlayerInventory {
     return healthNames;
   }
 
+  /**
+   * The size method returns the total number of items in the player inventory.
+   * @return int the total number of items.
+   */
   public int size() {
     return HEALTH_PLAYER_INVENTORY.size() + WEAPON_PLAYER_INVENTORY.size();
   }
 
-
+  /**
+   * The removeWeapon method removes a weapon from the player's inventory.
+   * 
+   * @param itemName
+   * @return
+   */
   public WeaponItem removeWeapon(String itemName) {
     if (WEAPON_PLAYER_INVENTORY.size() > 1) {
       return this.WEAPON_PLAYER_INVENTORY.remove(itemName);
@@ -102,10 +168,21 @@ public class PlayerInventory {
     return null;
   }
 
+  /**
+   * The addHealthItem method adds a health item to the player's inventory.
+   *
+   * @param itemName The name of the item to add.
+   */
   public void addHealthItem(String itemName) {
     this.HEALTH_PLAYER_INVENTORY.put(itemName, getItemCount(itemName) + 1);
   }
 
+  /**
+   * The removeHealthItem method removes a health item from the player's inventory.
+   *
+   * @param itemName The name of the item to remove.
+   * @return The item that was removed.
+   */
   public HealthItem removeHealthItem(String itemName) {
     int count = getItemCount(itemName) - 1;
 
@@ -120,6 +197,12 @@ public class PlayerInventory {
     return HEALTH_DEFINITIONS.returnItemFromName(itemName);
   }
 
+  /**
+   * The getItemCount method returns the number of items in the player's inventory.
+   *
+   * @param itemName The name of the item to check.
+   * @return The number of items in the player's inventory.
+   */
   public int getItemCount(String itemName) {
     // check weapons
     if (WEAPON_PLAYER_INVENTORY.getOrDefault(itemName, null) != null) {
@@ -129,6 +212,11 @@ public class PlayerInventory {
     return HEALTH_PLAYER_INVENTORY.getOrDefault(itemName, 0);
   }
 
+  /**
+   * The toString method for the PlayerInventory class.
+   *
+   * @return The string representation of the PlayerInventory class.
+   */
   @Override
   public String toString() {
 

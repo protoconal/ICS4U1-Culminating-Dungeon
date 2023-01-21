@@ -2,6 +2,10 @@ package Dungeon.Game;
 
 import java.util.Random;
 
+/**
+ * It generates a random number between 0 and 1, and then it uses a binary search to find the index of
+ * the first element in the CDF array that is greater than the random number
+ */
 public class GameWeightedRandoms {
 
 
@@ -32,6 +36,11 @@ public class GameWeightedRandoms {
 //    }
 // --Commented out by Inspection STOP (1/12/2023 11:21 PM)
 
+  /**
+   * The function updates the CDF array by multiplying each element of the BASE_PROBABILITIES array by
+   * the corresponding element of the scaleFactors array, and then adding the result to the
+   * runningTotal variable
+   */
   private void updateCDF() {
     double runningTotal = 0;
     for (int x = 0; x < this.CDF.length; x++) {
@@ -44,6 +53,12 @@ public class GameWeightedRandoms {
     Util.insertionSort(this.CDF);
   }
 
+  /**
+   * We generate a random number between 0 and 1, and then we use a binary search to find the index of
+   * the first element in the CDF array that is greater than the random number
+   * 
+   * @return The index of the choice.
+   */
   public int generateChoice() {
     double randomChoice = RAND.nextDouble(this.sum);
     // binary search
@@ -60,12 +75,23 @@ public class GameWeightedRandoms {
     return min;
   }
 
+  /**
+   * This function sets the scale factors and radius of the filter
+   * 
+   * @param radius The radius of the circle.
+   * @param scaleFactors The scale factors for each of the Gaussian kernels.
+   */
   public void setScaleFactors(int radius, double[] scaleFactors) {
     this.scaleFactors = scaleFactors;
     this.radius = radius;
     updateCDF();
   }
 
+  /**
+   * This function returns the radius of the circle
+   * 
+   * @return The radius of the circle.
+   */
   public int getRadius() {
     return this.radius;
   }

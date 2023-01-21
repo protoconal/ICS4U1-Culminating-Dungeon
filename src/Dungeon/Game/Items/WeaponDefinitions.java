@@ -2,10 +2,16 @@ package Dungeon.Game.Items;
 
 import java.util.HashMap;
 
+/**
+ * The WeaponDefinitions class is a class that contains all the weapon items.
+ */
 public class WeaponDefinitions {
   private final HashMap<String, WeaponItem> WEAPON_DEFINITIONS = new HashMap<>();
   private final String[] WEAPON_IDS;
 
+  /**
+   * The constructor for the WeaponDefinitions class.
+   */
   public WeaponDefinitions() {
     this.WEAPON_DEFINITIONS.put("DullSword", new DullSword());
     this.WEAPON_DEFINITIONS.put("IronSword", new IronSword());
@@ -20,16 +26,35 @@ public class WeaponDefinitions {
     this.WEAPON_IDS = this.WEAPON_DEFINITIONS.keySet().toArray(new String[0]);
   }
 
+  /**
+   * The returnItemFromName() method returns a WeaponItem object from the name of the item.
+   * 
+   * @param itemName The name of the item.
+   * @return The WeaponItem object.
+   */
   public WeaponItem returnItemFromName(String itemName) {
     return WEAPON_DEFINITIONS.getOrDefault(itemName, null);
   }
 
+  /**
+   * The getWeaponIds() method returns an array of Strings that contains the names of all the weapon
+   * items.
+   * 
+   * @return The array of Strings.
+   */
   public String[] getWeaponIds() {
     return WEAPON_IDS;
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class DullSword extends WeaponItem {
+  /**
+   * The constructor for the DullSword class.
+   */
   public DullSword() {
     super(
         "Dull Sword", // name
@@ -40,7 +65,14 @@ class DullSword extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class IronSword extends WeaponItem {
+  /**
+   * The constructor for the IronSword class.
+   */
   public IronSword() {
     super(
         "Iron Sword", // name
@@ -51,7 +83,14 @@ class IronSword extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class Katana extends WeaponItem {
+  /**
+   * The constructor for the Katana class.
+   */
   public Katana() {
     super(
         "Katana", // name
@@ -62,7 +101,14 @@ class Katana extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class RoyalSword extends WeaponItem {
+  /**
+   * The constructor for the RoyalSword class.
+   */
   public RoyalSword() {
     super(
         "Royal Sword", // name
@@ -73,7 +119,14 @@ class RoyalSword extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class CrystalGreatSword extends WeaponItem {
+  /**
+   * The constructor for the CrystalGreatSword class.
+   */
   public CrystalGreatSword() {
     super(
         "Crystal Great Sword", // name
@@ -84,7 +137,14 @@ class CrystalGreatSword extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class HolyBlade extends WeaponItem {
+  /**
+   * The constructor for the HolyBlade class.
+   */
   public HolyBlade() {
     super(
         "Holy Blade", // name
@@ -95,7 +155,14 @@ class HolyBlade extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class Muramasa extends WeaponItem {
+  /**
+   * The constructor for the Muramasa class.
+   */
   public Muramasa() {
     super(
         "Muramasa", // name
@@ -106,7 +173,14 @@ class Muramasa extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class CorruptedGreatSword extends WeaponItem {
+  /**
+   * The constructor for the CorruptedGreatSword class.
+   */
   public CorruptedGreatSword() {
     super(
         "Corrupted Great Sword", // name
@@ -117,7 +191,14 @@ class CorruptedGreatSword extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class AbyssalBlade extends WeaponItem {
+  /**
+   * The constructor for the AbyssalBlade class.
+   */
   public AbyssalBlade() {
     super(
         "Abyssal Blade", // name
@@ -128,7 +209,14 @@ class AbyssalBlade extends WeaponItem {
   }
 }
 
+/**
+ * The WeaponItem class is a subclass of the Item class, and it is the item that the player can use to
+ * attack the enemies.
+ */
 class GodSlayer extends WeaponItem {
+  /**
+   * The constructor for the GodSlayer class.
+   */
   public GodSlayer() {
     super(
         "God Slayer", // name

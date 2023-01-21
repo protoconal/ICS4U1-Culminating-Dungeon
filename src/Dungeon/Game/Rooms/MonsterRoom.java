@@ -8,27 +8,54 @@ import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Player;
 import Dungeon.Game.Views;
+// generate java docs for this class please
 
+/**
+ * The MonsterRoom class is a subclass of the Room class, and it is the room that the player can find
+ * monsters in.
+ */
 public class MonsterRoom extends Room {
   private static final int TILE_ID = 3;
   private final Monster MONSTER;
 
+  /**
+   * The constructor for the MonsterRoom class.
+   * 
+   * @param spawner The spawner object.
+   * @param depth The depth of the dungeon.
+   */
   public MonsterRoom(Spawner spawner, int depth) {
     super(TILE_ID);
     this.MONSTER = spawner.randomSpawn(depth);
   }
 
+  /**
+   * The toString() method returns a string representation of the object.
+   * 
+   * @return The string representation of the object.
+   */
   @Override
   public String toString() {
     return " <M> ";
   }
 
+  /**
+   * The interactRoom() method is called when the player interacts with the room.
+   * 
+   * @param player The player object.
+   * @return The boolean value of the interactRoom() method.
+   */
   @Override
   public boolean interactRoom(Player player) {
     this.setInteractableStatus(false);
     return handleFight();
   }
 
+  /**
+   * The handleFight() method handles the fight between the player and the monster.
+   * 
+   * @return The boolean value of the handleFight() method.
+   */
   public boolean handleFight() {
     Player player = Game.getPlayer();
 
@@ -110,6 +137,7 @@ public class MonsterRoom extends Room {
     }
 
 
+    
     if (player.isDead()) {
       player.setDeathReason(MONSTER.getName());
     }

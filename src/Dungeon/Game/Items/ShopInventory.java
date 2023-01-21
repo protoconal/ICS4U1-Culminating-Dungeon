@@ -1,5 +1,8 @@
 package Dungeon.Game.Items;
 
+/**
+ * The ShopInventory class is a class that contains all the items that the player can buy from the shop.
+ */
 public class ShopInventory {
   private final WeaponDefinitions WEAPON_DEFINITIONS = new WeaponDefinitions();
   private final HealthDefinitions HEALTH_DEFINITIONS = new HealthDefinitions();
@@ -8,6 +11,9 @@ public class ShopInventory {
   private String[] sortedWeaponIds;
   private String[] sortedHealthIds;
 
+  /**
+   * The constructor for the ShopInventory class.
+   */
   public ShopInventory() {
     // add items to the inventory, so later on we can use
     // getItemCount("name")
@@ -17,22 +23,43 @@ public class ShopInventory {
   }
 
   // possible items
+  
+  /**
+   * The getWeaponDefinitions() method returns the WeaponDefinitions object.
+   * @return The WeaponDefinitions object.
+   */
   public WeaponDefinitions getWeaponDefinitions() {
     return WEAPON_DEFINITIONS;
   }
 
+  /**
+   * The getHealthDefinitions() method returns the HealthDefinitions object.
+   * @return The HealthDefinitions object.
+   */
   public HealthDefinitions getHealthDefinitions() {
     return HEALTH_DEFINITIONS;
   }
 
+  /**
+   * The getSortedHealthIds() method returns the sorted health ids.
+   * @return The sorted health ids.
+   */
   public String[] getSortedHealthIds() {
     return sortedHealthIds;
   }
 
+  /**
+   * The getSortedWeaponIds() method returns the sorted weapon ids.
+   * @return The sorted weapon ids.
+   */
   public String[] getSortedWeaponIds() {
     return sortedWeaponIds;
   }
 
+  /**
+   * The getWeaponSellMultiplier() method returns the weapon sell multiplier.
+   * @return The weapon sell multiplier.
+   */
   public double getWeaponSellMultiplier() {
     // selling more depreciates value
     if (weaponSellPriceMultiplier > 0.4) {
@@ -41,17 +68,27 @@ public class ShopInventory {
     return weaponSellPriceMultiplier;
   }
 
+  /**
+   * The getHealthSellMultiplier() method returns the health sell multiplier.
+   * @return The health sell multiplier.
+   */
   public double getHealthSellMultiplier() {
     if (healthSellPriceMultiplier > 0.6) {
       healthSellPriceMultiplier *= 0.99;
     }
     return healthSellPriceMultiplier;
   }
-
-  // For sorting items based on price
-  // selection sort implemented under Util class
-  // access using Util.selectionSort(Array[]);
+  
+  /**
+   * The sortWeaponsByPrices() method sorts the weapons by prices.
+   * @return The sorted weapons by prices.
+   */
   public void sortWeaponsByPrices() {
+    // For sorting items based on price
+    // selection sort implemented under Util class
+    // access using Util.selectionSort(Array[]);
+
+
     String[] itemIds = WEAPON_DEFINITIONS.getWeaponIds();
     // get all the items
     // access their prices
@@ -65,6 +102,10 @@ public class ShopInventory {
     this.sortedWeaponIds = itemIds;
   }
 
+  /**
+   * The sortHealthByPrices() method sorts the health by prices.
+   * @return The sorted health by prices.
+   */
   public void sortHealthByPrices() {
     String[] itemIds = HEALTH_DEFINITIONS.getHealthIds();
     // get all the items
@@ -79,6 +120,12 @@ public class ShopInventory {
     this.sortedHealthIds = itemIds;
   }
 
+  /**
+   * The sortItems() method sorts the items.
+   * @param itemIds The item ids.
+   * @param itemPrices The item prices.
+   * @return The sorted items.
+   */
   private void sortItems(String[] itemIds, double[] itemPrices) {
     // implement some sort that keeps the ordering of the items
     // two arrays, one containing the itemStrings and the other the prices, while sorting, update both arrays according to indexes

@@ -1,5 +1,8 @@
 package Dungeon.Game.DungeonMap;
 
+/**
+ * The MapGenerationSettings class contains the settings for the map generation.
+ */
 public class MapGenerationSettings {
   // TODO: implement scaling generation
   private static final double[] CHANCE_TABLES = {
@@ -29,14 +32,26 @@ public class MapGenerationSettings {
   };
 
 
+  /**
+   * The getProbabilities() method returns the probability table.
+   * @return The probability table.
+   */
   public static double[] getProbabilities() {
     return CHANCE_TABLES;
   }
 
+  /**
+   * The getScalingFactors() method returns the scaling table.
+   * @return The scaling table.
+   */
   public static double[][] getScalingFactors() {
     return SCALING_TABLES;
   }
 
+  /**
+   * The getMonsterChanceTable() method returns the monster chance table.
+   * @return The monster chance table.
+   */
   public static double[][] getMonsterChanceTable() {
     return MONSTER_CHANCE_TABLE;
   }

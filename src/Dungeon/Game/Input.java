@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Input {
+  // these definitions could be stored in its own class
   final static String[] VALID_MOVEMENT_KEYS = {
       // keeping same from dungeon
       "W", // up
@@ -74,12 +75,21 @@ public class Input {
       ";", // menu
   };
 
-  final static Scanner SCAN = new Scanner(System.in);
-  private static final String[] VALID_YN_KEYS = {
-      "N", // no -- default
-      "Y", // yes
+  final static String[] VALID_YN_KEYS = {
+    "N", // no -- default
+    "Y", // yes
   };
 
+  final static Scanner SCAN = new Scanner(System.in);
+  
+  /**
+   * It takes in an array of valid keys and a string to print to the console, and returns a valid
+   * keystroke
+   * 
+   * @param validKeys An array of valid keys that the user can enter.
+   * @param consoleText The text that will be displayed to the user.
+   * @return A String
+   */
   public static String getValidKeystroke(String[] validKeys, String consoleText) {
     System.out.print(consoleText);
     String key = SCAN.nextLine();
@@ -96,6 +106,13 @@ public class Input {
     return key.toUpperCase();
   }
 
+  /**
+   * It takes in an ArrayList of valid keys and a String of console text, and returns a valid keystroke
+   * 
+   * @param validKeys An ArrayList of Strings that contains all the valid keys that the user can enter.
+   * @param consoleText The text that will be displayed to the user.
+   * @return A String
+   */
   public static String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
     System.out.print(consoleText);
     String key = SCAN.nextLine();
@@ -107,6 +124,16 @@ public class Input {
     return key.toUpperCase();
   }
 
+  // please generate javadocs for these methods
+
+  /**
+   * It takes in an array of valid keys and a string to print to the console, and returns a valid
+   * keystroke
+   * 
+   * @param validKeys An array of valid keys that the user can enter.
+   * @param consoleText The text that will be displayed to the user.
+   * @return A String
+   */
   private static boolean checkKey(String key, String[] validKeys) {
     // case ignorant
     for (int x = 0; x < validKeys.length; x++) {
@@ -117,6 +144,13 @@ public class Input {
     return false;
   }
 
+  /**
+   * It takes in an ArrayList of valid keys and a String of console text, and returns a valid keystroke
+   * 
+   * @param validKeys An ArrayList of Strings that contains all the valid keys that the user can enter.
+   * @param consoleText The text that will be displayed to the user.
+   * @return A String
+   */
   private static boolean checkKey(String key, ArrayList<String> validKeys) {
     // case ignorant
     for (int x = 0; x < validKeys.size(); x++) {
@@ -127,11 +161,25 @@ public class Input {
     return false;
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static void waitForKeyPress() {
     System.out.print("Press enter key to continue...");
     SCAN.nextLine();
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getMove(String[] movableDirections) {
     // I know this is inefficient. - oh well.
 
@@ -167,6 +215,13 @@ public class Input {
     return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getKeyOrDefault(String[] validKeys, String consoleText) {
     String key = getValidKeystroke(validKeys, consoleText);
     if (key.equals("")) {
@@ -175,35 +230,91 @@ public class Input {
     return key;
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getMenuKeys() {
     return getKeyOrDefault(VALID_MENU_KEYS, "Input: ");
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getFightKeys() {
     return getKeyOrDefault(VALID_FIGHT_KEYS, "Input: ");
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getInventoryKeys() {
     return getKeyOrDefault(VALID_INVENTORY_KEYS, "Input: ");
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getPreDungeonKeys() {
     return getKeyOrDefault(VALID_PRE_DUNGEON_KEYS, "Input: ");
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getDeathKeys() {
     return getKeyOrDefault(VALID_DEATH_MENU_KEYS, "Input: ");
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getShopKeys() {
     return getKeyOrDefault(VALID_SHOP_KEYS, "Input: ");
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getText(String consoleText) {
     System.out.print(consoleText);
     return SCAN.nextLine();
   }
 
+  /**
+   * It takes in a string and returns a boolean value based on whether the user wants to continue or
+   * not.
+   * 
+   * @param consoleText The text that will be displayed to the user.
+   * @return A boolean
+   */
   public static String getYN() {
     return getKeyOrDefault(VALID_YN_KEYS, "Input: ");
   }

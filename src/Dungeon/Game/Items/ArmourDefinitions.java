@@ -2,9 +2,15 @@ package Dungeon.Game.Items;
 
 import java.util.HashMap;
 
+/**
+ * 
+ */
 public class ArmourDefinitions {
   private final HashMap<String, ArmourItem> ARMOUR_DEFINITIONS = new HashMap<>();
 
+  /**
+   * The constructor for the ArmourDefinitions class.
+   */
   public ArmourDefinitions() {
     this.ARMOUR_DEFINITIONS.put("RustyArmour", new RustyArmour());
     this.ARMOUR_DEFINITIONS.put("ChainArmour", new ChainArmour());
@@ -18,12 +24,22 @@ public class ArmourDefinitions {
     this.ARMOUR_DEFINITIONS.put("HolyTrinityArmour", new HolyTrinityArmour());
   }
 
+  /**
+   * The returnItemFromName() method returns an ArmourItem object from the name of the item.
+   * 
+   * @param itemName The name of the item.
+   * @return The ArmourItem object.
+   */
   public ArmourItem returnItemFromName(String itemName) {
     return ARMOUR_DEFINITIONS.getOrDefault(itemName, null);
   }
 
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class RustyArmour extends ArmourItem {
   public RustyArmour() {
     super(
@@ -34,6 +50,10 @@ class RustyArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class ChainArmour extends ArmourItem {
   public ChainArmour() {
     super(
@@ -44,6 +64,10 @@ class ChainArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class IronArmour extends ArmourItem {
   public IronArmour() {
     super(
@@ -54,6 +78,10 @@ class IronArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class SteelArmour extends ArmourItem {
   public SteelArmour() {
     super(
@@ -64,6 +92,10 @@ class SteelArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class RoyalArmour extends ArmourItem {
   public RoyalArmour() {
     super(
@@ -74,6 +106,10 @@ class RoyalArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class DarkKnightArmour extends ArmourItem {
   public DarkKnightArmour() {
     super(
@@ -84,6 +120,10 @@ class DarkKnightArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class CrystallineSteelArmour extends ArmourItem {
   public CrystallineSteelArmour() {
     super(
@@ -94,6 +134,10 @@ class CrystallineSteelArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class ArmourOfTheCorrupted extends ArmourItem {
   public ArmourOfTheCorrupted() {
     super(
@@ -104,6 +148,10 @@ class ArmourOfTheCorrupted extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class AbyssalSteelArmour extends ArmourItem {
   public AbyssalSteelArmour() {
     super(
@@ -114,6 +162,10 @@ class AbyssalSteelArmour extends ArmourItem {
   }
 }
 
+/**
+ * The ArmourItem class is a subclass of the Item class, and it is the item that the player can equip
+ * to increase their health.
+ */
 class HolyTrinityArmour extends ArmourItem {
   public HolyTrinityArmour() {
     super(

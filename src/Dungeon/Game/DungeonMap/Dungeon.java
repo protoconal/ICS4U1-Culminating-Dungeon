@@ -10,10 +10,11 @@ import Dungeon.Game.Util;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The Dungeon class is a class that generates the dungeon map.
+ */
 public class Dungeon {
 
-  // TODO: implement randomized scaling generation
-  // i.e, map must have x Room of each Type, therefore randomly spit them around.
   private static final String[] VALID_DIRECTIONS = {
       "UP",
       "LEFT",
@@ -39,6 +40,9 @@ public class Dungeon {
   private int[] randomExit;
 
 
+  /**
+   * The constructor for the Dungeon class.
+   */
   public Dungeon() {
     this.DEFAULT_SIZE = 9;
     // remember, convention = row, column
@@ -46,6 +50,11 @@ public class Dungeon {
     nextLevel();
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public static int[] calculateCoordinates(int[] initialCoordinates, String direction) {
     // calculate new coordinates based on input
 
@@ -64,6 +73,11 @@ public class Dungeon {
     return directionFactor;
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public void nextLevel() {
     map = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
     setMapRoom(new StartRoom(), CENTER);
@@ -78,20 +92,40 @@ public class Dungeon {
     generateMap();
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public void fullReset() {
     this.difficultyMultiplier = 0;
     nextLevel();
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public int[] getCenter() {
     return CENTER;
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public void setVisibleSpaces(int[] coordinates) {
     // update visited space with the correct tiling
     this.visibleSpaces[coordinates[0]][coordinates[1]] = true;
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public String[] getMovableDirections(int[] playerCoordinates) {
     ArrayList<String> movableDirections = new ArrayList<>();
     for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
@@ -104,6 +138,11 @@ public class Dungeon {
     return movableDirections.toArray(new String[0]);
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   @Override
   public String toString() {
     StringBuilder out = new StringBuilder();
@@ -115,6 +154,11 @@ public class Dungeon {
     return out.toString();
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public String visibleSpacesToString(int[] playerCoordinates, String playerModel) {
     StringBuilder out = new StringBuilder();
 
@@ -139,6 +183,11 @@ public class Dungeon {
     return out.toString();
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public void updateVisibility(int[] playerCoordinates) {
     this.isReset = false;
 
@@ -153,6 +202,11 @@ public class Dungeon {
     }
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public void generateMap() {
     this.traverse(this.CENTER, 0);
     this.setMapRoom(new EndRoom(), randomExit);
@@ -160,7 +214,11 @@ public class Dungeon {
     System.out.println(this);
   }
 
-
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   private void traverse(int[] initialCoordinates, int radius) {
 
     // randomly get room
@@ -195,6 +253,11 @@ public class Dungeon {
     }
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   private Room generateRandomRoom(int radius) {
     // TODO: implement radius based randomization
     if (WEIGHTED_RANDOM.getRadius() != radius) {
@@ -204,6 +267,11 @@ public class Dungeon {
     return getRoom(choice);
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public Room getRoom(int roomID) {
     // these definitions correspond to chance table
     if (roomID == 0) {
@@ -232,6 +300,11 @@ public class Dungeon {
     return null;
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   private double[] lookupScaleFactors(int radius) {
     double[][] factors = MapGenerationSettings.getScalingFactors();
 
@@ -246,14 +319,29 @@ public class Dungeon {
     return scalingFactor;
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   private void setMapRoom(Room room, int[] coordinates) {
     this.map[coordinates[0]][coordinates[1]] = room;
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   public Room getMapRoom(int[] coordinates) {
     return this.map[coordinates[0]][coordinates[1]];
   }
 
+  /**
+   * The getMap() method returns the map of the dungeon.
+   *
+   * @return The map of the dungeon.
+   */
   private boolean checkBounds(int[] coordinates) {
     int minBound = 0;
     int maxBound = this.map.length - 1;

@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 // import java.util.Scanner;
 
+/**
+ * It loads a text file, sorts it, and writes it back to the text file
+ */
 public class HighScore {
 
   private final ArrayList<String> HIGHSCORES = new ArrayList<>();
@@ -16,6 +19,12 @@ public class HighScore {
     }
   }
 
+  /**
+   * It takes the high scores from the array list and puts them into a string builder, then returns the
+   * string builder as a string
+   * 
+   * @return A string of the high scores.
+   */
   public String returnHighScoreText() {
     StringBuilder outString = new StringBuilder();
     for (int x = 0; x < HIGHSCORES.size(); x++) {
