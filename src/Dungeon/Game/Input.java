@@ -46,8 +46,8 @@ public class Input {
   };
 
   final static String[] VALID_DEATH_MENU_KEYS = {
-          "R", // Reset -- default
-          ";", // Exit
+      "R", // Reset -- default
+      ";", // Exit
   };
 
   final static String[] VALID_FIGHT_KEYS = {
@@ -194,6 +194,7 @@ public class Input {
   public static String getDeathKeys() {
     return getKeyOrDefault(VALID_DEATH_MENU_KEYS, "Input: ");
   }
+
   public static String getShopKeys() {
     return getKeyOrDefault(VALID_SHOP_KEYS, "Input: ");
   }

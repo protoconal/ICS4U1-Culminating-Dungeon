@@ -33,15 +33,16 @@ public class StrongMonsterDefinitions {
 class Troll extends StrongMonsterDefinitions.StrongMonster {
   public Troll() {
     super("Miles the Troll",
-            200, //maxHP
+        200, //maxHP
         40, // minDamage
         60, // maxDamage
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
   }
+
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Troll();
   }
 }
@@ -49,7 +50,7 @@ class Troll extends StrongMonsterDefinitions.StrongMonster {
 class Centaur extends StrongMonsterDefinitions.StrongMonster {
   public Centaur() {
     super("Fiona the Centaur",
-            180, //maxHP
+        180, //maxHP
         40, // minDamage
         55, // maxDamage
         "verbs.", // onAttackText
@@ -58,7 +59,7 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Centaur();
   }
 }
@@ -66,7 +67,7 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
 class Minotaur extends StrongMonsterDefinitions.StrongMonster {
   public Minotaur() {
     super("Klara the Minotaur",
-            240, //maxHP
+        240, //maxHP
         50, // minDamage
         65, // maxDamage
         "verbs.", // onAttackText
@@ -75,7 +76,7 @@ class Minotaur extends StrongMonsterDefinitions.StrongMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Minotaur();
   }
 }

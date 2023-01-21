@@ -11,11 +11,11 @@ public class HighScore {
   public HighScore() {
     try {
       this.loadHighScore();
-    }
-    catch (IOException err) {
+    } catch (IOException err) {
       System.out.println("Something terrible has happened. : " + err);
     }
   }
+
   public String returnHighScoreText() {
     StringBuilder outString = new StringBuilder();
     for (int x = 0; x < HIGHSCORES.size(); x++) {
@@ -111,8 +111,7 @@ public class HighScore {
       String currentName = " ";
       try {
         currentName = this.HIGHSCORES.get(x).substring(13).strip();
-      }
-      catch (StringIndexOutOfBoundsException error){
+      } catch (StringIndexOutOfBoundsException error) {
         // do nothing
       }
       if (currentName.equals(name)) {

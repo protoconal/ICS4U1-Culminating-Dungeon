@@ -28,7 +28,11 @@ public class Item {
     return this.DESCRIPTION;
   }
 
-  public int getPrice() {return this.PRICE;}
+  public int getPrice() {
+    return this.PRICE;
+  }
 
-  public String getId() {return ITEM_ID;}
+  public String getId() {
+    return ITEM_ID;
+  }
 }

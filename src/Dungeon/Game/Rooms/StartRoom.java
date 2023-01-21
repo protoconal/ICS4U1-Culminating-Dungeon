@@ -1,7 +1,6 @@
 package Dungeon.Game.Rooms;
 
 import Dungeon.Game.Player;
-import Dungeon.Game.Game;
 
 public class StartRoom extends Room {
   private static final int ROOM_ID = -1;

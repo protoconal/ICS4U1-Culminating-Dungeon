@@ -1,13 +1,11 @@
-
-
 package Dungeon.Game.DungeonMap;
 
 
-import Dungeon.Game.Entities.*;
+import Dungeon.Game.Entities.Spawner;
+import Dungeon.Game.GameWeightedRandoms;
 import Dungeon.Game.Items.LootDefinitions;
 import Dungeon.Game.Rooms.*;
 import Dungeon.Game.Util;
-import Dungeon.Game.GameWeightedRandoms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,13 +27,13 @@ public class Dungeon {
       {1, 0}, // DOWN
       {0, 1}, // RIGHT
   };
-  private final GameWeightedRandoms WEIGHTED_RANDOM = new GameWeightedRandoms(MapGenerationSettings.getProbabilities());
-  private Room[][] map;
-  private boolean[][] visibleSpaces;
-  private final int[] CENTER;
   final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
   final Spawner SPAWNER = new Spawner();
+  private final GameWeightedRandoms WEIGHTED_RANDOM = new GameWeightedRandoms(MapGenerationSettings.getProbabilities());
+  private final int[] CENTER;
   private final int DEFAULT_SIZE;
+  private Room[][] map;
+  private boolean[][] visibleSpaces;
   private int difficultyMultiplier = 0;
   private boolean isReset;
   private int[] randomExit;
@@ -45,25 +43,6 @@ public class Dungeon {
     this.DEFAULT_SIZE = 9;
     // remember, convention = row, column
     CENTER = new int[]{DEFAULT_SIZE / 2, DEFAULT_SIZE / 2};
-    nextLevel();
-  }
-
-  public void nextLevel() {
-    map = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
-    setMapRoom(new StartRoom(), CENTER);
-
-    visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
-    visibleSpaces[CENTER[0]][CENTER[1]] = true;
-    this.isReset = true;
-
-    this.difficultyMultiplier += 1;
-    randomExit = CENTER;
-
-    generateMap();
-  }
-
-  public void fullReset() {
-    this.difficultyMultiplier = 0;
     nextLevel();
   }
 
@@ -83,6 +62,25 @@ public class Dungeon {
     }
 
     return directionFactor;
+  }
+
+  public void nextLevel() {
+    map = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
+    setMapRoom(new StartRoom(), CENTER);
+
+    visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
+    visibleSpaces[CENTER[0]][CENTER[1]] = true;
+    this.isReset = true;
+
+    this.difficultyMultiplier += 1;
+    randomExit = CENTER;
+
+    generateMap();
+  }
+
+  public void fullReset() {
+    this.difficultyMultiplier = 0;
+    nextLevel();
   }
 
   public int[] getCenter() {
@@ -163,7 +161,6 @@ public class Dungeon {
   }
 
 
-
   private void traverse(int[] initialCoordinates, int radius) {
 
     // randomly get room
@@ -223,11 +220,11 @@ public class Dungeon {
     }
     if (roomID == 4) {
       return new TrapRoom();
-      
+
     }
     if (roomID == 5) {
       return new EndRoom();
-      
+
     }
     if (roomID == -1) {
       return new StartRoom();

@@ -15,6 +15,7 @@ public class HealthDefinitions {
     this.HEALTH_DEFINITIONS.put("Wait", new Wait());
     this.HEALTH_IDS = this.HEALTH_DEFINITIONS.keySet().toArray(new String[0]);
   }
+
   public HealthItem returnItemFromName(String itemName) {
     return HEALTH_DEFINITIONS.getOrDefault(itemName, null);
   }
@@ -27,9 +28,9 @@ public class HealthDefinitions {
 class Wait extends HealthItem {
   public Wait() {
     super("Wait", // name
-            "Catch your breath!", // description
-            0, // price
-            10 // restoreHP
+        "Catch your breath!", // description
+        0, // price
+        10 // restoreHP
     );
   }
 }
