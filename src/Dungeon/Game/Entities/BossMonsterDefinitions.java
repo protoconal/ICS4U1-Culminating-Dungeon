@@ -38,7 +38,7 @@ public class BossMonsterDefinitions {
 class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
   public SpiderBroodMother() {
     super("The Mother Spider",
-            500, //maxHP
+        500, //maxHP
         30, // minDamage
         70, // maxDamage
         "verbs.", // onAttackText
@@ -47,7 +47,7 @@ class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new SpiderBroodMother();
   }
 }
@@ -55,7 +55,7 @@ class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
 class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
   public DarkKnightofTheForgotten() {
     super("The Dark Knight of The Forgotten",
-            650, //maxHP
+        650, //maxHP
         60, // minDamage
         80, // maxDamage
         "verbs.", // onAttackText
@@ -64,7 +64,7 @@ class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new DarkKnightofTheForgotten();
   }
 }
@@ -72,7 +72,7 @@ class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
 class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
   public CorruptedExecutioner() {
     super("The Corrupted Executioner",
-            750, //maxHP
+        750, //maxHP
         70, // minDamage
         90, // maxDamage
         "verbs.", // onAttackText
@@ -81,7 +81,7 @@ class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new CorruptedExecutioner();
   }
 }
@@ -89,7 +89,7 @@ class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
 class LichKing extends BossMonsterDefinitions.BossMonster {
   public LichKing() {
     super("The Lich King",
-            900, //maxHP
+        900, //maxHP
         75, // minDamage
         90, // maxDamage
         "verbs.", // onAttackText
@@ -98,7 +98,7 @@ class LichKing extends BossMonsterDefinitions.BossMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new LichKing();
   }
 }
@@ -106,7 +106,7 @@ class LichKing extends BossMonsterDefinitions.BossMonster {
 class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
   public AldwynTheFallen() {
     super("Aldwyn the Fallen",
-            1000, //maxHP
+        1000, //maxHP
         80, // minDamage
         100, // maxDamage
         "verbs.", // onAttackText
@@ -115,7 +115,7 @@ class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new AldwynTheFallen();
   }
 }

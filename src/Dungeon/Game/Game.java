@@ -16,12 +16,8 @@ public class Game {
   private static final PlayerInventory PLAYER_INVENTORY = PLAYER.getInventory();
   private static final ShopInventory SHOP_INVENTORY = new ShopInventory();
   private static final Dungeon CURRENT_MAP = new Dungeon();
-  private static int[] playerCoordinates = CURRENT_MAP.getCenter();
   private static final HighScore SCORES_HANDLER = new HighScore();
-
-  public static ShopInventory getShopInventory() {
-    return SHOP_INVENTORY;
-  }
+  private static int[] playerCoordinates = CURRENT_MAP.getCenter();
 
   public Game() {
     // do nothing
@@ -55,39 +51,16 @@ public class Game {
     }
   }
 
+  public static ShopInventory getShopInventory() {
+    return SHOP_INVENTORY;
+  }
+
   public static Player getPlayer() {
     return PLAYER;
   }
 
   public static String getName() {
     return GAME_NAME;
-  }
-
-  public void showDungeon() {
-    if (CURRENT_MAP.isReset()) {
-      Game.showStart();
-    }
-
-    // update visibility
-    CURRENT_MAP.updateVisibility(playerCoordinates);
-    Views.printDungeon(CURRENT_MAP, playerCoordinates);
-    // getMenuInputs
-    String optionSelected = Input.getMove(CURRENT_MAP.getMovableDirections(playerCoordinates));
-
-    if (optionSelected.equals("R")) {
-      showInventory();
-      return;
-    }
-    if (optionSelected.equals(";")) {
-      exit();
-    }
-
-    // update coordinates
-    this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
-
-    // activate Room input
-    Room currentRoom = CURRENT_MAP.getMapRoom(playerCoordinates);
-    handleRoom(currentRoom);
   }
 
   public static void showStart() {
@@ -124,8 +97,7 @@ public class Game {
 
       if (mode.equals("Weapon")) {
         currentIdSet = SHOP_INVENTORY.getSortedWeaponIds();
-      }
-      else {
+      } else {
         currentIdSet = SHOP_INVENTORY.getSortedHealthIds();
         currentIdSet = Util.copyArrayFromIndexes(currentIdSet, 1, currentIdSet.length);
       }
@@ -137,7 +109,7 @@ public class Game {
         price = weaponItem.getPrice();
         itemId = weaponItem.getId();
         itemName = weaponItem.getName();
-        outString = new String[] {
+        outString = new String[]{
             "Current Mode: " + mode,
             "     Selected item: " + itemName,
             "    Average Damage: " + weaponItem.getAvgDamage(),
@@ -145,13 +117,12 @@ public class Game {
             "             Price: " + price,
             "   Inventory Count: " + PLAYER_INVENTORY.getItemCount(itemId),
         };
-      }
-      else {
+      } else {
         healthItem = SHOP_INVENTORY.getHealthDefinitions().returnItemFromName(currentIdSet[index]);
         price = healthItem.getPrice();
         itemId = healthItem.getId();
         itemName = healthItem.getName();
-        outString = new String[] {
+        outString = new String[]{
             "Current Mode: " + mode,
             "     Selected item: " + itemName,
             "        HP Restore: " + healthItem.getRestoreHP(),
@@ -192,8 +163,7 @@ public class Game {
           if (mode.equals("Weapon")) {
             if (PLAYER_INVENTORY.getItemCount(itemId) == 0) {
               PLAYER_INVENTORY.addWeapon(itemId);
-            }
-            else {
+            } else {
               System.out.println("Sorry, you already have this item.");
               Input.waitForKeyPress();
             }
@@ -203,8 +173,7 @@ public class Game {
           if (mode.equals("Health")) {
             PLAYER_INVENTORY.addHealthItem(itemId);
           }
-        }
-        else {
+        } else {
           System.out.println("Sorry, insufficient funds.");
           Input.waitForKeyPress();
         }
@@ -215,7 +184,7 @@ public class Game {
         int sellPrice = 0;
         if (PLAYER_INVENTORY.getItemCount(itemId) != 0 && !itemId.equals("DullSword")) {
           // allowed to sell item
-          if (mode.equals("Weapon") ) {
+          if (mode.equals("Weapon")) {
             PLAYER_INVENTORY.removeWeapon(itemId);
             sellPrice = (int) Math.round(price * SHOP_INVENTORY.getWeaponSellMultiplier());
           }
@@ -227,8 +196,7 @@ public class Game {
           PLAYER.addScore(sellPrice);
 
           System.out.println("Sold " + itemName + " for " + sellPrice + ".");
-        }
-        else {
+        } else {
           System.out.println("Sorry, unable to sell last item.");
           Input.waitForKeyPress();
         }
@@ -239,36 +207,6 @@ public class Game {
       }
     }
     while (flag);
-  }
-
-  public void handleRoom(Room currentRoom) {
-    // if room is not interactable
-    if (!currentRoom.isInteractable()) {
-      return;
-    }
-
-    boolean hasDied = currentRoom.interactRoom(PLAYER);
-    if (hasDied) {
-      // send to death code
-      showDeathMenu();
-    }
-  }
-
-  public void showDeathMenu() {
-    saveScore();
-
-    Views.printDeathMenu(PLAYER, SCORES_HANDLER);
-    System.out.println(Views.getToolTip("DEATHMENU"));
-    String optionSelected = Input.getDeathKeys();
-    if (optionSelected.equals("R")) {
-      // reset
-      playerCoordinates = CURRENT_MAP.getCenter();
-      CURRENT_MAP.fullReset();
-      PLAYER.reset();
-    }
-    else {
-      exit();
-    }
   }
 
   public static void nextLevel() {
@@ -390,6 +328,62 @@ public class Game {
       } catch (IOException e) {
         System.out.println("Unable to save score, check disk space.");
       }
+    }
+  }
+
+  public void showDungeon() {
+    if (CURRENT_MAP.isReset()) {
+      Game.showStart();
+    }
+
+    // update visibility
+    CURRENT_MAP.updateVisibility(playerCoordinates);
+    Views.printDungeon(CURRENT_MAP, playerCoordinates);
+    // getMenuInputs
+    String optionSelected = Input.getMove(CURRENT_MAP.getMovableDirections(playerCoordinates));
+
+    if (optionSelected.equals("R")) {
+      showInventory();
+      return;
+    }
+    if (optionSelected.equals(";")) {
+      exit();
+    }
+
+    // update coordinates
+    this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
+
+    // activate Room input
+    Room currentRoom = CURRENT_MAP.getMapRoom(playerCoordinates);
+    handleRoom(currentRoom);
+  }
+
+  public void handleRoom(Room currentRoom) {
+    // if room is not interactable
+    if (!currentRoom.isInteractable()) {
+      return;
+    }
+
+    boolean hasDied = currentRoom.interactRoom(PLAYER);
+    if (hasDied) {
+      // send to death code
+      showDeathMenu();
+    }
+  }
+
+  public void showDeathMenu() {
+    saveScore();
+
+    Views.printDeathMenu(PLAYER, SCORES_HANDLER);
+    System.out.println(Views.getToolTip("DEATHMENU"));
+    String optionSelected = Input.getDeathKeys();
+    if (optionSelected.equals("R")) {
+      // reset
+      playerCoordinates = CURRENT_MAP.getCenter();
+      CURRENT_MAP.fullReset();
+      PLAYER.reset();
+    } else {
+      exit();
     }
   }
 

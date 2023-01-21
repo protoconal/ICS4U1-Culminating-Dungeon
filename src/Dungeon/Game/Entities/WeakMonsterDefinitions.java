@@ -33,7 +33,7 @@ public class WeakMonsterDefinitions {
 class Skeleton extends WeakMonsterDefinitions.WeakMonster {
   public Skeleton() {
     super("Fallen Warrior",
-            75, //maxHP
+        75, //maxHP
         10, // minDamage
         20, // maxDamage
         "verbs.", // onAttackText
@@ -42,7 +42,7 @@ class Skeleton extends WeakMonsterDefinitions.WeakMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Skeleton();
   }
 }
@@ -50,7 +50,7 @@ class Skeleton extends WeakMonsterDefinitions.WeakMonster {
 class Slime extends WeakMonsterDefinitions.WeakMonster {
   public Slime() {
     super("Blobby",
-            25, //maxHP
+        25, //maxHP
         1, // minDamage
         10, // maxDamage
         "verbs.", // onAttackText
@@ -59,7 +59,7 @@ class Slime extends WeakMonsterDefinitions.WeakMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Slime();
   }
 }
@@ -67,7 +67,7 @@ class Slime extends WeakMonsterDefinitions.WeakMonster {
 class Spider extends WeakMonsterDefinitions.WeakMonster {
   public Spider() {
     super("Tiffany the Spider",
-            45, //maxHP
+        45, //maxHP
         5, // minDamage
         15, // maxDamage
         "verbs.", // onAttackText
@@ -76,7 +76,7 @@ class Spider extends WeakMonsterDefinitions.WeakMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Spider();
   }
 }

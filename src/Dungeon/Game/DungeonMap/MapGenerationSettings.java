@@ -20,12 +20,12 @@ public class MapGenerationSettings {
   };
 
   private static final double[][] MONSTER_CHANCE_TABLE = {
-          // depending on levels deep into the dungeon
-          {1 , 1.00, 0.00, 0.00, 0.00}, // depth 1, Weak, Normal, Strong, Boss
-          {3 , 1.00, 1.50, 1.50, 0.00}, // depth 2
-          {6 , 0.00, 0.50, 1.00, 0.00}, // depth 5
-          {9 , 0.00, 5.00, 2.00, 2.00}, // depth 5
-          {10, 0.00, 1.00, 1.00, 2.00}, // depth 6
+      // depending on levels deep into the dungeon
+      {1, 1.00, 0.00, 0.00, 0.00}, // depth 1, Weak, Normal, Strong, Boss
+      {3, 1.00, 1.50, 1.50, 0.00}, // depth 2
+      {6, 0.00, 0.50, 1.00, 0.00}, // depth 5
+      {9, 0.00, 5.00, 2.00, 2.00}, // depth 5
+      {10, 0.00, 1.00, 1.00, 2.00}, // depth 6
   };
 
 

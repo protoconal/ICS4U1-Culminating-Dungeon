@@ -1,12 +1,12 @@
 package Dungeon.Game.Rooms;
 
-import Dungeon.Game.Game;
-import Dungeon.Game.Input;
-import Dungeon.Game.Player;
 import Dungeon.Game.Entities.Monster;
 import Dungeon.Game.Entities.Spawner;
+import Dungeon.Game.Game;
+import Dungeon.Game.Input;
 import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
+import Dungeon.Game.Player;
 import Dungeon.Game.Views;
 
 public class MonsterRoom extends Room {
@@ -49,8 +49,7 @@ public class MonsterRoom extends Room {
       // if no item exists, allow them to wait
       if (currentInventory.getHealthItems().length == 0) {
         currentAvailableHealthItem = "Wait";
-      }
-      else {
+      } else {
         currentAvailableHealthItem = healthItems[0];
       }
 
@@ -62,13 +61,13 @@ public class MonsterRoom extends Room {
       boolean flag = true;
       while (flag) {
         String[] outString = new String[]{
-                monster.getName() + " " + monster.getAttackText(),
-                "  HP: " + monster.getCurrentHP(),
-                "They dealt " + damageTaken + " damage!",
-                "",
-                "A: Attack using " + currentInventory.getEquippedWeapon(),
-                "H: Heal using " + useHealth,
-                "R: Inventory"
+            monster.getName() + " " + monster.getAttackText(),
+            "  HP: " + monster.getCurrentHP(),
+            "They dealt " + damageTaken + " damage!",
+            "",
+            "A: Attack using " + currentInventory.getEquippedWeapon(),
+            "H: Heal using " + useHealth,
+            "R: Inventory"
         };
 
         Views.printLines(outString);
@@ -79,8 +78,7 @@ public class MonsterRoom extends Room {
           if (currentAvailableHealthItem.equals("Wait")) {
             // just sub in the empty heal
             healingItem = currentHealthItem;
-          }
-          else {
+          } else {
             // use the proper inventory remove health item
             healingItem = currentInventory.removeHealthItem(currentAvailableHealthItem);
           }

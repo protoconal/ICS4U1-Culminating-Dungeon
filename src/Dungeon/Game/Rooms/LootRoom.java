@@ -20,7 +20,7 @@ public class LootRoom extends Room {
   public String toString() {
     return "!!!!!";
   }
-  
+
   public boolean interactRoom(Player player) {
     player.addScore(LOOT.getValue());
     this.setInteractableStatus(false);

@@ -3,7 +3,6 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Game;
 import Dungeon.Game.Input;
 import Dungeon.Game.Player;
-
 import Dungeon.Game.Views;
 
 public class EndRoom extends Room {

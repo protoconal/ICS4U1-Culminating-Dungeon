@@ -95,7 +95,7 @@ public class Views {
     if (clsTerminal) {
       Util.clearTerminal();
     }
-    System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING +"\n" + outString);
+    System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING + "\n" + outString);
   }
 
   public static void delayedPrintLines(String[] consoleText) {
@@ -120,7 +120,6 @@ public class Views {
       throw new RuntimeException(e);
     }
   }
-
 
 
   public static void printPreDungeon(int difficultyMultiplier) {

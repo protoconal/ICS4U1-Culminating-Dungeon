@@ -1,41 +1,11 @@
 package Dungeon.Game.Items;
 
 public class ShopInventory {
-  // possible items
-  public WeaponDefinitions getWeaponDefinitions() {
-    return WEAPON_DEFINITIONS;
-  }
-  public HealthDefinitions getHealthDefinitions() {
-    return HEALTH_DEFINITIONS;
-  }
   private final WeaponDefinitions WEAPON_DEFINITIONS = new WeaponDefinitions();
   private final HealthDefinitions HEALTH_DEFINITIONS = new HealthDefinitions();
-
-  public String[] getSortedHealthIds() {
-    return sortedHealthIds;
-  }
-  public String[] getSortedWeaponIds() {
-    return sortedWeaponIds;
-  }
-
   double weaponSellPriceMultiplier = 0.95;
   double healthSellPriceMultiplier = 0.95;
-  public double getWeaponSellMultiplier() {
-    // selling more depreciates value
-    if (weaponSellPriceMultiplier > 0.4) {
-      weaponSellPriceMultiplier *= 0.95;
-    }
-    return weaponSellPriceMultiplier;
-  }
-  public double getHealthSellMultiplier() {
-    if (healthSellPriceMultiplier > 0.6) {
-      healthSellPriceMultiplier *= 0.99;
-    }
-    return healthSellPriceMultiplier;
-  }
-
   private String[] sortedWeaponIds;
-
   private String[] sortedHealthIds;
 
   public ShopInventory() {
@@ -46,7 +16,37 @@ public class ShopInventory {
     sortHealthByPrices();
   }
 
+  // possible items
+  public WeaponDefinitions getWeaponDefinitions() {
+    return WEAPON_DEFINITIONS;
+  }
 
+  public HealthDefinitions getHealthDefinitions() {
+    return HEALTH_DEFINITIONS;
+  }
+
+  public String[] getSortedHealthIds() {
+    return sortedHealthIds;
+  }
+
+  public String[] getSortedWeaponIds() {
+    return sortedWeaponIds;
+  }
+
+  public double getWeaponSellMultiplier() {
+    // selling more depreciates value
+    if (weaponSellPriceMultiplier > 0.4) {
+      weaponSellPriceMultiplier *= 0.95;
+    }
+    return weaponSellPriceMultiplier;
+  }
+
+  public double getHealthSellMultiplier() {
+    if (healthSellPriceMultiplier > 0.6) {
+      healthSellPriceMultiplier *= 0.99;
+    }
+    return healthSellPriceMultiplier;
+  }
 
   // For sorting items based on price
   // selection sort implemented under Util class

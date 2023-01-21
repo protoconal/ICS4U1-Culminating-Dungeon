@@ -36,7 +36,7 @@ public class NormalMonsterDefinitions {
 class HauntedArmour extends NormalMonsterDefinitions.NormalMonster {
   public HauntedArmour() {
     super("Henry the Haunted Armour",
-            170, //maxHP
+        170, //maxHP
         20, // minDamage
         30, // maxDamage
         "Armour clanks.", // onAttackText
@@ -45,7 +45,7 @@ class HauntedArmour extends NormalMonsterDefinitions.NormalMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new HauntedArmour();
   }
 }
@@ -53,7 +53,7 @@ class HauntedArmour extends NormalMonsterDefinitions.NormalMonster {
 class Ghoul extends NormalMonsterDefinitions.NormalMonster {
   public Ghoul() {
     super("Jerry the Ghoul",
-            125, //maxHP
+        125, //maxHP
         15, // minDamage
         25, // maxDamage
         " verbs.", // onAttackText
@@ -62,7 +62,7 @@ class Ghoul extends NormalMonsterDefinitions.NormalMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Ghoul();
   }
 }
@@ -70,7 +70,7 @@ class Ghoul extends NormalMonsterDefinitions.NormalMonster {
 class Cultist extends NormalMonsterDefinitions.NormalMonster {
   public Cultist() {
     super("Jasmine, our Holy Leader",
-            150, //maxHP
+        150, //maxHP
         25, // minDamage
         30, // maxDamage
         "verbs.", // onAttackText
@@ -79,7 +79,7 @@ class Cultist extends NormalMonsterDefinitions.NormalMonster {
   }
 
   @Override
-  public Monster returnCopy()  {
+  public Monster returnCopy() {
     return new Cultist();
   }
 }

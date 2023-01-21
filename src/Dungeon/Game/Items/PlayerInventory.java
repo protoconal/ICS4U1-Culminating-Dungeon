@@ -6,21 +6,20 @@ import java.util.TreeMap;
 
 
 public class PlayerInventory {
-  public WeaponDefinitions getWeaponDefinitions() {
-    return WEAPON_DEFINITIONS;
-  }
-  public HealthDefinitions getHealthDefinitions() {
-    return HEALTH_DEFINITIONS;
-  }
-
   private final WeaponDefinitions WEAPON_DEFINITIONS = new WeaponDefinitions();
   private final HealthDefinitions HEALTH_DEFINITIONS = new HealthDefinitions();
-
   // use a map
   private final TreeMap<String, Integer> HEALTH_PLAYER_INVENTORY = new TreeMap<>();
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
-
   private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
+
+  public WeaponDefinitions getWeaponDefinitions() {
+    return WEAPON_DEFINITIONS;
+  }
+
+  public HealthDefinitions getHealthDefinitions() {
+    return HEALTH_DEFINITIONS;
+  }
 
   public void reset() {
     HEALTH_PLAYER_INVENTORY.clear();
@@ -44,8 +43,7 @@ public class PlayerInventory {
     if (getItemCount(weapon.getId()) == 0) {
       // not found, therefore put into inventory
       this.WEAPON_PLAYER_INVENTORY.put(weapon.getId(), weapon);
-    }
-    else {
+    } else {
       // sell weapon automatically
       Game.getPlayer().addScore((int) Math.round(Game.getShopInventory().getWeaponSellMultiplier() * weapon.getPrice()));
     }
@@ -58,6 +56,7 @@ public class PlayerInventory {
   public String[] getWeapons() {
     return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
+
   public String[] getHealthItems() {
     return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
@@ -114,8 +113,7 @@ public class PlayerInventory {
     if (count <= 0) {
       // delete from inventory
       this.HEALTH_PLAYER_INVENTORY.remove(itemName);
-    }
-    else {
+    } else {
       // otherwise, update count
       this.HEALTH_PLAYER_INVENTORY.put(itemName, count);
     }

@@ -6,6 +6,7 @@ import Dungeon.Game.Items.WeaponItem;
 public abstract class Entity implements Attackable {
   private final int MAX_HP;
   private int currentHP;
+
   public Entity(int maximumHP) {
     this.MAX_HP = maximumHP;
     this.currentHP = maximumHP;
@@ -14,10 +15,14 @@ public abstract class Entity implements Attackable {
   public int getCurrentHP() {
     return currentHP;
   }
+
   public int getMaxHP() {
     return MAX_HP;
   }
-  public void resetHP() {currentHP = getMaxHP();}
+
+  public void resetHP() {
+    currentHP = getMaxHP();
+  }
 
   @Override
   public void heal(HealthItem health) {
