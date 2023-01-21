@@ -1,5 +1,7 @@
 package Dungeon.Game.Items;
 
+import Dungeon.Game.Game;
+
 import java.util.TreeMap;
 
 
@@ -43,8 +45,15 @@ public class PlayerInventory {
     this.equippedWeapon = removeWeapon(itemString);
   }
 
-  private void addWeapon(WeaponItem equippedWeapon) {
-    this.WEAPON_PLAYER_INVENTORY.put(equippedWeapon.getId(), equippedWeapon);
+  private void addWeapon(WeaponItem weapon) {
+    if (getItemCount(weapon.getId()) == 0) {
+      // not found, therefore put into inventory
+      this.WEAPON_PLAYER_INVENTORY.put(weapon.getId(), weapon);
+    }
+    else {
+      // sell weapon automatically
+      Game.getPlayer().addScore((int) Math.round(Game.getShopInventory().getWeaponSellMultiplier() * weapon.getPrice()));
+    }
   }
 
   public void addWeapon(String itemName) {
@@ -53,6 +62,9 @@ public class PlayerInventory {
 
   public String[] getWeapons() {
     return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
+  }
+  public String[] getHealthItems() {
+    return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
   public void initializeWeapons() {
@@ -76,9 +88,14 @@ public class PlayerInventory {
     return weaponNames;
   }
 
-  public String[] getHealthItems() {
-    return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
+  public String[] getHealthNames() {
+    String[] healthNames = getHealthItems();
+    for (int x = 0; x < healthNames.length; x++) {
+      healthNames[x] = HEALTH_DEFINITIONS.returnItemFromName(healthNames[x]).getName();
+    }
+    return healthNames;
   }
+
 
   public String[] updateHealthNames() {
     this.healthInInventory = getHealthItems();

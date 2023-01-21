@@ -63,6 +63,10 @@ public class Input {
   };
 
   final static String[] VALID_SHOP_KEYS = {
+      "A", // Left
+      "D", // Right
+      "W", // Weapons
+      "S", // Health
       "E", // buy
       "Q", // sell
       "R", // return
@@ -137,7 +141,7 @@ public class Input {
     possibleMovementKeys.add("R"); // patch in inventory;
     toolTip.append(" R: Inventory"); // patch in inventory;
     possibleMovementKeys.add(";"); // patch in menu;
-    toolTip.append(" ;: Menu"); // patch in menu;
+    toolTip.append(" ;: Exit"); // patch in menu;
 
     System.out.println(toolTip);
     // return the direction, rather than the key
@@ -166,7 +170,7 @@ public class Input {
   }
 
   public static String getPreDungeonKeys() {
-    return getValidKeystroke(VALID_PRE_DUNGEON_KEYS, "Interact: ");
+    return getValidKeystroke(VALID_PRE_DUNGEON_KEYS, "Input: ");
   }
 
   public static String getDeathKeys() {

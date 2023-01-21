@@ -15,12 +15,18 @@ public class Views {
 
   public static String getToolTip(String type) {
     if (type.equals("INVENTORY")) {
-      return "A: Left D: Right E: Use/Equip W: Weapons S: Healing R: Return ;: Menu";
+      return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: ;: Menu";
+    }
+    if (type.equals("SHOP")) {
+      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, R: Return, ;: ;: Menu";
+    }
+    if (type.equals("PREDUNGEON")) {
+      return "S: Go to the Shop, R: Enter the dungeon, ;: ;: Menu";
     }
     if (type.equals("MAINMENU")) {
-      return "B: Begin ;: Exit";
+      return "B: Begin, ;: Exit";
     }
-    if (type.equals("DEATH")) {
+    if (type.equals("DEATHMENU")) {
       return "R: Reset  ;: Exit";
     }
     return null;
@@ -82,12 +88,9 @@ public class Views {
         "",
         "High scores!",
         score.returnHighScoreText(),
+        "",
     };
     printLines(consoleText);
-  }
-
-  public static void printShop() {
-
   }
 
   public static void printLines(String[] consoleText) {
@@ -110,10 +113,12 @@ public class Views {
     System.out.println(outString);
   }
 
-  public static void printLn(String outString) {
+  public static void printLn(String outString, boolean clsTerminal) {
     // cls terminal
-    Util.clearTerminal();
-    System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING + "\n" + outString);
+    if (clsTerminal) {
+      Util.clearTerminal();
+    }
+    System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING +"\n" + outString);
   }
 
   public static void delayedPrintLines(String[] consoleText) {
@@ -132,6 +137,15 @@ public class Views {
     } catch (InterruptedException e) {
       throw new RuntimeException(e);
     }
-    printLn(outString);
+    printLn(outString, true);
+  }
+
+  public static void printPreDungeon(int difficultyMultiplier) {
+    String[] consoleText = new String[]{
+        "Welcome traveller, you've reached the entrance to dungeon: " + difficultyMultiplier,
+        "",
+        "Beware of creepy monsters!"
+    };
+    printLines(consoleText);
   }
 }

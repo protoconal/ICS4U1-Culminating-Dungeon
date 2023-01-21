@@ -9,7 +9,6 @@ public class LootDefinitions {
       new Silver(),
       new Gold(),
       new Platinum(),
-      //new Sapphire(),
       new Diamond(),
       new Ruby(),
   };

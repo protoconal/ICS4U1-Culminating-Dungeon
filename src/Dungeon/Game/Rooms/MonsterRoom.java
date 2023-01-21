@@ -46,7 +46,7 @@ public class MonsterRoom extends Room {
   public boolean handleFight() {
     Player player = Game.getPlayer();
 
-    Views.printLn(monster.getAppearText());
+    Views.printLn(monster.getAppearText(), true);
     Input.waitForKeyPress();
 
     // send over to inventory
@@ -105,7 +105,7 @@ public class MonsterRoom extends Room {
 
       int playerDamage = player.getInventory().getEquippedWeapon().randomDamage();
       monster.damage(playerDamage);
-      Views.printLn("You took " + playerDamage + " HP away!");
+      Views.printLn("You took " + playerDamage + " HP away!", true);
       System.out.println("    " + monster.getName() + " HP: " + monster.getCurrentHP());
       Input.waitForKeyPress();
     }

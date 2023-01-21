@@ -16,7 +16,9 @@ public class Player extends Hero {
   public String toString() {
     return "Player - HP: " + this.getCurrentHP() +
         " - AVG DMG: " +
-        INVENTORY.getEquippedWeapon().getAvgDamage();
+        INVENTORY.getEquippedWeapon().getAvgDamage() +
+        " - SCORE: " +
+        this.getScore();
   }
 
   public int getScore() {
@@ -26,6 +28,11 @@ public class Player extends Hero {
   public void addScore(int score) {
     this.score += score;
   }
+
+  public void removeScore(int score) {
+    this.score -= score;
+  }
+
 
   public void reset() {
     this.score = 0;

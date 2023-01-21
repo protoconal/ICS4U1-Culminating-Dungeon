@@ -3,8 +3,8 @@ package Dungeon.Game.Items;
 public class ArmourItem extends Item {
   private final int HP_INCREASE;
 
-  public ArmourItem(String name, String description, double price, int maxNumber, int hpIncrease) {
-    super(name, description, price, maxNumber);
+  public ArmourItem(String name, String description, int price, int hpIncrease) {
+    super(name, description, price);
     this.HP_INCREASE = hpIncrease;
   }
 
