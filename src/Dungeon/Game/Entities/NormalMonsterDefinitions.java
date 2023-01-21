@@ -1,10 +1,10 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.NormalWeightedRandoms;
 
 public class NormalMonsterDefinitions {
 
-  private final WeightedRandoms RANDOM;
+  private final NormalWeightedRandoms RANDOM;
   private final Monster[] MONSTERS = new Monster[]{
       new HauntedArmour(),
       new Ghoul(),
@@ -19,7 +19,7 @@ public class NormalMonsterDefinitions {
         0.30, // Ghoul()
         0.20, // Cultist()
     };
-    this.RANDOM = new WeightedRandoms(spawnChances);
+    this.RANDOM = new NormalWeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
@@ -27,15 +27,16 @@ public class NormalMonsterDefinitions {
   }
 
   public abstract static class NormalMonster extends Monster {
-    public NormalMonster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
-      super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
+    public NormalMonster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+      super(name, maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
   }
 }
 
 class HauntedArmour extends NormalMonsterDefinitions.NormalMonster {
   public HauntedArmour() {
-    super(170, //maxHP
+    super("Henry the Haunted Armour",
+            170, //maxHP
         20, // minDamage
         30, // maxDamage
         "Armour clanks.", // onAttackText
@@ -46,7 +47,8 @@ class HauntedArmour extends NormalMonsterDefinitions.NormalMonster {
 
 class Ghoul extends NormalMonsterDefinitions.NormalMonster {
   public Ghoul() {
-    super(125, //maxHP
+    super("Jerry the Ghoul",
+            125, //maxHP
         15, // minDamage
         25, // maxDamage
         " verbs.", // onAttackText
@@ -57,7 +59,8 @@ class Ghoul extends NormalMonsterDefinitions.NormalMonster {
 
 class Cultist extends NormalMonsterDefinitions.NormalMonster {
   public Cultist() {
-    super(150, //maxHP
+    super("Jasmine, our Holy Leader",
+            150, //maxHP
         25, // minDamage
         30, // maxDamage
         "verbs.", // onAttackText

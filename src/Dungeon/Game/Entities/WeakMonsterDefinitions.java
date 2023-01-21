@@ -1,9 +1,9 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.NormalWeightedRandoms;
 
 public class WeakMonsterDefinitions {
-  private final WeightedRandoms RANDOM;
+  private final NormalWeightedRandoms RANDOM;
   private final Monster[] MONSTERS = new Monster[]{
       new Skeleton(),
       new Slime(),
@@ -16,7 +16,7 @@ public class WeakMonsterDefinitions {
         2, // Slime
         3, // Spider
     };
-    this.RANDOM = new WeightedRandoms(spawnChances);
+    this.RANDOM = new NormalWeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
@@ -24,15 +24,16 @@ public class WeakMonsterDefinitions {
   }
 
   public abstract static class WeakMonster extends Monster {
-    public WeakMonster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
-      super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
+    public WeakMonster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+      super(name, maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
   }
 }
 
 class Skeleton extends WeakMonsterDefinitions.WeakMonster {
   public Skeleton() {
-    super(75, //maxHP
+    super("Fallen Warrior",
+            75, //maxHP
         10, // minDamage
         20, // maxDamage
         "verbs.", // onAttackText
@@ -43,7 +44,8 @@ class Skeleton extends WeakMonsterDefinitions.WeakMonster {
 
 class Slime extends WeakMonsterDefinitions.WeakMonster {
   public Slime() {
-    super(25, //maxHP
+    super("Blobby",
+            25, //maxHP
         1, // minDamage
         10, // maxDamage
         "verbs.", // onAttackText
@@ -54,11 +56,12 @@ class Slime extends WeakMonsterDefinitions.WeakMonster {
 
 class Spider extends WeakMonsterDefinitions.WeakMonster {
   public Spider() {
-    super(45, //maxHP
+    super("Tiffany the Spider",
+            45, //maxHP
         5, // minDamage
         15, // maxDamage
         "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "A creepy crawler appears!" // onAppearText
     );
   }
 }

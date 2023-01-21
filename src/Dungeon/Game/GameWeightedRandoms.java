@@ -1,10 +1,8 @@
-package Dungeon.Game.DungeonMap;
-
-import Dungeon.Game.Util;
+package Dungeon.Game;
 
 import java.util.Random;
 
-public class WeightedRandom {
+public class GameWeightedRandoms {
 
 
   // https://stackoverflow.com/a/4463613
@@ -15,7 +13,7 @@ public class WeightedRandom {
   private double sum;
   private int radius = -1;
 
-  public WeightedRandom(double[] probabilities) {
+  public GameWeightedRandoms(double[] probabilities) {
     this.BASE_PROBABILITIES = probabilities;
     this.CDF = new double[probabilities.length];
     this.scaleFactors = new double[probabilities.length];

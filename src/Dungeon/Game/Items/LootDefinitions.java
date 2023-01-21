@@ -1,10 +1,10 @@
 package Dungeon.Game.Items;
 
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.NormalWeightedRandoms;
 
 // 7
 public class LootDefinitions {
-  private final WeightedRandoms rand;
+  private final NormalWeightedRandoms rand;
   private final LootItem[] loot = new LootItem[]{
       new Silver(),
       new Gold(),
@@ -22,7 +22,7 @@ public class LootDefinitions {
         0.10, // Diamond
         0.05, // Ruby
     };
-    this.rand = new WeightedRandoms(loot);
+    this.rand = new NormalWeightedRandoms(loot);
   }
 
   public LootItem generateLoot() {

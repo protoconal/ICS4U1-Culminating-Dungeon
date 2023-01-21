@@ -7,19 +7,18 @@ public class Views {
   static final String SPACE_PADDING = "            ";
   private static final String PLAYER_MODEL = " <i> ";
 
+  private static final double TIME_DELAY = 1.5;
+
   public static String gameHeader() {
     return DASH_PADDING + "  " + Game.getName() + "  " + DASH_PADDING + "\n";
   }
 
   public static String getToolTip(String type) {
     if (type.equals("INVENTORY")) {
-      return "E: Use ";
+      return "A: Left D: Right E: Use/Equip W: Weapons S: Healing R: Return ;: Menu";
     }
     if (type.equals("MAINMENU")) {
       return "B: Begin ;: Exit";
-    }
-    if (type.equals("Inventory")) {
-      return "A: Left D: Right W: Weapons S: Healing R: Return ;: Menu";
     }
     if (type.equals("DEATH")) {
       return "R: Reset  ;: Exit";
@@ -120,5 +119,14 @@ public class Views {
       outString.append(consoleText[x]).append("\n");
     }
     System.out.println(outString);
+  }
+
+  public static void delayedPrintLn(String outString) {
+    try {
+      Thread.sleep((long) (TIME_DELAY * 1000));
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
+    printLn(outString);
   }
 }

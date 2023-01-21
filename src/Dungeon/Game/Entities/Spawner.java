@@ -1,10 +1,14 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.DungeonMap.MapGenerationSettings;
+import Dungeon.Game.GameWeightedRandoms;
+import Dungeon.Game.Rooms.Room;
+import Dungeon.Game.Util;
+import Dungeon.Game.NormalWeightedRandoms;
 
 public class Spawner {
 
-  private final WeightedRandoms RAND;
+  private final GameWeightedRandoms RAND;
   private final WeakMonsterDefinitions WEAK_MONSTER_DEFINITIONS = new WeakMonsterDefinitions();
   private final NormalMonsterDefinitions NORMAL_MONSTER_DEFINITIONS = new NormalMonsterDefinitions();
   private final StrongMonsterDefinitions STRONG_MONSTER_DEFINITIONS = new StrongMonsterDefinitions();
@@ -17,10 +21,28 @@ public class Spawner {
         0.20, // StrongMonsters
         0.10, // Bosses
     };
-    RAND = new WeightedRandoms(spawnChances);
+    RAND = new GameWeightedRandoms(spawnChances);
   }
 
-  public Monster randomSpawn() {
+  private double[] lookupScaleFactors(int depth) {
+    double[][] factors = MapGenerationSettings.getMonsterChanceTable();
+
+    double[] scalingFactor = factors[0];
+    int x = 0;
+    while ((double) depth > scalingFactor[0] && x < (factors.length - 1)) {
+      x += 1;
+      scalingFactor = factors[x];
+    }
+
+    scalingFactor = Util.copyArrayFromIndexes(scalingFactor, 1, scalingFactor.length);
+    return scalingFactor;
+  }
+
+  public Monster randomSpawn(int radius) {
+    if (RAND.getRadius() != radius) {
+      RAND.setScaleFactors(radius, lookupScaleFactors(radius));
+    }
+
     int choice = RAND.generateChoice();
     if (choice == 0) {
       return WEAK_MONSTER_DEFINITIONS.generateMonster();

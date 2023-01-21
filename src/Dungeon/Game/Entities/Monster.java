@@ -1,6 +1,7 @@
 package Dungeon.Game.Entities;
 
 public abstract class Monster extends Entity {
+  private final String NAME;
   private final int MIN_DAMAGE;
   private final int MAX_DAMAGE;
   private final String onAttackText; // x verbs you.
@@ -8,14 +9,16 @@ public abstract class Monster extends Entity {
 
   public Monster() {
     super(0);
+    this.NAME = "";
     this.MIN_DAMAGE = 0;
     this.MAX_DAMAGE = 0;
     this.onAttackText = "";
     this.onAppearText = "";
   }
 
-  public Monster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+  public Monster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
     super(maxHP);
+    this.NAME = name;
     this.MIN_DAMAGE = minDamage;
     this.MAX_DAMAGE = maxDamage;
     this.onAttackText = onAttackText;
@@ -33,5 +36,9 @@ public abstract class Monster extends Entity {
 
   public String getAppearText() {
     return onAppearText;
+  }
+
+  public String getName() {
+    return NAME;
   }
 }

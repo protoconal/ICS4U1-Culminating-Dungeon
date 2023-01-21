@@ -1,9 +1,9 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.WeightedRandoms;
+import Dungeon.Game.NormalWeightedRandoms;
 
 public class StrongMonsterDefinitions {
-  private final WeightedRandoms rand;
+  private final NormalWeightedRandoms rand;
   private final Monster[] monsters = new Monster[]{
       new Troll(),
       new Centaur(),
@@ -16,7 +16,7 @@ public class StrongMonsterDefinitions {
         2, // Centaur
         3, // Minotaur
     };
-    this.rand = new WeightedRandoms(spawnChances);
+    this.rand = new NormalWeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
@@ -24,15 +24,16 @@ public class StrongMonsterDefinitions {
   }
 
   public abstract static class StrongMonster extends Monster {
-    public StrongMonster(int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
-      super(maxHP, minDamage, maxDamage, onAttackText, onAppearText);
+    public StrongMonster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
+      super(name, maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
   }
 }
 
 class Troll extends StrongMonsterDefinitions.StrongMonster {
   public Troll() {
-    super(200, //maxHP
+    super("Miles the Troll",
+            200, //maxHP
         40, // minDamage
         60, // maxDamage
         "verbs.", // onAttackText
@@ -43,7 +44,8 @@ class Troll extends StrongMonsterDefinitions.StrongMonster {
 
 class Centaur extends StrongMonsterDefinitions.StrongMonster {
   public Centaur() {
-    super(180, //maxHP
+    super("Fiona the Centaur",
+            180, //maxHP
         40, // minDamage
         55, // maxDamage
         "verbs.", // onAttackText
@@ -54,7 +56,8 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
 
 class Minotaur extends StrongMonsterDefinitions.StrongMonster {
   public Minotaur() {
-    super(240, //maxHP
+    super("Klara the Minotaur",
+            240, //maxHP
         50, // minDamage
         65, // maxDamage
         "verbs.", // onAttackText
