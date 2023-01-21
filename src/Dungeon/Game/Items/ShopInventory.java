@@ -18,7 +18,7 @@ public class ShopInventory {
     return sortedWeaponIds;
   }
 
-  double weaponSellPriceMultiplier = 0.85;
+  double weaponSellPriceMultiplier = 0.95;
   double healthSellPriceMultiplier = 0.95;
   public double getWeaponSellMultiplier() {
     // selling more depreciates value

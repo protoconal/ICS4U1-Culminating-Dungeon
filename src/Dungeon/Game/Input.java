@@ -13,12 +13,12 @@ public class Input {
   };
 
   final static String[] VALID_INVENTORY_KEYS = {
+      "R", // Return -- default behaviour
       "A", // Left
       "D", // Right
       "W", // Weapons
       "S", // Health
       "E", // Use/Equip
-      "R", // Return
       "Q", // Drop/Delete
       ";" // menu
   };
@@ -40,44 +40,54 @@ public class Input {
   };
 
   final static String[] VALID_MENU_KEYS = {
-      "B", // begin
+      "B", // begin -- default
+      "H", // highscores
       ";", // menu
   };
 
   final static String[] VALID_DEATH_MENU_KEYS = {
-          "R", // Reset
+          "R", // Reset -- default
           ";", // Exit
   };
 
   final static String[] VALID_FIGHT_KEYS = {
-      "A", // fight
+      "A", // fight -- default
       "H", // heal
       "R", // inventory
       ";", // menu
   };
 
   final static String[] VALID_PRE_DUNGEON_KEYS = {
+      "R", // continue -- default
       "S", // go shop
-      "R", // continue
       ";", // menu
   };
 
   final static String[] VALID_SHOP_KEYS = {
+      "R", // return -- default
       "A", // Left
       "D", // Right
       "W", // Weapons
       "S", // Health
       "E", // buy
       "Q", // sell
-      "R", // return
       ";", // menu
   };
 
   final static Scanner SCAN = new Scanner(System.in);
+  private static final String[] VALID_YN_KEYS = {
+      "N", // no -- default
+      "Y", // yes
+  };
 
   public static String getValidKeystroke(String[] validKeys, String consoleText) {
     System.out.print(consoleText);
     String key = SCAN.nextLine();
+
+    if (key.equals("")) {
+      return "";
+    }
+
     while (!checkKey(key, validKeys)) {
       System.out.println("Sorry, Invalid option.");
       System.out.print(consoleText);
@@ -157,32 +167,44 @@ public class Input {
     return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
   }
 
+  public static String getKeyOrDefault(String[] validKeys, String consoleText) {
+    String key = getValidKeystroke(validKeys, consoleText);
+    if (key.equals("")) {
+      return validKeys[0];
+    }
+    return key;
+  }
+
   public static String getMenuKeys() {
-    return getValidKeystroke(VALID_MENU_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_MENU_KEYS, "Input: ");
   }
 
   public static String getFightKeys() {
-    return getValidKeystroke(VALID_FIGHT_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_FIGHT_KEYS, "Input: ");
   }
 
   public static String getInventoryKeys() {
-    return getValidKeystroke(VALID_INVENTORY_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_INVENTORY_KEYS, "Input: ");
   }
 
   public static String getPreDungeonKeys() {
-    return getValidKeystroke(VALID_PRE_DUNGEON_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_PRE_DUNGEON_KEYS, "Input: ");
   }
 
   public static String getDeathKeys() {
-    return getValidKeystroke(VALID_DEATH_MENU_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_DEATH_MENU_KEYS, "Input: ");
   }
   public static String getShopKeys() {
-    return getValidKeystroke(VALID_SHOP_KEYS, "Input: ");
+    return getKeyOrDefault(VALID_SHOP_KEYS, "Input: ");
   }
 
   public static String getText(String consoleText) {
     System.out.print(consoleText);
     return SCAN.nextLine();
+  }
+
+  public static String getYN() {
+    return getKeyOrDefault(VALID_YN_KEYS, "Input: ");
   }
 }
 

@@ -15,16 +15,16 @@ public class Views {
 
   public static String getToolTip(String type) {
     if (type.equals("INVENTORY")) {
-      return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: ;: Menu";
+      return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: Menu";
     }
     if (type.equals("SHOP")) {
-      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, R: Return, ;: ;: Menu";
+      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, R: Return, ;: Menu";
     }
     if (type.equals("PREDUNGEON")) {
-      return "S: Go to the Shop, R: Enter the dungeon, ;: ;: Menu";
+      return "S: Go to the Shop, R: Enter the dungeon, ;: Menu";
     }
     if (type.equals("MAINMENU")) {
-      return "B: Begin, ;: Exit";
+      return "B: Begin, H: High Scores, ;: Exit";
     }
     if (type.equals("DEATHMENU")) {
       return "R: Reset  ;: Exit";
@@ -42,7 +42,7 @@ public class Views {
         "ex: W: Up, A: Left, S: Down, D: Right",
         "",
         "Finally, if you're a coward, press ; to exit to the main menu.",
-        "Are you ready? Enter B to begin!",
+        "Are you ready? Enter B to begin! Enter H to see the high scores.",
     };
     printLinesWithoutPlayer(consoleText);
   }
@@ -58,7 +58,7 @@ public class Views {
 
   public static void printDeathMenu(Player player, HighScore score) {
     String[] consoleText = new String[]{
-        "Unfortunately, the great " + player.getName() + " has met their great demise from a " + player.getDeathReason(),
+        "Unfortunately, the great \"" + player.getName() + "\" has met their great demise from " + player.getDeathReason(),
         "",
         "Thanks for playing!",
         "Your final score: " + player.getScore(),

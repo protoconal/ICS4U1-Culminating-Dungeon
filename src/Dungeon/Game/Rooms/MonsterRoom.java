@@ -38,9 +38,9 @@ public class MonsterRoom extends Room {
     // send over to inventory
     Game.showInventory();
 
-    do {
-      int damageTaken = monster.generateDamage();
-      player.damage(damageTaken);
+    int damageTaken = monster.generateDamage();
+    player.damage(damageTaken);
+    while (!player.isDead() && !monster.isDead()) {
 
       PlayerInventory currentInventory = player.getInventory();
       String[] healthItems = currentInventory.getHealthItems();
@@ -59,7 +59,8 @@ public class MonsterRoom extends Room {
 
       String optionSelected = "";
       // while not attacking
-      while (!optionSelected.equals("A")) {
+      boolean flag = true;
+      while (flag) {
         String[] outString = new String[]{
                 monster.getName() + " " + monster.getAttackText(),
                 "  HP: " + monster.getCurrentHP(),
@@ -67,7 +68,7 @@ public class MonsterRoom extends Room {
                 "",
                 "A: Attack using " + currentInventory.getEquippedWeapon(),
                 "H: Heal using " + useHealth,
-                "I: Inventory"
+                "R: Inventory"
         };
 
         Views.printLines(outString);
@@ -84,23 +85,40 @@ public class MonsterRoom extends Room {
             healingItem = currentInventory.removeHealthItem(currentAvailableHealthItem);
           }
           player.heal(healingItem);
+
+          Views.printLn("You healed " + healingItem.getRestoreHP() + " HP!", true);
+          System.out.println("    " + player.getName() + " HP: " + player.getCurrentHP());
+          Input.waitForKeyPress();
+
+          flag = false;
         }
-        if (optionSelected.equals("I")) {
+        if (optionSelected.equals("A")) {
+          int playerDamage = player.getInventory().getEquippedWeapon().randomDamage();
+          monster.damage(playerDamage);
+          Views.printLn("You took " + playerDamage + " HP away!", true);
+          System.out.println("    " + monster.getName() + " HP: " + monster.getCurrentHP());
+          Input.waitForKeyPress();
+
+          flag = false;
+        }
+        if (optionSelected.equals("R")) {
           // showInventory
           Game.showInventory();
         }
       }
 
-      int playerDamage = player.getInventory().getEquippedWeapon().randomDamage();
-      monster.damage(playerDamage);
-      Views.printLn("You took " + playerDamage + " HP away!", true);
-      System.out.println("    " + monster.getName() + " HP: " + monster.getCurrentHP());
-      Input.waitForKeyPress();
+      damageTaken = monster.generateDamage();
+      player.damage(damageTaken);
     }
-    while (!player.isDead() && !monster.isDead());
+
 
     if (player.isDead()) {
       player.setDeathReason(monster.getName());
+    }
+
+    if (monster.isDead()) {
+      player.addScore((int) Math.round(monster.getMaxHP() * 0.1));
+      // add ten percent to score
     }
 
     return player.isDead();

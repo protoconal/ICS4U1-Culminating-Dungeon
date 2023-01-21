@@ -17,6 +17,6 @@ public class WeaponItem extends Item {
   }
 
   public int getAvgDamage() {
-    return ((MAX_DAMAGE - MIN_DAMAGE) / 2);
+    return ((MAX_DAMAGE - MIN_DAMAGE) / 2) + MIN_DAMAGE;
   }
 }

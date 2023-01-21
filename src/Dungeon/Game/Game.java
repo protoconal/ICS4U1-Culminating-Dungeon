@@ -15,10 +15,9 @@ public class Game {
   private static final Player PLAYER = new Player();
   private static final PlayerInventory PLAYER_INVENTORY = PLAYER.getInventory();
   private static final ShopInventory SHOP_INVENTORY = new ShopInventory();
-  // --Commented out by Inspection (2023-01-21 12:11 a.m.):static String phase;
-  private final Dungeon CURRENT_MAP = new Dungeon();
-  private int[] playerCoordinates = CURRENT_MAP.getCenter();
-  private final HighScore SCORES_HANDLER = new HighScore();
+  private static final Dungeon CURRENT_MAP = new Dungeon();
+  private static int[] playerCoordinates = CURRENT_MAP.getCenter();
+  private static final HighScore SCORES_HANDLER = new HighScore();
 
   public static ShopInventory getShopInventory() {
     return SHOP_INVENTORY;
@@ -29,10 +28,16 @@ public class Game {
     Views.printMainMenu();
 
     // getMenuInputs
-    System.out.println(Views.getToolTip("MAINMENU"));
-    String optionSelected = Input.getMenuKeys();
-    if (optionSelected.equals(";")) {
-      exit();
+    String optionSelected = "";
+    while (!optionSelected.equals("B")) {
+      System.out.println(Views.getToolTip("MAINMENU"));
+      optionSelected = Input.getMenuKeys();
+      if (optionSelected.equals("H")) {
+        System.out.println("High scores: \n" + SCORES_HANDLER.returnHighScoreText());
+      }
+      if (optionSelected.equals(";")) {
+        exit();
+      }
     }
 
     // getName
@@ -44,6 +49,7 @@ public class Game {
     PLAYER_INVENTORY.initializeHealth();
 
     // if PLAYER isn't dead, keep playing the dungeon
+
     while (!PLAYER.isDead()) {
       showDungeon();
     }
@@ -58,12 +64,13 @@ public class Game {
   }
 
   public void showDungeon() {
-    // show the preDungeon screen
-    showPreDungeon();
+    if (CURRENT_MAP.isReset()) {
+      Game.showStart();
+    }
 
     // update visibility
-    this.CURRENT_MAP.updateVisibility(playerCoordinates);
-    Views.printDungeon(this.CURRENT_MAP, playerCoordinates);
+    CURRENT_MAP.updateVisibility(playerCoordinates);
+    Views.printDungeon(CURRENT_MAP, playerCoordinates);
     // getMenuInputs
     String optionSelected = Input.getMove(CURRENT_MAP.getMovableDirections(playerCoordinates));
 
@@ -79,19 +86,15 @@ public class Game {
     this.playerCoordinates = Dungeon.calculateCoordinates(playerCoordinates, optionSelected);
 
     // activate Room input
-    Room currentRoom = this.CURRENT_MAP.getMapRoom(playerCoordinates);
+    Room currentRoom = CURRENT_MAP.getMapRoom(playerCoordinates);
     handleRoom(currentRoom);
   }
 
-  public void showPreDungeon() {
-    // show the preDungeon screen
-
-
-    // getMenuInputs
+  public static void showStart() {
     String optionSelected = "";
-
     while (!optionSelected.equals("R")) {
-      Views.printPreDungeon(CURRENT_MAP.getDifficultyMultiplier());
+      Views.printPreDungeon(CURRENT_MAP.getDifficultyMultiplier()); // diffuciltyMultipler == depth
+
       System.out.println(Views.getToolTip("PREDUNGEON"));
       optionSelected = Input.getPreDungeonKeys();
       if (optionSelected.equals("S")) {
@@ -103,7 +106,7 @@ public class Game {
     }
   }
 
-  private void showShop() {
+  private static void showShop() {
     String optionSelected;
     String mode = "Weapon";
 
@@ -166,7 +169,7 @@ public class Game {
       // could replace with a switch statement
       if (optionSelected.equals("W")) {
         index = 0;
-        mode = "Weapons";
+        mode = "Weapon";
       } else if (optionSelected.equals("S")) {
         index = 0;
         mode = "Health";
@@ -186,7 +189,7 @@ public class Game {
         if (PLAYER.getScore() >= price) {
           PLAYER.removeScore(price);
           // allowed to buy item
-          if (mode.equals("Weapons")) {
+          if (mode.equals("Weapon")) {
             if (PLAYER_INVENTORY.getItemCount(itemId) == 0) {
               PLAYER_INVENTORY.addWeapon(itemId);
             }
@@ -212,7 +215,7 @@ public class Game {
         int sellPrice = 0;
         if (PLAYER_INVENTORY.getItemCount(itemId) != 0 && !itemId.equals("DullSword")) {
           // allowed to sell item
-          if (mode.equals("Weapons") ) {
+          if (mode.equals("Weapon") ) {
             PLAYER_INVENTORY.removeWeapon(itemId);
             sellPrice = (int) Math.round(price * SHOP_INVENTORY.getWeaponSellMultiplier());
           }
@@ -259,12 +262,18 @@ public class Game {
     String optionSelected = Input.getDeathKeys();
     if (optionSelected.equals("R")) {
       // reset
-      CURRENT_MAP.reset();
+      playerCoordinates = CURRENT_MAP.getCenter();
+      CURRENT_MAP.fullReset();
       PLAYER.reset();
     }
     else {
       exit();
     }
+  }
+
+  public static void nextLevel() {
+    playerCoordinates = CURRENT_MAP.getCenter();
+    CURRENT_MAP.fullReset();
   }
 
   public static void showInventory() {
@@ -303,13 +312,13 @@ public class Game {
 
       System.out.println("Selected item: " + currentWorkingInventory[index]);
       System.out.println();
-      System.out.println(Views.getToolTip("PLAYER_INVENTORY"));
+      System.out.println(Views.getToolTip("INVENTORY"));
       optionSelected = Input.getInventoryKeys();
 
       // could replace with a switch statement
       if (optionSelected.equals("W")) {
         index = 0;
-        mode = "Weapons";
+        mode = "Weapon";
       } else if (optionSelected.equals("S")) {
         index = 0;
         mode = "Health";
@@ -368,12 +377,12 @@ public class Game {
     showInventory();
   }
 
-  public void exit() {
+  public static void exit() {
     saveScore();
     System.exit(0);
   }
 
-  public void saveScore() {
+  public static void saveScore() {
     if (PLAYER.getScore() != 0) {
       SCORES_HANDLER.updateHighScore(PLAYER.getName(), PLAYER.getScore());
       try {

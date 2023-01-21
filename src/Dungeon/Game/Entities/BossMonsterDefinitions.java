@@ -25,7 +25,7 @@ public class BossMonsterDefinitions {
   }
 
   public Monster generateMonster() {
-    return MONSTERS[RANDOM.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()].returnCopy();
   }
 
   public abstract static class BossMonster extends Monster {
@@ -45,6 +45,11 @@ class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new SpiderBroodMother();
+  }
 }
 
 class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
@@ -56,6 +61,11 @@ class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
+  }
+
+  @Override
+  public Monster returnCopy()  {
+    return new DarkKnightofTheForgotten();
   }
 }
 
@@ -69,6 +79,11 @@ class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new CorruptedExecutioner();
+  }
 }
 
 class LichKing extends BossMonsterDefinitions.BossMonster {
@@ -81,6 +96,11 @@ class LichKing extends BossMonsterDefinitions.BossMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new LichKing();
+  }
 }
 
 class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
@@ -92,5 +112,10 @@ class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
+  }
+
+  @Override
+  public Monster returnCopy()  {
+    return new AldwynTheFallen();
   }
 }

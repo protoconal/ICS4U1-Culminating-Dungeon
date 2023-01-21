@@ -108,14 +108,20 @@ public class HighScore {
     int index = -1;
     for (int x = 0; x < this.HIGHSCORES.size(); x++) {
       // "0000000001 - U1", start of name is past character 13
-      String currentName = this.HIGHSCORES.get(x).substring(13).strip();
+      String currentName = " ";
+      try {
+        currentName = this.HIGHSCORES.get(x).substring(13).strip();
+      }
+      catch (StringIndexOutOfBoundsException error){
+        // do nothing
+      }
       if (currentName.equals(name)) {
         index = x;
         x = this.HIGHSCORES.size();
       }
     }
 
-    int newScore = 1;
+    int newScore = currentScore;
     // if the score exists, check if higher
     if (index != -1) {
       String currentScoreString = this.HIGHSCORES.remove(index);

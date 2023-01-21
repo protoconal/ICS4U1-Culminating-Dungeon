@@ -3,8 +3,8 @@ package Dungeon.Game.Entities;
 import Dungeon.Game.NormalWeightedRandoms;
 
 public class StrongMonsterDefinitions {
-  private final NormalWeightedRandoms rand;
-  private final Monster[] monsters = new Monster[]{
+  private final NormalWeightedRandoms RANDOM;
+  private final Monster[] MONSTERS = new Monster[]{
       new Troll(),
       new Centaur(),
       new Minotaur(),
@@ -16,11 +16,11 @@ public class StrongMonsterDefinitions {
         2, // Centaur
         3, // Minotaur
     };
-    this.rand = new NormalWeightedRandoms(spawnChances);
+    this.RANDOM = new NormalWeightedRandoms(spawnChances);
   }
 
   public Monster generateMonster() {
-    return monsters[rand.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()].returnCopy();
   }
 
   public abstract static class StrongMonster extends Monster {
@@ -40,6 +40,10 @@ class Troll extends StrongMonsterDefinitions.StrongMonster {
         "x appears!" // onAppearText
     );
   }
+  @Override
+  public Monster returnCopy()  {
+    return new Troll();
+  }
 }
 
 class Centaur extends StrongMonsterDefinitions.StrongMonster {
@@ -52,6 +56,11 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Centaur();
+  }
 }
 
 class Minotaur extends StrongMonsterDefinitions.StrongMonster {
@@ -63,5 +72,10 @@ class Minotaur extends StrongMonsterDefinitions.StrongMonster {
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
+  }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Minotaur();
   }
 }

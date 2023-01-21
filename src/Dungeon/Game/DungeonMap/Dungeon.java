@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class Dungeon {
 
   // TODO: implement randomized scaling generation
-  // i.e, MAP must have x Room of each Type, therefore randomly spit them around.
+  // i.e, map must have x Room of each Type, therefore randomly spit them around.
   private static final String[] VALID_DIRECTIONS = {
       "UP",
       "LEFT",
@@ -30,31 +30,41 @@ public class Dungeon {
       {0, 1}, // RIGHT
   };
   private final GameWeightedRandoms WEIGHTED_RANDOM = new GameWeightedRandoms(MapGenerationSettings.getProbabilities());
-  private final Room[][] MAP;
+  private Room[][] map;
   private boolean[][] visibleSpaces;
   private final int[] CENTER;
   final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
   final Spawner SPAWNER = new Spawner();
   private final int DEFAULT_SIZE;
   private int difficultyMultiplier = 0;
+  private boolean isReset;
+  private int[] randomExit;
 
 
   public Dungeon() {
     this.DEFAULT_SIZE = 9;
     // remember, convention = row, column
-    MAP = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
     CENTER = new int[]{DEFAULT_SIZE / 2, DEFAULT_SIZE / 2};
-    reset();
+    nextLevel();
   }
 
-  public void reset() {
+  public void nextLevel() {
+    map = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
     setMapRoom(new StartRoom(), CENTER);
+
     visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
     visibleSpaces[CENTER[0]][CENTER[1]] = true;
+    this.isReset = true;
 
     this.difficultyMultiplier += 1;
+    randomExit = CENTER;
 
     generateMap();
+  }
+
+  public void fullReset() {
+    this.difficultyMultiplier = 0;
+    nextLevel();
   }
 
   public static int[] calculateCoordinates(int[] initialCoordinates, String direction) {
@@ -89,7 +99,7 @@ public class Dungeon {
     for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
       int[] proposedCoordinates = Dungeon.calculateCoordinates(playerCoordinates, VALID_DIRECTIONS[x]);
       if (checkBounds(proposedCoordinates) &&
-          !(MAP[proposedCoordinates[0]][proposedCoordinates[1]] instanceof WalledRoom)) {
+          !(map[proposedCoordinates[0]][proposedCoordinates[1]] instanceof WalledRoom)) {
         movableDirections.add(VALID_DIRECTIONS[x]);
       }
     }
@@ -100,8 +110,8 @@ public class Dungeon {
   public String toString() {
     StringBuilder out = new StringBuilder();
 
-    for (int row = 0; row < this.MAP.length; row++) {
-      out.append(Arrays.toString(this.MAP[row])).append("\n");
+    for (int row = 0; row < this.map.length; row++) {
+      out.append(Arrays.toString(this.map[row])).append("\n");
     }
 
     return out.toString();
@@ -110,14 +120,14 @@ public class Dungeon {
   public String visibleSpacesToString(int[] playerCoordinates, String playerModel) {
     StringBuilder out = new StringBuilder();
 
-    for (int row = 0; row < this.MAP.length; row++) {
-      Room[] columns = this.MAP[row];
+    for (int row = 0; row < this.map.length; row++) {
+      Room[] columns = this.map[row];
       for (int col = 0; col < columns.length; col++) {
         // place player
         if (row == playerCoordinates[0] && col == playerCoordinates[1]) {
           out.append(playerModel);
         } else if (this.visibleSpaces[row][col]) {
-          out.append(this.MAP[row][col]);
+          out.append(this.map[row][col]);
         } else {
           out.append("?_?_?");
         }
@@ -132,6 +142,8 @@ public class Dungeon {
   }
 
   public void updateVisibility(int[] playerCoordinates) {
+    this.isReset = false;
+
     setVisibleSpaces(playerCoordinates);
 
     // double check bounds, then paint
@@ -145,6 +157,7 @@ public class Dungeon {
 
   public void generateMap() {
     this.traverse(this.CENTER, 0);
+    this.setMapRoom(new EndRoom(), randomExit);
 
     System.out.println(this);
   }
@@ -169,6 +182,11 @@ public class Dungeon {
 
         if (!(randomRoom instanceof WalledRoom)) {
           traversableDirections.add(direction);
+
+          // random chance to be exiting
+          if (Math.random() > 0.75) {
+            randomExit = newCoordinates;
+          }
         }
         setMapRoom(randomRoom, newCoordinates);
       }
@@ -232,16 +250,16 @@ public class Dungeon {
   }
 
   private void setMapRoom(Room room, int[] coordinates) {
-    this.MAP[coordinates[0]][coordinates[1]] = room;
+    this.map[coordinates[0]][coordinates[1]] = room;
   }
 
   public Room getMapRoom(int[] coordinates) {
-    return this.MAP[coordinates[0]][coordinates[1]];
+    return this.map[coordinates[0]][coordinates[1]];
   }
 
   private boolean checkBounds(int[] coordinates) {
     int minBound = 0;
-    int maxBound = this.MAP.length - 1;
+    int maxBound = this.map.length - 1;
 
     boolean rowBounds = (coordinates[0] >= minBound) && (coordinates[0] <= maxBound);
     boolean columnBounds = (coordinates[1] >= minBound) && (coordinates[1] <= maxBound);
@@ -253,4 +271,7 @@ public class Dungeon {
     return difficultyMultiplier;
   }
 
+  public boolean isReset() {
+    return this.isReset;
+  }
 }

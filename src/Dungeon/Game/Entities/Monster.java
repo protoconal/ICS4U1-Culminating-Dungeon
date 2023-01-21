@@ -16,6 +16,8 @@ public abstract class Monster extends Entity {
     this.onAppearText = onAppearText;
   }
 
+  public abstract Monster returnCopy();
+
   public int generateDamage() {
     int damageRange = MAX_DAMAGE - MIN_DAMAGE;
     return (int) (MIN_DAMAGE + Math.random() * damageRange);

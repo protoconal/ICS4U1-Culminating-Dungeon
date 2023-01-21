@@ -23,7 +23,7 @@ public class NormalMonsterDefinitions {
   }
 
   public Monster generateMonster() {
-    return MONSTERS[RANDOM.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()].returnCopy();
   }
 
   public abstract static class NormalMonster extends Monster {
@@ -43,6 +43,11 @@ class HauntedArmour extends NormalMonsterDefinitions.NormalMonster {
         "A ghostly set of armor appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new HauntedArmour();
+  }
 }
 
 class Ghoul extends NormalMonsterDefinitions.NormalMonster {
@@ -55,6 +60,11 @@ class Ghoul extends NormalMonsterDefinitions.NormalMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Ghoul();
+  }
 }
 
 class Cultist extends NormalMonsterDefinitions.NormalMonster {
@@ -66,5 +76,10 @@ class Cultist extends NormalMonsterDefinitions.NormalMonster {
         "verbs.", // onAttackText
         "x appears!" // onAppearText
     );
+  }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Cultist();
   }
 }

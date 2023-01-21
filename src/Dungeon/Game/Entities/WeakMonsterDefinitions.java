@@ -20,7 +20,7 @@ public class WeakMonsterDefinitions {
   }
 
   public Monster generateMonster() {
-    return MONSTERS[RANDOM.generateChoice()];
+    return MONSTERS[RANDOM.generateChoice()].returnCopy();
   }
 
   public abstract static class WeakMonster extends Monster {
@@ -40,6 +40,11 @@ class Skeleton extends WeakMonsterDefinitions.WeakMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Skeleton();
+  }
 }
 
 class Slime extends WeakMonsterDefinitions.WeakMonster {
@@ -52,6 +57,11 @@ class Slime extends WeakMonsterDefinitions.WeakMonster {
         "x appears!" // onAppearText
     );
   }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Slime();
+  }
 }
 
 class Spider extends WeakMonsterDefinitions.WeakMonster {
@@ -63,5 +73,10 @@ class Spider extends WeakMonsterDefinitions.WeakMonster {
         "verbs.", // onAttackText
         "A creepy crawler appears!" // onAppearText
     );
+  }
+
+  @Override
+  public Monster returnCopy()  {
+    return new Spider();
   }
 }
