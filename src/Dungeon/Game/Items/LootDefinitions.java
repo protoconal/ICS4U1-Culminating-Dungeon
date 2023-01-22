@@ -6,8 +6,8 @@ import Dungeon.Game.NormalWeightedRandoms;
  * The LootDefinitions class is a class that contains all the loot definitions.
  */
 public class LootDefinitions {
-  private final NormalWeightedRandoms rand;
-  private final LootItem[] loot = new LootItem[]{
+  private final NormalWeightedRandoms RAND;
+  private final LootItem[] LOOT = new LootItem[]{
       new Silver(),
       new Gold(),
       new Platinum(),
@@ -26,7 +26,7 @@ public class LootDefinitions {
         0.10, // Diamond
         0.05, // Ruby
     };
-    this.rand = new NormalWeightedRandoms(loot);
+    this.RAND = new NormalWeightedRandoms(loot);
   }
 
   /**
@@ -35,7 +35,7 @@ public class LootDefinitions {
    * @return A random loot item.
    */
   public LootItem generateLoot() {
-    return loot[rand.generateChoice()];
+    return LOOT[RAND.generateChoice()];
   }
 }
 

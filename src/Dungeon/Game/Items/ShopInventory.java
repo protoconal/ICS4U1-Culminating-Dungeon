@@ -41,19 +41,19 @@ public class ShopInventory {
   }
 
   /**
-   * The getSortedHealthIds() method returns the sorted health ids.
-   * @return The sorted health ids.
-   */
-  public String[] getSortedHealthIds() {
-    return sortedHealthIds;
-  }
-
-  /**
    * The getSortedWeaponIds() method returns the sorted weapon ids.
    * @return The sorted weapon ids.
    */
   public String[] getSortedWeaponIds() {
     return sortedWeaponIds;
+  }
+
+  /**
+   * The getSortedHealthIds() method returns the sorted health ids.
+   * @return The sorted health ids.
+   */
+  public String[] getSortedHealthIds() {
+    return sortedHealthIds;
   }
 
   /**

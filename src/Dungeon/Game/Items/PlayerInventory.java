@@ -20,18 +20,6 @@ public class PlayerInventory {
   /**
    * The constructor for the PlayerInventory class.
    */
-  public WeaponDefinitions getWeaponDefinitions() {
-    return WEAPON_DEFINITIONS;
-  }
-
-  /**
-   * The getHealthDefinitions() method returns the HealthDefinitions object.
-   * 
-   * @return The HealthDefinitions object.
-   */
-  public HealthDefinitions getHealthDefinitions() {
-    return HEALTH_DEFINITIONS;
-  }
 
   /**
    * The reset method resets the player's inventory.
@@ -43,7 +31,26 @@ public class PlayerInventory {
   }
 
   /**
-   * The getEquippedWeapon() method returns the equipped weapon.
+   * The getWeaponDefinitions method returns the WeaponDefinitions object.
+   * 
+   * @return The WeaponDefinitions object.
+   */
+  public WeaponDefinitions getWeaponDefinitions() {
+    return WEAPON_DEFINITIONS;
+  }
+
+  /**
+   * The getHealthDefinitions method returns the HealthDefinitions object.
+   * 
+   * @return The HealthDefinitions object.
+   */
+  public HealthDefinitions getHealthDefinitions() {
+    return HEALTH_DEFINITIONS;
+  }
+
+  /**
+   * The getEquippedWeapon method returns the equipped weapon.
+   * 
    * @return WeaponItem The equipped weapon.
    */
   public WeaponItem getEquippedWeapon() {
@@ -51,7 +58,8 @@ public class PlayerInventory {
   }
 
   /**
-   * The getEquippedWeapon() method sets the equipped weapon.
+   * The setEquippedWeapon method sets the equipped weapon.
+   * 
    * @return WeaponItem The equipped weapon.
    */
   public void setEquippedWeapon(String itemString) {
@@ -73,7 +81,8 @@ public class PlayerInventory {
       this.WEAPON_PLAYER_INVENTORY.put(weapon.getId(), weapon);
     } else {
       // sell weapon automatically
-      Game.getPlayer().addScore((int) Math.round(Game.getShopInventory().getWeaponSellMultiplier() * weapon.getPrice()));
+      Game.getPlayer()
+          .addScore((int) Math.round(Game.getShopInventory().getWeaponSellMultiplier() * weapon.getPrice()));
     }
   }
 
@@ -86,8 +95,7 @@ public class PlayerInventory {
     this.WEAPON_PLAYER_INVENTORY.put(itemName, WEAPON_DEFINITIONS.returnItemFromName(itemName));
   }
 
-
-  /** 
+  /**
    * The getWeapons method returns the weapons in the player's inventory.
    * 
    * @return String[] The weapons in the player's inventory.
@@ -96,7 +104,7 @@ public class PlayerInventory {
     return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
-  /** 
+  /**
    * The getHealthItems method returns the health items in the player's inventory.
    * 
    * @return String[] The health items in the player's inventory.
@@ -123,8 +131,10 @@ public class PlayerInventory {
     addHealthItem("Bandage");
   }
 
-/**
-   * The getWeaponNames method returns the names of the weapons in the player's inventory.
+  /**
+   * The getWeaponNames method returns the names of the weapons in the player's
+   * inventory.
+   * 
    * @return String[] The names of the weapons in the player's inventory.
    */
   public String[] getWeaponNames() {
@@ -135,8 +145,10 @@ public class PlayerInventory {
     return weaponNames;
   }
 
-/**
-   * The getHealthNames method returns the names of the health items in the player's inventory.
+  /**
+   * The getHealthNames method returns the names of the health items in the
+   * player's inventory.
+   * 
    * @return String[] The names of the health items in the player's inventory.
    */
   public String[] getHealthNames() {
@@ -149,6 +161,7 @@ public class PlayerInventory {
 
   /**
    * The size method returns the total number of items in the player inventory.
+   * 
    * @return int the total number of items.
    */
   public int size() {
@@ -178,7 +191,8 @@ public class PlayerInventory {
   }
 
   /**
-   * The removeHealthItem method removes a health item from the player's inventory.
+   * The removeHealthItem method removes a health item from the player's
+   * inventory.
    *
    * @param itemName The name of the item to remove.
    * @return The item that was removed.
@@ -198,7 +212,8 @@ public class PlayerInventory {
   }
 
   /**
-   * The getItemCount method returns the number of items in the player's inventory.
+   * The getItemCount method returns the number of items in the player's
+   * inventory.
    *
    * @param itemName The name of the item to check.
    * @return The number of items in the player's inventory.
@@ -219,7 +234,6 @@ public class PlayerInventory {
    */
   @Override
   public String toString() {
-
 
     StringBuilder out = new StringBuilder();
     out.append("Currently equipped Weapon: ").append(equippedWeapon.getName()).append("\n");

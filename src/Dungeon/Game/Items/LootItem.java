@@ -5,7 +5,7 @@ package Dungeon.Game.Items;
  * increase their gold.
  */
 public class LootItem extends Item {
-  private final int value;
+  private final int VALUE;
 
   /**
    * The constructor for the LootItem class.
@@ -16,7 +16,7 @@ public class LootItem extends Item {
    */
   public LootItem(String name, String description, int value) {
     super(name, description);
-    this.value = value;
+    this.VALUE = value;
   }
 
   /**
@@ -25,6 +25,6 @@ public class LootItem extends Item {
    * @return The value of the loot item.
    */
   public int getValue() {
-    return value;
+    return VALUE;
   }
 }
