@@ -20,6 +20,13 @@ public class PlayerInventory {
   private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromId("DullSword");
 
   /**
+   * Constructor for PlayerInventory class
+   */
+  public PlayerInventory() {
+    // do nothing
+  }
+
+  /**
    * @return this class's child WeaponDefinitions object.
    */
   public WeaponDefinitions getWeaponDefinitions() {
