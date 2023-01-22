@@ -1,14 +1,18 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.NormalWeightedRandoms;
+import Dungeon.Game.GameWeightedRandoms;
 
 /**
- * The BossMonsterDefinitions class is a class that contains all the boss monster definitions.
+ * This BossMonsterDefinitions class contains all the possible boss monsters in the game.
+ *
+ * @author Chris Yang, Ilelemwanta Nomaren, Tony Guo, Emily Ta,
+ * @version 1.0
+ * @since 1.0
  */
 public class BossMonsterDefinitions {
 
-  private final NormalWeightedRandoms RANDOM;
-  private final Monster[] MONSTERS = new Monster[]{
+  private final GameWeightedRandoms RANDOM;
+  private final Monster[] MONSTER_TABLE = new Monster[]{
       new SpiderBroodMother(),
       new DarkKnightofTheForgotten(),
       new CorruptedExecutioner(),
@@ -27,16 +31,16 @@ public class BossMonsterDefinitions {
         0.10, // LichKing
         0.05, // AldwynTheFallen
     };
-    this.RANDOM = new NormalWeightedRandoms(spawnChances);
+    this.RANDOM = new GameWeightedRandoms(spawnChances);
   }
 
   /**
    * The generateMonster() method generates a random boss monster.
-   * 
+   *
    * @return A random boss monster.
    */
   public Monster generateMonster() {
-    return MONSTERS[RANDOM.generateChoice()].returnCopy();
+    return MONSTER_TABLE[RANDOM.generateChoice()].returnCopy();
   }
 
   public abstract static class BossMonster extends Monster {
@@ -65,7 +69,7 @@ class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
 
   /**
    * The returnCopy() method returns a copy of the SpiderBroodMother class.
-   * 
+   *
    * @return A copy of the SpiderBroodMother class.
    */
   @Override
@@ -93,7 +97,7 @@ class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
 
   /**
    * The returnCopy() method returns a copy of the DarkKnightofTheForgotten class.
-   * 
+   *
    * @return A copy of the DarkKnightofTheForgotten class.
    */
   @Override
@@ -121,7 +125,7 @@ class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
 
   /**
    * The returnCopy() method returns a copy of the CorruptedExecutioner class.
-   * 
+   *
    * @return A copy of the CorruptedExecutioner class.
    */
   @Override
@@ -149,7 +153,7 @@ class LichKing extends BossMonsterDefinitions.BossMonster {
 
   /**
    * The returnCopy() method returns a copy of the LichKing class.
-   * 
+   *
    * @return A copy of the LichKing class.
    */
   @Override
@@ -177,7 +181,7 @@ class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
 
   /**
    * The returnCopy() method returns a copy of the AldwynTheFallen class.
-   * 
+   *
    * @return A copy of the AldwynTheFallen class.
    */
   @Override

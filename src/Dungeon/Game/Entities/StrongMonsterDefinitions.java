@@ -1,44 +1,40 @@
 package Dungeon.Game.Entities;
 
-import Dungeon.Game.NormalWeightedRandoms;
-
 /**
- * The StrongMonsterDefinitions class is a class that contains all the definitions of the strong
- * monsters in the game.
+ * This StrongMonsterDefinitions class contains all the possible strong monsters in the game.
+ *
+ * @author Chris Yang, Ilelemwanta Nomaren, Tony Guo, Emily Ta,
+ * @version 1.0
+ * @since 1.0
  */
-public class StrongMonsterDefinitions {
-  private final NormalWeightedRandoms RANDOM;
-  private final Monster[] MONSTERS = new Monster[]{
-      new Troll(),
-      new Centaur(),
-      new Minotaur(),
-  };
+public class StrongMonsterDefinitions extends MonsterDefinitions {
 
   /**
-   * The constructor for the StrongMonsterDefinitions class.
+   * Constructor for the StrongMonsterDefinitions class.
    */
   public StrongMonsterDefinitions() {
-    double[] spawnChances = new double[]{
-        1, // Troll
-        2, // Centaur
-        3, // Minotaur
-    };
-    this.RANDOM = new NormalWeightedRandoms(spawnChances);
+    super(
+        // types of monsters
+        new Monster[]{
+            new Troll(),
+            new Centaur(),
+            new Minotaur(),
+        },
+        // chances of monsters
+        new double[]{
+            1, // Troll
+            2, // Centaur
+            3, // Minotaur
+        });
   }
 
   /**
-   * The generateMonster() method generates a random strong monster.
-   * 
-   * @return A random strong monster.
-   */
-  public Monster generateMonster() {
-    return MONSTERS[RANDOM.generateChoice()].returnCopy();
-  }
-
-  /**
-   * The StrongMonster class is a subclass of the Monster class, and it is a strong monster.
+   * This class represents a strong monster.
    */
   public abstract static class StrongMonster extends Monster {
+    /**
+     * Constructor for the StrongMonster class.
+     */
     public StrongMonster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
       super(name, maxHP, minDamage, maxDamage, onAttackText, onAppearText);
     }
@@ -46,11 +42,11 @@ public class StrongMonsterDefinitions {
 }
 
 /**
- * The Troll class is a subclass of the StrongMonster class, and it is a strong monster.
+ * This class defines a Troll, which is a strong monster.
  */
 class Troll extends StrongMonsterDefinitions.StrongMonster {
   /**
-   * The constructor for the Troll class.
+   * Constructor for the Troll class.
    */
   public Troll() {
     super("Miles the Troll",
@@ -63,9 +59,7 @@ class Troll extends StrongMonsterDefinitions.StrongMonster {
   }
 
   /**
-   * The returnCopy() method returns a copy of the Troll class.
-   * 
-   * @return A copy of the Troll class.
+   * @return a copy of the Troll class.
    */
   @Override
   public Monster returnCopy() {
@@ -74,11 +68,11 @@ class Troll extends StrongMonsterDefinitions.StrongMonster {
 }
 
 /**
- * The Centaur class is a subclass of the StrongMonster class, and it is a strong monster.
+ * This class defines a Centaur, which is a strong monster.
  */
 class Centaur extends StrongMonsterDefinitions.StrongMonster {
   /**
-   * The constructor for the Centaur class.
+   * Constructor for the Centaur class.
    */
   public Centaur() {
     super("Fiona the Centaur",
@@ -91,9 +85,7 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
   }
 
   /**
-   * The returnCopy() method returns a copy of the Centaur class.
-   * 
-   * @return A copy of the Centaur class.
+   * @return a copy of the Centaur class.
    */
   @Override
   public Monster returnCopy() {
@@ -102,11 +94,11 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
 }
 
 /**
- * The Minotaur class is a subclass of the StrongMonster class, and it is a strong monster.
+ * This class defines a Minotaur, which is a strong monster.
  */
 class Minotaur extends StrongMonsterDefinitions.StrongMonster {
   /**
-   * The constructor for the Minotaur class.
+   * Constructor for the Minotaur class.
    */
   public Minotaur() {
     super("Klara the Minotaur",
@@ -119,7 +111,7 @@ class Minotaur extends StrongMonsterDefinitions.StrongMonster {
   }
 
   /**
-   * The returnCopy() method returns a copy of the Minotaur class.
+   * @return a copy of the Centaur class.
    */
   @Override
   public Monster returnCopy() {

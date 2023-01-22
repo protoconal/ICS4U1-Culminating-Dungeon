@@ -1,18 +1,21 @@
 package Dungeon.Game.Items;
 
 /**
- * The LootItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their gold.
+ * This LootItem class provides a template for LootItems in the game. These items increase the score of the player.
+ *
+ * @author Tony Guo, Chris Yang, Emily Ta, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
  */
-public class LootItem extends Item {
+public abstract class LootItem extends Item {
   private final int value;
 
   /**
-   * The constructor for the LootItem class.
-   * 
-   * @param name The name of the loot item.
-   * @param description The description of the loot item.
-   * @param value The value of the loot item.
+   * Constructor for the LootItem class.
+   *
+   * @param name        a string that stores the name of the loot item.
+   * @param description a string that stores the description of the loot item.
+   * @param value       stores the value of the loot item.
    */
   public LootItem(String name, String description, int value) {
     super(name, description);
@@ -20,9 +23,7 @@ public class LootItem extends Item {
   }
 
   /**
-   * The getValue() method returns the value of the loot item.
-   * 
-   * @return The value of the loot item.
+   * @return the value of the loot item.
    */
   public int getValue() {
     return value;

@@ -3,29 +3,30 @@ package Dungeon.Game;
 import Dungeon.Game.DungeonMap.Dungeon;
 
 /**
- * It's a class that prints out the game's text
+ * This Views class stores methods to prints out the game's text.
+ *
+ * @author Ilelemwanta Nomaren, Emily Ta, Chris Yang, Tony Guo
+ * @version 1.0
+ * @since 1.0
  */
 public class Views {
   static final String DASH_PADDING = "------------";
   static final String SPACE_PADDING = "            ";
   private static final String PLAYER_MODEL = " <i> ";
-
   private static final double TIME_DELAY = 1.5;
 
   /**
-   * It returns a string that contains the name of the game, padded with dashes
-   * 
-   * @return The gameHeader() method returns a string that contains the name of the game.
+   * @return returns a padded string that contains the name of the game.
    */
   public static String gameHeader() {
     return DASH_PADDING + "  " + Game.getName() + "  " + DASH_PADDING + "\n";
   }
 
   /**
-   * It returns a string based on the string passed to it
-   * 
-   * @param type The type of menu you want to get the tooltip for.
-   * @return The return value is a String.
+   * Returns a tooltip given the type needed;
+   *
+   * @param type a string that stores the type of menu you want to get the tooltip for.
+   * @return the tooltip
    */
   public static String getToolTip(String type) {
     if (type.equals("INVENTORY")) {
@@ -65,10 +66,10 @@ public class Views {
   }
 
   /**
-   * This function takes a dungeon map and the player's coordinates, and prints the map to the console
-   * 
-   * @param map The dungeon object
-   * @param playerCoordinates The coordinates of the player.
+   * Prints the Dungeon
+   *
+   * @param map               stores the current dungeon
+   * @param playerCoordinates stores the current coordinates of the player.
    */
   public static void printDungeon(Dungeon map, int[] playerCoordinates) {
     String[] consoleText = new String[]{
@@ -81,10 +82,10 @@ public class Views {
 
 
   /**
-   * It prints a bunch of text to the console
-   * 
-   * @param player The player object
-   * @param score HighScore object
+   * Prints the Death Menu
+   *
+   * @param player stores the player object to grab scores
+   * @param score  stores the HighScore object to grab high scores
    */
   public static void printDeathMenu(Player player, HighScore score) {
     String[] consoleText = new String[]{
@@ -101,9 +102,9 @@ public class Views {
   }
 
   /**
-   * It takes an array of strings, prints them to the console, and then prints the player's stats
-   * 
-   * @param consoleText String[]
+   * Print a String Array with a GameHeader and the Player's current stats.
+   *
+   * @param consoleText stores a String[] containing the text to be printed to the console
    */
   public static void printLines(String[] consoleText) {
     // cls terminal
@@ -116,10 +117,9 @@ public class Views {
   }
 
   /**
-   * It takes an array of strings, prints them to the console, and adds a header to the top of the
-   * console
-   * 
-   * @param consoleText The text to be printed to the console.
+   * Print an String Array with a GameHeader
+   *
+   * @param consoleText stores a String[] containing the text to be printed to the console
    */
   public static void printLinesWithoutPlayer(String[] consoleText) {
     // cls terminal
@@ -131,11 +131,12 @@ public class Views {
     System.out.println(outString);
   }
 
+
   /**
-   * This function prints a string to the terminal, and optionally clears the terminal before printing
-   * 
-   * @param outString The string to be printed to the terminal
-   * @param clsTerminal clears the terminal
+   * Print a String Array with a GameHeader and the Player's current stats, optionally clearing the terminal.
+   *
+   * @param outString   stores the string to be printed to the terminal
+   * @param clsTerminal stores whether to clear the terminal
    */
   public static void printLn(String outString, boolean clsTerminal) {
     // cls terminal
@@ -146,10 +147,9 @@ public class Views {
   }
 
   /**
-   * This function prints the text in the consoleText array, one line at a time, with a delay between
-   * each line
-   * 
-   * @param consoleText The text to be printed to the console.
+   * Wait a delay after printing some lines.
+   *
+   * @param consoleText stores a String[] containing the text to be printed to the console
    */
   public static void delayedPrintLines(String[] consoleText) {
     printLines(consoleText);
@@ -157,9 +157,9 @@ public class Views {
   }
 
   /**
-   * It prints the text to the console and then delays the program for a second.
-   * 
-   * @param consoleText The text to be printed to the console.
+   * Wait a delay after printing some lines without the stat header.
+   *
+   * @param consoleText stores a String[] containing the text to be printed to the console
    */
   public static void delayedPrintLinesWithoutPlayer(String[] consoleText) {
     printLinesWithoutPlayer(consoleText);
@@ -167,9 +167,9 @@ public class Views {
   }
 
   /**
-   * This function prints a string to the console, and then delays the program for a second
-   * 
-   * @param consoleText The text to be printed to the console.
+   * Wait a delay after printing a line, always clears terminal.
+   *
+   * @param consoleText stores a String containing the text to be printed to the console
    */
   public static void delayedPrintLn(String consoleText) {
     printLn(consoleText, true);
@@ -177,8 +177,7 @@ public class Views {
   }
 
   /**
-   * It's a function that takes no arguments and returns nothing. It's called delay and it sleeps for a
-   * certain amount of time
+   * Sleep
    */
   public static void delay() {
     try {
@@ -190,13 +189,13 @@ public class Views {
 
 
   /**
-   * It prints out a welcome message to the console
-   * 
-   * @param difficultyMultiplier This is the difficulty of the dungeon.
+   * Prints out the welcome message to the dungeon.
+   *
+   * @param depth stores how deep we are through the dungeon.
    */
-  public static void printPreDungeon(int difficultyMultiplier) {
+  public static void printPreDungeon(int depth) {
     String[] consoleText = new String[]{
-        "Welcome traveller, you've reached the entrance to dungeon: " + difficultyMultiplier,
+        "Welcome traveller, you've reached the entrance to dungeon: " + depth,
         "",
         "Beware of creepy monsters!"
     };

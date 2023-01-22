@@ -3,9 +3,13 @@ package Dungeon.Game;
 import java.util.Random;
 
 /**
- * It generates a random number between 0 and 1, and then it uses a binary search to find the index of
- * the first element in the CDF array that is greater than the random number
+ * This GameWeightedRandoms class provides WeightedRandom generation with optional Scaling.
+ *
+ * @author <a href="https://stackoverflow.com/a/4463613">Sven Marnach</a> + Tony Guo
+ * @version 1.0
+ * @since 1.0
  */
+
 public class GameWeightedRandoms {
 
 
@@ -17,9 +21,14 @@ public class GameWeightedRandoms {
   private double sum;
   private int radius = -1;
 
+  /**
+   * Constructor for the GameWeightedRandoms class.
+   */
   public GameWeightedRandoms(double[] probabilities) {
     this.BASE_PROBABILITIES = probabilities;
     this.CDF = new double[probabilities.length];
+
+    // create new scale factors and set them to zero
     this.scaleFactors = new double[probabilities.length];
     for (int x = 0; x < probabilities.length; x++) {
       this.scaleFactors[x] = 1;
@@ -27,19 +36,8 @@ public class GameWeightedRandoms {
     updateCDF();
   }
 
-// --Commented out by Inspection START (1/12/2023 11:21 PM):
-//    public WeightedRandom(double[] probabilities, double[] scalarFactors) {
-//        this.BASE_PROBABILITIES = probabilities;
-//        this.CDF = new double[probabilities.length];
-//        this.scaleFactors = scalarFactors;
-//        updateCDF();
-//    }
-// --Commented out by Inspection STOP (1/12/2023 11:21 PM)
-
   /**
-   * The function updates the CDF array by multiplying each element of the BASE_PROBABILITIES array by
-   * the corresponding element of the scaleFactors array, and then adding the result to the
-   * runningTotal variable
+   * Calculates the probability of each element.
    */
   private void updateCDF() {
     double runningTotal = 0;
@@ -54,10 +52,9 @@ public class GameWeightedRandoms {
   }
 
   /**
-   * We generate a random number between 0 and 1, and then we use a binary search to find the index of
-   * the first element in the CDF array that is greater than the random number
-   * 
-   * @return The index of the choice.
+   * Calculate a choice by randomly generating a number and finding the first greater element within the array.
+   *
+   * @return the choice.
    */
   public int generateChoice() {
     double randomChoice = RAND.nextDouble(this.sum);
@@ -76,10 +73,10 @@ public class GameWeightedRandoms {
   }
 
   /**
-   * This function sets the scale factors and radius of the filter
-   * 
-   * @param radius The radius of the circle.
-   * @param scaleFactors The scale factors for each of the Gaussian kernels.
+   * Sets the scale factors and radius.
+   *
+   * @param radius       stores the radius
+   * @param scaleFactors stores the probability scaling factors in a double array
    */
   public void setScaleFactors(int radius, double[] scaleFactors) {
     this.scaleFactors = scaleFactors;
@@ -88,39 +85,83 @@ public class GameWeightedRandoms {
   }
 
   /**
-   * This function returns the radius of the circle
-   * 
-   * @return The radius of the circle.
+   * @return the radius
    */
   public int getRadius() {
     return this.radius;
   }
 
-
-    /* double[] chanceTables = {
-                0.05, // RegularTile
-                0.05, // RegularTile
-                0.15,  // WallTile
-                0.25, // RegularTile
-                0.50  // WallTile
-        };
-        WeightedRandom weights = new WeightedRandom(chanceTables);
-        int[] newWeights = new int[5];
-        while (true) {
-            int index = weights.generateChoice();
-            newWeights[index] += 1;
-            if (newWeights[0] % 2000 == 0) {
-                double sum = 0;
-                for (int newWeight : newWeights) {
-                    sum += newWeight;
-                }
-                System.out.println(newWeights[0] / sum + "\n" +
-                        newWeights[1] / sum + "\n" +
-                        newWeights[2] / sum + "\n" +
-                        newWeights[3] / sum + "\n" +
-                        newWeights[4] / sum + "\n");
-            }
+  // this function tests self
+  public void testSelf() {
+    double[] chanceTables = {
+        0.05, // RegularTile
+        0.05, // RegularTile
+        0.15,  // WallTile
+        0.25, // RegularTile
+        0.50  // WallTile
+    };
+    GameWeightedRandoms weights = new GameWeightedRandoms(chanceTables);
+    int[] newWeights = new int[5];
+    int x = 0;
+    while (x <= 50000) {
+      int index = weights.generateChoice();
+      newWeights[index] += 1;
+      if (newWeights[0] / 20000 == 0) {
+        double sum = 0;
+        for (int newWeight : newWeights) {
+          sum += newWeight;
         }
-     */
+        System.out.println(newWeights[0] / sum + "\n" +
+            newWeights[1] / sum + "\n" +
+            newWeights[2] / sum + "\n" +
+            newWeights[3] / sum + "\n" +
+            newWeights[4] / sum + "\n");
+        System.out.println("Regular " + x);
+      }
+      x++;
+    }
+
+    x = 0;
+    weights.setScaleFactors(0, new double[]{1.00, 0.00, 0.00, 0.00, 0.00});
+    newWeights = new int[5];
+    while (x <= 50000) {
+      int index = weights.generateChoice();
+      newWeights[index] += 1;
+      if (newWeights[0] / 20000 == 0) {
+        double sum = 0;
+        for (int newWeight : newWeights) {
+          sum += newWeight;
+        }
+        System.out.println(newWeights[0] / sum + "\n" +
+            newWeights[1] / sum + "\n" +
+            newWeights[2] / sum + "\n" +
+            newWeights[3] / sum + "\n" +
+            newWeights[4] / sum + "\n");
+        System.out.println("Scaled " + x);
+      }
+      x++;
+    }
+
+    x = 0;
+    weights.setScaleFactors(0, new double[]{1.00, 2.00, 3.00, 4.00, 0.00});
+    newWeights = new int[5];
+    while (x <= 50000) {
+      int index = weights.generateChoice();
+      newWeights[index] += 1;
+      if (newWeights[0] / 20000 == 0) {
+        double sum = 0;
+        for (int newWeight : newWeights) {
+          sum += newWeight;
+        }
+        System.out.println(newWeights[0] / sum + "\n" +
+            newWeights[1] / sum + "\n" +
+            newWeights[2] / sum + "\n" +
+            newWeights[3] / sum + "\n" +
+            newWeights[4] / sum + "\n");
+        System.out.println("Scaled 2 " + x);
+      }
+      x++;
+    }
+  }
 
 }

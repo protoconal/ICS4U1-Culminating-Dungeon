@@ -4,10 +4,12 @@ import Dungeon.Game.Game;
 
 import java.util.TreeMap;
 
-// please document this whole java file with javadocs
-
 /**
- * The PlayerInventory class is a class that stores the player's inventory.
+ * This PlayerInventory class represents a player's inventory.
+ *
+ * @author Tony Guo, Emily Ta, Chris Yang, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
  */
 public class PlayerInventory {
   private final WeaponDefinitions WEAPON_DEFINITIONS = new WeaponDefinitions();
@@ -15,57 +17,80 @@ public class PlayerInventory {
   // use a map
   private final TreeMap<String, Integer> HEALTH_PLAYER_INVENTORY = new TreeMap<>();
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
-  private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
+  private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromId("DullSword");
 
   /**
-   * The constructor for the PlayerInventory class.
+   * @return this class's child WeaponDefinitions object.
    */
   public WeaponDefinitions getWeaponDefinitions() {
     return WEAPON_DEFINITIONS;
   }
 
   /**
-   * The getHealthDefinitions() method returns the HealthDefinitions object.
-   * 
-   * @return The HealthDefinitions object.
+   * @return this class's child HealthDefinitions object.
    */
   public HealthDefinitions getHealthDefinitions() {
     return HEALTH_DEFINITIONS;
   }
 
   /**
-   * The reset method resets the player's inventory.
+   * @return the weapon ids currently in the player's inventory.
    */
-  public void reset() {
-    HEALTH_PLAYER_INVENTORY.clear();
-    WEAPON_PLAYER_INVENTORY.clear();
-    equippedWeapon = WEAPON_DEFINITIONS.returnItemFromName("DullSword");
+  public String[] getWeaponsIds() {
+    return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
   /**
-   * The getEquippedWeapon() method returns the equipped weapon.
-   * @return WeaponItem The equipped weapon.
+   * @return the health ids currently in the player's inventory.
    */
-  public WeaponItem getEquippedWeapon() {
-    return equippedWeapon;
+  public String[] getHealthIds() {
+    return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
+  }
+
+
+  /**
+   * @return the names of the weapons in the player's inventory.
+   */
+  public String[] getWeaponNames() {
+    String[] weaponNames = getWeaponsIds();
+    for (int x = 0; x < weaponNames.length; x++) {
+      weaponNames[x] = WEAPON_DEFINITIONS.returnItemFromId(weaponNames[x]).getName();
+    }
+    return weaponNames;
   }
 
   /**
-   * The getEquippedWeapon() method sets the equipped weapon.
-   * @return WeaponItem The equipped weapon.
+   * @return the names of the health items in the player's inventory.
    */
-  public void setEquippedWeapon(String itemString) {
-    // assumes validated data
-
-    // return weapon, set new weapon
-    addWeapon(this.equippedWeapon);
-    this.equippedWeapon = removeWeapon(itemString);
+  public String[] getHealthNames() {
+    String[] healthNames = getHealthIds();
+    for (int x = 0; x < healthNames.length; x++) {
+      healthNames[x] = HEALTH_DEFINITIONS.returnItemFromId(healthNames[x]).getName();
+    }
+    return healthNames;
   }
 
   /**
-   * The addWeapon method adds a weapon to the player's inventory.
-   * 
-   * @param weapon
+   * Returns the current count of an itemId in the player's inventory.
+   *
+   * @param itemId a string that stores the itemId to check.
+   * @return the current count of an item in the player's inventory.
+   */
+  public int getItemCount(String itemId) {
+    // check weapons
+    if (WEAPON_PLAYER_INVENTORY.getOrDefault(itemId, null) != null) {
+      return 1;
+    }
+    // must be health item with stackable properties
+    return HEALTH_PLAYER_INVENTORY.getOrDefault(itemId, 0);
+  }
+
+  /**
+   * Adds a weapon to the player's inventory given its Object.
+   * <p></p>
+   * If the item already exists within the player's inventory, it is automatically sold.
+   *
+   * @param weapon a WeaponItem to be added to the inventory.
    */
   private void addWeapon(WeaponItem weapon) {
     if (getItemCount(weapon.getId()) == 0) {
@@ -78,144 +103,115 @@ public class PlayerInventory {
   }
 
   /**
-   * The addWeapon method adds a weapon to the player's inventory.
-   * 
-   * @param weapon
+   * Adds a weapon to the player's inventory given its itemId.
+   * <p></p>
+   * If the item already exists within the player's inventory, it is automatically sold.
+   *
+   * @param itemId a string representing a WeaponItem to be added to the inventory.
    */
-  public void addWeapon(String itemName) {
-    this.WEAPON_PLAYER_INVENTORY.put(itemName, WEAPON_DEFINITIONS.returnItemFromName(itemName));
-  }
-
-
-  /** 
-   * The getWeapons method returns the weapons in the player's inventory.
-   * 
-   * @return String[] The weapons in the player's inventory.
-   */
-  public String[] getWeapons() {
-    return this.WEAPON_PLAYER_INVENTORY.keySet().toArray(new String[0]);
-  }
-
-  /** 
-   * The getHealthItems method returns the health items in the player's inventory.
-   * 
-   * @return String[] The health items in the player's inventory.
-   */
-  public String[] getHealthItems() {
-    return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
+  public void addWeapon(String itemId) {
+    addWeapon(WEAPON_DEFINITIONS.returnItemFromId(itemId));
   }
 
   /**
-   * The initializeWeapons method initializes the player's weapons.
+   * Removes a weapon from the player's inventory given a itemId.
+   *
+   * @param itemId a string storing the item's id to remove.
+   * @return the weapon that was removed
    */
-  public void initializeWeapons() {
-    addWeapon("DullSword");
-    addWeapon("IronSword");
-    addWeapon("Katana");
-  }
-
-  /**
-   * The initializeHealth method initializes the player's weapons.
-   */
-  public void initializeHealth() {
-    addHealthItem("Bandage");
-    addHealthItem("Bandage");
-    addHealthItem("Bandage");
-  }
-
-/**
-   * The getWeaponNames method returns the names of the weapons in the player's inventory.
-   * @return String[] The names of the weapons in the player's inventory.
-   */
-  public String[] getWeaponNames() {
-    String[] weaponNames = getWeapons();
-    for (int x = 0; x < weaponNames.length; x++) {
-      weaponNames[x] = WEAPON_DEFINITIONS.returnItemFromName(weaponNames[x]).getName();
+  public WeaponItem removeWeapon(String itemId) {
+    if (WEAPON_PLAYER_INVENTORY.size() > 1) {
+      return this.WEAPON_PLAYER_INVENTORY.remove(itemId);
     }
-    return weaponNames;
-  }
-
-/**
-   * The getHealthNames method returns the names of the health items in the player's inventory.
-   * @return String[] The names of the health items in the player's inventory.
-   */
-  public String[] getHealthNames() {
-    String[] healthNames = getHealthItems();
-    for (int x = 0; x < healthNames.length; x++) {
-      healthNames[x] = HEALTH_DEFINITIONS.returnItemFromName(healthNames[x]).getName();
-    }
-    return healthNames;
+    return null;
   }
 
   /**
-   * The size method returns the total number of items in the player inventory.
-   * @return int the total number of items.
+   * Adds a health item to the player's inventory given a itemId.
+   *
+   * @param itemId a string storing the item's id to add.
+   */
+  public void addHealthItem(String itemId) {
+    this.HEALTH_PLAYER_INVENTORY.put(itemId, getItemCount(itemId) + 1);
+  }
+
+  /**
+   * Removes a health item from the player's inventory.
+   *
+   * @param itemId a string storing the name of the item to remove.
+   * @return the health item that was removed.
+   */
+  public HealthItem removeHealthItem(String itemId) {
+    int count = getItemCount(itemId) - 1;
+
+    // if count smaller or equal to zero
+    if (count <= 0) {
+      // delete from inventory
+      this.HEALTH_PLAYER_INVENTORY.remove(itemId);
+    } else {
+      // otherwise, update count
+      this.HEALTH_PLAYER_INVENTORY.put(itemId, count);
+    }
+    return HEALTH_DEFINITIONS.returnItemFromId(itemId);
+  }
+
+  /**
+   * @return the player's equipped weapon.
+   */
+  public WeaponItem getEquippedWeapon() {
+    return equippedWeapon;
+  }
+
+  /**
+   * Sets the equipped weapon given a itemId.
+   *
+   * @param itemId a string storing the id of the item wanted to be equipped.
+   */
+  public void setEquippedWeapon(String itemId) {
+    // assumes validated data
+
+    // return weapon, set new weapon
+    addWeapon(this.equippedWeapon);
+    this.equippedWeapon = removeWeapon(itemId);
+  }
+
+  /**
+   * @return the total number of items in the player inventory.
    */
   public int size() {
     return HEALTH_PLAYER_INVENTORY.size() + WEAPON_PLAYER_INVENTORY.size();
   }
 
   /**
-   * The removeWeapon method removes a weapon from the player's inventory.
-   * 
-   * @param itemName
-   * @return
+   * Debug: Initializes the player's weapons.
    */
-  public WeaponItem removeWeapon(String itemName) {
-    if (WEAPON_PLAYER_INVENTORY.size() > 1) {
-      return this.WEAPON_PLAYER_INVENTORY.remove(itemName);
-    }
-    return null;
+  public void DEBUG_initializeWeapons() {
+    addWeapon("DullSword");
+    addWeapon("IronSword");
+    addWeapon("Katana");
   }
 
   /**
-   * The addHealthItem method adds a health item to the player's inventory.
-   *
-   * @param itemName The name of the item to add.
+   * Debug: Initializes the player's weapons.
    */
-  public void addHealthItem(String itemName) {
-    this.HEALTH_PLAYER_INVENTORY.put(itemName, getItemCount(itemName) + 1);
+  public void DEBUG_initializeHealth() {
+    addHealthItem("Bandage");
+    addHealthItem("Bandage");
+    addHealthItem("Bandage");
   }
 
   /**
-   * The removeHealthItem method removes a health item from the player's inventory.
-   *
-   * @param itemName The name of the item to remove.
-   * @return The item that was removed.
+   * Resets the player's inventory by destroying their Weapons and HealthItems. They are equipped with one DullSword.
    */
-  public HealthItem removeHealthItem(String itemName) {
-    int count = getItemCount(itemName) - 1;
-
-    // if count smaller or equal to zero
-    if (count <= 0) {
-      // delete from inventory
-      this.HEALTH_PLAYER_INVENTORY.remove(itemName);
-    } else {
-      // otherwise, update count
-      this.HEALTH_PLAYER_INVENTORY.put(itemName, count);
-    }
-    return HEALTH_DEFINITIONS.returnItemFromName(itemName);
+  public void reset() {
+    HEALTH_PLAYER_INVENTORY.clear();
+    WEAPON_PLAYER_INVENTORY.clear();
+    equippedWeapon = WEAPON_DEFINITIONS.returnItemFromId("DullSword");
   }
 
-  /**
-   * The getItemCount method returns the number of items in the player's inventory.
-   *
-   * @param itemName The name of the item to check.
-   * @return The number of items in the player's inventory.
-   */
-  public int getItemCount(String itemName) {
-    // check weapons
-    if (WEAPON_PLAYER_INVENTORY.getOrDefault(itemName, null) != null) {
-      return 1;
-    }
-    // must be health item with stackable properties
-    return HEALTH_PLAYER_INVENTORY.getOrDefault(itemName, 0);
-  }
 
   /**
-   * The toString method for the PlayerInventory class.
-   *
-   * @return The string representation of the PlayerInventory class.
+   * @return the string representation of the player's inventory.
    */
   @Override
   public String toString() {
@@ -225,7 +221,7 @@ public class PlayerInventory {
     out.append("Currently equipped Weapon: ").append(equippedWeapon.getName()).append("\n");
 
     // build weapon string
-    String[] weapons = this.getWeapons();
+    String[] weapons = this.getWeaponsIds();
     out.append("Your weapons... \n");
     // check empty
     if (weapons.length == 0) {
@@ -246,7 +242,7 @@ public class PlayerInventory {
     out.append("\n");
 
     // build weapon string
-    String[] health = this.getHealthItems();
+    String[] health = this.getHealthIds();
     out.append("Your healing items... \n");
     if (health.length == 0) {
       out.append("  No healing items. \n");
@@ -266,7 +262,4 @@ public class PlayerInventory {
 
     return out.toString();
   }
-
 }
-
-// inventoryArray = new Item[20];

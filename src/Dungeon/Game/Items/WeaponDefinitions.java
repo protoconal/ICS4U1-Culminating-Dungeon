@@ -3,7 +3,7 @@ package Dungeon.Game.Items;
 import java.util.HashMap;
 
 /**
- * The WeaponDefinitions class is a class that contains all the weapon items.
+ * The WeaponDefinitions class is a class that contains all the weapon items that the player can use in the game.
  */
 public class WeaponDefinitions {
   private final HashMap<String, WeaponItem> WEAPON_DEFINITIONS = new HashMap<>();
@@ -27,19 +27,19 @@ public class WeaponDefinitions {
   }
 
   /**
-   * The returnItemFromName() method returns a WeaponItem object from the name of the item.
-   * 
+   * The returnItemFromId() method returns a WeaponItem object from the name of the item.
+   *
    * @param itemName The name of the item.
    * @return The WeaponItem object.
    */
-  public WeaponItem returnItemFromName(String itemName) {
+  public WeaponItem returnItemFromId(String itemName) {
     return WEAPON_DEFINITIONS.getOrDefault(itemName, null);
   }
 
   /**
    * The getWeaponIds() method returns an array of Strings that contains the names of all the weapon
    * items.
-   * 
+   *
    * @return The array of Strings.
    */
   public String[] getWeaponIds() {

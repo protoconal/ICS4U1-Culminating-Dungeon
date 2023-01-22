@@ -1,26 +1,104 @@
 package Dungeon.Game;
 
-import Dungeon.Game.Entities.Hero;
+import Dungeon.Game.Entities.Entity;
 import Dungeon.Game.Items.PlayerInventory;
 
 /**
- * The Player class is a subclass of the Hero class, and it has an inventory, a score, and a death
- * reason
+ * This Player class represents the player.
+ * <p></p>
+ * They have an inventory, a score, and a death reason.
+ *
+ * @author Tony Guo, Emily Ta, Chris Yang, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
  */
-public class Player extends Hero {
-  public final PlayerInventory INVENTORY = new PlayerInventory();
+public class Player extends Entity {
+  private final PlayerInventory INVENTORY = new PlayerInventory();
+  private String name;
   private int score = 0;
   private String deathReason;
 
   public Player() {
-    super();
+    super(100);
   }
 
   /**
-   * The toString() method returns a string representation of the object
-   * 
-   * @return The player's current HP, the average damage of the equipped weapon, and the player's
-   * score.
+   * @return the player's inventory.
+   */
+  public PlayerInventory getInventory() {
+    return INVENTORY;
+  }
+
+  /**
+   * @return the name our the hero.
+   */
+  public String getName() {
+    return name;
+  }
+
+  /**
+   * Sets the name of the hero.
+   *
+   * @param name the name of our player
+   */
+  public void setName(String name) {
+    this.name = name;
+  }
+
+
+  /**
+   * @return the score of the player.
+   */
+  public int getScore() {
+    return score;
+  }
+
+  /**
+   * Adds the given score to our player's score.
+   *
+   * @param score stores the score to add.
+   */
+  public void addScore(int score) {
+    this.score += score;
+  }
+
+  /**
+   * Removes the given score from our player's score.
+   *
+   * @param score stores the score to remove.
+   */
+  public void removeScore(int score) {
+    this.score -= score;
+  }
+
+  /**
+   * @return the monster's name who killed player.
+   */
+  public String getDeathReason() {
+    return deathReason;
+  }
+
+  /**
+   * Sets the death reason of the player
+   *
+   * @param deathReason the monster's name who killed player.
+   */
+  public void setDeathReason(String deathReason) {
+    this.deathReason = deathReason;
+  }
+
+
+  /**
+   * Resets the score, HP and inventory to defaults.
+   */
+  public void reset() {
+    this.score = 0;
+    this.resetHP();
+    INVENTORY.reset();
+  }
+
+  /**
+   * @return a string representation of the player's current HP, the average damage of the equipped weapon, and the player's score.
    */
   @Override
   public String toString() {
@@ -31,75 +109,4 @@ public class Player extends Hero {
         this.getScore();
   }
 
-  
-  /**
-   * // Java
-   * public int getScore() {
-   *     return score;
-   *   }
-   * 
-   * @return The score of the player.
-   */
-  public int getScore() {
-    return score;
-  }
-
-  /**
-   * This function adds the score parameter to the score variable
-   * 
-   * @param score The score to add to the current score.
-   */
-  public void addScore(int score) {
-    this.score += score;
-  }
-
-  /**
-   * // Java
-   * public void removeScore(int score) {
-   *     this.score -= score;
-   *   }
-   * 
-   * @param score The score to be added to the player's score.
-   */
-  public void removeScore(int score) {
-    this.score -= score;
-  }
-
-
-  /**
-   * This function resets the score and HP of the player to 0 and 100 respectively, and resets the
-   * inventory
-   */
-  public void reset() {
-    this.score = 0;
-    this.resetHP();
-    INVENTORY.reset();
-  }
-
-  /**
-   * It returns the player's inventory
-   * 
-   * @return The PlayerInventory object.
-   */
-  public PlayerInventory getInventory() {
-    return INVENTORY;
-  }
-
-  /**
-   * This function returns the death reason of the player
-   * 
-   * @return The deathReason variable is being returned.
-   */
-  public String getDeathReason() {
-    return deathReason;
-  }
-
-  /**
-   * This function sets the death reason of the player
-   * 
-   * @param deathReason The reason the player died.
-   */
-  public void setDeathReason(String deathReason) {
-    this.deathReason = deathReason;
-  }
 }

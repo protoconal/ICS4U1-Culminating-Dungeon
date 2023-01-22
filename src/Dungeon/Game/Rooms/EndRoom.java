@@ -5,26 +5,25 @@ import Dungeon.Game.Input;
 import Dungeon.Game.Player;
 import Dungeon.Game.Views;
 
-// generate java docs for this class please
-
 /**
- * The EndRoom class is a subclass of the Room class, and it is the room that the player must reach to
- * win the game.
+ * The EndRoom class represents the portal to exit the Dungeon to deeper depth.
+ *
+ * @author Tony Guo, Emily Ta, Ilelemwanta Nomaren, Chris Yang
+ * @version 1.0
+ * @since 1.0
  */
 public class EndRoom extends Room {
   private static final int ROOM_ID = 5;
 
   /**
-   * The constructor for the EndRoom class.
+   * Constructor for the EndRoom class.
    */
   public EndRoom() {
     super(ROOM_ID, true);
   }
 
   /**
-   * The toString() method returns a string representation of the object.
-   * 
-   * @return The string representation of the object.
+   * @return the representation of the room on a Dungeon map.
    */
   @Override
   public String toString() {
@@ -32,10 +31,10 @@ public class EndRoom extends Room {
   }
 
   /**
-   * The interactRoom() method is called when the player interacts with the room.
-   * 
-   * @param player The player object.
-   * @return The boolean value of the interactRoom() method.
+   * Handles when the player interacts with the portal.
+   *
+   * @param player stores the player to interact with.
+   * @return whether the player died in the room.
    */
   public boolean interactRoom(Player player) {
     String[] consoleText = new String[]{
