@@ -3,7 +3,15 @@ package Dungeon.Game;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This Input class contains methods and definitions to get valid input.
+ *
+ * @author Tony Guo, Ilelemwanta Nomaren, Emily Ta, Chris Yang,
+ * @version 1.0
+ * @since 1.0
+ */
 public class Input {
+  // these definitions could be stored in its own class
   final static String[] VALID_MOVEMENT_KEYS = {
       // keeping same from dungeon
       "W", // up
@@ -41,7 +49,7 @@ public class Input {
 
   final static String[] VALID_MENU_KEYS = {
       "B", // begin -- default
-      "H", // highscores
+      "H", // high scores
       ";", // menu
   };
 
@@ -74,12 +82,20 @@ public class Input {
       ";", // menu
   };
 
-  final static Scanner SCAN = new Scanner(System.in);
-  private static final String[] VALID_YN_KEYS = {
+  final static String[] VALID_YN_KEYS = {
       "N", // no -- default
       "Y", // yes
   };
 
+  final private static Scanner SCAN = new Scanner(System.in);
+
+  /**
+   * Returns a valid keystroke given a definition of what keys are valid.
+   *
+   * @param validKeys   stores array of valid keys that the user can enter.
+   * @param consoleText stores the text that will be prompted to the user.
+   * @return the valid keystroke.
+   */
   public static String getValidKeystroke(String[] validKeys, String consoleText) {
     System.out.print(consoleText);
     String key = SCAN.nextLine();
@@ -96,6 +112,13 @@ public class Input {
     return key.toUpperCase();
   }
 
+  /**
+   * Returns a valid keystroke given a definition of what keys are valid.
+   *
+   * @param validKeys   stores ArrayList of valid keys that the user can enter.
+   * @param consoleText stores the text that will be prompted to the user.
+   * @return the valid keystroke.
+   */
   public static String getValidKeystroke(ArrayList<String> validKeys, String consoleText) {
     System.out.print(consoleText);
     String key = SCAN.nextLine();
@@ -107,6 +130,13 @@ public class Input {
     return key.toUpperCase();
   }
 
+  /**
+   * Checks whether a keystroke is in the valid keys array.
+   *
+   * @param key   stores the key to be checked
+   * @param validKeys stores array of valid keys that the user can enter.
+   * @return whether the key is a valid key.
+   */
   private static boolean checkKey(String key, String[] validKeys) {
     // case ignorant
     for (int x = 0; x < validKeys.length; x++) {
@@ -117,6 +147,13 @@ public class Input {
     return false;
   }
 
+  /**
+   * Checks whether a keystroke is in the valid keys array.
+   *
+   * @param key   stores the key to be checked
+   * @param validKeys stores ArrayList of valid keys that the user can enter.
+   * @return whether the key is a valid key.
+   */
   private static boolean checkKey(String key, ArrayList<String> validKeys) {
     // case ignorant
     for (int x = 0; x < validKeys.size(); x++) {
@@ -127,11 +164,20 @@ public class Input {
     return false;
   }
 
+  /**
+   * Wait's for any key press.
+   */
   public static void waitForKeyPress() {
     System.out.print("Press enter key to continue...");
     SCAN.nextLine();
   }
 
+  /**
+   * Retrieves input that matches the directions that it is given.
+   *
+   * @param movableDirections stores a list of directions that the player can move
+   * @return the valid direction keystroke.
+   */
   public static String getMove(String[] movableDirections) {
     // I know this is inefficient. - oh well.
 
@@ -167,6 +213,13 @@ public class Input {
     return VALID_DIRECTIONS[Util.index(VALID_MOVEMENT_KEYS, keyStroke)];
   }
 
+  /**
+   * Retrieves input that matches a valid key list. If no input is found, it defaults to the first option.
+   *
+   * @param validKeys   stores ArrayList of valid keys that the user can enter.
+   * @param consoleText stores the text that will be prompted to the user.
+   * @return the valid keystroke.
+   */
   public static String getKeyOrDefault(String[] validKeys, String consoleText) {
     String key = getValidKeystroke(validKeys, consoleText);
     if (key.equals("")) {
@@ -175,38 +228,80 @@ public class Input {
     return key;
   }
 
+  /**
+   * Retrieves valid Menu input.
+   *
+   * @return the valid keystroke.
+   */
   public static String getMenuKeys() {
     return getKeyOrDefault(VALID_MENU_KEYS, "Input: ");
   }
 
+  /**
+   * Retrieves valid Fight input.
+   *
+   * @return the valid keystroke.
+   */
   public static String getFightKeys() {
     return getKeyOrDefault(VALID_FIGHT_KEYS, "Input: ");
   }
 
+  /**
+   * Retrieves valid Inventory input.
+   *
+   * @return the valid keystroke.
+   */
   public static String getInventoryKeys() {
     return getKeyOrDefault(VALID_INVENTORY_KEYS, "Input: ");
   }
 
+  /**
+   * Retrieves valid Pre-Dungeon input.
+   *
+   * @return the valid keystroke.
+   */
   public static String getPreDungeonKeys() {
     return getKeyOrDefault(VALID_PRE_DUNGEON_KEYS, "Input: ");
   }
 
+  /**
+   * Retrieves valid Death Menu input.
+   *
+   * @return the valid keystroke.
+   */
   public static String getDeathKeys() {
     return getKeyOrDefault(VALID_DEATH_MENU_KEYS, "Input: ");
   }
 
+  /**
+   * Retrieves valid Shopping input.
+   *
+   * @return the valid keystroke.
+   */
   public static String getShopKeys() {
     return getKeyOrDefault(VALID_SHOP_KEYS, "Input: ");
   }
 
+  /**
+   * Retrieves a yes or no from the user.
+   *
+   * @return the valid keystroke.
+   */
+  public static String getYN() {
+    return getKeyOrDefault(VALID_YN_KEYS, "Input: ");
+  }
+
+  /**
+   * Retrieves any String input from the user.
+   *
+   * @param consoleText stores the text that will be prompted to the user.
+   * @return a string containing user input.
+   */
   public static String getText(String consoleText) {
     System.out.print(consoleText);
     return SCAN.nextLine();
   }
 
-  public static String getYN() {
-    return getKeyOrDefault(VALID_YN_KEYS, "Input: ");
-  }
 }
 
 

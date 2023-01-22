@@ -1,8 +1,19 @@
 package Dungeon.Game.DungeonMap;
 
+/**
+ * This MapGenerationSettings class contains the specifications for map generation.
+ * <p></>
+ * Each table contains the relative weights against each other to be used.
+ *
+ * @author Tony Guo, Emily Ta, Chris Yang, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
+ */
 public class MapGenerationSettings {
-  // TODO: implement scaling generation
-  private static final double[] CHANCE_TABLES = {
+  /**
+   * Stores the chances for generating each Room for any given coordinate
+   */
+  private static final double[] ROOM_PROBABILITY_TABLE = {
       0.20, // EmptyRoom
       0.15, // WallRoom
       0.20, // TreasureRoom
@@ -10,15 +21,25 @@ public class MapGenerationSettings {
       0.00, // TrapRoom
   };
 
-  private static final double[][] SCALING_TABLES = {
+  /**
+   * Stores the scaling factors for the base Room probabilities to be multiplied by according to the distance from the center.
+   * <p></p>
+   * When the player gets farther away from the center, we can allow for higher occurrences of MonsterRooms.
+   */
+  private static final double[][] ROOM_PROBABILITY_SCALING_TABLES = {
       // depth will always be half of width of table
-      {1, 1.00, 0.00, 0.00, 0.00, 0}, // depth 1, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
-      {2, 1.00, 1.50, 1.50, 0.50, 0}, // depth 2, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
-      {4, 1.00, 0.50, 0.00, 2.00, 0}, // depth 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
-      {5, 1.00, 5.00, 2.00, 0.00, 0}, // depth 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
-      {8, 1.00, 2.00, 0.00, 0.25, 0}, // depth 6, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
+      {1, 1.00, 0.00, 0.00, 0.00, 0}, // distance 1, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
+      {2, 1.00, 1.50, 1.50, 0.50, 0}, // distance 2, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
+      {4, 1.00, 0.50, 0.00, 2.00, 0}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
+      {5, 1.00, 5.00, 2.00, 0.00, 0}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
+      {8, 1.00, 2.00, 0.00, 0.25, 0}, // distance 6, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
   };
 
+  /**
+   * Stores the scaling factors for the base Monster probabilities to be multiplied by according to the dungeon depth.
+   * <p></p>
+   * When the player gets deeper into the dungeon, we can allow for higher strength of monsters.
+   */
   private static final double[][] MONSTER_CHANCE_TABLE = {
       // depending on levels deep into the dungeon
       {1, 1.00, 0.00, 0.00, 0.00}, // depth 1, Weak, Normal, Strong, Boss
@@ -29,14 +50,23 @@ public class MapGenerationSettings {
   };
 
 
-  public static double[] getProbabilities() {
-    return CHANCE_TABLES;
+  /**
+   * @return the Room probability table (double[]).
+   */
+  public static double[] getRoomProbabilities() {
+    return ROOM_PROBABILITY_TABLE;
   }
 
-  public static double[][] getScalingFactors() {
-    return SCALING_TABLES;
+  /**
+   * @return the Room probability scaling table (double[][]).
+   */
+  public static double[][] getRoomScalingFactors() {
+    return ROOM_PROBABILITY_SCALING_TABLES;
   }
 
+  /**
+   * @return the monster chance table (double[][]).
+   */
   public static double[][] getMonsterChanceTable() {
     return MONSTER_CHANCE_TABLE;
   }

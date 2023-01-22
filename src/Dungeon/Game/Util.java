@@ -3,10 +3,24 @@ package Dungeon.Game;
 import java.util.ArrayList;
 
 /**
- * Utility Class
+ * Utility Class.
+ * Some functions appropriated from Nim.
+ *
+ * @author Tony Guo
+ * @version 1.0
+ * @since 1.0
  */
 public class Util {
 
+  /**
+   * Find the searchTerm within an Array using Linear Search
+   * <p></p>
+   * If not found, return -1;
+   *
+   * @param array      the array to search
+   * @param searchTerm The term you're searching for.
+   * @return The index of the search term in the array.
+   */
   public static int index(String[] array, String searchTerm) {
     // linear search
     for (int x = 0; x < array.length; x++) {
@@ -17,6 +31,15 @@ public class Util {
     return -1;
   }
 
+  /**
+   * It takes an array, a starting index, and an ending index, and returns a new array that contains
+   * the values from the original array that are between the starting and ending indexes
+   *
+   * @param originalArr The original array to copy from
+   * @param fromIndex   The index of the first element to copy.
+   * @param toIndex     The index of the last element to copy.
+   * @return The method is returning a copy of the original array.
+   */
   public static double[] copyArrayFromIndexes(double[] originalArr, int fromIndex, int toIndex) {
     double[] copyArr = new double[toIndex - fromIndex];
     int y = 0;
@@ -28,6 +51,14 @@ public class Util {
     return copyArr;
   }
 
+  /**
+   * We start at the second element in the array, and compare it to the first element. If it's smaller,
+   * we move the first element to the right, and then compare the second element to the new first
+   * element. We keep doing this until we find an element that's smaller than the second element, or we
+   * reach the end of the array. Then we move the second element to the right of the element we found
+   *
+   * @param data the array to be sorted
+   */
   public static void insertionSort(double[] data) {
     // insertion sort
     int index;
@@ -50,6 +81,12 @@ public class Util {
     }
   }
 
+  /**
+   * The function takes an ArrayList of Strings as a parameter and sorts the ArrayList using the
+   * insertion sort algorithm
+   *
+   * @param data the ArrayList to be sorted
+   */
   public static void insertionSort(ArrayList<String> data) {
 
     // insertion sort
@@ -78,7 +115,6 @@ public class Util {
    * @param start stores start index
    * @param end   stores end index
    */
-
   public static void reverseArrList(ArrayList<String> arr, int start, int end) {
     do {
       String temp = arr.get(end);
@@ -97,6 +133,15 @@ public class Util {
     System.out.flush();
   }
 
+  /**
+   * It takes an array, a starting index, and an ending index, and returns a new array that contains
+   * the elements of the original array from the starting index to the ending index
+   *
+   * @param originalArr The original array to copy from.
+   * @param fromIndex   The index of the first element to copy.
+   * @param toIndex     The index of the last element to copy.
+   * @return A copy of the original array from the specified indexes.
+   */
   public static String[] copyArrayFromIndexes(String[] originalArr, int fromIndex, int toIndex) {
     String[] copyArr = new String[toIndex - fromIndex];
     int y = 0;

@@ -2,11 +2,20 @@ package Dungeon.Game.Items;
 
 import java.util.HashMap;
 
-// 7
+/**
+ * This HealthDefinitions class contains all the health items that the player can use in the game.
+ *
+ * @author Chris Yang, Ilelemwanta Nomaren, Tony Guo, Emily Ta,
+ * @version 1.0
+ * @since 1.0
+ */
 public class HealthDefinitions {
   private final HashMap<String, HealthItem> HEALTH_DEFINITIONS = new HashMap<>();
   private final String[] HEALTH_IDS;
 
+  /**
+   * Constructor for the HealthDefinitions class.
+   */
   public HealthDefinitions() {
     this.HEALTH_DEFINITIONS.put("Bandage", new Bandage());
     this.HEALTH_DEFINITIONS.put("Potion", new Potion());
@@ -16,16 +25,31 @@ public class HealthDefinitions {
     this.HEALTH_IDS = this.HEALTH_DEFINITIONS.keySet().toArray(new String[0]);
   }
 
-  public HealthItem returnItemFromName(String itemName) {
+  /**
+   * Returns an HealthItem object from the name of the item.
+   *
+   * @param itemName a string storing the name of the item.
+   * @return the HealthItem object.
+   */
+  public HealthItem returnItemFromId(String itemName) {
     return HEALTH_DEFINITIONS.getOrDefault(itemName, null);
   }
 
+  /**
+   * @return the array of Strings that contains the names of all the health items.
+   */
   public String[] getHealthIds() {
     return HEALTH_IDS;
   }
 }
 
+/**
+ * This class defines Wait, it is a free option when the player has no more health items to use. It restores 10 HP.
+ */
 class Wait extends HealthItem {
+  /**
+   * Constructor for the Wait class.
+   */
   public Wait() {
     super("Wait", // name
         "Catch your breath!", // description
@@ -35,7 +59,13 @@ class Wait extends HealthItem {
   }
 }
 
+/**
+ * This class defines Bandage, it restores 50 HP.
+ */
 class Bandage extends HealthItem {
+  /**
+   * Constructor for the Bandage class.
+   */
   public Bandage() {
     super("Bandage", // name
         "TEMPORARY DESCRIPTION", // description
@@ -45,7 +75,13 @@ class Bandage extends HealthItem {
   }
 }
 
+/**
+ * This class defines Potion, it restores 120 HP.
+ */
 class Potion extends HealthItem {
+  /**
+   * Constructor for the Potion class.
+   */
   public Potion() {
     super("Potion", // name
         "Hocus pocus, I'm starting to lose focus.", // description
@@ -55,7 +91,13 @@ class Potion extends HealthItem {
   }
 }
 
+/**
+ * This class defines Pill, it restores 140 HP.
+ */
 class Pill extends HealthItem {
+  /**
+   * Constructor for the Pill class.
+   */
   public Pill() {
     super("Pill", // name
         "Warning: Not approved by the FDA", // description
@@ -65,7 +107,13 @@ class Pill extends HealthItem {
   }
 }
 
+/**
+ * This class defines ChickenSoup, it restores 180 HP.
+ */
 class ChickenSoup extends HealthItem {
+  /**
+   * Constructor for the ChickenSoup class.
+   */
   public ChickenSoup() {
     super("Chicken Soup", // name
         "All proceeds go to the charity 'Save the Chickens'.", // description

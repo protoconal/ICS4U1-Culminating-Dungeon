@@ -1,13 +1,21 @@
-package Dungeon.Game;
+ package Dungeon.Game;
 
 import java.io.*;
 import java.util.ArrayList;
-// import java.util.Scanner;
 
+/**
+ * HighScore.
+ * Appropriated from Nim.
+ *
+ * @author Tony Guo
+ * @version 1.0
+ * @since 1.0
+ */
 public class HighScore {
 
-  private final ArrayList<String> HIGHSCORES = new ArrayList<>();
+  private final ArrayList<String> HIGH_SCORES = new ArrayList<>();
 
+  /** Constructor for HighScore class */
   public HighScore() {
     try {
       this.loadHighScore();
@@ -16,11 +24,17 @@ public class HighScore {
     }
   }
 
+  /**
+   * It takes the high scores from the array list and puts them into a string builder, then returns the
+   * string builder as a string
+   *
+   * @return a string of the high scores.
+   */
   public String returnHighScoreText() {
     StringBuilder outString = new StringBuilder();
-    for (int x = 0; x < HIGHSCORES.size(); x++) {
+    for (int x = 0; x < HIGH_SCORES.size(); x++) {
       outString.append("    ")
-          .append(HIGHSCORES.get(x))
+          .append(HIGH_SCORES.get(x))
           .append("\n");
     }
 
@@ -44,7 +58,7 @@ public class HighScore {
       read = new BufferedReader(new FileReader("highscore.txt"));
       String line;
       while ((line = read.readLine()) != null) { // does not read newline characters
-        this.HIGHSCORES.add(line);
+        this.HIGH_SCORES.add(line);
       }
     } catch (IOException e) {
       // file probably doesn't exist so create it.
@@ -63,32 +77,32 @@ public class HighScore {
    */
   private void sortHighScore() {
 
-    if (this.HIGHSCORES.size() == 0) {
+    if (this.HIGH_SCORES.size() == 0) {
       return;
     }
 
-    Util.insertionSort(this.HIGHSCORES);
+    Util.insertionSort(this.HIGH_SCORES);
 
     // implement sort score by alphabetical
     // the list should be sorted, we only need to reverse the indexes
 
-    String currentElement = this.HIGHSCORES.get(0).substring(0, 11);
+    String currentElement = this.HIGH_SCORES.get(0).substring(0, 11);
     int max = 0;
     int min = 0;
     // length is one less than size
-    int arrayLength = this.HIGHSCORES.size() - 1;
+    int arrayLength = this.HIGH_SCORES.size() - 1;
 
-    for (int x = 0; x < this.HIGHSCORES.size(); x++) {
+    for (int x = 0; x < this.HIGH_SCORES.size(); x++) {
 
       // not equal
-      if (!this.HIGHSCORES.get(x).substring(0, 11).equals(currentElement) ||
+      if (!this.HIGH_SCORES.get(x).substring(0, 11).equals(currentElement) ||
           x == arrayLength) {
-        currentElement = this.HIGHSCORES.get(x).substring(0, 11);
+        currentElement = this.HIGH_SCORES.get(x).substring(0, 11);
 
         if (x == arrayLength) {
-          Util.reverseArrList(this.HIGHSCORES, min, max);
+          Util.reverseArrList(this.HIGH_SCORES, min, max);
         } else {
-          Util.reverseArrList(this.HIGHSCORES, min, max - 1);
+          Util.reverseArrList(this.HIGH_SCORES, min, max - 1);
         }
         min = x;
       }
@@ -106,24 +120,24 @@ public class HighScore {
     name = name.strip();
     // search for name -- linear search
     int index = -1;
-    for (int x = 0; x < this.HIGHSCORES.size(); x++) {
+    for (int x = 0; x < this.HIGH_SCORES.size(); x++) {
       // "0000000001 - U1", start of name is past character 13
       String currentName = " ";
       try {
-        currentName = this.HIGHSCORES.get(x).substring(13).strip();
+        currentName = this.HIGH_SCORES.get(x).substring(13).strip();
       } catch (StringIndexOutOfBoundsException error) {
         // do nothing
       }
       if (currentName.equals(name)) {
         index = x;
-        x = this.HIGHSCORES.size();
+        x = this.HIGH_SCORES.size();
       }
     }
 
     int newScore = currentScore;
     // if the score exists, check if higher
     if (index != -1) {
-      String currentScoreString = this.HIGHSCORES.remove(index);
+      String currentScoreString = this.HIGH_SCORES.remove(index);
       // first ten digits are the score
       int score = Integer.parseInt(currentScoreString.substring(0, 10));
       newScore = Math.max(currentScore, score);
@@ -131,7 +145,7 @@ public class HighScore {
     // since it is now an integer, we must convert it back to a string
     // representation (SCORE - NAME)
     // and replace the spaces created with (%10s) to zeros
-    this.HIGHSCORES.add(String.format("%10s", newScore).replace(' ', '0') + " - " + name);
+    this.HIGH_SCORES.add(String.format("%10s", newScore).replace(' ', '0') + " - " + name);
 
     // finally sort it
     sortHighScore();
@@ -146,7 +160,7 @@ public class HighScore {
 
     try {
       read = new BufferedWriter(new FileWriter("highscore.txt"));
-      read.write(String.join("\n", this.HIGHSCORES));
+      read.write(String.join("\n", this.HIGH_SCORES));
     } catch (IOException e) {
       System.out.println("Failed to save high scores.");
     } finally {

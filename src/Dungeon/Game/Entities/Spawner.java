@@ -4,6 +4,9 @@ import Dungeon.Game.DungeonMap.MapGenerationSettings;
 import Dungeon.Game.GameWeightedRandoms;
 import Dungeon.Game.Util;
 
+/**
+ * This Monster class holds all the possible monsters and enables the dungeon to randomly spawn them.
+ */
 public class Spawner {
 
   private final GameWeightedRandoms RAND;
@@ -12,6 +15,9 @@ public class Spawner {
   private final StrongMonsterDefinitions STRONG_MONSTER_DEFINITIONS = new StrongMonsterDefinitions();
   private final BossMonsterDefinitions BOSS_MONSTER_DEFINITIONS = new BossMonsterDefinitions();
 
+  /**
+   * Constructor for the Spawner class.
+   */
   public Spawner() {
     double[] spawnChances = new double[]{
         0.40, // WeakMonsters
@@ -22,6 +28,12 @@ public class Spawner {
     RAND = new GameWeightedRandoms(spawnChances);
   }
 
+  /**
+   * Looks up the scale factors for the given dungeon depth.
+   *
+   * @param depth stores the dungeon depth to look up the scale factors for.
+   * @return the scale factors for the given dungeon depth.
+   */
   private double[] lookupScaleFactors(int depth) {
     double[][] factors = MapGenerationSettings.getMonsterChanceTable();
 
@@ -36,6 +48,12 @@ public class Spawner {
     return scalingFactor;
   }
 
+  /**
+   * Spawns a random monster.
+   *
+   * @param radius stores the dungeon depth.
+   * @return a random monster according to the dungeon depth.
+   */
   public Monster randomSpawn(int radius) {
     if (RAND.getRadius() != radius) {
       RAND.setScaleFactors(radius, lookupScaleFactors(radius));

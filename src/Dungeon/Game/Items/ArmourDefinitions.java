@@ -2,9 +2,20 @@ package Dungeon.Game.Items;
 
 import java.util.HashMap;
 
+/**
+ * This ArmourDefinitions class contains all the armour items that the player can use in the game.
+ *
+ * @author Chris Yang, Ilelemwanta Nomaren, Tony Guo, Emily Ta,
+ * @version 1.0
+ * @since 1.0
+ */
 public class ArmourDefinitions {
   private final HashMap<String, ArmourItem> ARMOUR_DEFINITIONS = new HashMap<>();
+  private final String[] ARMOUR_IDS;
 
+  /**
+   * Constructor for the ArmourDefinitions class.
+   */
   public ArmourDefinitions() {
     this.ARMOUR_DEFINITIONS.put("RustyArmour", new RustyArmour());
     this.ARMOUR_DEFINITIONS.put("ChainArmour", new ChainArmour());
@@ -16,15 +27,34 @@ public class ArmourDefinitions {
     this.ARMOUR_DEFINITIONS.put("ArmourOfTheCorrupted", new ArmourOfTheCorrupted());
     this.ARMOUR_DEFINITIONS.put("AbyssalSteelArmour", new AbyssalSteelArmour());
     this.ARMOUR_DEFINITIONS.put("HolyTrinityArmour", new HolyTrinityArmour());
+    this.ARMOUR_IDS = this.ARMOUR_DEFINITIONS.keySet().toArray(new String[0]);
   }
 
+  /**
+   * Returns an ArmourItem object from the name of the item.
+   *
+   * @param itemName a string storing the name of the item.
+   * @return the ArmourItem object.
+   */
   public ArmourItem returnItemFromName(String itemName) {
     return ARMOUR_DEFINITIONS.getOrDefault(itemName, null);
   }
 
+  /**
+   * @return the array of Strings that contains the names of all the armour items.
+   */
+  public String[] getArmourIds() {
+    return ARMOUR_IDS;
+  }
 }
 
+/**
+ * This class defines RustyArmour, it adds 100 maximumHP.
+ */
 class RustyArmour extends ArmourItem {
+  /**
+   * Constructor for the RustyArmour class.
+   */
   public RustyArmour() {
     super(
         "Rusty Armour", // name
@@ -34,7 +64,13 @@ class RustyArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines ChainArmour, it adds 150 maximumHP.
+ */
 class ChainArmour extends ArmourItem {
+  /**
+   * Constructor for the ChainArmour class.
+   */
   public ChainArmour() {
     super(
         "Chain Armour", // name
@@ -44,7 +80,13 @@ class ChainArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines IronArmour, it adds 200 maximumHP.
+ */
 class IronArmour extends ArmourItem {
+  /**
+   * Constructor for the IronArmour class.
+   */
   public IronArmour() {
     super(
         "Iron Armour", // name
@@ -54,7 +96,13 @@ class IronArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines SteelArmour, it adds 250 maximumHP.
+ */
 class SteelArmour extends ArmourItem {
+  /**
+   * Constructor for the SteelArmour class.
+   */
   public SteelArmour() {
     super(
         "Steel Armour", // name
@@ -64,7 +112,13 @@ class SteelArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines RoyalArmour, it adds 300 maximumHP.
+ */
 class RoyalArmour extends ArmourItem {
+  /**
+   * Constructor for the RoyalArmour class.
+   */
   public RoyalArmour() {
     super(
         "Royal Armour", // name
@@ -74,7 +128,13 @@ class RoyalArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines DarkKnightArmour, it adds 350 maximumHP.
+ */
 class DarkKnightArmour extends ArmourItem {
+  /**
+   * Constructor for the DarkKnightArmour class.
+   */
   public DarkKnightArmour() {
     super(
         "dark Knight Armour", // name
@@ -84,7 +144,13 @@ class DarkKnightArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines CrystallineSteelArmour, it adds 400 maximumHP.
+ */
 class CrystallineSteelArmour extends ArmourItem {
+  /**
+   * Constructor for the CrystallineSteelArmour class.
+   */
   public CrystallineSteelArmour() {
     super(
         "Crystalline Steel Armour", // name
@@ -94,7 +160,13 @@ class CrystallineSteelArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines ArmourOfTheCorrupted, it adds 450 maximumHP.
+ */
 class ArmourOfTheCorrupted extends ArmourItem {
+  /**
+   * Constructor for the ArmourOfTheCorrupted class.
+   */
   public ArmourOfTheCorrupted() {
     super(
         "Armour Of The Corrupted", // name
@@ -104,7 +176,13 @@ class ArmourOfTheCorrupted extends ArmourItem {
   }
 }
 
+/**
+ * This class defines AbyssalSteelArmour, it adds 500 maximumHP.
+ */
 class AbyssalSteelArmour extends ArmourItem {
+  /**
+   * Constructor for the AbyssalSteelArmour class.
+   */
   public AbyssalSteelArmour() {
     super(
         "Abyssal Steel Armour", // name
@@ -114,10 +192,16 @@ class AbyssalSteelArmour extends ArmourItem {
   }
 }
 
+/**
+ * This class defines HolyTrinityArmour, it adds 600 maximumHP.
+ */
 class HolyTrinityArmour extends ArmourItem {
+  /**
+   * Constructor for the HolyTrinityArmour class.
+   */
   public HolyTrinityArmour() {
     super(
-        "HolyTrinityArmour", // name
+        "Holy Trinity Armour", // name
         "Just one look at this armour and monsters will convert to Christianity.", // description
         2000, // price
         600); // hpIncrease
