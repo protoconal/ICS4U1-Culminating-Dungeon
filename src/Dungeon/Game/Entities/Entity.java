@@ -12,7 +12,7 @@ import Dungeon.Game.Items.WeaponItem;
  * @since 1.0
  */
 public abstract class Entity implements Attackable {
-  private int maxHP;
+  private final int MAX_HP;
   private int damageEndured;
   private ArmourItem armour;
 
@@ -22,7 +22,7 @@ public abstract class Entity implements Attackable {
    * @param maximumHP stores the maximum HP of the entity.
    */
   public Entity(int maximumHP) {
-    this.maxHP = maximumHP;
+    this.MAX_HP = maximumHP;
     this.damageEndured = 0;
   }
 
@@ -35,10 +35,7 @@ public abstract class Entity implements Attackable {
    */
   public int getCurrentHP() {
     int currentHp = getMaxHP() - damageEndured;
-    if (currentHp <= 0) {
-      return 0;
-    }
-    return currentHp;
+    return Math.max(currentHp, 0);
   }
 
   /**
@@ -46,9 +43,9 @@ public abstract class Entity implements Attackable {
    */
   public int getMaxHP() {
     if (armour != null) {
-      return this.maxHP + armour.getHpIncrease();
+      return MAX_HP + armour.getHpIncrease();
     }
-    return this.maxHP;
+    return MAX_HP;
   }
 
   /**

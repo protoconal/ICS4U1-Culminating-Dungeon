@@ -342,7 +342,6 @@ public class Dungeon {
    * @return the chosen Room.
    */
   private Room generateRandomRoom(int radius) {
-    // TODO: implement radius based randomization
     if (WEIGHTED_RANDOM.getRadius() != radius) {
       WEIGHTED_RANDOM.setScaleFactors(radius, lookupScaleFactors(radius));
     }
