@@ -368,9 +368,6 @@ public class Dungeon {
     if (roomID == 3) {
       return new MonsterRoom(MONSTER_SPAWNER, depth);
     }
-    if (roomID == 4) {
-      return new TrapRoom();
-    }
     if (roomID == 5) {
       return new EndRoom();
     }
