@@ -8,21 +8,23 @@ import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Player;
 import Dungeon.Game.Views;
-// generate java docs for this class please
 
 /**
- * The MonsterRoom class is a subclass of the Room class, and it is the room that the player can find
- * monsters in.
+ * The MonsterRoom class represents the room where a player can fight monsters.
+ *
+ * @author Tony Guo, Emily Ta, Ilelemwanta Nomaren, Chris Yang
+ * @version 1.0
+ * @since 1.0
  */
 public class MonsterRoom extends Room {
   private static final int TILE_ID = 3;
   private final Monster MONSTER;
 
   /**
-   * The constructor for the MonsterRoom class.
-   * 
-   * @param spawner The spawner object.
-   * @param depth The depth of the dungeon.
+   * Constructor for the MonsterRoom class.
+   *
+   * @param spawner stores a spawner to generate monsters.
+   * @param depth   stores the depth of the dungeon.
    */
   public MonsterRoom(Spawner spawner, int depth) {
     super(TILE_ID);
@@ -30,9 +32,7 @@ public class MonsterRoom extends Room {
   }
 
   /**
-   * The toString() method returns a string representation of the object.
-   * 
-   * @return The string representation of the object.
+   * @return the representation of the room on a Dungeon map.
    */
   @Override
   public String toString() {
@@ -40,24 +40,24 @@ public class MonsterRoom extends Room {
   }
 
   /**
-   * The interactRoom() method is called when the player interacts with the room.
-   * 
-   * @param player The player object.
-   * @return The boolean value of the interactRoom() method.
+   * Handles when the player interacts with the monsters.
+   *
+   * @param player stores the player to interact with.
+   * @return whether the player died in the room.
    */
   @Override
   public boolean interactRoom(Player player) {
     this.setInteractableStatus(false);
-    return handleFight();
+    return handleFight(player);
   }
 
   /**
-   * The handleFight() method handles the fight between the player and the monster.
-   * 
-   * @return The boolean value of the handleFight() method.
+   * Handles the fight between the player and the monster.
+   *
+   * @param player stores the player to interact with.
+   * @return whether the player died in the fight.
    */
-  public boolean handleFight() {
-    Player player = Game.getPlayer();
+  public boolean handleFight(Player player) {
 
     Views.printLn(MONSTER.getAppearText(), true);
     Input.waitForKeyPress();
@@ -70,17 +70,17 @@ public class MonsterRoom extends Room {
     while (!player.isDead() && !MONSTER.isDead()) {
 
       PlayerInventory currentInventory = player.getInventory();
-      String[] healthItems = currentInventory.getHealthItems();
+      String[] healthItems = currentInventory.getHealthIds();
       String currentAvailableHealthItem;
 
       // if no item exists, allow them to wait
-      if (currentInventory.getHealthItems().length == 0) {
+      if (currentInventory.getHealthIds().length == 0) {
         currentAvailableHealthItem = "Wait";
       } else {
         currentAvailableHealthItem = healthItems[0];
       }
 
-      HealthItem currentHealthItem = currentInventory.getHealthDefinitions().returnItemFromName(currentAvailableHealthItem);
+      HealthItem currentHealthItem = currentInventory.getHealthDefinitions().returnItemFromId(currentAvailableHealthItem);
       String useHealth = currentAvailableHealthItem + ": Restores " + currentHealthItem.getRestoreHP();
 
       String optionSelected;
@@ -137,7 +137,6 @@ public class MonsterRoom extends Room {
     }
 
 
-    
     if (player.isDead()) {
       player.setDeathReason(MONSTER.getName());
     }

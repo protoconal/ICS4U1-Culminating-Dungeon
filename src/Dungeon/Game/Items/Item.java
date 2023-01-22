@@ -1,20 +1,24 @@
 package Dungeon.Game.Items;
 
 /**
- * The Item class is the superclass of all items in the game.
+ * This Item class provides a template for all items in the game.
+ *
+ * @author Tony Guo, Chris Yang, Emily Ta, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
  */
-public class Item {
+public abstract class Item {
   private final String NAME;
   private final String ITEM_ID;
   private final String DESCRIPTION;
   private final int PRICE;
 
   /**
-   * The constructor for the Item class.
-   * 
-   * @param name The name of the item.
-   * @param description The description of the item.
-   * @param price The price of the item.
+   * Constructor for the Item class.
+   *
+   * @param name        a string that stores the name of the health item.
+   * @param description a string that stores the description of the health item.
+   * @param price       stores the price of the health item.
    */
   public Item(String name, String description, int price) {
     this.NAME = name;
@@ -24,9 +28,9 @@ public class Item {
   }
 
   /**
-   * The constructor for the Item class.
-   * 
-   * @param name The name of the item.
+   * Constructor for the Item class, ignoring the price.
+   *
+   * @param name        The name of the item.
    * @param description The description of the item.
    */
   public Item(String name, String description) {
@@ -37,36 +41,28 @@ public class Item {
   }
 
   /**
-   * The getName() method returns the name of the item.
-   * 
-   * @return The name of the item.
+   * @return the name of the item.
    */
   public String getName() {
     return this.NAME;
   }
 
   /**
-   * The getDescription() method returns the description of the item.
-   * 
-   * @return The description of the item.
+   * @return the description of the item.
    */
   public String getDescription() {
     return this.DESCRIPTION;
   }
 
   /**
-   * The getPrice() method returns the price of the item.
-   * 
-   * @return The price of the item.
+   * @return the price of the item.
    */
   public int getPrice() {
     return this.PRICE;
   }
 
   /**
-   * The getId() method returns the ID of the item.
-   * 
-   * @return The ID of the item.
+   * @return the ID of the item.
    */
   public String getId() {
     return ITEM_ID;

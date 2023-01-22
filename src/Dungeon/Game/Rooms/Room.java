@@ -3,46 +3,45 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 /**
- * The Room class is an abstract class that is the parent class of all the room classes.
- * 
- * @author Dylan
+ * The Room abstract class provides a template for all other Rooms in the game.
  *
+ * @author Tony Guo, Emily Ta, Ilelemwanta Nomaren, Chris Yang
+ * @version 1.0
+ * @since 1.0
  */
 public abstract class Room {
   private final int ROOM_ID;
   private boolean isInteractable = true;
 
   /**
-   * The constructor for the Room class.
+   * Constructor for the Room class, assumes it acts as a normal room.
    */
   public Room() {
     this.ROOM_ID = 0;
   }
 
   /**
-   * The constructor for the Room class.
-   * 
-   * @param roomId The room ID.
+   * Constructor for the Room class, sets the roomId to the provided id.
+   *
+   * @param roomId a string that stores the room ID.
    */
   public Room(int roomId) {
     this.ROOM_ID = roomId;
   }
 
   /**
-   * The constructor for the Room class.
-   * 
-   * @param tileID The tile ID.
-   * @param isInteractable The boolean value of the isInteractable variable.
+   * Constructor for the Room class, sets the roomId to the provided id and its interaction status.
+   *
+   * @param roomId         a string that stores the room ID.
+   * @param isInteractable stores whether the room is interactable
    */
-  public Room(int tileID, boolean isInteractable) {
-    this.ROOM_ID = tileID;
+  public Room(int roomId, boolean isInteractable) {
+    this.ROOM_ID = roomId;
     this.isInteractable = isInteractable;
   }
 
   /**
-   * The toString() method returns a string representation of the object.
-   * 
-   * @return The string representation of the object.
+   * @return the representation of the room on a Dungeon map.
    */
   @Override
   public String toString() {
@@ -50,36 +49,31 @@ public abstract class Room {
   }
 
   /**
-   * The interactRoom() method is called when the player interacts with the room.
-   * 
-   * @param player The player object.
-   * @return The boolean value of the interactRoom() method.
+   * @return this room's id.
    */
   public int getRoomId() {
     return this.ROOM_ID;
   }
 
   /**
-   * The interactRoom() method is called when the player interacts with the room.
-   * 
-   * @param player The player object.
-   * @return The boolean value of the interactRoom() method.
+   * This abstract method handles when the player interacts with the room.
+   *
+   * @param player stores the player to interact with.
+   * @return whether the player died in the room.
    */
   public abstract boolean interactRoom(Player player);
 
   /**
-   * The isInteractable() method returns the boolean value of the isInteractable variable.
-   * 
-   * @return The boolean value of the isInteractable variable.
+   * @return whether the room is interactable.
    */
   public boolean isInteractable() {
     return isInteractable;
   }
 
   /**
-   * The setInteractableStatus() method sets the boolean value of the isInteractable variable.
-   * 
-   * @param interactable The boolean value of the isInteractable variable.
+   * Sets the whether the room is interactable.
+   *
+   * @param interactable stores whether the room is interactable.
    */
   public void setInteractableStatus(boolean interactable) {
     this.isInteractable = interactable;

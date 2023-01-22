@@ -1,13 +1,17 @@
 package Dungeon.Game.Items;
 
-import Dungeon.Game.NormalWeightedRandoms;
+import Dungeon.Game.GameWeightedRandoms;
 
 /**
- * The LootDefinitions class is a class that contains all the loot definitions.
+ * This LootDefinitions class contains all the LOOT_DEFINITIONS that the player can find in the game.
+ *
+ * @author Chris Yang, Ilelemwanta Nomaren, Tony Guo, Emily Ta,
+ * @version 1.0
+ * @since 1.0
  */
 public class LootDefinitions {
-  private final NormalWeightedRandoms RAND;
-  private final LootItem[] LOOT = new LootItem[]{
+  private final GameWeightedRandoms RANDOM;
+  private final LootItem[] LOOT_DEFINITIONS = new LootItem[]{
       new Silver(),
       new Gold(),
       new Platinum(),
@@ -16,36 +20,35 @@ public class LootDefinitions {
   };
 
   /**
-   * The constructor for the LootDefinitions class.
+   * Constructor for the LootDefinitions class.
    */
   public LootDefinitions() {
-    double[] loot = new double[]{
+    double[] lootChances = new double[]{
         0.35, // Silver();
         0.30, // Gold
         0.20, // Platinum
         0.10, // Diamond
         0.05, // Ruby
     };
-    this.RAND = new NormalWeightedRandoms(loot);
+    this.RANDOM = new GameWeightedRandoms(lootChances);
   }
 
   /**
-   * The generateLoot() method generates a random loot item.
-   * 
-   * @return A random loot item.
+   * Generates a random LootItem.
+   *
+   * @return a random LootItem.
    */
   public LootItem generateLoot() {
-    return LOOT[RAND.generateChoice()];
+    return LOOT_DEFINITIONS[RANDOM.generateChoice()];
   }
 }
 
 /**
- * The LootItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their score.
+ * This Silver is an item worth 10 score.
  */
 class Silver extends LootItem {
   /**
-   * The constructor for the Silver class.
+   * Constructor for the Silver class.
    */
   public Silver() {
     super("Silver", // name
@@ -56,12 +59,11 @@ class Silver extends LootItem {
 }
 
 /**
- * The LootItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their score.
+ * This Silver is an item worth 50 score.
  */
 class Gold extends LootItem {
   /**
-   * The constructor for the Gold class.
+   * Constructor for the Gold class.
    */
   public Gold() {
     super("Gold", // name
@@ -72,12 +74,11 @@ class Gold extends LootItem {
 }
 
 /**
- * The LootItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their score.
+ * This Silver is an item worth 70 score.
  */
 class Platinum extends LootItem {
   /**
-   * The constructor for the Platinum class.
+   * Constructor for the Platinum class.
    */
   public Platinum() {
     super("Platinum", // name
@@ -88,12 +89,11 @@ class Platinum extends LootItem {
 }
 
 /**
- * The LootItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their score.
+ * This Silver is an item worth 150 score.
  */
 class Diamond extends LootItem {
   /**
-   * The constructor for the Diamond class.
+   * Constructor for the Diamond class.
    */
   public Diamond() {
     super("Diamond", // name
@@ -104,12 +104,11 @@ class Diamond extends LootItem {
 }
 
 /**
- * The LootItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their score.
+ * This Silver is an item worth 200 score.
  */
 class Ruby extends LootItem {
   /**
-   * The constructor for the Ruby class.
+   * Constructor for the Ruby class.
    */
   public Ruby() {
     super("Ruby", // name

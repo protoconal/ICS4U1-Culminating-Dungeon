@@ -3,23 +3,24 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 /**
- * The WalledRoom class is a subclass of the Room class, and it is the room that the player can find
- * monsters in.
+ * The StartRoom class represents an walled off room.
+ *
+ * @author Tony Guo, Emily Ta, Ilelemwanta Nomaren, Chris Yang
+ * @version 1.0
+ * @since 1.0
  */
 public class WalledRoom extends Room {
   private static final int ROOM_ID = 1;
 
   /**
-   * The constructor for the WalledRoom class.
+   * Constructor for the WalledRoom class.
    */
   public WalledRoom() {
     super(ROOM_ID);
   }
 
   /**
-   * The toString() method returns a string representation of the object.
-   * 
-   * @return The string representation of the object.
+   * @return the representation of the room on a Dungeon map.
    */
   @Override
   public String toString() {
@@ -27,10 +28,10 @@ public class WalledRoom extends Room {
   }
 
   /**
-   * The interactRoom() method is called when the player interacts with the room.
-   * 
-   * @param player The player object.
-   * @return The boolean value of the interactRoom() method.
+   * Does nothing.
+   *
+   * @param player does nothing.
+   * @return false.
    */
   public boolean interactRoom(Player player) {
     return false;

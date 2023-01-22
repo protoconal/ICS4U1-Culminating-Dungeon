@@ -3,20 +3,26 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 /**
- * The NormalRoom class is a subclass of the Room class, and it is the room that the player can find
- * monsters in.
+ * The NormalRoom class represents an empty room.
+ *
+ * @author Tony Guo, Emily Ta, Ilelemwanta Nomaren, Chris Yang
+ * @version 1.0
+ * @since 1.0
  */
 public class NormalRoom extends Room {
-  
+
   /**
-   * The constructor for the NormalRoom class.
+   * Constructor for the NormalRoom class.
    */
   public NormalRoom() {
     super(0, false);
   }
 
   /**
-   * Interact room
+   * Does nothing.
+   *
+   * @param player does nothing.
+   * @return false.
    */
   public boolean interactRoom(Player player) {
     return false;

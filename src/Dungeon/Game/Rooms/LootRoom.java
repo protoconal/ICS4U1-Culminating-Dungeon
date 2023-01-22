@@ -17,7 +17,7 @@ public class LootRoom extends Room {
 
   /**
    * The constructor for the LootRoom class.
-   * 
+   *
    * @param item The loot item that the room contains.
    */
   public LootRoom(LootItem item) {
@@ -28,7 +28,7 @@ public class LootRoom extends Room {
 
   /**
    * The toString() method returns a string representation of the object.
-   * 
+   *
    * @return The string representation of the object.
    */
   @Override
@@ -38,7 +38,7 @@ public class LootRoom extends Room {
 
   /**
    * The interactRoom() method is called when the player interacts with the room.
-   * 
+   *
    * @param player The player object.
    * @return The boolean value of the interactRoom() method.
    */

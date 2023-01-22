@@ -1,19 +1,22 @@
 package Dungeon.Game.Items;
 
 /**
- * The ArmourItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their HP.
+ * This ArmourItem class represents an item of Armour.
+ *
+ * @author Ilelemwanta Nomaren, Tony Guo, Chris Yang, Emily Ta
+ * @version 1.0
+ * @since 1.0
  */
-public class ArmourItem extends Item {
+public abstract class ArmourItem extends Item {
   private final int HP_INCREASE;
 
   /**
-   * The constructor for the ArmourItem class.
-   * 
-   * @param name The name of the armour.
-   * @param description The description of the armour.
-   * @param price The price of the armour.
-   * @param hpIncrease The amount of HP the armour increases.
+   * Constructor for the ArmourItem class.
+   *
+   * @param name        a string that stores the name of the armour.
+   * @param description a string that stores the description of the armour.
+   * @param price       stores the price of the armour.
+   * @param hpIncrease  stores the amount of HP the armour increases.
    */
   public ArmourItem(String name, String description, int price, int hpIncrease) {
     super(name, description, price);
@@ -21,9 +24,7 @@ public class ArmourItem extends Item {
   }
 
   /**
-   * The getHpIncrease() method returns the amount of HP the armour increases.
-   * 
-   * @return The amount of HP the armour increases.
+   * @return the amount of HP the armour increases.
    */
   public int getHpIncrease() {
     return HP_INCREASE;

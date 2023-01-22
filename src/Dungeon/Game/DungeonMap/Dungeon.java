@@ -1,6 +1,5 @@
 package Dungeon.Game.DungeonMap;
 
-
 import Dungeon.Game.Entities.Spawner;
 import Dungeon.Game.GameWeightedRandoms;
 import Dungeon.Game.Items.LootDefinitions;
@@ -11,16 +10,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * The Dungeon class is a class that generates the dungeon map.
+ * This Dungeon class represents a dungeon.
+ * <p>
+ * It can randomly generate a dungeon according to the specifications in MapGenerationSettings.
+ *
+ * @author Tony Guo, Emily Ta, Chris Yang, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
  */
 public class Dungeon {
 
+  /**
+   * Stores the supported directions one can move.
+   * <p>
+   * DIRECTION_FACTORS inherits this ordering.
+   *
+   * @see #DIRECTION_FACTORS
+   */
   private static final String[] VALID_DIRECTIONS = {
       "UP",
       "LEFT",
       "DOWN",
       "RIGHT"
   };
+  /**
+   * Stores the required transformations to apply to set of coordinates to produce a movement into a given direction.
+   * <p>
+   * The ordering is defined by VALID_DIRECTIONS.
+   *
+   * @see #VALID_DIRECTIONS
+   */
   private static final int[][] DIRECTION_FACTORS = {
       // row, column
       {-1, 0}, // UP
@@ -28,39 +47,45 @@ public class Dungeon {
       {1, 0}, // DOWN
       {0, 1}, // RIGHT
   };
-  final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
-  final Spawner SPAWNER = new Spawner();
-  private final GameWeightedRandoms WEIGHTED_RANDOM = new GameWeightedRandoms(MapGenerationSettings.getProbabilities());
-  private final int[] CENTER;
+  private final LootDefinitions LOOT_GENERATOR = new LootDefinitions();
+  private final Spawner MONSTER_SPAWNER = new Spawner();
+  private final GameWeightedRandoms WEIGHTED_RANDOM = new GameWeightedRandoms(MapGenerationSettings.getRoomProbabilities());
+  private final int[] CENTER_OF_MAP;
   private final int DEFAULT_SIZE;
   private Room[][] map;
   private boolean[][] visibleSpaces;
-  private int difficultyMultiplier = 0;
+  private int depth = 0;
+  /**
+   * Stores whether the dungeon is in a "fresh" state.
+   */
   private boolean isReset;
+  /**
+   * Stores the coordinate to be overwritten with the ExitRoom.
+   */
   private int[] randomExit;
 
-
   /**
-   * The constructor for the Dungeon class.
+   * Constructor for the Dungeon class.
    */
-  public Dungeon() {
-    this.DEFAULT_SIZE = 9;
+  public Dungeon(int defaultSize) {
+    this.DEFAULT_SIZE = defaultSize;
     // remember, convention = row, column
-    CENTER = new int[]{DEFAULT_SIZE / 2, DEFAULT_SIZE / 2};
+    CENTER_OF_MAP = new int[]{DEFAULT_SIZE / 2, DEFAULT_SIZE / 2};
     nextLevel();
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Calculates the new set of coordinates given a direction and its initial coordinates.
    *
-   * @return The map of the dungeon.
+   * @param direction          a string representing the direction to follow.
+   * @param initialCoordinates an array to store the initialCoordinates.
+   * @return a int[] containing the new set of coordinates
    */
   public static int[] calculateCoordinates(int[] initialCoordinates, String direction) {
     // calculate new coordinates based on input
-
-
     int directionIndex = Util.index(VALID_DIRECTIONS, direction);
     if (directionIndex == -1) {
+      // something terribly went wrong
       System.out.println("ERROR: Invalid Direction. Raised by calculateCoordinates().");
       return null;
     }
@@ -74,47 +99,51 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @return the LootDefinitions generator.
    */
-  public void nextLevel() {
-    map = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
-    setMapRoom(new StartRoom(), CENTER);
-
-    visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
-    visibleSpaces[CENTER[0]][CENTER[1]] = true;
-    this.isReset = true;
-
-    this.difficultyMultiplier += 1;
-    randomExit = CENTER;
-
-    generateMap();
+  public LootDefinitions getLootGenerator() {
+    return LOOT_GENERATOR;
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @return the (Monster) Spawner generator.
    */
-  public void fullReset() {
-    this.difficultyMultiplier = 0;
-    nextLevel();
+  public Spawner getMonsterSpawner() {
+    return MONSTER_SPAWNER;
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @return the int[] containing for the center of the map.
    */
   public int[] getCenter() {
-    return CENTER;
+    return CENTER_OF_MAP;
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * @return the width / height of the square map.
+   */
+  public int getSize() {
+    return DEFAULT_SIZE;
+  }
+
+  /**
+   * @return the Room[][] map.
+   */
+  public Room[][] getMap() {
+    return map;
+  }
+
+  /**
+   * @return the boolean map representing the visibility of a tile to the player.
+   */
+  public boolean[][] getVisibleSpaces() {
+    return visibleSpaces;
+  }
+
+  /**
+   * Sets the provided coordinate to a visible state.
    *
-   * @return The map of the dungeon.
+   * @param coordinates an int array storing the coordinates to be set visible
    */
   public void setVisibleSpaces(int[] coordinates) {
     // update visited space with the correct tiling
@@ -122,14 +151,64 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @return the int[] containing of the exit.
    */
-  public String[] getMovableDirections(int[] playerCoordinates) {
+  public int[] getRandomExit() {
+    return randomExit;
+  }
+
+  /**
+   * @return the current dungeon depth.
+   */
+  public int getDepth() {
+    return depth;
+  }
+
+  /**
+   * @return whether the dungeon has reset.
+   */
+  public boolean isReset() {
+    return this.isReset;
+  }
+
+  /**
+   * Resets the required instance variables for generating a new layout. Generates that layout afterwards.
+   */
+  public void nextLevel() {
+    map = new Room[DEFAULT_SIZE][DEFAULT_SIZE];
+    setMapRoom(new StartRoom(), CENTER_OF_MAP);
+
+    visibleSpaces = new boolean[DEFAULT_SIZE][DEFAULT_SIZE];
+    // make sure start is visible
+    visibleSpaces[CENTER_OF_MAP[0]][CENTER_OF_MAP[1]] = true;
+
+    this.isReset = true;
+
+    this.depth += 1;
+    randomExit = CENTER_OF_MAP;
+
+    generateMap();
+  }
+
+  /**
+   * Resets all instance variables to generate a new dungeon. Generates the map afterwards.
+   */
+  public void fullReset() {
+    this.depth = 0;
+    nextLevel();
+  }
+
+  /**
+   * Calculates the directions that are clear to move forward.
+   *
+   * @param playerCoordinates a int array that stores the current player position
+   * @return a String[] containing directions a player can move
+   */
+  public String[] calculateMovableDirections(int[] playerCoordinates) {
     ArrayList<String> movableDirections = new ArrayList<>();
     for (int x = 0; x < VALID_DIRECTIONS.length; x++) {
       int[] proposedCoordinates = Dungeon.calculateCoordinates(playerCoordinates, VALID_DIRECTIONS[x]);
+      // if within bounds and it isn't a wall
       if (checkBounds(proposedCoordinates) &&
           !(map[proposedCoordinates[0]][proposedCoordinates[1]] instanceof WalledRoom)) {
         movableDirections.add(VALID_DIRECTIONS[x]);
@@ -139,9 +218,7 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @return the string representation of the current map.
    */
   @Override
   public String toString() {
@@ -155,9 +232,13 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Returns a string representation of what the player should see.
+   * <p>
+   * The provided params tell the method which block to replace with the player.
    *
-   * @return The map of the dungeon.
+   * @param playerCoordinates a int array that stores the current player position
+   * @param playerModel       a string that stores the representation of the player
+   * @return the string representation of the visible spaces on the current map.
    */
   public String visibleSpacesToString(int[] playerCoordinates, String playerModel) {
     StringBuilder out = new StringBuilder();
@@ -165,10 +246,9 @@ public class Dungeon {
     for (int row = 0; row < this.map.length; row++) {
       Room[] columns = this.map[row];
       for (int col = 0; col < columns.length; col++) {
-        // place player
-        if (row == playerCoordinates[0] && col == playerCoordinates[1]) {
+        if (row == playerCoordinates[0] && col == playerCoordinates[1]) { // place player
           out.append(playerModel);
-        } else if (this.visibleSpaces[row][col]) {
+        } else if (this.visibleSpaces[row][col]) { // check visibility
           out.append(this.map[row][col]);
         } else {
           out.append("?_?_?");
@@ -179,14 +259,15 @@ public class Dungeon {
       }
       out.append("\n");
     }
-
     return out.toString();
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Updates the visibility of the player.
+   * <p></p>
+   * The directions around the player should become visible.
    *
-   * @return The map of the dungeon.
+   * @param playerCoordinates a int array that stores the current player position
    */
   public void updateVisibility(int[] playerCoordinates) {
     this.isReset = false;
@@ -203,25 +284,24 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * Generates the map.
    */
   public void generateMap() {
-    this.traverse(this.CENTER, 0);
+    this.traverse(this.CENTER_OF_MAP, 0);
     this.setMapRoom(new EndRoom(), randomExit);
 
     System.out.println(this);
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * A traversal method to update an empty map with random rooms.
+   * <p></p>
+   * This method uses a DFS-style traversal pattern. This method continues down a direction until the direction becomes blocked by a randomly generated wall. Only when it reaches a dead-end does it return back.
    *
-   * @return The map of the dungeon.
+   * @param initialCoordinates stores the position of the node being considered
+   * @param radius             stores the distance from the center
    */
   private void traverse(int[] initialCoordinates, int radius) {
-
-    // randomly get room
     ArrayList<String> traversableDirections = new ArrayList<>();
     Room randomRoom;
 
@@ -233,8 +313,8 @@ public class Dungeon {
           checkBounds(newCoordinates) && // check they are in bounds
           getMapRoom(newCoordinates) == null) { // check if it is empty
         randomRoom = generateRandomRoom(radius);
-        // if the room is not a wall
 
+        // if the room is not a wall
         if (!(randomRoom instanceof WalledRoom)) {
           traversableDirections.add(direction);
 
@@ -254,9 +334,12 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Generates a random room.
+   * <p></p>
+   * It consults the generation settings, updating the generator with the correct weights, to generate a variable map.
    *
-   * @return The map of the dungeon.
+   * @param radius stores the distance from the center of the room.
+   * @return the chosen Room.
    */
   private Room generateRandomRoom(int radius) {
     // TODO: implement radius based randomization
@@ -268,9 +351,8 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @param roomID stores the numeric representation of the room.
+   * @return the Room object based on the provided id.
    */
   public Room getRoom(int roomID) {
     // these definitions correspond to chance table
@@ -284,15 +366,13 @@ public class Dungeon {
       return new LootRoom(LOOT_GENERATOR.generateLoot());
     }
     if (roomID == 3) {
-      return new MonsterRoom(SPAWNER, difficultyMultiplier);
+      return new MonsterRoom(MONSTER_SPAWNER, depth);
     }
     if (roomID == 4) {
       return new TrapRoom();
-
     }
     if (roomID == 5) {
       return new EndRoom();
-
     }
     if (roomID == -1) {
       return new StartRoom();
@@ -301,12 +381,13 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Searches through the generation settings for the correct probability scaling factor for the current depth.
    *
-   * @return The map of the dungeon.
+   * @param radius stores the radius from the center.
+   * @return the correct probability scaling double[] factor for the current depth.
    */
   private double[] lookupScaleFactors(int radius) {
-    double[][] factors = MapGenerationSettings.getScalingFactors();
+    double[][] factors = MapGenerationSettings.getRoomScalingFactors();
 
     double[] scalingFactor = factors[0];
     int x = 0;
@@ -320,27 +401,27 @@ public class Dungeon {
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Sets the provided coordinates to the provided room.
    *
-   * @return The map of the dungeon.
+   * @param room        the room to update with.
+   * @param coordinates the coordinates to update.
    */
   private void setMapRoom(Room room, int[] coordinates) {
     this.map[coordinates[0]][coordinates[1]] = room;
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
-   *
-   * @return The map of the dungeon.
+   * @param coordinates the coordinates to check.
+   * @return the room at the provided coordinates (int[]).
    */
   public Room getMapRoom(int[] coordinates) {
     return this.map[coordinates[0]][coordinates[1]];
   }
 
   /**
-   * The getMap() method returns the map of the dungeon.
+   * Checks whether the coordinate is in bounds of the map.
    *
-   * @return The map of the dungeon.
+   * @return whether the coordinate is in bounds
    */
   private boolean checkBounds(int[] coordinates) {
     int minBound = 0;
@@ -350,13 +431,5 @@ public class Dungeon {
     boolean columnBounds = (coordinates[1] >= minBound) && (coordinates[1] <= maxBound);
 
     return rowBounds && columnBounds;
-  }
-
-  public int getDifficultyMultiplier() {
-    return difficultyMultiplier;
-  }
-
-  public boolean isReset() {
-    return this.isReset;
   }
 }

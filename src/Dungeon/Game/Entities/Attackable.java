@@ -4,37 +4,39 @@ import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.WeaponItem;
 
 /**
- * The Attackable interface is an interface that contains all the methods that an entity that can be
- * attacked must have.
+ * This Attackable interface contains all the methods that an attackable that can be attacked must have.
+ *
+ * @author Tony Guo, Emily Ta, Chris Yang, Ilelemwanta Nomaren
+ * @version 1.0
+ * @since 1.0
  */
 public interface Attackable {
+
   /**
-   * The heal() method heals the entity.
-   * 
-   * @param health The health item to heal the entity with.
+   * Heals the attackable with a provided item.
+   *
+   * @param health stores the health item to heal the attackable with.
    */
   void heal(HealthItem health);
 
   /**
-   * The isDead() method returns whether the entity is dead or not.
-   * 
-   * @return Whether the entity is dead or not.
+   * @return whether the attackable is dead.
    */
   boolean isDead();
 
   /**
-   * The damage() method damages the entity.
-   * 
-   * @param weapon The weapon to damage the entity with.
-   * @return Whether the entity is dead or not.
+   * Damages the attackable with a provided item.
+   *
+   * @param weapon stores the weapon to damage the attackable with.
+   * @return whether the attackable is dead.
    */
   boolean damage(WeaponItem weapon);
 
   /**
-   * The damage() method damages the entity.
-   * 
-   * @param damage The amount of damage to deal to the entity.
-   * @return Whether the entity is dead or not.
+   * Damages the attackable with a provided damage amount.
+   *
+   * @param damage stores the amount of damage to deal to the attackable.
+   * @return whether the attackable is dead.
    */
   boolean damage(int damage);
 }

@@ -3,14 +3,18 @@ package Dungeon.Game.Items;
 import java.util.HashMap;
 
 /**
- * The HealthDefinitions class contains all the health items that the player can use.
+ * This HealthDefinitions class contains all the health items that the player can use in the game.
+ *
+ * @author Chris Yang, Ilelemwanta Nomaren, Tony Guo, Emily Ta,
+ * @version 1.0
+ * @since 1.0
  */
 public class HealthDefinitions {
   private final HashMap<String, HealthItem> HEALTH_DEFINITIONS = new HashMap<>();
   private final String[] HEALTH_IDS;
 
   /**
-   * The constructor for the HealthDefinitions class.
+   * Constructor for the HealthDefinitions class.
    */
   public HealthDefinitions() {
     this.HEALTH_DEFINITIONS.put("Bandage", new Bandage());
@@ -22,20 +26,17 @@ public class HealthDefinitions {
   }
 
   /**
-   * The returnItemFromName() method returns an HealthItem object from the name of the item.
-   * 
-   * @param itemName The name of the item.
-   * @return The HealthItem object.
+   * Returns an HealthItem object from the name of the item.
+   *
+   * @param itemName a string storing the name of the item.
+   * @return the HealthItem object.
    */
-  public HealthItem returnItemFromName(String itemName) {
+  public HealthItem returnItemFromId(String itemName) {
     return HEALTH_DEFINITIONS.getOrDefault(itemName, null);
   }
 
   /**
-   * The getHealthIds() method returns an array of Strings that contains the names of all the health
-   * items.
-   * 
-   * @return The array of Strings.
+   * @return the array of Strings that contains the names of all the health items.
    */
   public String[] getHealthIds() {
     return HEALTH_IDS;
@@ -43,12 +44,11 @@ public class HealthDefinitions {
 }
 
 /**
- * The HealthItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their health.
+ * This class defines Wait, it is a free option when the player has no more health items to use. It restores 10 HP.
  */
 class Wait extends HealthItem {
   /**
-   * The constructor for the Wait class.
+   * Constructor for the Wait class.
    */
   public Wait() {
     super("Wait", // name
@@ -60,12 +60,11 @@ class Wait extends HealthItem {
 }
 
 /**
- * The HealthItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their health.
+ * This class defines Bandage, it restores 50 HP.
  */
 class Bandage extends HealthItem {
   /**
-   * The constructor for the Bandage class.
+   * Constructor for the Bandage class.
    */
   public Bandage() {
     super("Bandage", // name
@@ -77,12 +76,11 @@ class Bandage extends HealthItem {
 }
 
 /**
- * The HealthItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their health.
+ * This class defines Potion, it restores 120 HP.
  */
 class Potion extends HealthItem {
   /**
-   * The constructor for the Potion class.
+   * Constructor for the Potion class.
    */
   public Potion() {
     super("Potion", // name
@@ -94,12 +92,11 @@ class Potion extends HealthItem {
 }
 
 /**
- * The HealthItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their health.
+ * This class defines Pill, it restores 140 HP.
  */
 class Pill extends HealthItem {
   /**
-   * The constructor for the Pill class.
+   * Constructor for the Pill class.
    */
   public Pill() {
     super("Pill", // name
@@ -111,12 +108,11 @@ class Pill extends HealthItem {
 }
 
 /**
- * The HealthItem class is a subclass of the Item class, and it is the item that the player can use to
- * increase their health.
+ * This class defines ChickenSoup, it restores 180 HP.
  */
 class ChickenSoup extends HealthItem {
   /**
-   * The constructor for the ChickenSoup class.
+   * Constructor for the ChickenSoup class.
    */
   public ChickenSoup() {
     super("Chicken Soup", // name
