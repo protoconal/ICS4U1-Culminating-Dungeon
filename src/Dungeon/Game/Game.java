@@ -50,8 +50,8 @@ public class Game {
     PLAYER.setName(Input.getText("Input: "));
 
     // DEBUG options
-    PLAYER_INVENTORY.DEBUG_initializeWeapons();
-    PLAYER_INVENTORY.DEBUG_initializeHealth();
+    // PLAYER_INVENTORY.DEBUG_initializeWeapons();
+    // PLAYER_INVENTORY.DEBUG_initializeHealth();
 
     // if PLAYER isn't dead, keep playing the dungeon
     while (!PLAYER.isDead()) {

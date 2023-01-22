@@ -17,7 +17,7 @@ import Dungeon.Game.Items.PlayerInventory;
 public class Player extends Entity {
   private final PlayerInventory INVENTORY = new PlayerInventory();
   private String name;
-  private int score = 1000;
+  private int score = 0;
   private String deathReason;
 
   public Player() {

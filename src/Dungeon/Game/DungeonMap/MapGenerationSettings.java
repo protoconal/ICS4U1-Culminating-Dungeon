@@ -30,7 +30,7 @@ public class MapGenerationSettings {
       // depth will always be half of width of table
       {1, 1.00, 0.00, 0.00, 0.00, 0}, // distance 1, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
       {2, 1.00, 1.50, 1.50, 0.50, 0}, // distance 2, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
-      {4, 1.00, 0.50, 0.00, 2.00, 0}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
+      {4, 1.00, 0.50, 0.00, 0.00, 0}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
       {5, 1.00, 5.00, 2.00, 0.00, 0}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
       {8, 1.00, 2.00, 0.00, 0.25, 0}, // distance 6, EmptyChance, WallChance, TreasureChance, MonsterChance, TrapChance
   };
