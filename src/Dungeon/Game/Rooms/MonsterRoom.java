@@ -5,6 +5,7 @@ import Dungeon.Game.Entities.Spawner;
 import Dungeon.Game.Game;
 import Dungeon.Game.Input;
 import Dungeon.Game.Items.HealthItem;
+import Dungeon.Game.Items.ItemInventory;
 import Dungeon.Game.Items.PlayerInventory;
 import Dungeon.Game.Player;
 import Dungeon.Game.Views;
@@ -80,7 +81,7 @@ public class MonsterRoom extends Room {
         currentAvailableHealthItem = healthItems[0];
       }
 
-      HealthItem currentHealthItem = currentInventory.getHealthDefinitions().returnItemFromId(currentAvailableHealthItem);
+      HealthItem currentHealthItem = ItemInventory.getHealthDefinitions().returnItemFromId(currentAvailableHealthItem);
       String useHealth = currentAvailableHealthItem + ": Restores " + currentHealthItem.getRestoreHP();
 
       String optionSelected;

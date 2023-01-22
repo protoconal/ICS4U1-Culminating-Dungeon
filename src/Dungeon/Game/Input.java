@@ -77,6 +77,7 @@ public class Input {
       "D", // Right
       "W", // Weapons
       "S", // Health
+      "T", // Armour
       "E", // buy
       "Q", // sell
       ";", // menu

@@ -12,32 +12,20 @@ import java.util.TreeMap;
  * @since 1.0
  */
 public class PlayerInventory {
-  private final WeaponDefinitions WEAPON_DEFINITIONS = new WeaponDefinitions();
-  private final HealthDefinitions HEALTH_DEFINITIONS = new HealthDefinitions();
+  private final WeaponDefinitions WEAPON_DEFINITIONS = ItemInventory.getWeaponDefinitions();
+  private final HealthDefinitions HEALTH_DEFINITIONS = ItemInventory.getHealthDefinitions();
+  private final ArmourDefinitions ARMOUR_DEFINITIONS = ItemInventory.getArmourDefinitions();
   // use a map
   private final TreeMap<String, Integer> HEALTH_PLAYER_INVENTORY = new TreeMap<>();
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
-  private WeaponItem equippedWeapon = WEAPON_DEFINITIONS.returnItemFromId("DullSword");
+  private WeaponItem equippedWeapon;
+  private ArmourItem equippedArmour;
 
   /**
    * Constructor for PlayerInventory class
    */
   public PlayerInventory() {
     // do nothing
-  }
-
-  /**
-   * @return this class's child WeaponDefinitions object.
-   */
-  public WeaponDefinitions getWeaponDefinitions() {
-    return WEAPON_DEFINITIONS;
-  }
-
-  /**
-   * @return this class's child HealthDefinitions object.
-   */
-  public HealthDefinitions getHealthDefinitions() {
-    return HEALTH_DEFINITIONS;
   }
 
   /**
@@ -84,6 +72,10 @@ public class PlayerInventory {
    * @return the current count of an item in the player's inventory.
    */
   public int getItemCount(String itemId) {
+    // check armour
+    if (equippedArmour.getId().equals(itemId)) {
+      return 1;
+    }
     // check weapons
     if (WEAPON_PLAYER_INVENTORY.getOrDefault(itemId, null) != null) {
       return 1;
@@ -100,6 +92,7 @@ public class PlayerInventory {
    * @param weapon a WeaponItem to be added to the inventory.
    */
   private void addWeapon(WeaponItem weapon) {
+
     if (getItemCount(weapon.getId()) == 0) {
       // not found, therefore put into inventory
       this.WEAPON_PLAYER_INVENTORY.put(weapon.getId(), weapon);
@@ -162,6 +155,25 @@ public class PlayerInventory {
     return HEALTH_DEFINITIONS.returnItemFromId(itemId);
   }
 
+  public ArmourItem getEquippedArmour() {
+    return this.equippedArmour;
+  }
+
+  /**
+   * Sets the armour and new maximumHP for the player.
+   * <p></p>
+   * The previous item is automatically sold.
+   *
+   * @param armour to be equipped.
+   */
+  public void setArmour(ArmourItem armour) {
+    if (this.equippedArmour != null) {
+      Game.getPlayer().addScore(this.equippedArmour.getPrice());
+    }
+    this.equippedArmour = armour;
+  }
+
+
   /**
    * @return the player's equipped weapon.
    */
@@ -175,11 +187,14 @@ public class PlayerInventory {
    * @param itemId a string storing the id of the item wanted to be equipped.
    */
   public void setEquippedWeapon(String itemId) {
-    // assumes validated data
-
     // return weapon, set new weapon
-    addWeapon(this.equippedWeapon);
-    this.equippedWeapon = removeWeapon(itemId);
+    if ( this.equippedWeapon != null) {
+      addWeapon(this.equippedWeapon);
+      this.equippedWeapon = removeWeapon(itemId);
+    }
+    else {
+      this.equippedWeapon = WEAPON_DEFINITIONS.returnItemFromId(itemId);
+    }
   }
 
   /**
@@ -226,6 +241,7 @@ public class PlayerInventory {
 
     StringBuilder out = new StringBuilder();
     out.append("Currently equipped Weapon: ").append(equippedWeapon.getName()).append("\n");
+    out.append("Currently equipped Armour: ").append(equippedArmour.getName()).append("\n");
 
     // build weapon string
     String[] weapons = this.getWeaponsIds();
@@ -269,4 +285,6 @@ public class PlayerInventory {
 
     return out.toString();
   }
+
+
 }

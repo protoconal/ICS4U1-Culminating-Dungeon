@@ -1,6 +1,8 @@
 package Dungeon.Game;
 
 import Dungeon.Game.Entities.Entity;
+import Dungeon.Game.Items.ArmourItem;
+import Dungeon.Game.Items.ItemInventory;
 import Dungeon.Game.Items.PlayerInventory;
 
 /**
@@ -15,11 +17,15 @@ import Dungeon.Game.Items.PlayerInventory;
 public class Player extends Entity {
   private final PlayerInventory INVENTORY = new PlayerInventory();
   private String name;
-  private int score = 0;
+  private int score = 1000;
   private String deathReason;
 
   public Player() {
     super(100);
+    ArmourItem item = (ArmourItem) ItemInventory.returnItemFromId("RustyArmour");
+    INVENTORY.setArmour(item);
+    this.updateHealth(item);
+    INVENTORY.setEquippedWeapon("DullSword");
   }
 
   /**
@@ -102,11 +108,15 @@ public class Player extends Entity {
    */
   @Override
   public String toString() {
-    return "Player - HP: " + this.getCurrentHP() +
-        " - AVG DMG: " +
-        INVENTORY.getEquippedWeapon().getAvgDamage() +
+    return "\"" + this.getName() + "\"" +
+        " - HP: " + this.getCurrentHP() +
+        " - MaxHP: " + this.getMaxHP() +
+        " - AVG DMG: " + INVENTORY.getEquippedWeapon().getAvgDamage() +
         " - SCORE: " +
         this.getScore();
   }
 
+  public void updateHealth(ArmourItem armour) {
+    super.setArmour(armour);
+  }
 }

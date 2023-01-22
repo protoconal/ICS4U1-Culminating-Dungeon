@@ -36,7 +36,7 @@ public class ArmourDefinitions {
    * @param itemName a string storing the name of the item.
    * @return the ArmourItem object.
    */
-  public ArmourItem returnItemFromName(String itemName) {
+  public ArmourItem returnItemFromId(String itemName) {
     return ARMOUR_DEFINITIONS.getOrDefault(itemName, null);
   }
 
@@ -46,6 +46,7 @@ public class ArmourDefinitions {
   public String[] getArmourIds() {
     return ARMOUR_IDS;
   }
+
 }
 
 /**

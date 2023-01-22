@@ -1,5 +1,6 @@
 package Dungeon.Game.Entities;
 
+import Dungeon.Game.Items.ArmourItem;
 import Dungeon.Game.Items.HealthItem;
 import Dungeon.Game.Items.WeaponItem;
 
@@ -11,8 +12,9 @@ import Dungeon.Game.Items.WeaponItem;
  * @since 1.0
  */
 public abstract class Entity implements Attackable {
-  private final int MAX_HP;
-  private int currentHP;
+  private int maxHP;
+  private int damageEndured;
+  private ArmourItem armour;
 
   /**
    * Constructor for the Entity class.
@@ -20,29 +22,40 @@ public abstract class Entity implements Attackable {
    * @param maximumHP stores the maximum HP of the entity.
    */
   public Entity(int maximumHP) {
-    this.MAX_HP = maximumHP;
-    this.currentHP = maximumHP;
+    this.maxHP = maximumHP;
+    this.damageEndured = 0;
+  }
+
+  public void setArmour(ArmourItem armour) {
+    this.armour = armour;
   }
 
   /**
    * @return the current HP of the entity.
    */
   public int getCurrentHP() {
-    return currentHP;
+    int currentHp = getMaxHP() - damageEndured;
+    if (currentHp <= 0) {
+      return 0;
+    }
+    return currentHp;
   }
 
   /**
    * @return the maximum HP of the entity.
    */
   public int getMaxHP() {
-    return MAX_HP;
+    if (armour != null) {
+      return this.maxHP + armour.getHpIncrease();
+    }
+    return this.maxHP;
   }
 
   /**
    * Resets the HP of the entity to the maximum HP.
    */
   public void resetHP() {
-    currentHP = getMaxHP();
+    damageEndured = 0;
   }
 
   /**
@@ -52,12 +65,12 @@ public abstract class Entity implements Attackable {
    */
   @Override
   public void heal(HealthItem health) {
-    int newHealth = this.currentHP + health.getRestoreHP();
-    if (newHealth > MAX_HP) {
-      this.currentHP = MAX_HP;
+    int newDamageEndured = this.damageEndured - health.getRestoreHP();
+    if (newDamageEndured < 0) {
+      this.damageEndured = 0;
       return;
     }
-    this.currentHP = newHealth;
+    this.damageEndured = newDamageEndured;
   }
 
   /**
@@ -65,7 +78,7 @@ public abstract class Entity implements Attackable {
    */
   @Override
   public boolean isDead() {
-    return this.currentHP <= 0;
+    return this.getCurrentHP() <= 0;
   }
 
   /**
@@ -76,12 +89,11 @@ public abstract class Entity implements Attackable {
    */
   @Override
   public boolean damage(WeaponItem weapon) {
-    int newHealth = this.currentHP - weapon.randomDamage();
-    if (newHealth < 0) {
-      this.currentHP = 0;
+    int newDamageEndured = this.damageEndured + weapon.randomDamage();
+    if (this.damageEndured > getMaxHP()) {
       return true;
     }
-    this.currentHP = newHealth;
+    this.damageEndured = newDamageEndured;
     return false;
   }
 
@@ -93,12 +105,13 @@ public abstract class Entity implements Attackable {
    */
   @Override
   public boolean damage(int damage) {
-    int newHealth = this.currentHP - damage;
-    if (newHealth < 0) {
-      this.currentHP = 0;
+    int newDamageEndured = this.damageEndured + damage;
+    if (this.damageEndured > getMaxHP()) {
       return true;
     }
-    this.currentHP = newHealth;
+    this.damageEndured = newDamageEndured;
     return false;
   }
+
+
 }

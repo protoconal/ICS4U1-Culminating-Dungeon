@@ -5,7 +5,7 @@ import Dungeon.Game.Items.*;
 import Dungeon.Game.Rooms.Room;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  * Vaquera: The Emboldened Adventure.
@@ -115,56 +115,44 @@ public class Game {
     int index = 0;
     boolean flag = true;
     do {
-      WeaponItem weaponItem;
-      HealthItem healthItem;
-
-
       String itemId;
-      String itemName;
-      int price;
 
-      String[] currentIdSet;
-
-      if (mode.equals("Weapon")) {
-        currentIdSet = SHOP_INVENTORY.getSortedWeaponIds();
-      } else {
+      String[] currentIdSet = SHOP_INVENTORY.getSortedWeaponIds();
+      if (mode.equals("Armour")) {
+        currentIdSet = SHOP_INVENTORY.getSortedArmourIds();
+      }
+      if (mode.equals("Health")) {
         currentIdSet = SHOP_INVENTORY.getSortedHealthIds();
         currentIdSet = Util.copyArrayFromIndexes(currentIdSet, 1, currentIdSet.length);
       }
 
-      String[] outString;
+      // set itemId
+      itemId = currentIdSet[index];
+      Item currentItem = ItemInventory.returnItemFromId(itemId);
+      int price = currentItem.getPrice();
 
-
-      if (mode.equals("Weapon")) {
-        weaponItem = SHOP_INVENTORY.getWeaponDefinitions().returnItemFromId(currentIdSet[index]);
-        price = weaponItem.getPrice();
-        itemId = weaponItem.getId();
-        itemName = weaponItem.getName();
-        outString = new String[]{
-            "Current Mode: " + mode,
-            "     Selected item: " + itemName,
-            "    Average Damage: " + weaponItem.getAvgDamage(),
-            "       Description: " + weaponItem.getDescription(),
-            "             Price: " + price,
-            "   Inventory Count: " + PLAYER_INVENTORY.getItemCount(itemId),
-        };
-      } else {
-        healthItem = SHOP_INVENTORY.getHealthDefinitions().returnItemFromId(currentIdSet[index]);
-        price = healthItem.getPrice();
-        itemId = healthItem.getId();
-        itemName = healthItem.getName();
-        outString = new String[]{
-            "Current Mode: " + mode,
-            "     Selected item: " + itemName,
-            "        HP Restore: " + healthItem.getRestoreHP(),
-            "       Description: " + healthItem.getDescription(),
-            "             Price: " + price,
-            "   Inventory Count: " + PLAYER_INVENTORY.getItemCount(itemId),
-        };
+      ArrayList<String> outString = new ArrayList<>();
+      outString.add("Items for sale: ");
+      for (int x = 0; x < currentIdSet.length; x++) {
+        outString.add("    " + ItemInventory.returnItemFromId(currentIdSet[x]).getName());
       }
+      outString.add("Current Mode: " + mode);
+      outString.add("     Selected item: " + currentItem.getName());
+      outString.add("       Description: " + currentItem.getDescription());
+      outString.add("             Price: " + currentItem.getPrice());
+      if (currentItem instanceof WeaponItem) {
+        outString.add("    Average Damage: " + ((WeaponItem) currentItem).getAvgDamage());
+      }
+      if (currentItem instanceof HealthItem) {
+        outString.add("        HP Restore: " + ((HealthItem) currentItem).getRestoreHP());
+      }
+      if (currentItem instanceof ArmourItem) {
+        outString.add("       HP Increase: " + ((ArmourItem) currentItem).getHpIncrease());
+      }
+      outString.add("   Inventory Count: " + PLAYER_INVENTORY.getItemCount(itemId));
 
-      Views.printLn(Arrays.toString(currentIdSet), true);
-      System.out.println(String.join("\n", outString));
+
+      Views.printLines(outString);
       System.out.println(Views.getToolTip("SHOP"));
       optionSelected = Input.getShopKeys();
 
@@ -175,6 +163,9 @@ public class Game {
       } else if (optionSelected.equals("S")) {
         index = 0;
         mode = "Health";
+      } else if (optionSelected.equals("T")) {
+        index = 0;
+        mode = "Armour";
       } else if (optionSelected.equals("A")) {
         index -= 1;
         if (index < 0) {
@@ -204,6 +195,16 @@ public class Game {
           if (mode.equals("Health")) {
             PLAYER_INVENTORY.addHealthItem(itemId);
           }
+
+          // set equipped armour
+          if (mode.equals("Armour")) {
+            ArmourItem equippedArmour = PLAYER_INVENTORY.getEquippedArmour();
+            PLAYER_INVENTORY.setArmour((ArmourItem) currentItem);
+            PLAYER.setArmour((ArmourItem) currentItem);
+            System.out.println("Bought and equipped: " + currentItem.getName());
+            System.out.println("Sold: " + equippedArmour.getName() + " for " + equippedArmour.getPrice());
+            Input.waitForKeyPress();
+          }
         } else {
           System.out.println("Sorry, insufficient funds.");
           Input.waitForKeyPress();
@@ -213,7 +214,8 @@ public class Game {
         // buy item
         // check if player has cash
         int sellPrice = 0;
-        if (PLAYER_INVENTORY.getItemCount(itemId) != 0 && !itemId.equals("DullSword")) {
+        // if it exists, isn't a dull sword and isn't an armour item
+        if (PLAYER_INVENTORY.getItemCount(itemId) != 0 && !itemId.equals("DullSword") && !(currentItem instanceof ArmourItem)) {
           // allowed to sell item
           if (mode.equals("Weapon")) {
             PLAYER_INVENTORY.removeWeapon(itemId);
@@ -228,7 +230,7 @@ public class Game {
           }
           PLAYER.addScore(sellPrice);
 
-          System.out.println("Sold " + itemName + " for " + sellPrice + ".");
+          System.out.println("Sold " + currentItem.getName() + " for " + sellPrice + ".");
         } else {
           System.out.println("Sorry, unable to sell last item.");
           Input.waitForKeyPress();
@@ -259,40 +261,49 @@ public class Game {
    */
   public static void showInventory() {
     String optionSelected;
-
     String mode = "Weapon";
-    String[] weaponsInInventory = PLAYER_INVENTORY.getWeaponNames();
-    String[] healingInInventory = PLAYER_INVENTORY.getHealthNames();
 
     int index = 0;
     boolean flag = true;
     do {
+
+      String itemId;
+      String[] currentIdSet = PLAYER_INVENTORY.getWeaponsIds();
+
+      if (mode.equals("Weapon")) {
+        currentIdSet = PLAYER_INVENTORY.getWeaponsIds();
+      }
+      if (mode.equals("Health")) {
+        currentIdSet = PLAYER_INVENTORY.getHealthIds();
+      }
+
       // use regular print;
       Views.printLn(PLAYER_INVENTORY.toString(), true);
 
-      // if empty, try switching to health
-      if (mode.equals("Weapon") && weaponsInInventory.length == 0) {
-        mode = "Health";
-      }
-      // if empty, try switching to weapons
-      if (mode.equals("Health") && healingInInventory.length == 0) {
-        mode = "Weapon";
-      }
       // if empty, give up
       if (PLAYER_INVENTORY.size() == 0) {
         Input.waitForKeyPress();
         return;
       }
-
-      System.out.println("Current Mode: " + mode);
-
-      String[] currentWorkingInventory = weaponsInInventory;
-      if (mode.equals("Health")) {
-        currentWorkingInventory = healingInInventory;
+      // if empty, try switching to health
+      if (mode.equals("Weapon") && currentIdSet.length == 0) {
+        mode = "Health";
+        currentIdSet = PLAYER_INVENTORY.getHealthIds();
+      }
+      // if empty, try switching to weapons
+      if (mode.equals("Health") && currentIdSet.length == 0) {
+        mode = "Weapon";
+        currentIdSet = PLAYER_INVENTORY.getWeaponsIds();
       }
 
-      System.out.println("Selected item: " + currentWorkingInventory[index]);
-      System.out.println();
+      // set itemId
+      itemId = currentIdSet[index];
+      Item currentItem = ItemInventory.returnItemFromId(itemId);
+
+      System.out.println("Current Mode: " + mode);
+      System.out.println("       Selected item: " + currentItem.getName());
+      System.out.println("         Description: " + currentItem.getDescription());
+      System.out.println("     Inventory Count: " + PLAYER_INVENTORY.getItemCount(itemId));
       System.out.println(Views.getToolTip("INVENTORY"));
       optionSelected = Input.getInventoryKeys();
 
@@ -306,12 +317,42 @@ public class Game {
       } else if (optionSelected.equals("A")) {
         index -= 1;
         if (index < 0) {
-          index = currentWorkingInventory.length - 1;
+          index = currentIdSet.length - 1;
         }
       } else if (optionSelected.equals("D")) {
         index += 1;
-        if (index > currentWorkingInventory.length - 1) {
+        if (index > currentIdSet.length - 1) {
           index = 0;
+        }
+      } else if (optionSelected.equals("E")) {
+        index = 0;
+        // Use/Equip
+        if (mode.equals("Weapon")) {
+          PLAYER_INVENTORY.setEquippedWeapon(itemId);
+        }
+        if (mode.equals("Health")) {
+          // ensure that PLAYER needs more than 50% of heal
+          HealthItem item = ItemInventory.getHealthDefinitions().returnItemFromId(itemId);
+          if (PLAYER.getCurrentHP() + item.getRestoreHP() * 0.25 < PLAYER.getMaxHP()) {
+            item = PLAYER_INVENTORY.removeHealthItem(itemId);
+            PLAYER.heal(item);
+            System.out.println("Healed!");
+            Input.waitForKeyPress();
+          }
+          else {
+            System.out.println("You already have enough health.");
+            Input.waitForKeyPress();
+          }
+        }
+      } else if (optionSelected.equals("Q")) {
+        index = 0;
+        // Drop/Delete
+        if (mode.equals("Weapon")) {
+          PLAYER_INVENTORY.removeWeapon(itemId);
+        }
+        if (mode.equals("Health")) {
+          PLAYER_INVENTORY.removeHealthItem(itemId);
+          System.out.println("Removed item.");
         }
       }
       // exit loop as input is not selection
@@ -320,42 +361,6 @@ public class Game {
       }
     }
     while (flag);
-
-    String itemId = "";
-    if (mode.equals("Weapon")) {
-      itemId = weaponsInInventory[index].replaceAll("\\s", "");
-    }
-    if (mode.equals("Health")) {
-      itemId = healingInInventory[index].replaceAll("\\s", "");
-    }
-
-    if (optionSelected.equals("R")) {
-      return;
-    }
-    if (optionSelected.equals("E")) {
-      // Use/Equip
-      if (mode.equals("Weapon")) {
-        PLAYER_INVENTORY.setEquippedWeapon(itemId);
-      }
-      if (mode.equals("Health")) {
-        // ensure that PLAYER needs more than 50% of heal
-        HealthItem item = PLAYER_INVENTORY.getHealthDefinitions().returnItemFromId(itemId);
-        if (PLAYER.getCurrentHP() + item.getRestoreHP() * 0.5 < PLAYER.getMaxHP()) {
-          item = PLAYER_INVENTORY.removeHealthItem(itemId);
-          PLAYER.heal(item);
-        }
-      }
-    }
-    if (optionSelected.equals("Q")) {
-      // Drop/Delete
-      if (mode.equals("Weapon")) {
-        PLAYER_INVENTORY.removeWeapon(itemId);
-      }
-      if (mode.equals("Health")) {
-        PLAYER_INVENTORY.removeHealthItem(itemId);
-      }
-    }
-    showInventory();
   }
 
   /**

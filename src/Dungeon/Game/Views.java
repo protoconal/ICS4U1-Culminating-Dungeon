@@ -2,6 +2,8 @@ package Dungeon.Game;
 
 import Dungeon.Game.DungeonMap.Dungeon;
 
+import java.util.ArrayList;
+
 /**
  * This Views class stores methods to prints out the game's text.
  *
@@ -33,7 +35,7 @@ public class Views {
       return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: Menu";
     }
     if (type.equals("SHOP")) {
-      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, R: Return, ;: Menu";
+      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, T: Armour, R: Return, ;: Menu";
     }
     if (type.equals("PREDUNGEON")) {
       return "S: Go to the Shop, R: Enter the dungeon, ;: Menu";
@@ -112,6 +114,21 @@ public class Views {
     StringBuilder outString = new StringBuilder(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING + "\n");
     for (int x = 0; x < consoleText.length; x++) {
       outString.append(consoleText[x]).append("\n");
+    }
+    System.out.println(outString);
+  }
+
+  /**
+   * Print a String Array with a GameHeader and the Player's current stats.
+   *
+   * @param consoleText stores a ArrayList<String> containing the text to be printed to the console
+   */
+  public static void printLines(ArrayList<String> consoleText) {
+    // cls terminal
+    Util.clearTerminal();
+    StringBuilder outString = new StringBuilder(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING + "\n");
+    for (int x = 0; x < consoleText.size(); x++) {
+      outString.append(consoleText.get(x)).append("\n");
     }
     System.out.println(outString);
   }
