@@ -93,7 +93,7 @@ public class MonsterRoom extends Room {
             "  HP: " + MONSTER.getCurrentHP(),
             "They dealt " + damageTaken + " damage!",
             "",
-            "A: Attack using " + currentInventory.getEquippedWeapon(),
+            "A: Attack using " + currentInventory.getEquippedWeapon().getName(),
             "H: Heal using " + useHealth,
             "R: Inventory"
         };
