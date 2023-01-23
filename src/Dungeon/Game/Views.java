@@ -57,10 +57,9 @@ public class Views {
         "You’ve been selected to explore the newly-discovered dungeon of Vaquera.",
         "Your bravery will help you fight monsters, find treasure, and help Vaquera learn more about the treasures that lie beneath the surface.",
         "",
-        "If you ever need to find out what you can input, a tooltip will always appear!",
-        "ex: W: Up, A: Left, S: Down, D: Right",
+        "If you ever need to find out what you can input, a handy tooltip will appear!",
         "",
-        "Finally, if you're a coward, press ; to exit to the main menu.",
+        "Finally, if you're a coward, you can press ; to exit the game at anytime.",
         "Are you ready? Enter B to begin! Enter H to see the high scores.",
     };
     printLinesWithoutPlayer(consoleText);
@@ -170,7 +169,7 @@ public class Views {
    */
   public static void printPreDungeon(int depth) {
     String[] consoleText = new String[]{
-        "Welcome traveller, you've reached the entrance to dungeon: " + depth,
+        "Welcome traveler, you've reached the entrance to dungeon: " + depth,
         "",
         "Beware of creepy monsters!"
     };
