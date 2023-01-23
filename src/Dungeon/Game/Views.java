@@ -31,13 +31,13 @@ public class Views {
    */
   public static String getToolTip(String type) {
     if (type.equals("INVENTORY")) {
-      return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: Menu";
+      return "A: Left, D: Right, E: Use/Equip, W: Weapons, S: Healing, R: Return, ;: Exit";
     }
     if (type.equals("SHOP")) {
-      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, T: Armour, R: Return, ;: Menu";
+      return "A: Left, D: Right, E: Buy, Q: Sell, W: Weapons, S: Healing, T: Armour, R: Return, ;: Exit";
     }
     if (type.equals("PREDUNGEON")) {
-      return "S: Go to the Shop, R: Enter the dungeon, ;: Menu";
+      return "S: Go to the Shop, R: Enter the dungeon, ;: Exit";
     }
     if (type.equals("MAINMENU")) {
       return "B: Begin, H: High Scores, ;: Exit";

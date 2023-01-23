@@ -88,6 +88,7 @@ public class Game {
    * Allow them to exit or continue.
    */
   public static void showPreDungeon() {
+
     String optionSelected = "";
     while (!optionSelected.equals("R")) {
       Views.printPreDungeon(CURRENT_MAP.getDepth()); // difficultyMultiplier == depth
@@ -251,7 +252,7 @@ public class Game {
    */
   public static void nextLevel() {
     playerCoordinates = CURRENT_MAP.getCenter();
-    CURRENT_MAP.fullReset();
+    CURRENT_MAP.nextLevel();
   }
 
   /**
