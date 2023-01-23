@@ -15,7 +15,6 @@ public class Views {
   static final String DASH_PADDING = "------------";
   static final String SPACE_PADDING = "            ";
   private static final String PLAYER_MODEL = " <i> ";
-  private static final double TIME_DELAY = 1.5;
 
   /**
    * @return returns a padded string that contains the name of the game.
@@ -134,7 +133,7 @@ public class Views {
   }
 
   /**
-   * Print an String Array with a GameHeader
+   * Print a String Array with a GameHeader
    *
    * @param consoleText stores a String[] containing the text to be printed to the console
    */
@@ -161,47 +160,6 @@ public class Views {
       Util.clearTerminal();
     }
     System.out.println(gameHeader() + SPACE_PADDING + "    " + Game.getPlayer().toString() + "    " + SPACE_PADDING + "\n" + outString);
-  }
-
-  /**
-   * Wait a delay after printing some lines.
-   *
-   * @param consoleText stores a String[] containing the text to be printed to the console
-   */
-  public static void delayedPrintLines(String[] consoleText) {
-    printLines(consoleText);
-    delay();
-  }
-
-  /**
-   * Wait a delay after printing some lines without the stat header.
-   *
-   * @param consoleText stores a String[] containing the text to be printed to the console
-   */
-  public static void delayedPrintLinesWithoutPlayer(String[] consoleText) {
-    printLinesWithoutPlayer(consoleText);
-    delay();
-  }
-
-  /**
-   * Wait a delay after printing a line, always clears terminal.
-   *
-   * @param consoleText stores a String containing the text to be printed to the console
-   */
-  public static void delayedPrintLn(String consoleText) {
-    printLn(consoleText, true);
-    delay();
-  }
-
-  /**
-   * Sleep
-   */
-  public static void delay() {
-    try {
-      Thread.sleep((long) (TIME_DELAY * 1000));
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
   }
 
 

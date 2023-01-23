@@ -28,3 +28,4 @@ public abstract class MonsterDefinitions {
     return MONSTER_TABLE[RANDOM.generateChoice()].returnCopy();
   }
 }
+

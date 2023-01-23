@@ -58,7 +58,7 @@ public class MonsterRoom extends Room {
    * @param player stores the player to interact with.
    * @return whether the player died in the fight.
    */
-  public boolean handleFight(Player player) {
+  private boolean handleFight(Player player) {
 
     Views.printLn(MONSTER.getAppearText(), true);
     Input.waitForKeyPress();
@@ -93,7 +93,7 @@ public class MonsterRoom extends Room {
             "  HP: " + MONSTER.getCurrentHP(),
             "They dealt " + damageTaken + " damage!",
             "",
-            "A: Attack using " + currentInventory.getEquippedWeapon(),
+            "A: Attack using " + currentInventory.getEquippedWeapon().getName(),
             "H: Heal using " + useHealth,
             "R: Inventory"
         };

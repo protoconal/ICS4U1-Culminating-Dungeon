@@ -82,8 +82,8 @@ class Ghoul extends NormalMonsterDefinitions.NormalMonster {
         125, //maxHP
         15, // minDamage
         25, // maxDamage
-        " verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "Irradiates the surroundings.", // onAttackText
+        "Poor soul appears!" // onAppearText
     );
   }
 
@@ -108,8 +108,8 @@ class Cultist extends NormalMonsterDefinitions.NormalMonster {
         150, //maxHP
         25, // minDamage
         30, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "Commands her followers to chant.", // onAttackText
+        "Emily is running back from the store when she gets recruited by Jasmine, our holy leader. And I'm like I can't believe that Jasmine became that but honestly, she's girlbossing her way to becoming a millionaire. Anyways, there she is.!" // onAppearText
     );
   }
 

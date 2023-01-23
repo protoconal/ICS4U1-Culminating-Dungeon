@@ -14,7 +14,6 @@ import java.util.TreeMap;
 public class PlayerInventory {
   private final WeaponDefinitions WEAPON_DEFINITIONS = ItemInventory.getWeaponDefinitions();
   private final HealthDefinitions HEALTH_DEFINITIONS = ItemInventory.getHealthDefinitions();
-  private final ArmourDefinitions ARMOUR_DEFINITIONS = ItemInventory.getArmourDefinitions();
   // use a map
   private final TreeMap<String, Integer> HEALTH_PLAYER_INVENTORY = new TreeMap<>();
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
@@ -44,28 +43,6 @@ public class PlayerInventory {
 
 
   /**
-   * @return the names of the weapons in the player's inventory.
-   */
-  public String[] getWeaponNames() {
-    String[] weaponNames = getWeaponsIds();
-    for (int x = 0; x < weaponNames.length; x++) {
-      weaponNames[x] = WEAPON_DEFINITIONS.returnItemFromId(weaponNames[x]).getName();
-    }
-    return weaponNames;
-  }
-
-  /**
-   * @return the names of the health items in the player's inventory.
-   */
-  public String[] getHealthNames() {
-    String[] healthNames = getHealthIds();
-    for (int x = 0; x < healthNames.length; x++) {
-      healthNames[x] = HEALTH_DEFINITIONS.returnItemFromId(healthNames[x]).getName();
-    }
-    return healthNames;
-  }
-
-  /**
    * Returns the current count of an itemId in the player's inventory.
    *
    * @param itemId a string that stores the itemId to check.
@@ -91,7 +68,7 @@ public class PlayerInventory {
    *
    * @param weapon a WeaponItem to be added to the inventory.
    */
-  private void addWeapon(WeaponItem weapon) {
+  public void addWeapon(WeaponItem weapon) {
 
     if (getItemCount(weapon.getId()) == 0) {
       // not found, therefore put into inventory
@@ -202,24 +179,6 @@ public class PlayerInventory {
    */
   public int size() {
     return HEALTH_PLAYER_INVENTORY.size() + WEAPON_PLAYER_INVENTORY.size();
-  }
-
-  /**
-   * Debug: Initializes the player's weapons.
-   */
-  public void DEBUG_initializeWeapons() {
-    addWeapon("DullSword");
-    addWeapon("IronSword");
-    addWeapon("Katana");
-  }
-
-  /**
-   * Debug: Initializes the player's weapons.
-   */
-  public void DEBUG_initializeHealth() {
-    addHealthItem("Bandage");
-    addHealthItem("Bandage");
-    addHealthItem("Bandage");
   }
 
   /**

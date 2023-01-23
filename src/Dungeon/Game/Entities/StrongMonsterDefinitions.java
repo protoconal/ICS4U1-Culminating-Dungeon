@@ -53,8 +53,8 @@ class Troll extends StrongMonsterDefinitions.StrongMonster {
         200, //maxHP
         40, // minDamage
         60, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "convinces you to buy some of his tinctures. You feel sick at spending all your score.", // onAttackText
+        "A wild tradesman appears!" // onAppearText
     );
   }
 
@@ -79,8 +79,8 @@ class Centaur extends StrongMonsterDefinitions.StrongMonster {
         180, //maxHP
         40, // minDamage
         55, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "kicks you.", // onAttackText
+        "A beautiful beast appears!" // onAppearText
     );
   }
 
@@ -105,8 +105,8 @@ class Minotaur extends StrongMonsterDefinitions.StrongMonster {
         240, //maxHP
         50, // minDamage
         65, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "tries... alright, she's trying.", // onAttackText
+        "Klara shows up!" // onAppearText
     );
   }
 

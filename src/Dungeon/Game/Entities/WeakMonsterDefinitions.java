@@ -53,8 +53,8 @@ class Skeleton extends WeakMonsterDefinitions.WeakMonster {
         75, //maxHP
         10, // minDamage
         20, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "Breathes.", // onAttackText
+        "A fury of red approaches you! You can't do anything but become enthralled by his scent, his hair, his beard, his face. You are enamoured." // onAppearText
     );
   }
 
@@ -79,8 +79,8 @@ class Slime extends WeakMonsterDefinitions.WeakMonster {
         25, //maxHP
         1, // minDamage
         10, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "Blobs around.", // onAttackText
+        "Bobby the blobby appears! You wouldn't kill it... Would you?" // onAppearText
     );
   }
 
@@ -105,7 +105,7 @@ class Spider extends WeakMonsterDefinitions.WeakMonster {
         45, //maxHP
         5, // minDamage
         15, // maxDamage
-        "verbs.", // onAttackText
+        "grabs your throat and squeezes.", // onAttackText
         "A creepy crawler appears!" // onAppearText
     );
   }

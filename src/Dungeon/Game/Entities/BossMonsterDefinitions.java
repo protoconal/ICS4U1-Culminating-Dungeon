@@ -62,8 +62,8 @@ class SpiderBroodMother extends BossMonsterDefinitions.BossMonster {
         500, //maxHP
         30, // minDamage
         70, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "splooshes goo everywhere. It gets into your eyes.", // onAttackText
+        "Mother Spider appears!" // onAppearText
     );
   }
 
@@ -90,8 +90,8 @@ class DarkKnightofTheForgotten extends BossMonsterDefinitions.BossMonster {
         650, //maxHP
         60, // minDamage
         80, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "slices you with his carbon fibre tendrils.", // onAttackText
+        "A shadow of the night appears!" // onAppearText
     );
   }
 
@@ -118,8 +118,8 @@ class CorruptedExecutioner extends BossMonsterDefinitions.BossMonster {
         750, //maxHP
         70, // minDamage
         90, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "They drop the axe.", // onAttackText
+        "A politician appears!" // onAppearText
     );
   }
 
@@ -146,8 +146,8 @@ class LichKing extends BossMonsterDefinitions.BossMonster {
         900, //maxHP
         75, // minDamage
         90, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "Kisses you.", // onAttackText
+        "A king appears!" // onAppearText
     );
   }
 
@@ -174,8 +174,8 @@ class AldwynTheFallen extends BossMonsterDefinitions.BossMonster {
         1000, //maxHP
         80, // minDamage
         100, // maxDamage
-        "verbs.", // onAttackText
-        "x appears!" // onAppearText
+        "Takes you out on a bad date but you can't say no because he's too nice.", // onAttackText
+        "A good boy appears!" // onAppearText
     );
   }
 

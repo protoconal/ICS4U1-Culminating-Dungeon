@@ -3,7 +3,7 @@ package Dungeon.Game.Rooms;
 import Dungeon.Game.Player;
 
 /**
- * The StartRoom class represents an walled off room.
+ * The StartRoom class represents a walled off room.
  *
  * @author Tony Guo, Emily Ta, Ilelemwanta Nomaren, Chris Yang
  * @version 1.0
