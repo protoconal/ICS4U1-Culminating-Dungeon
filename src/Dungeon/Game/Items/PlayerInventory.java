@@ -68,7 +68,7 @@ public class PlayerInventory {
    *
    * @param weapon a WeaponItem to be added to the inventory.
    */
-  private void addWeapon(WeaponItem weapon) {
+  public void addWeapon(WeaponItem weapon) {
 
     if (getItemCount(weapon.getId()) == 0) {
       // not found, therefore put into inventory

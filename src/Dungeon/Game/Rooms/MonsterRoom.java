@@ -58,7 +58,7 @@ public class MonsterRoom extends Room {
    * @param player stores the player to interact with.
    * @return whether the player died in the fight.
    */
-  public boolean handleFight(Player player) {
+  private boolean handleFight(Player player) {
 
     Views.printLn(MONSTER.getAppearText(), true);
     Input.waitForKeyPress();
