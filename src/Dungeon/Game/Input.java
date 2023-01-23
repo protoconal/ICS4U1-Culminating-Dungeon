@@ -12,7 +12,7 @@ import java.util.Scanner;
  */
 public class Input {
   // these definitions could be stored in its own class
-  final static String[] VALID_MOVEMENT_KEYS = {
+  private final static String[] VALID_MOVEMENT_KEYS = {
       // keeping same from dungeon
       "W", // up
       "A", // left
@@ -20,7 +20,7 @@ public class Input {
       "D", // right
   };
 
-  final static String[] VALID_INVENTORY_KEYS = {
+  private final static String[] VALID_INVENTORY_KEYS = {
       "R", // Return -- default behaviour
       "A", // Left
       "D", // Right
@@ -31,7 +31,7 @@ public class Input {
       ";" // menu
   };
 
-  final static String[] VALID_DIRECTIONS = {
+  private final static String[] VALID_DIRECTIONS = {
       // keeping same from dungeon
       "UP", // up
       "LEFT", // left
@@ -39,7 +39,7 @@ public class Input {
       "RIGHT", // right
   };
 
-  final static String[] TOOLTIP_DIRECTIONS = {
+  private final static String[] TOOLTIP_DIRECTIONS = {
       // keeping same from dungeon
       "W: Up", // up
       "A: Left", // left
@@ -47,31 +47,31 @@ public class Input {
       "D: Right", // right
   };
 
-  final static String[] VALID_MENU_KEYS = {
+  private final static String[] VALID_MENU_KEYS = {
       "B", // begin -- default
       "H", // high scores
       ";", // menu
   };
 
-  final static String[] VALID_DEATH_MENU_KEYS = {
+  private final static String[] VALID_DEATH_MENU_KEYS = {
       "R", // Reset -- default
       ";", // Exit
   };
 
-  final static String[] VALID_FIGHT_KEYS = {
+  private final static String[] VALID_FIGHT_KEYS = {
       "A", // fight -- default
       "H", // heal
       "R", // inventory
       ";", // menu
   };
 
-  final static String[] VALID_PRE_DUNGEON_KEYS = {
+  private final static String[] VALID_PRE_DUNGEON_KEYS = {
       "R", // continue -- default
       "S", // go shop
       ";", // menu
   };
 
-  final static String[] VALID_SHOP_KEYS = {
+  private final static String[] VALID_SHOP_KEYS = {
       "R", // return -- default
       "A", // Left
       "D", // Right
@@ -83,7 +83,7 @@ public class Input {
       ";", // menu
   };
 
-  final static String[] VALID_YN_KEYS = {
+  private final static String[] VALID_YN_KEYS = {
       "N", // no -- default
       "Y", // yes
   };
