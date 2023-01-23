@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Views {
   private static final String DASH_PADDING = "------------";
-  private static final String SPACE_PADDING = "            ";
+  private static final String SPACE_PADDING = "   ";
   private static final String PLAYER_MODEL = " <i> ";
 
   /**
