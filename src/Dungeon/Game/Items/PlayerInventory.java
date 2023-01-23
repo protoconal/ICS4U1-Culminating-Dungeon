@@ -14,7 +14,6 @@ import java.util.TreeMap;
 public class PlayerInventory {
   private final WeaponDefinitions WEAPON_DEFINITIONS = ItemInventory.getWeaponDefinitions();
   private final HealthDefinitions HEALTH_DEFINITIONS = ItemInventory.getHealthDefinitions();
-  private final ArmourDefinitions ARMOUR_DEFINITIONS = ItemInventory.getArmourDefinitions();
   // use a map
   private final TreeMap<String, Integer> HEALTH_PLAYER_INVENTORY = new TreeMap<>();
   private final TreeMap<String, WeaponItem> WEAPON_PLAYER_INVENTORY = new TreeMap<>();
@@ -42,28 +41,6 @@ public class PlayerInventory {
     return this.HEALTH_PLAYER_INVENTORY.keySet().toArray(new String[0]);
   }
 
-
-  /**
-   * @return the names of the weapons in the player's inventory.
-   */
-  public String[] getWeaponNames() {
-    String[] weaponNames = getWeaponsIds();
-    for (int x = 0; x < weaponNames.length; x++) {
-      weaponNames[x] = WEAPON_DEFINITIONS.returnItemFromId(weaponNames[x]).getName();
-    }
-    return weaponNames;
-  }
-
-  /**
-   * @return the names of the health items in the player's inventory.
-   */
-  public String[] getHealthNames() {
-    String[] healthNames = getHealthIds();
-    for (int x = 0; x < healthNames.length; x++) {
-      healthNames[x] = HEALTH_DEFINITIONS.returnItemFromId(healthNames[x]).getName();
-    }
-    return healthNames;
-  }
 
   /**
    * Returns the current count of an itemId in the player's inventory.
@@ -202,24 +179,6 @@ public class PlayerInventory {
    */
   public int size() {
     return HEALTH_PLAYER_INVENTORY.size() + WEAPON_PLAYER_INVENTORY.size();
-  }
-
-  /**
-   * Debug: Initializes the player's weapons.
-   */
-  public void DEBUG_initializeWeapons() {
-    addWeapon("DullSword");
-    addWeapon("IronSword");
-    addWeapon("Katana");
-  }
-
-  /**
-   * Debug: Initializes the player's weapons.
-   */
-  public void DEBUG_initializeHealth() {
-    addHealthItem("Bandage");
-    addHealthItem("Bandage");
-    addHealthItem("Bandage");
   }
 
   /**

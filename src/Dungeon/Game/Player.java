@@ -104,7 +104,7 @@ public class Player extends Entity {
   }
 
   /**
-   * @return a string representation of the player's current HP, the average damage of the equipped weapon, and the player's score.
+   * @return a string representation of the player's current HP, the average damage provided by the equipped weapon, and the player's score.
    */
   @Override
   public String toString() {

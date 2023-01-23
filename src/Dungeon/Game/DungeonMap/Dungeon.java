@@ -79,7 +79,7 @@ public class Dungeon {
    *
    * @param direction          a string representing the direction to follow.
    * @param initialCoordinates an array to store the initialCoordinates.
-   * @return a int[] containing the new set of coordinates
+   * @return an int[] containing the new set of coordinates
    */
   public static int[] calculateCoordinates(int[] initialCoordinates, String direction) {
     // calculate new coordinates based on input
@@ -99,45 +99,10 @@ public class Dungeon {
   }
 
   /**
-   * @return the LootDefinitions generator.
-   */
-  public LootDefinitions getLootGenerator() {
-    return LOOT_GENERATOR;
-  }
-
-  /**
-   * @return the (Monster) Spawner generator.
-   */
-  public Spawner getMonsterSpawner() {
-    return MONSTER_SPAWNER;
-  }
-
-  /**
    * @return the int[] containing for the center of the map.
    */
   public int[] getCenter() {
     return CENTER_OF_MAP;
-  }
-
-  /**
-   * @return the width / height of the square map.
-   */
-  public int getSize() {
-    return DEFAULT_SIZE;
-  }
-
-  /**
-   * @return the Room[][] map.
-   */
-  public Room[][] getMap() {
-    return map;
-  }
-
-  /**
-   * @return the boolean map representing the visibility of a tile to the player.
-   */
-  public boolean[][] getVisibleSpaces() {
-    return visibleSpaces;
   }
 
   /**
@@ -148,13 +113,6 @@ public class Dungeon {
   public void setVisibleSpaces(int[] coordinates) {
     // update visited space with the correct tiling
     this.visibleSpaces[coordinates[0]][coordinates[1]] = true;
-  }
-
-  /**
-   * @return the int[] containing of the exit.
-   */
-  public int[] getRandomExit() {
-    return randomExit;
   }
 
   /**
@@ -201,7 +159,7 @@ public class Dungeon {
   /**
    * Calculates the directions that are clear to move forward.
    *
-   * @param playerCoordinates a int array that stores the current player position
+   * @param playerCoordinates an int array that stores the current player position
    * @return a String[] containing directions a player can move
    */
   public String[] calculateMovableDirections(int[] playerCoordinates) {
@@ -236,7 +194,7 @@ public class Dungeon {
    * <p>
    * The provided params tell the method which block to replace with the player.
    *
-   * @param playerCoordinates a int array that stores the current player position
+   * @param playerCoordinates an int array that stores the current player position
    * @param playerModel       a string that stores the representation of the player
    * @return the string representation of the visible spaces on the current map.
    */
@@ -267,7 +225,7 @@ public class Dungeon {
    * <p></p>
    * The directions around the player should become visible.
    *
-   * @param playerCoordinates a int array that stores the current player position
+   * @param playerCoordinates an int array that stores the current player position
    */
   public void updateVisibility(int[] playerCoordinates) {
     this.isReset = false;
