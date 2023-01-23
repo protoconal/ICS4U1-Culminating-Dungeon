@@ -76,7 +76,7 @@ class IronSword extends WeaponItem {
   public IronSword() {
     super(
         "Iron Sword", // name
-        "TEMPORARY DESCRIPTION", // description
+        "What is this, minecraft?", // description
         150, // price
         20, // minDamage
         30); // maxDamage

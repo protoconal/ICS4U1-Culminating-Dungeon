@@ -68,7 +68,7 @@ class Bandage extends HealthItem {
    */
   public Bandage() {
     super("Bandage", // name
-        "TEMPORARY DESCRIPTION", // description
+        "A Band-Aid (trademarked) will cure anything!", // description
         50, // price
         50 // restoreHP
     );
