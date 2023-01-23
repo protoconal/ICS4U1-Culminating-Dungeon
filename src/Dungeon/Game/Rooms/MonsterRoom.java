@@ -143,8 +143,8 @@ public class MonsterRoom extends Room {
     }
 
     if (MONSTER.isDead()) {
-      player.addScore((int) Math.round(MONSTER.getMaxHP() * 0.1));
-      // add ten percent to score
+      player.addScore((int) Math.round(MONSTER.getMaxHP() * 0.6));
+      // add fourty percent to score
     }
 
     return player.isDead();
