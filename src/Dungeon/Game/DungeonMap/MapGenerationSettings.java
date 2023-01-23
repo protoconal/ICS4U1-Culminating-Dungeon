@@ -15,9 +15,9 @@ public class MapGenerationSettings {
    */
   private static final double[] ROOM_PROBABILITY_TABLE = {
       0.20, // EmptyRoom
-      0.15, // WallRoom
+      0.20, // WallRoom
       0.20, // TreasureRoom
-      0.30, // MonsterRoom
+      0.40, // MonsterRoom
   };
 
   /**
@@ -28,8 +28,8 @@ public class MapGenerationSettings {
   private static final double[][] ROOM_PROBABILITY_SCALING_TABLES = {
       // depth will always be half of width of table
       {1, 1.00, 0.00, 0.00, 0.00}, // distance 1, EmptyChance, WallChance, TreasureChance, MonsterChance
-      {2, 1.00, 1.50, 1.50, 0.50}, // distance 2, EmptyChance, WallChance, TreasureChance, MonsterChance
-      {4, 1.00, 0.50, 0.00, 0.00}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance
+      {2, 1.00, 1.50, 1.50, 1.00}, // distance 2, EmptyChance, WallChance, TreasureChance, MonsterChance
+      {4, 1.00, 0.50, 0.00, 1.50}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance
       {5, 1.00, 5.00, 2.00, 0.00}, // distance 5, EmptyChance, WallChance, TreasureChance, MonsterChance
       {8, 1.00, 2.00, 0.00, 0.25}, // distance 6, EmptyChance, WallChance, TreasureChance, MonsterChance
   };
