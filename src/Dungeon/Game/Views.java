@@ -12,8 +12,8 @@ import java.util.ArrayList;
  * @since 1.0
  */
 public class Views {
-  static final String DASH_PADDING = "------------";
-  static final String SPACE_PADDING = "            ";
+  private static final String DASH_PADDING = "------------";
+  private static final String SPACE_PADDING = "   ";
   private static final String PLAYER_MODEL = " <i> ";
 
   /**
