@@ -37,14 +37,16 @@ public class Game {
     while (!optionSelected.equals("B")) {
       System.out.println(Views.getToolTip("MAINMENU"));
       optionSelected = Input.getMenuKeys();
+
       if (optionSelected.equals("H")) {
-        System.out.println("High scores: \n" + SCORES_HANDLER.returnHighScoreText());
+        System.out.println("\nHigh scores: \n" + SCORES_HANDLER.returnHighScoreText());
       }
       if (optionSelected.equals(";")) {
         exit();
       }
     }
 
+    System.out.println();
     // getName
     System.out.println("What do you want to your name to be?");
     PLAYER.setName(Input.getText("Input: "));
@@ -53,6 +55,7 @@ public class Game {
     // PLAYER_INVENTORY.DEBUG_initializeWeapons();
     // PLAYER_INVENTORY.DEBUG_initializeHealth();
 
+    PLAYER.addScore(1000);
     // if PLAYER isn't dead, keep playing the dungeon
     while (!PLAYER.isDead()) {
       showDungeon();
@@ -88,6 +91,8 @@ public class Game {
    * Allow them to exit or continue.
    */
   public static void showPreDungeon() {
+    // provide a little free health
+    PLAYER.heal((HealthItem) ItemInventory.returnItemFromId("Bandage"));
 
     String optionSelected = "";
     while (!optionSelected.equals("R")) {
