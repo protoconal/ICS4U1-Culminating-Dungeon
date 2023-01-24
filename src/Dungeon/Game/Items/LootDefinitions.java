@@ -53,7 +53,7 @@ class Silver extends LootItem {
   public Silver() {
     super("Silver", // name
         "Cheaper than platinum", // description
-        10 // value
+        20 // value
     );
   }
 }
@@ -113,7 +113,7 @@ class Ruby extends LootItem {
   public Ruby() {
     super("Ruby", // name
         "Gold, but red", // description
-        200 // value
+        250 // value
     );
   }
 }
