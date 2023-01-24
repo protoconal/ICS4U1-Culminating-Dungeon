@@ -25,17 +25,17 @@ public class ShopInventory {
   }
 
   /**
-   * @return the sorted health ids.
-   */
-  public String[] getSortedHealthIds() {
-    return sortedHealthIds;
-  }
-
-  /**
    * @return the sorted weapon ids.
    */
   public String[] getSortedWeaponIds() {
     return sortedWeaponIds;
+  }
+
+  /**
+   * @return the sorted health ids.
+   */
+  public String[] getSortedHealthIds() {
+    return sortedHealthIds;
   }
 
   /**
@@ -103,6 +103,24 @@ public class ShopInventory {
     this.sortedWeaponIds = itemIds;
   }
 
+  /**
+   * Sorts the healthIds by prices.
+   */
+  public void sortHealthByPrices() {
+    HealthDefinitions healthDefinitions = ItemInventory.getHealthDefinitions();
+    String[] itemIds = healthDefinitions.getHealthIds();
+    // get all the items
+    // access their prices
+    double[] itemPrices = new double[itemIds.length];
+    for (int x = 0; x < itemIds.length; x++) {
+      Item item = healthDefinitions.returnItemFromId(itemIds[x]);
+      itemPrices[x] = item.getPrice();
+    }
+
+    sortItems(itemIds, itemPrices);
+    this.sortedHealthIds = itemIds;
+  }
+
   public void sortArmourByPrices() {
     // For sorting items based on price
     // selection sort implemented under Util class
@@ -121,24 +139,6 @@ public class ShopInventory {
 
     sortItems(itemIds, itemPrices);
     this.sortedArmourIds = itemIds;
-  }
-
-  /**
-   * Sorts the healthIds by prices.
-   */
-  public void sortHealthByPrices() {
-    HealthDefinitions healthDefinitions = ItemInventory.getHealthDefinitions();
-    String[] itemIds = healthDefinitions.getHealthIds();
-    // get all the items
-    // access their prices
-    double[] itemPrices = new double[itemIds.length];
-    for (int x = 0; x < itemIds.length; x++) {
-      Item item = healthDefinitions.returnItemFromId(itemIds[x]);
-      itemPrices[x] = item.getPrice();
-    }
-
-    sortItems(itemIds, itemPrices);
-    this.sortedHealthIds = itemIds;
   }
 
   /**
