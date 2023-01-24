@@ -37,7 +37,7 @@ public class EndRoom extends Room {
    * @return whether the player died in the room.
    */
   public boolean interactRoom(Player player) {
-    String[] consoleText = new String[]{
+    String[] consoleText = new String[] {
         "This is the portal to the next dungeon.",
         "Are you ready to leave?",
         "(y/N)",
