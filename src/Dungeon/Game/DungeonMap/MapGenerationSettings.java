@@ -1,4 +1,4 @@
-package Dungeon.Game.DungeonMap;
+  package Dungeon.Game.DungeonMap;
 
 /**
  * This MapGenerationSettings class contains the specifications for map generation.

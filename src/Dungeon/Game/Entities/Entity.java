@@ -1,4 +1,4 @@
-package Dungeon.Game.Entities;
+ package Dungeon.Game.Entities;
 
 import Dungeon.Game.Items.ArmourItem;
 import Dungeon.Game.Items.HealthItem;

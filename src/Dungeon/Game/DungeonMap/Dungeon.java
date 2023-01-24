@@ -1,4 +1,4 @@
-package Dungeon.Game.DungeonMap;
+ package Dungeon.Game.DungeonMap;
 
 import Dungeon.Game.Entities.Spawner;
 import Dungeon.Game.GameWeightedRandoms;
