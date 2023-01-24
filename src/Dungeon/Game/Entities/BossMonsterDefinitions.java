@@ -41,8 +41,8 @@ public class BossMonsterDefinitions {
    */
   public Monster generateMonster() {
     return MONSTER_TABLE[RANDOM.generateChoice()].returnCopy();
-  }
-
+  }  
+ 
   public abstract static class BossMonster extends Monster {
     public BossMonster(String name, int maxHP, int minDamage, int maxDamage, String onAttackText, String onAppearText) {
       super(name, maxHP, minDamage, maxDamage, onAttackText, onAppearText);

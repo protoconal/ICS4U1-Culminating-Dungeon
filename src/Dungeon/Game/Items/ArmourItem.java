@@ -1,4 +1,4 @@
-package Dungeon.Game.Items;
+ package Dungeon.Game.Items;
 
 /**
  * This ArmourItem class represents an item of Armour.
