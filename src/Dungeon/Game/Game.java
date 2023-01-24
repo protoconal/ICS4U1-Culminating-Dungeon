@@ -51,11 +51,6 @@ public class Game {
     System.out.println("What do you want to your name to be?");
     PLAYER.setName(Input.getText("Input: "));
 
-    // DEBUG options
-    // PLAYER_INVENTORY.DEBUG_initializeWeapons();
-    // PLAYER_INVENTORY.DEBUG_initializeHealth();
-
-    PLAYER.addScore(1000);
     // if PLAYER isn't dead, keep playing the dungeon
     while (!PLAYER.isDead()) {
       showDungeon();

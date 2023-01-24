@@ -132,9 +132,12 @@ public class MonsterRoom extends Room {
           Game.showInventory();
         }
       }
-
-      damageTaken = MONSTER.generateDamage();
-      player.damage(damageTaken);
+      
+      // avoid situation where player dies after defeat.
+      if (!MONSTER.isDead()) {
+        damageTaken = MONSTER.generateDamage();
+        player.damage(damageTaken);
+      }
     }
 
 
