@@ -54,7 +54,7 @@ class Skeleton extends WeakMonsterDefinitions.WeakMonster {
         10, // minDamage
         20, // maxDamage
         "Breathes.", // onAttackText
-        "A fury of red approaches you! You can't do anything but become enthralled by his scent, his hair, his beard, his face. You are enamoured." // onAppearText
+        "A fury of red approaches you! You can't do anything but become enthralled by his scent, his hair, his beard, his face. You are enamoured with his bones. He's only bones. You're smelling bones. You're hallucinating." // onAppearText
     );
   }
 

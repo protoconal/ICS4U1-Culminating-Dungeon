@@ -18,9 +18,7 @@ public class NormalMonsterDefinitions extends MonsterDefinitions {
         new Monster[]{
             new HauntedArmour(),
             new Ghoul(),
-            new Cultist(),
-            new LichKing(),
-            new AldwynTheFallen(),
+            new Cultist()
         },
         // chances of monsters
         new double[]{
