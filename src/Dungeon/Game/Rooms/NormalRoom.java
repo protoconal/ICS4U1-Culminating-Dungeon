@@ -14,7 +14,7 @@ public class NormalRoom extends Room {
   /**
    * Constructor for the NormalRoom class.
    */
-  public NormalRoom() {
+  public NormalRoom() { 
     super(0, false);
   }
 
