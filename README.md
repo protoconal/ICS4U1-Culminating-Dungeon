@@ -10,7 +10,7 @@ Main Idea: Dungeon Crawler-type Game
 - Lead Conceptual Designer: Chris Yang
 - Copywriter/Designer: Ilelemwanta Nomaren
 - Programmer: Tony Guo
-- Project Management: Emily Ta
+- Project Management and Diagramist: Emily Ta
 
 ### Thoughts and Reflections
 It was hell. (edit 2023-06-11: less hell, it was a challenge though)
