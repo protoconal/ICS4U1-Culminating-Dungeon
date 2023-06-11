@@ -1,17 +1,26 @@
 # ICS4U1 Culminating 2022-23 - presented for Kalisz
 
-## Name: "Vaquera: The Emboldened Adventure"
+## "Vaquera: The Emboldened Adventure"
 
 This was a culminating project for ICS4U1.
 
-Dungeon Crawler-type Game
+Main Idea: Dungeon Crawler-type Game
 
-Lead Conceptual Designer: Chris Yang
-Copywriter/Designer: Ilelemwanta Nomaren
-Programmers: Tony Guo
-Project Management: Emily Ta
+### Credits
+- Lead Conceptual Designer: Chris Yang
+- Copywriter/Designer: Ilelemwanta Nomaren
+- Programmer: Tony Guo
+- Project Management: Emily Ta
 
-I think I got a high 90 or maybe a mid 80?
-I'm not sure.
-
+### Thoughts and Reflections
 It was hell. (edit 2023-06-11: less hell, it was a challenge though)
+
+I think the project's final mark was in the mid to high 90s?
+
+It was a good project and ***je suis très surprise*** with what was cobbled together under the crunch.
+
+### Thanks
+##### Special Thanks to Emily Ta for writing/managing the diagram throughout constant code revisions, you're a real one.
+##### Special Thanks to Ilelemwanta Nomaren for writing the lore!
+##### Special Thanks to Chris Yang for planning out the actual requirements of the game!
+#### Y'all were great to work with :)
